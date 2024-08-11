@@ -229,13 +229,6 @@ app.whenReady().then(() => {
 autoUpdater.on("update-available", (info) => {
   window_update.sendDataView({version: app.getVersion(), status: 1, msg: "Uma atualização esta disponival, por favor aguarde o downlaod ser finalizado!"});
   let pth = autoUpdater.downloadUpdate();
-  createWindowApp();
-  setTimeout(()=>{
-    try {
-      window_update.close();
-    } catch (error) { 
-    }
-  }, 10000);
 });
 
 autoUpdater.on("update-not-available", (info) => {
@@ -246,7 +239,7 @@ autoUpdater.on("update-not-available", (info) => {
       window_update.close();
     } catch (error) { 
     }
-  }, 5000);
+  }, 10000);
 });
 
 //Download Completion Message
