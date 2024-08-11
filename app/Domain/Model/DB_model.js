@@ -1,4 +1,5 @@
 module.exports = {
+    DB_DIR: null,
     DB: null,
     Opens_windows: null,
     ProgramsExe: null,

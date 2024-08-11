@@ -5,6 +5,7 @@ const Screen_update = require("../Domain/Updater/main/mainScreen.js");
 const { autoUpdater, AppUpdater } = require("electron-updater");
 const { exec } = require('child_process');
 const MAIN_DIR = path.dirname(require.main.filename);
+
 var DAO = require("../Repository/DB.js");
 var windows_custom = {};
 
@@ -222,13 +223,12 @@ app.whenReady().then(() => {
     });
     
     autoUpdater.checkForUpdates();
-    window_update.sendDataView({version: app.getVersion(), status: 11, msg: "Procurando atualizações!"});
   });
 });
 
 autoUpdater.on("update-available", (info) => {
   window_update.sendDataView({version: app.getVersion(), status: 1, msg: "Uma atualização esta disponival, por favor aguarde o downlaod ser finalizado!"});
-  let pth = autoUpdater.downloadUpdate();
+  let pth = autoUpdater.downloadUpdate({isForceRunAfter: true});
 });
 
 autoUpdater.on("update-not-available", (info) => {
@@ -245,7 +245,6 @@ autoUpdater.on("update-not-available", (info) => {
 //Download Completion Message
 autoUpdater.on("update-downloaded", (info) => {
   window_update.sendDataView({version: app.getVersion(), status: 3, msg: "Atualização baixada com sucesso!"});
-  createWindowApp();
   setTimeout(()=>{
     try {
       window_update.close();

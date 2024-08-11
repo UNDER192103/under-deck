@@ -80,7 +80,7 @@
 }
 
 .loader {
-  width: 350px;
+  width: 550px;
   height: 180px;
   border-radius: 10px;
   background: #fff;
@@ -111,7 +111,7 @@
   z-index: 1;
   animation: loading 0.6s alternate infinite;
 }
-label {
+.loader label {
   color: #002;
   font-size: 18px;
   animation: bit 0.6s alternate infinite;

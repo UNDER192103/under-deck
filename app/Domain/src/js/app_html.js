@@ -538,7 +538,7 @@ const add_app_for_file = async (file, icon, nameCustom) => {
         save_icon_app_file(icon, file.name, async (dir_icon)=>{
             let icon_but_exe = null;
             if(dir_icon == null){
-                icon_but_exe = await Comun.get_icon_by_exe(file.path, path.join(MAIN_DIR, "\\Domain\\src\\img\\icons-exe\\"));
+                icon_but_exe = await Comun.get_icon_by_exe(file.path, path.join(DAO.DB_DIR, '\\UN-DATA\\icons-exe\\'));
                 if(icon_but_exe != null)
                     dir_icon = icon_but_exe;
                 else
@@ -586,7 +586,7 @@ function compare__id( a, b ) {
 
 const save_icon_app_file = async (data_img, name, callback) => {
     if(data_img){
-        var dirCopy = path.join(MAIN_DIR, 'Domain', 'src', 'img', 'icons-exe', `${name.replace('.','-')}-${data_img.name}`);
+        var dirCopy = path.join(DB_DIR, 'UN-DATA', 'icons-exe', `${name.replace('.','-')}-${data_img.name}`);
         if(fs.existsSync(dirCopy) == false){
             fs.copyFile(data_img.path, dirCopy, (err) => {
                 callback(dirCopy);
@@ -794,7 +794,7 @@ async function saveEditExe(){
 
 async function saveIconFile(fileInput, callback){
     if(fileInput){
-        var dirCopy = path.join(MAIN_DIR, 'Domain', 'src', 'img', 'icons-exe', `${editExeNow.name.replace('.','-')}-${fileInput.name}`);
+        var dirCopy = path.join(DAO.DB_DIR, 'UN-DATA', 'icons-exe', `${editExeNow.name.replace('.','-')}-${fileInput.name}`);
         const oldFile = editExeNow.iconCustom;
         fs.copyFile(fileInput.path, dirCopy, (err) => {
             if (err) throw err;
