@@ -8,7 +8,7 @@
     "start": "electron .",
     "build": "electron-builder"
   },
-  "repository": "https://github.com/UNDER192103/underdeck",
+  "repository": "https://github.com/UNDER192103/under-deck",
   "publish": {
     "provider": "github",
     "releaseType": "release"
@@ -29,7 +29,7 @@
       "output": "biuld"
     }
   },
-  "homepage": "https://github.com/UNDER192103/underdeck",
+  "homepage": "https://github.com/UNDER192103/under-deck",
   "author": {
     "name": "UNDER",
     "email": "undernouzen@gmail.com",
