@@ -82,15 +82,23 @@ const update_programs_select = async (list = _all.list_programs) => {
         var icone = location.origin+"/src/img/underbot_logo.png";
         if(item.nameCustom.length > 0)
             name = item.nameCustom;
-        if(item.iconCustom != null)
-            icone = item.iconCustom;
         $('.exe-list').append(`<li id="item-exe-${item._id}" onclick="execut_exe(${item._id})" class="col mb-4 bg-light" data-name="0-circle" data-tags="number numeral" data-categories="shapes">
-        <a class="d-block text-body-emphasis text-decoration-none" >
-        <div class="bg-body-secondary text-center rounded div-content-img-exe">
-            <img src="${icone}" class="img-exe">
-        </div>
-        <div class="name text-dark div-text-name-exe text-decoration-none text-center">${name}</div>
-        </a>
-      </li>`)
+            <a class="d-block text-body-emphasis text-decoration-none" >
+            <div class="bg-body-secondary text-center rounded div-content-img-exe">
+                <img id="icon-${item._id}" src="${icone}" class="img-exe">
+            </div>
+            <div class="name text-dark div-text-name-exe text-decoration-none text-center">${name}</div>
+            </a>
+        </li>`);
+        $.ajax({
+            url: `${location.origin}/get_base64`,
+            data: JSON.stringify({icon: item.iconCustom}),
+            type: 'POST',
+            contentType: 'application/json',
+            success: function(data){
+                if(data != "")
+                    $(`#icon-${item._id}`).attr('src', data);
+            }
+        });
     });
 }

@@ -32,10 +32,7 @@ async function start_server(type, callback) {
                 DAO = await DAO.GetDataNow();
                 var new_list = new Array();
                 if(DAO.List_programs != null && DAO.List_programs.length > 0){
-                    DAO.List_programs.forEach(item => {
-                        item.iconCustom = item.iconCustom.replace(prvt_MAIN_DIR+"\\Domain", `http://${ip.address("public", "ipv4")}:${port}`).replaceAll("\\", "/");
-                        new_list.push(item);
-                    });
+                    new_list = DAO.List_programs;
                 }
                 res.send(JSON.stringify(new_list))
             })
@@ -44,6 +41,16 @@ async function start_server(type, callback) {
                 DAO = await DAO.GetDataNow();
                 exec_program(req.body);
                 res.send("Ok")
+            })
+
+            app.post("/get_base64", async (req, res) => {
+                fs.readFile(req.body.icon, "base64", function(err, buffer){
+                    if ( err ) {
+                        res.send("");
+                    } else {
+                        res.send("data:image;base64,"+buffer);
+                    }
+                })
             })
 
             app.all("*", (req, res, next) => {
