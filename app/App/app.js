@@ -18,7 +18,6 @@ var window_update;
 //Basic flags
 autoUpdater.autoDownload = false;
 autoUpdater.autoInstallOnAppQuit = true;
-autoUpdater.autoRunAppAfterInstall = true;
 //
 
 const select_folder = async (properties = ['openDirectory'], filters = [])=>{
@@ -228,7 +227,7 @@ app.whenReady().then(() => {
 
 autoUpdater.on("update-available", (info) => {
   window_update.sendDataView({version: app.getVersion(), status: 1, msg: "Uma atualização esta disponival, por favor aguarde o downlaod ser finalizado!"});
-  let pth = autoUpdater.downloadUpdate({isForceRunAfter: true});
+  let pth = autoUpdater.downloadUpdate();
 });
 
 autoUpdater.on("update-not-available", (info) => {
@@ -248,9 +247,10 @@ autoUpdater.on("update-downloaded", (info) => {
   setTimeout(()=>{
     try {
       window_update.close();
+      autoUpdater.quitAndInstall(false, true);
     } catch (error) { 
     }
-  }, 10000);
+  }, 5000);
 });
 
 autoUpdater.on("error", (info) => {
