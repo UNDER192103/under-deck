@@ -239,7 +239,7 @@ autoUpdater.on("update-not-available", (info) => {
       window_update.close();
     } catch (error) { 
     }
-  }, 10000);
+  }, 5000);
 });
 
 //Download Completion Message
