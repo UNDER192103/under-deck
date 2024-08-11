@@ -261,17 +261,6 @@ autoUpdater.on("update-downloaded", (info) => {
   }, 10000);
 });
 
-autoUpdater.on("update-cancelled", (info) => {
-  window_update.sendDataView({version: app.getVersion(), status: 0, msg: "Erro na atualização do aplicativo!"});
-  createWindowApp();
-  setTimeout(()=>{
-    try {
-      window_update.close();
-    } catch (error) { 
-    }
-  }, 10000);
-});
-
 autoUpdater.on("error", (info) => {
   window_update.sendDataView({version: app.getVersion(), status: 0, msg: "Erro na atualização do aplicativo!"});
   createWindowApp();
