@@ -1,0 +1,51 @@
+body {
+    display: flex;
+    justify-content: center;
+    overflow-x: hidden;
+}
+
+main {
+    width: 96% !important;
+}
+
+.bnt-fullscreen {
+    display: flex;
+    margin-top: 5px;
+    position: absolute;
+}
+
+.exe-list {
+    display: flex;
+    justify-content: center;   
+}
+
+.exe-list li {
+    margin: 3vh;
+    width: 34vh;
+    height: 35vh;
+    border-radius: 3vh;
+    transition: transform .2s;
+}
+
+.div-text-name-exe{
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    width: 100%;
+    margin-top: 0vh;
+    height: 7vh;
+    font-size: 21px;
+}
+
+.div-content-img-exe {
+    margin-top: 2vh;
+}
+
+.img-exe {
+    width: 24vh;
+    height: 24vh;
+    max-height: 24vh;
+    max-width: 24vh;
+    border-radius: 3vh;
+}
