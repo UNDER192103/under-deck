@@ -177,7 +177,7 @@ var pt_br = [
     {
         id:".p_s_a_audio_text",
         type: "text",
-        text: "Por favor selecione um audio!"
+        text: "Por favor selecione um áudio!"
     },
     {
         id:".not_selected_com",
@@ -377,7 +377,7 @@ var pt_br = [
     {
         id: ".audio_text",
         type: "text",
-        text: "Audio",
+        text: "Áudio",
     },
     {
         id: ".trad_ty_exe",
@@ -387,7 +387,7 @@ var pt_br = [
     {
         id: ".trad_ty_audio",
         type: "text",
-        text: "Audio",
+        text: "Áudio",
     },
     {
         id: ".trad_ty_web_page",

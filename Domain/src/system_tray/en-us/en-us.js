@@ -377,7 +377,7 @@ var en_us = [
     {
         id: ".audio_text",
         type: "text",
-        text: "Áudio",
+        text: "Audio",
     },
     {
         id: ".trad_ty_exe",
@@ -387,7 +387,7 @@ var en_us = [
     {
         id: ".trad_ty_audio",
         type: "text",
-        text: "Áudio",
+        text: "Audio",
     },
     {
         id: ".trad_ty_web_page",
