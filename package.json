@@ -1,7 +1,8 @@
 {
   "name": "under-deck",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "description": "Under Deck",
+  "productName": "Under Deck",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -23,8 +24,12 @@
       "icon":"Domain/src/img/under-icon-512x.ico"
     },
     "nsis": {
+      "oneClick":true,
       "installerIcon": "Domain/src/img/under-icon-512x.ico",
-      "installerHeaderIcon": "Domain/src/img/under-icon-512x.ico"
+      "uninstallerIcon":"Domain/src/img/under-icon-512x.ico",
+      "installerHeaderIcon": "Domain/src/img/under-icon-512x.ico",
+      "license":"LICENSE.md",
+      "allowToChangeInstallationDirectory": false
     },
     "directories": {
       "output": "biuld"
