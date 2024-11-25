@@ -4,7 +4,6 @@ var DAO = require("../Repository/DB.js");
 const translator = require("../Domain/Comun/Translator_app.js");
 const AutoUpdater = require("../Domain/Service/AutoUpdater.js");
 const Validations = require("../Domain/Comun/Validations.js");
-//const Teste = require("../Domain/Screens/Register/mainScreen.js");
 const Screen_main = require("../Domain/Screens/Main/main.js");
 const Screens = require("../Domain/Screens/Screen.js");
 
@@ -17,9 +16,6 @@ app.whenReady().then(() => {
   Validations.killProcessWinpy(()=>{
 
     Validations.DB_default_values(()=>{
-      createWindowApp()
-      //var scrennn = new Teste();
-      /*
       AutoUpdater.CreateWindow(appIcon);
       AutoUpdater.Update_available();
       AutoUpdater.Update_not_available(createWindowApp);
@@ -28,7 +24,7 @@ app.whenReady().then(() => {
   
       app.on("activate", function () {
         if (BrowserWindow.getAllWindows().length == 0) AutoUpdater.CreateWindow(appIcon);
-      });*/
+      });
     });
 
   });
