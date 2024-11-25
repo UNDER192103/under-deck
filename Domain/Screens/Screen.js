@@ -13,7 +13,7 @@ const New = async (data) =>{
       webPreferences: {
         nodeIntegration: false,
         contextIsolation: false,
-        devTools: false
+        devTools: true
       }
     });
     Windows[data.name].maximize();
