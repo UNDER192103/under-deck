@@ -38,7 +38,12 @@ hr {
 }
 
 .card-body{
-  padding: 0.5rem !important;
+  padding: 0.5rem 0.5rem !important;
+}
+
+.iframeUpdate {
+  resize: vertical;
+  min-height: 300px;
 }
 
 .float-right {
@@ -160,7 +165,7 @@ hr {
 }
 
 .container {
-  max-width: 1335px !important;
+  max-width: 4000px !important;
 }
 
 .bnt-top-title-ma {
@@ -245,6 +250,10 @@ hr {
 .a-style{
   color: #8F43EE !important;
   text-decoration: underline;
+  cursor: pointer;
+}
+
+.cursor-pointer {
   cursor: pointer;
 }
 

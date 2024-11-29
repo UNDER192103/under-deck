@@ -1,5 +1,5 @@
 ///      Constants      ///
-
+const Electron = require('electron');
 const MAIN_DIR = __dirname.split('\\Domain')[0];
 const _dirname = MAIN_DIR;
 const path = require('path');
@@ -12,7 +12,9 @@ const QRCode = require('qrcode');
 const {getAllInstalledSoftwareSync} = require('fetch-installed-software');
 const Comun = require(MAIN_DIR+"/Domain/Comun/Comun.js");
 const toaster = require(MAIN_DIR+"/Domain/src/js/toaster.js");
-
+let stylesAnimmetedC = [ 'animate__slideInDown', /*'animate__slideInLeft',*/ 'animate__slideInRight', 'animate__slideInUp' ];
+let styleNowstylesAnimmetedC = stylesAnimmetedC[Math.floor((Math.random() * stylesAnimmetedC.length))]
+$(".container-animated-style").addClass(styleNowstylesAnimmetedC);
 ///      Constants      ///
 
 ///      Variables      ///
@@ -48,6 +50,7 @@ DAO.List_programs = DAO.ProgramsExe.get('list_programs');
 document.getElementById('key-macro').checked = DAO.DB.get('keyEvent');
 document.getElementById('notifications_on_windows').checked = DAO.DB.get('App_notification_windows');
 document.getElementById('autoupdateonestart').checked = DAO.DB.get('AutoUpdateApp');
+document.getElementById('isNotValidFirstSearchUpdateApp').checked = DAO.DB.get('isNotValidFirstSearchUpdateApp');
 document.getElementById('obs-checkbox-start').checked = DAO.OBS.get('ObsWssStartOnApp');
 GNDATA.server_port = DAO.DB.get('server_port');
 $('#port-local-server').val(GNDATA.server_port);
@@ -63,6 +66,7 @@ $("#bd-light").click(function(e) {
     $(".bg-srt-modal .modal-dialog .modal-content").addClass('bg-light').removeClass('bg-black');
     $(".bg-srt-dropdown-menu").removeClass('dropdown-menu-light').removeClass('dropdown-menu-black');
     $('#bd-theme').html('<i class="bi bi-sun-fill"></i>');
+    $("#c_bootbox").html(``);
     DAO.DB.set('bd_theme', 'light');
 });
 
@@ -72,6 +76,22 @@ $("#bd-black").click(function(e) {
     $(".bg-srt-modal .modal-dialog .modal-content").addClass('bg-black').removeClass('bg-light');
     $(".bg-srt-dropdown-menu").addClass('dropdown-menu-black').removeClass('dropdown-menu-light');
     $('#bd-theme').html('<i class="bi bi-moon-stars-fill"></i>');
+    $("#c_bootbox").html(`
+        .modal-content > * {
+           background-color: black;
+           color: white;
+        }
+        .modal-body, .modal-header, .modal-footer, .modal-header {
+           border: var(--bs-modal-border-width) solid rgb(255 255 255) !important;
+        }
+        .modal-body{
+           border-bottom-left-radius: 5px;
+           border-bottom-right-radius: 5px;
+        }
+        .bootbox-close-button.close.btn-close {
+           background-color: #e30909;
+        }
+    `);
     DAO.DB.set('bd_theme', 'black');
 });
 
@@ -157,9 +177,21 @@ const change_list_web_pages = async () => {
     }
 }
 
+function shuffleArray(o) {
+    for (var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+  }
+
 async function selectMenu(id, uC = false){
     $(`.navs-item-sm`).removeClass('active');
     $(`#nav-item-${id}`).addClass('active');
+
+    if(localStorage.getItem('page') != id){
+        $(".container-animated-style").removeClass(styleNowstylesAnimmetedC);
+        stylesAnimmetedC = shuffleArray(stylesAnimmetedC);
+        styleNowstylesAnimmetedC = stylesAnimmetedC[Math.floor((Math.random() * stylesAnimmetedC.length))]
+        $(".container-animated-style").addClass(styleNowstylesAnimmetedC);
+    }
 
     var _page_selected = "";
 
@@ -183,6 +215,9 @@ async function selectMenu(id, uC = false){
     else if(id == 'config'){
         _page_selected = `.container-config`;
     }
+    else if(id == 'updates'){
+        _page_selected = `.container-updates`;
+    }
     else if(id == 'help'){
         _page_selected = `.container-helper`;
     }
@@ -193,12 +228,13 @@ async function selectMenu(id, uC = false){
     }
 
     localStorage.setItem('page', id);
+    $(".toastify .toast-close").click();
 };
 
 ///      Pre load funcions      ///
 
 
-///      App ready      ///
+///      App ready      //
 
 $(document).ready(async () => {
     await BACKEND.Send('Obs_wss_p', {stage: 'Status'});
@@ -228,9 +264,13 @@ $(document).ready(async () => {
     change_list_keys_macros();
     change_list_web_pages();
 
-    setTimeout(()=>{
+    setTimeout(async ()=>{
         $("#preload-app").hide();
         $("#main-app").fadeIn(500);
+        if(await DAO.DB.get('first_search_update_app') == true){
+            $("#button-search-updates").click()
+            await DAO.DB.set('first_search_update_app', false);
+        }
     }, 100);
 });
 

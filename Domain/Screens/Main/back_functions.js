@@ -1,4 +1,5 @@
 const { ipcRenderer } = require("electron");
+const { text } = require("express");
 const { events } = require("lepikevents");
 
 const BACKEND = {
@@ -14,6 +15,100 @@ const BACKEND = {
 }
 
 //Functions
+
+ipcRenderer.on('AutoUpdater', (events, data) => {
+  
+  switch (data.code) {
+    case -1:
+      toaster.danger(data.msg);
+      bootbox.alert(`<h4>${data.msg}</h4>`);
+      $("#button-search-updates").html(getNameTd('.search_updates_text')).prop('disabled', false);
+    break;
+
+    case -2:
+      toaster.danger(data.msg);
+      bootbox.alert(`<h4>${data.msg}</h4>`);
+      $("#button-search-updates").html(getNameTd('.search_updates_text')).prop('disabled', false);
+    break;
+
+    case 0:
+      toaster.success(data.msg);
+      bootbox.alert(`<h4>${data.msg}</h4>`);
+      $("#button-search-updates").html(getNameTd('.search_updates_text')).prop('disabled', false);
+    break;
+
+    case 1:
+      toaster.success(data.msg);
+      $("#button-search-updates").html(getNameTd('.search_updates_text')).prop('disabled', true);
+      bootbox.confirm(
+        {
+          title: data.msg,
+          message: `
+            <label>${getNameTd('.version_text')}: ${data.info.version}</label><br>
+            <label>${getNameTd('.releaseDate_text')}: ${new Date(data.info.releaseDate).toLocaleString()}</label><br>
+            <label>${getNameTd('.releaseName_text')}: ${data.info.releaseName}</label><br>
+            <label>${getNameTd('.releaseNotes_text')}:<br><br> ${data.info.releaseNotes.replace('href="', '')}</label><br>
+          `,
+          buttons: {
+            cancel: {
+              label: `${getNameTd('.close_text')}`,
+              className: "btn-danger"
+            },
+            confirm: {
+              label: `${getNameTd('.download_text')} ${getNameTd('.uupdate_text')}`
+            }
+          },
+          callback: function(result){ 
+            if(result){
+              BACKEND.Send('app_update_start_download', null).then(response => {
+                //console.log(response)
+              });
+            }
+            else{
+              $("#button-search-updates").html(getNameTd('.search_updates_text')).prop('disabled', false);
+            }
+          }
+        }
+      );
+    break;
+    
+    case 2:
+
+      if(data.info != null && data.info.percent != null){
+        $(".percent_download_update_app").show('slow');
+        let txt = ``;
+        if(data.info.percent.toString().split('.').length > 1){
+          txt = `${data.info.percent.toString().split('.')[0]}.${data.info.percent.toString().split('.')[1].slice(0, 2)}`;
+        }
+        else{
+          txt = data.info.percent;
+        }
+        $(".percent_download_app_update").html(txt+"%");
+         
+      }
+
+    break;
+
+    case 3:
+      toaster.success(data.msg);
+      $(".percent_download_update_app").hide('slow');
+      $("#button-search-updates").html(getNameTd('.search_updates_text')).prop('disabled', false);
+    break;
+    
+    case 4:
+      toaster.success(data.msg);
+      bootbox.alert(data.msg);
+      $(".percent_download_update_app").hide('slow');
+      $("#button-search-updates").html(getNameTd('.search_updates_text')).prop('disabled', false);
+    break;
+
+    default:
+      console.log(data)
+    break;
+  }
+
+});
+
 ipcRenderer.on('selectMenu', (events, dt)=>{
   if(selectMenu){
     selectMenu(dt)

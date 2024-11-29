@@ -13,7 +13,7 @@
 </head>
 
 <style id="c_tooltip-inner"></style>
-
+<style id="c_bootbox"></style>
 <body class="bg-dark">
 
   <div id="preload-app" class="full-page dr-flex bg-black none-curso-selection-drag justify-center items-center">
@@ -24,7 +24,7 @@
 
     <main class="full-page d-flex flex-nowrap">
 
-      <nav id="Menu" class="mt-1 mb-1">
+      <nav id="Menu" class="mt-1 mb-1 animate__animated animate__slideInLeft">
         <div class="bg-srt h-100 rounded-end d-flex flex-column flex-shrink-0 p-3 bg-light">
           <a href="javascript:void(0)" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
             <img src="../../src/img/under-icon.png" style="width:40px;border-radius: 5px;">
@@ -88,6 +88,10 @@
               <a href="javascript:void(0)" id="nav-item-config" class="nav-link link-dark navs-item-sm settings_text_icon">
               </a>
             </li>
+            <li onClick="selectMenu('updates', true)" class="nav-item">
+               <a href="javascript:void(0)" id="nav-item-updates" class="nav-link link-dark navs-item-sm updates_text_icon">
+               </a>
+            </li>
             <li onClick="selectMenu('help', true)" class="nav-item">
               <a href="javascript:void(0)" id="nav-item-help" class="nav-link link-dark navs-item-sm help_text_icon">
               </a>
@@ -96,7 +100,7 @@
           </div>
       </nav>
 
-      <div class="container container-hide-control container-home mt-1 mb-1 animate__animated animate__fadeIn">
+      <div class="container container-hide-control container-home mt-1 mb-1 animate__animated container-animated-style">
         <div class="bg-srt full-h container rounded px-4 py-4 bg-light" id="featured-3">
           <div class="auto-scrool">
             <div class="pb-2 d-flex border-bottom">
@@ -114,7 +118,7 @@
         </div>
       </div>
 
-      <div class="container container-hide-control container-obs-studio mt-1 mb-1 animate__animated animate__fadeIn" style="display: none;">
+      <div class="container container-hide-control container-obs-studio mt-1 mb-1 animate__animated container-animated-style" style="display: none;">
          <div class="bg-srt full-h container rounded px-4 py-4 bg-light" id="featured-3">
            <div class="auto-scrool">
              <h2 class="pb-2 border-bottom obs_studio_n_text_icon"></h2>
@@ -250,18 +254,14 @@
          </div>
       </div>
 
-      <div class="container container-hide-control container-config mt-1 mb-1 animate__animated animate__fadeIn" style="display: none;">
+      <div class="container container-hide-control container-config mt-1 mb-1 animate__animated container-animated-style" style="display: none;">
         <div class="bg-srt full-h container rounded px-4 py-4 bg-light" id="featured-3">
           <div class="auto-scrool">
             <h2 class="pb-2 border-bottom settings_text_icon"></h2>
 
 
             <div class="row g-4 py-2 row-cols-1 row-cols-lg-1">
-                <div class="p-2 d-flex">
-                  <div class="ml-1">
-                     <input class="form-check-input" type="checkbox" id="autoupdateonestart">
-                     <label class="form-check-label autoupdate_text" for="autoupdateonestart"></label>
-                  </div>
+               <div class="p-2 d-flex">
                   <div class="ml-1">
                     <input class="form-check-input" type="checkbox" id="key-macro">
                     <label class="form-check-label keys_macro_text" for="key-macro"></label>
@@ -270,7 +270,7 @@
                      <input class="form-check-input" type="checkbox" id="notifications_on_windows">
                      <label class="form-check-label notifications-on-windows" for="notifications_on_windows"></label>
                   </div>
-                </div>
+               </div>
 
                <div class="p-2 m-0 w-50">
                  <div class="ml-1">
@@ -310,7 +310,67 @@
         </div>
       </div>
 
-      <div class="container container-hide-control container-kys-macros mt-1 mb-1 animate__animated animate__fadeIn" style="display: none;">
+      <div class="container container-hide-control container-updates mt-1 mb-1 animate__animated container-animated-style" style="display: none;">
+         <div class="bg-srt full-h container rounded px-4 py-4 bg-light" id="featured-3">
+            <div class="auto-scrool">
+               <h2 class="pb-2 border-bottom updates_text_icon"></h2>
+ 
+               
+               <div class="row mt-1 g-4 py-2 row-cols-1 row-cols-lg-1">
+                  <div class="p-2 m-0 d-flex">
+                     <div class="ml-1">
+                        <input class="form-check-input" type="checkbox" id="autoupdateonestart">
+                        <label class="form-check-label autoupdate_text" for="autoupdateonestart"></label>
+                     </div>
+                     <div class="ml-1">
+                        <input class="form-check-input" type="checkbox" id="isNotValidFirstSearchUpdateApp">
+                        <label class="form-check-label searchUpdateAppOnStart_text" for="isNotValidFirstSearchUpdateApp"></label>
+                     </div>
+                  </div>
+
+                  <div class="p-2 m-0 w-50">
+                     <div class="ml-1">
+                        <h3 class="pb-2"><span class="version_cuttent_text"></span>: <a class="a cursor-pointer version_app">N/A</a></h3>
+                     </div>
+                  </div>
+                  <div class="p-2 m-0 float-end w-50">
+                     <button type="button" id="button-search-updates" class="btn float-right-c btn-warning mr-10px search_updates_text"></button>
+                  </div>
+
+                  <div style="display: none;" class="p-2 m-0 percent_download_update_app">
+                     <div class="ml-1">
+                        <h4 class=""><span class="download_percentage_text"></span>: <a class="a cursor-pointer percent_download_app_update">10%</a></h4>
+                     </div>
+                  </div>
+ 
+                  <div class="feature mt-0 col">
+                     <div class="ml-1"><div class="alert alert-por-local-server-modal alert-danger hidden" role="alert"></div></div>
+                  </div>
+
+                  <div class="feature mt-0 col">
+                     <div class="ml-1">
+                        <div class="card none-border bg-dark">
+                           <div class="card-header" id="headingUpdates">
+                              <h5 class="mb-0">
+                                 <button class="btn btn-dark versions_on_github_text full-w" data-toggle="collapse" data-target="#collapseUpdates" aria-expanded="true" aria-controls="collapseUpdates">
+                                 </button>
+                              </h5>
+                           </div>
+      
+                           <div id="collapseUpdates" class="collapse" aria-labelledby="headingUpdates" data-parent="#accordion">
+                              <div class="card-body bg-srt" id="webViewUpdatesGitHub">
+
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="container container-hide-control container-kys-macros mt-1 mb-1 animate__animated container-animated-style" style="display: none;">
         <div class="bg-srt full-h container rounded px-4 py-4 bg-light" id="featured-3">
           <div class="auto-scrool">
             <div class="pb-2 d-flex border-bottom">
@@ -361,7 +421,7 @@
         </div>
       </div>
 
-      <div class="container container-hide-control container-web-pages mt-1 mb-1 animate__animated animate__fadeIn"style="display: none;">
+      <div class="container container-hide-control container-web-pages mt-1 mb-1 animate__animated container-animated-style"style="display: none;">
         <div class="bg-srt full-h container rounded px-4 py-4 bg-light" id="featured-3">
           <div class="auto-scrool">
             <div class="pb-2 d-flex border-bottom">
@@ -410,7 +470,7 @@
         </div>
       </div>
 
-      <div class="container container-hide-control container-helper mt-1 mb-1 animate__animated animate__fadeIn" style="display: none;">
+      <div class="container container-hide-control container-helper mt-1 mb-1 animate__animated container-animated-style" style="display: none;">
         <div class="bg-srt full-h container rounded px-4 py-4 bg-light" id="featured-3">
           <div class="auto-scrool">
             <h2 class="pb-2 border-bottom help_text_icon"></h2>
@@ -807,6 +867,7 @@
   <script src="./js/comuns.js"></script>
   <script src="../../src/js/selector_language.js"></script>
   <script src="./back_functions.js"></script>
+  <script src="./js/updates.js"></script>
   <script src="./js/app.js"></script>
   <script src="./js/web_server.js"></script>
   <script src="./js/obs.js"></script>

@@ -1,9 +1,13 @@
-const { app, BrowserWindow, Notification, Menu, MenuItem, Tray, ipcMain, ipcRenderer, globalShortcut } = require("electron");
+const { app, BrowserWindow, Notification, Menu, dialog, MenuItem, Tray, ipcMain, ipcRenderer, globalShortcut } = require("electron");
 const { exec } = require('child_process');
 const path = require("path");
 const translator = require(path.join(app.getAppPath(), 'Domain', 'Comun', 'Translator_app.js'));
 var DAO = require(path.join(app.getAppPath(), 'Repository', 'DB.js'));
+const { autoUpdater, AppUpdater } = require("electron-updater");
 const ObsService = require("../../Service/Obs");
+
+autoUpdater.autoDownload = false;
+autoUpdater.autoInstallOnAppQuit = false;
 
 class MainScreen {
   window;
@@ -33,11 +37,12 @@ class MainScreen {
         nodeIntegration: true,
         contextIsolation: false,
         preload: path.join(__dirname, "./preload.js"),
-        devTools: false
+        devTools: true
       },
     });
 
     this.startAllHandleMessages();
+    this.startAllServices();
 
     this.window.once("ready-to-show", () => {
       setTimeout(()=>{ this.startServices(); }, 2500);
@@ -49,7 +54,7 @@ class MainScreen {
         }
       }, 5000);
     });
-  
+
     this.window.maximize();
     this.window.loadFile(path.join(__dirname, "./app.html"));
   }
@@ -180,6 +185,18 @@ class MainScreen {
   }
 
   startAllHandleMessages(){
+    this.handleMessages('get_version', (event, dt)=>{
+      return app.getVersion();
+    });
+
+    this.handleMessages('app_update_start_download', async (event, dt)=>{
+      return await autoUpdater.downloadUpdate();
+    });
+
+    this.handleMessages('check_app_update', async (event, dt)=>{
+      await autoUpdater.checkForUpdates();
+      return app.getVersion();
+    });
 
     this.handleMessages('Obs_wss_p', (event, dt)=>{
       if(dt.stage == 'is_started'){
@@ -411,6 +428,138 @@ class MainScreen {
       }
     });
 
+  }
+
+  startAllServices(){
+    ///////   Updater   ///////
+
+    autoUpdater.on("update-available", (info) => { ///Has Update
+      this.sendFrontData("AutoUpdater", {
+        info: info,
+        version: app.getVersion(),
+        code: 1,
+        msg: translator.getNameTd('.newAppUpdate')
+      });
+
+      this.Notification(
+        translator.getNameTd('.app_update_text'),
+        translator.getNameTd('.newAppUpdate')
+      );
+
+    });
+
+    let onNotifyWinDownloadUpdate = true;
+    autoUpdater.on('download-progress', (info) =>{ ///Donloading Update
+
+      this.sendFrontData("AutoUpdater", {
+        info: info,
+        version: app.getVersion(),
+        code: 2,
+        msg: translator.getNameTd('.update_in_download_progress')
+      });
+
+      if(onNotifyWinDownloadUpdate == true){
+        onNotifyWinDownloadUpdate = false;
+          
+        this.Notification(
+          translator.getNameTd('.app_update_text'),
+          translator.getNameTd('.update_in_download_progress')
+        );
+      }
+
+    });
+
+    autoUpdater.on("update-downloaded", (event, releaseNotes, releaseName) => { ///Has ben downloaded Update
+
+      if(DAO.DB.get('AutoUpdateApp') == true){
+        this.Notification(
+          translator.getNameTd('.app_update_text'),
+          translator.getNameTd('.updateds')
+        );
+
+        this.sendFrontData("AutoUpdater", {
+          event: event,
+          releaseNotes: releaseNotes,
+          releaseName: releaseName,
+          version: app.getVersion(),
+          code: 3,
+          msg: translator.getNameTd('.updateds')
+        });
+        
+        setTimeout(()=>{
+          autoUpdater.quitAndInstall(false, true);
+        }, 5000);
+      }
+      else{
+        this.sendFrontData("AutoUpdater", {
+          event: event,
+          releaseNotes: releaseNotes,
+          releaseName: releaseName,
+          version: app.getVersion(),
+          code: 3,
+          msg: translator.getNameTd('.download_update_finish_text'),
+        });
+
+        const dialogOpts = {
+          type: 'info',
+          buttons: [translator.getNameTd('.update_later'), translator.getNameTd('.update_and_restart')],
+          title: translator.getNameTd('.application_update'),
+          message: process.platform === 'win32' ? releaseNotes : releaseName,
+          detail: translator.getNameTd('.newversionhasbeendownloaded_msg')
+        };
+
+        dialog.showMessageBox(dialogOpts).then((returnValue) => {
+          if (returnValue.response == 1){
+            autoUpdater.quitAndInstall(false, true);
+          }
+          else{
+            this.sendFrontData("AutoUpdater", {
+              event: event,
+              releaseNotes: releaseNotes,
+              releaseName: releaseName,
+              version: app.getVersion(),
+              code: 4,
+              msg: translator.getNameTd('.the_application_will_be_updated_when_the_application_was_closed'),
+            });
+          }
+        });
+      }
+      
+    });
+
+    autoUpdater.on("update-not-available", (info) => { ///Not update
+
+      this.sendFrontData("AutoUpdater", {
+        info: info,
+        version: app.getVersion(),
+        code: 0,
+        msg: `${translator.getNameTd('.taiaitlastv')}: ${app.getVersion()}!`
+      });
+
+    });
+
+    autoUpdater.on("error",async info => { ///Error
+
+      if(info.toString().includes('net::ERR_NAME_NOT_RESOLVED')){
+        this.sendFrontData("AutoUpdater", {
+          info: info,
+          version: app.getVersion(),
+          code: -2,
+          msg: translator.getNameTd('.erronetupdatetheapp')
+        });
+      }
+      else{
+        this.sendFrontData("AutoUpdater", {
+          info: info,
+          version: app.getVersion(),
+          code: -1,
+          msg: translator.getNameTd('.erroupdatetheapp')
+        });   
+      }
+
+    });
+
+    ///////   Updater   ///////
   }
 
   startServices(){

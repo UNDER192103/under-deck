@@ -15,6 +15,86 @@ var pt_br = [
         text: '<i class="bi bi-speedometer"></i> OBS Studio'
     },
     {
+        id: ".version_text",
+        type: "text",
+        text: "Versão"
+    },
+    {
+        id: ".releaseDate_text",
+        type: "text",
+        text: "Data de lançamento da atualização"
+    },
+    {
+        id: ".uupdate_text",
+        type: "text",
+        text: "Atualização"
+    },
+    {
+        id: ".download_percentage_text",
+        type: "text",
+        text: "Porcentagem de download"
+    },
+    {
+        id: ".download_update_finish_text",
+        type: "text",
+        text: "Download da atualização concluído com sucesso"
+    },
+    {
+        id: ".the_application_will_be_updated_when_the_application_was_closed",
+        type: "text",
+        text: "O aplicativo será atualizado quando o aplicativo for fechado"
+    },
+    {
+        id: ".releaseName_text",
+        type: "text",
+        text: "Nome da atualização"
+    },
+    {
+        id: ".releaseNotes_text",
+        type: "text",
+        text: "Nota da atualização"
+    },
+    {
+        id: ".download_text",
+        type: "text",
+        text: "Baixar"
+    },
+    {
+        id: ".versions_text",
+        type: "text",
+        text: "Versões"
+    },
+    {
+        id: ".versions_on_github_text",
+        type: "text",
+        text: "Versões no Github"
+    },
+    {
+        id: ".version_cuttent_text",
+        type: "text",
+        text: "Versão atual"
+    },
+    {
+        id: ".search_updates_text",
+        type: "text",
+        text: "Procurar por atualizações"
+    },
+    {
+        id: ".updates_text",
+        type: "text",
+        text: "Updates"
+    },
+    {
+        id: ".app_update_text",
+        type: "text",
+        text: "App Update"
+    },
+    {
+        id: ".updates_text_icon",
+        type: "html",
+        text: '<i class="bi bi-cloud-arrow-down"></i> Updates'
+    },
+    {
         id: ".ccOBSWsswhenstarting",
         type: "text",
         text: "Conectar OBS Websocket ao iniciar"
@@ -580,6 +660,11 @@ var pt_br = [
         text: "Atualização baixada com sucesso, por favor aguarde a instalação!",
     },
     {
+        id: ".erronetupdatetheapp",
+        type: "text",
+        text: "Não foi possivel procurar por atualizações devido a falta de conexão com a internet!", 
+    },
+    {
         id: ".erroupdatetheapp",
         type: "text",
         text: "Erro ao atualizar o aplicativo!", 
@@ -777,7 +862,7 @@ var pt_br = [
     {
         id: ".newversionhasbeendownloaded_msg",
         type: "text",
-        text: "Uma nova versão foi baixada. Reinicie o aplicativo para aplicar as atualizações.",
+        text: "Uma nova atualização foi baixada. Reinicie o aplicativo para aplicar as atualizações.",
     },
     {
         id: ".update_in_download_progress",
@@ -787,7 +872,12 @@ var pt_br = [
     {
         id: ".autoupdate_text",
         type: "text",
-        text: "Atualização automática ao iniciar",
+        text: "Atualização automática ao finalizar o download",
+    },
+    {
+        id: ".searchUpdateAppOnStart_text",
+        type: "text",
+        text: "Verifique se há atualizações ao iniciar",
     },
     {
         id: ".mute_text",
@@ -803,6 +893,11 @@ var pt_br = [
         id: ".are_you_sure_of_that_text",
         type: "text",
         text: "Você tem certeza disso?",
+    },
+    {
+        id: ".newAppUpdate",
+        type: "text",
+        text: "Nova atualização encontrada.",
     },
 ];
 

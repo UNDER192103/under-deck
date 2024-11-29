@@ -15,6 +15,86 @@ var en_us = [
         text: '<i class="bi bi-speedometer"></i> OBS Studio'
     },
     {
+        id: ".version_text",
+        type: "text",
+        text: "Version"
+    },
+    {
+        id: ".releaseDate_text",
+        type: "text",
+        text: "Update release date"
+    },
+    {
+        id: ".download_percentage_text",
+        type: "text",
+        text: "Download percentage"
+    },
+    {
+        id: ".download_update_finish_text",
+        type: "text",
+        text: "Update download completed successfully"
+    },
+    {
+        id: ".the_application_will_be_updated_when_the_application_was_closed",
+        type: "text",
+        text: "The application will be updated when the application was closed"
+    },
+    {
+        id: ".releaseName_text",
+        type: "text",
+        text: "Update name"
+    },
+    {
+        id: ".uupdate_text",
+        type: "text",
+        text: "Update"
+    },
+    {
+        id: ".releaseNotes_text",
+        type: "text",
+        text: "Update note"
+    },
+    {
+        id: ".download_text",
+        type: "text",
+        text: "Download"
+    },
+    {
+        id: ".versions_text",
+        type: "text",
+        text: "Versions"
+    },
+    {
+        id: ".versions_on_github_text",
+        type: "text",
+        text: "Versions on Github"
+    },
+    {
+        id: ".version_cuttent_text",
+        type: "text",
+        text: "Version current"
+    },
+    {
+        id: ".search_updates_text",
+        type: "text",
+        text: "Search for updates"
+    },
+    {
+        id: ".updates_text",
+        type: "text",
+        text: "Updates"
+    },
+    {
+        id: ".app_update_text",
+        type: "text",
+        text: "App Update"
+    },
+    {
+        id: ".updates_text_icon",
+        type: "html",
+        text: '<i class="bi bi-cloud-arrow-down"></i> Updates'
+    },
+    {
         id: ".ccOBSWsswhenstarting",
         type: "text",
         text: "Connect OBS Websocket when starting"
@@ -570,6 +650,11 @@ var en_us = [
         text: "Update downloaded successfully, please wait for installation!",
     },
     {
+        id: ".erronetupdatetheapp",
+        type: "text",
+        text: "Clound not search for updates due to lack of internet connection!", 
+    },
+    {
         id: ".erroupdatetheapp",
         type: "text",
         text: "Error updating the application!", 
@@ -777,7 +862,7 @@ var en_us = [
     {
         id: ".newversionhasbeendownloaded_msg",
         type: "text",
-        text: "A new version has been downloaded. Restart the application to apply the updates.",
+        text: "A new update has been downloaded. Restart the application to apply the updates.",
     },
     {
         id: ".update_in_download_progress",
@@ -787,7 +872,12 @@ var en_us = [
     {
         id: ".autoupdate_text",
         type: "text",
-        text: "Automatic update on start",
+        text: "Automatic update when download completes",
+    },
+    {
+        id: ".searchUpdateAppOnStart_text",
+        type: "text",
+        text: "Check for updates when starting",
     },
     {
         id: ".mute_text",
@@ -803,6 +893,11 @@ var en_us = [
         id: ".are_you_sure_of_that_text",
         type: "text",
         text: "Are you sure of that?",
+    },
+    {
+        id: ".newAppUpdate",
+        type: "text",
+        text: "New update found.",
     },
 ]
 

@@ -12,6 +12,11 @@ $(document).ready(async () => {
         let isCheck =  document.getElementById('autoupdateonestart').checked;
         DAO.DB.set('AutoUpdateApp', isCheck);
     });
+
+    $('#isNotValidFirstSearchUpdateApp').click(function(){
+        let isCheck =  document.getElementById('isNotValidFirstSearchUpdateApp').checked;
+        DAO.DB.set('isNotValidFirstSearchUpdateApp', isCheck);
+    });
     
     $('#input-app-exec').change(async () => {
         $('.alert-add-app').text("").addClass('hidden');

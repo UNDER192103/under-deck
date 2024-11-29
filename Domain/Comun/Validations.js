@@ -6,6 +6,11 @@ const DB_default_values = async (callback) => {
     await DAO.DB.set('ShowMainScreen', null);
     await DAO.DB.set("select_folder", null);
     await DAO.DB.set("select_file", null);
+    if(await DAO.DB.get('isNotValidFirstSearchUpdateApp') == null)
+        await DAO.DB.set('isNotValidFirstSearchUpdateApp', true);
+
+    if(await DAO.DB.get('isNotValidFirstSearchUpdateApp') != false)
+        await DAO.DB.set('first_search_update_app', true);
 
     if(DAO.DB.get('server_port') == null)
         DAO.DB.set('server_port', 3000);
