@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../../src/bootstrap-5.0.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../src/bootstrap-5.0.2/css/bootstrap-icons.css">
+  <link rel="stylesheet" href="../../src/footable/css/footable.core.css">
+  <link rel="stylesheet" type="text/css" href="../../src/css/toastify.min.css">
+  <link href="../../src/css/animated.min.css" rel="stylesheet">
+  <link href="../../src/css/index.css" rel="stylesheet">
+  <link href="../../src/css/loading.css" rel="stylesheet">
+</head>
+
+<style id="c_tooltip-inner"></style>
+<style id="c_bootbox"></style>
+<body class="bg-dark">
+
+  <div id="preload-app" class="full-page dr-flex bg-black none-curso-selection-drag justify-center items-center">
+    <div class="loading-bar loading_text">LOADING</div>
+  </div>
+
+  <div id="main-app" style="display: none;">
+
+    <main class="full-page d-flex flex-nowrap">
+
+      <nav id="Menu" class="mt-1 mb-1 animate__animated animate__slideInLeft">
+        <div class="bg-srt h-100 rounded-end d-flex flex-column flex-shrink-0 p-3 bg-light">
+          <a href="javascript:void(0)" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+            <img src="../../src/img/under-icon.png" style="width:40px;border-radius: 5px;">
+            <span class="p-1 fs-4 menu_text"></span>
+          </a>
+          <hr>
+          <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item d-flex">
+               <div class="btn-group m-1">
+               
+                  <button type="button" class="btn btn-dark btn-sm border border-dark"><img class="icone-selected-lang m-1" src=""></button>
+                  <button type="button" class="btn btn-light btn-sm dropdown-toggle border border-dark" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="text-lang-selected"></span>
+                  </button>
+                  <ul class="dropdown-menu bg-srt-dropdown-menu ul-dropdown-lang ul-languages">
+                  </ul>
+               </div>
+              
+               <div class="dropdown">
+                  <button class="btn none-border py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme (light)">
+                    <i class="bi bi-sun-fill"></i>
+                  </button>
+                  <ul class="dropdown-menu bg-srt-dropdown-menu" aria-labelledby="bd-theme-text">
+                    <li>
+                      <button id="bd-light" type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="true">
+                        <i class="bi bi-sun-fill"></i>
+                        Light
+                      </button>
+                    </li>
+                    <li>
+                      <button id="bd-black" type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                        <i class="bi bi-moon-stars-fill"></i>
+                        Dark
+                      </button>
+                    </li>
+                  </ul>
+               </div>
+            </li>
+          </ul>
+          <div class="auto-scrool">
+            <ul class="nav nav-pills flex-column mb-auto">
+  
+            <li onClick="selectMenu('app-main', true)" class="nav-item">
+              <a href="javascript:void(0)" id="nav-item-app-main" class="nav-link link-dark navs-item-sm active apps_name_icon" aria-current="page">
+              </a>
+            </li>
+            <li onClick="selectMenu('keys-macros', true)" class="nav-item">
+              <a href="javascript:void(0)" id="nav-item-keys-macros" class="nav-link link-dark navs-item-sm keys_macro_text_icon">
+              </a>
+            </li>
+            <li onClick="selectMenu('web-pages', true)" class="nav-item">
+              <a href="javascript:void(0)" id="nav-item-web-pages" class="nav-link link-dark navs-item-sm web_pages_text_icon"></a>
+            </li>
+            <li onClick="selectMenu('obs-studio', true)" class="nav-item">
+               <a href="javascript:void(0)" id="nav-item-obs-studio" class="nav-link link-dark navs-item-sm obs_studio_n_text_icon">
+               </a>
+            </li>
+            <li onClick="selectMenu('config', true)" class="nav-item" for="stside">
+              <a href="javascript:void(0)" id="nav-item-config" class="nav-link link-dark navs-item-sm settings_text_icon_HVRT d-flex">
+              </a>
+            </li>
+            <li onClick="selectMenu('updates', true)" class="nav-item">
+               <a href="javascript:void(0)" id="nav-item-updates" class="nav-link link-dark navs-item-sm updates_text_icon">
+               </a>
+            </li>
+            <li onClick="selectMenu('help', true)" class="nav-item">
+              <a href="javascript:void(0)" id="nav-item-help" class="nav-link link-dark navs-item-sm help_text_icon">
+              </a>
+            </li>
+            </ul>
+          </div>
+      </nav>
+
+      <div class="container container-hide-control container-home mt-1 mb-1 animate__animated container-animated-style">
+        <div class="bg-srt full-h container rounded px-4 py-4 bg-light" id="featured-3">
+          <div class="auto-scrool">
+            <div class="pb-2 d-flex border-bottom">
+               <h2 class="btn-full-w apps_name_icon"></h2>
+               <div class="input-group">
+                  <button class="btn btn-primary add_text_icon bnt-top-title-ma" data-bs-toggle="modal" data-bs-target="#modal-add-app" type="button" onclick="clear_add_app()" id="bnt_modal_add_app"></button>
+               </div>
+            </div>
+            <div class="row g-4 py-3 row-cols-1 row-cols-lg-1 full-w ">
+              <div class="feature col">
+                <div class="row row-cols-1 row-cols-md-5 g-2 list_apps content-files-add"></div>
+              </div>
+            </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="container container-hide-control container-obs-studio mt-1 mb-1 animate__animated container-animated-style" style="display: none;">
+         <div class="bg-srt full-h container rounded px-4 py-4 bg-light" id="featured-3">
+            <div class="auto-scrool">
+               <h2 class="pb-2 border-bottom obs_studio_n_text_icon"></h2>
+ 
+ 
+               <div class="cards-area aos-init aos-animate mb-3" data-aos="fade-down">
+                  <div class="row">
+                  
+                     <div class="col-md-12 col-xl-16 animate__animated">
+                        <div class="card bg-card-srt">
+                          <div class="card-header shadow-text">
+                              <span class="obs-wss-config-t h5"></span>
+                              <button class="btn btn-success btn-sm float-end hover-pulse-grean btn-success connect-obs" type="button" id="button-obs-wss-s-s"></button>
+                          </div>
+                       
+                          <div class="card-body">
+                              <div class="alert apobswbs alert-danger hidden" role="alert"></div>
+                              
+                              <div class="forms">
+
+                                 <div class="checks mb-2">
+                                    <div class="">
+                                       <input class="form-check-input" type="checkbox" id="obs-checkbox-start">
+                                       <label class="form-check-label ccOBSWsswhenstarting" for="obs-checkbox-start"></label>
+                                    </div>
+                                 </div>
+                                 
+                                 <div class="input mb-1">
+                                    <label for="obs-wss-port" class="col-form-label p-0 port-e-ip-server"></label>
+                                    <div class="input-group">
+                                       <input type="text" id="obs-wss-ip" class="form-control placeholder-ip-server border border-secondary">
+                                       <input type="number" id="obs-wss-port" class="form-control placeholder-port border border-secondary">
+                                       <button class="btn btn-primary save_text" type="button" id="btn-save-osb-port"></button>
+                                    </div>
+                                 </div>
+
+                                 <div class="input">
+                                    <label for="obs-wss-password" class="col-form-label p-0 password-text"></label>
+                                    <div class="input-group">
+                                       <a class="btn btn-light border border-secondary" type="button" id="btn-view-osb-password"><i class="bi bi-eye-fill"></i></a>
+                                       <input type="password" id="obs-wss-password" class="form-control placeholder-password-text border border-secondary">
+                                       <button class="btn btn-primary save_text" type="button" id="btn-save-osb-password"></button>
+                                    </div>
+                                 </div>
+
+                              </div>
+                           
+                           </div>
+                        </div>
+                     </div>
+                  
+                  </div>
+               </div>
+
+               <div id="accordion">
+
+                  <div class="card none-border bg-dark">
+                    <div class="card-header" id="headingOne">
+                      <h5 class="mb-0">
+                        <button class="btn btn-dark obsScenes full-w" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        </button>
+                      </h5>
+                    </div>
+                
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                      <div class="card-body bg-srt">
+                
+                        <div class="input-group mb-2">
+                           <button class="btn btn-secondary" type="button"><span class="bi bi-search"></span></button>
+                           <input type="text" name="FLSfoo_filter" id="FLSfoo_filter" class="form-control foo_filter" placeholder="Procurar...">
+                        </div>
+                        <table class="table footable-list-scenes footable bg-srt border rounded" data-page-size="15" data-filter="#FLSfoo_filter">
+                           <thead>
+                             <tr>
+                               <th>#</th>
+                               <th class="name_text"></th>
+                               <th class="active_text"></th>
+                               <th class="apply_text"></th>
+                             </tr>
+                           </thead>
+                           <tbody id="">
+                
+                           </tbody>
+                           <tfoot>
+                              <tr>
+                                 <td colspan="6" class="border-0">
+                                    <ul class="pagination">
+                                    </ul>
+                                 </td>
+                              </tr>
+                           </tfoot>
+                        </table>
+                
+                      </div>
+                    </div>
+                  </div>
+
+                  <hr>
+
+                  <div class="card none-border bg-dark">
+                     <div class="card-header" id="headingTwo">
+                       <h5 class="mb-0">
+                           <button class="btn btn-dark obsaudioinput full-w" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                           </button>
+                       </h5>
+                     </div>
+
+                     <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+                       <div class="card-body bg-srt">
+                 
+                        <div class="input-group mb-2">
+                           <button class="btn btn-secondary" type="button"><span class="bi bi-search"></span></button>
+                           <input type="text" name="LAIfoo_filter" id="LAIfoo_filter" class="form-control foo_filter" placeholder="Procurar...">
+                         </div>
+                         <table class="table footable-list-audios-inputs footable bg-srt border rounded" data-page-size="15" data-filter="#LAIfoo_filter">
+                           <thead>
+                             <tr>
+                               <th>#</th>
+                               <th class="name_text"></th>
+                               <th class="mute_text"></th>
+                               <th class="unmute_text"></th>
+                             </tr>
+                           </thead>
+                           <tbody>
+                           </tbody>
+                           <tfoot>
+                              <tr>
+                                 <td colspan="6" class="border-0">
+                                    <ul class="pagination">
+                                    </ul>
+                                 </td>
+                              </tr>
+                           </tfoot>
+                        </table>
+                       </div>
+                     </div>
+                  </div>
+               </div>
+ 
+           </div>
+         </div>
+      </div>
+
+      <div class="container container-hide-control container-config mt-1 mb-1 animate__animated container-animated-style" style="display: none;">
+        <div class="bg-srt full-h container rounded px-4 py-4 bg-light" id="featured-3">
+          <div class="auto-scrool">
+            <h2 class="pb-2 border-bottom d-flex settings_text_icon_HVRT"></h2>
+ 
+            <div class="cards-area aos-init aos-animate" data-aos="fade-down">
+               <div class="row">
+
+                  <div class="col-md-12 col-xl-6 animate__animated animate__slideInLeft">
+                     <div class="card bg-card-srt">
+                       <div class="card-header shadow-text text-center">
+                           <h5 class="general_text "></h5>
+                       </div>
+
+                       <div class="card-body">
+
+                           <div class="forms">
+
+                              <div class="checks mb-3">
+                                 <div class="">
+                                    <input class="form-check-input" type="checkbox" id="key-macro">
+                                    <label class="form-check-label keys_macro_text" for="key-macro"></label>
+                                 </div>
+   
+                                 <div class="">
+                                    <input class="form-check-input" type="checkbox" id="notifications_on_windows">
+                                    <label class="form-check-label notifications-on-windows" for="notifications_on_windows"></label>
+                                 </div>
+                              </div>
+
+                              <div class="select">
+                                 <label class="form-check-label language_text" for="s-languages"></label>
+                                 <div class="input-group">
+                                    <div class="input-group-text p-1">
+                                       <img class="icone-selected-lang m-1" src="">
+                                    </div>
+                                    <select id="s-languages" class="form-select s-languages">
+                                    </select>
+                                 </div>
+                                 
+                              </div>
+                           </div>
+
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="col-md-12 col-xl-6 animate__animated animate__slideInRight">
+                     <div class="card bg-card-srt">
+                        <div class="card-header text-center shadow-text d-contents">
+                           <h5 class="mt-2 web_stream_deck_text"></h5>
+                           <a class="btn btn-success btn-sm mx-2 start_text" type="button" id="button-start-local-server"></a>
+                        </div>
+
+                        <div class="card-body">
+                           <div class="forms">
+                              <div class="feature mt-0 col">
+                                 <div class="alert alert-por-local-server-modal alert-danger hidden" role="alert"></div>
+                              </div>
+
+                              <div class="inputs">
+
+                                 <div class="m-0 mb-3">
+                                    <label for="port-local-server" class="form-check-label door_text_expc_1"></label>
+                                    <div class="input-group">
+                                       <input type="number" id="port-local-server" class="form-control placeholder-port" placeholder="" aria-label="" aria-describedby="button-addon2">
+                                       <button class="btn btn-primary save_text" type="button" id="btn-port-local-server"></button>
+                                    </div>
+                                 </div>
+
+                                 <div class="m-0">
+                                    <label for="local-server-adress-acess-url" class="form-check-label url_text_expc_1"></label>
+                                    <div class="input-group">
+                                       <input type="text" id="local-server-adress-acess-url" disabled class="form-control" placeholder="" aria-label="" aria-describedby="button-addon2">
+                                       <button onclick="openIpUrlWeb()" class="btn btn-primary open_text" type="button" ></button>
+                                       <button onclick="getQrCodeIpUrlWeb()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-qr-code" type="button" >QR Code</button>
+                                    </div>
+                                 </div>
+
+                              </div>
+
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="col-md-12 col-xl-6 animate__animated animate__slideInLeft">
+                     <div class="card bg-card-srt">
+                       <div class="card-header shadow-text text-center">
+                           <h5 class="appearance_text "></h5>
+                       </div>
+
+                       <div class="card-body">
+
+                           <div class="forms">
+
+                              <div class="select mb-3">
+                                 <label class="form-check-label theme_text" for="s-themes"></label>
+                                 <select id="s-themes" class="form-select s-themes">
+                                    <option value="light">Light</option>
+                                    <option value="black">Dark</option>
+                                 </select>
+                              </div>
+
+                              <div class="card none-border bg-secondary">
+                                 <div class="card-header" id="headingAP">
+                                    <h5 class="mb-0">
+                                       <button class="btn btn-secondary btn-sm screen_transitions_text full-w" data-toggle="collapse" data-target="#collapseAP" aria-expanded="true" aria-controls="collapseAP">
+                                       </button>
+                                    </h5>
+                                 </div>
+                             
+                                 <div id="collapseAP" class="collapse show" aria-labelledby="headingAP" data-parent="#accordion">
+                                   <div class="card-body rounded-bottom bg-srt">
+                             
+                                    <div class="select mb-3">
+                                       <label class="form-check-label enable_animations_text" for="s-themes"></label>
+                                       <select id="s-enAnimations" class="form-select">
+                                          <option value="true" class="yes"></option>
+                                          <option value="false" class="not"></option>
+                                       </select>
+                                    </div>
+      
+                                    <div class="select mb-3">
+                                       <label class="form-check-label animation_models_text" for="s-themes"></label>
+                                       <select id="s-Manimations" class="form-select">
+                                          <option value="random" class="default_text"></option>
+                                          <option value="as">Attention Seekers</option>
+                                          <option value="be">Back Entrances</option>
+                                       </select>
+                                    </div>
+      
+                                    <div class="select mb-3">
+                                       <label class="form-check-label animation_type_text" for="s-themes"></label>
+                                       <select disabled id="s-animation" class="form-select">
+                                          <option value="random" class="default_text"></option>
+                                          <option value="animate__bounce">Bounce</option>
+                                          <option value="animate__flash">Flash</option>
+                                          <option value="animate__pulse">Pulse</option>
+                                          <option value="animate__rubberBand">rubberBand</option>
+                                          <option value="animate__shakeX">shakeX</option>
+                                          <option value="animate__shakeY">shakeY</option>
+                                       </select>
+                                    </div>
+
+                                    <div class="inputs">
+
+                                       <div class="m-0">
+                                          <label for="animation-duration" class="form-check-label duration_animation_text"></label>
+                                          <div class="input-group">
+                                             <input disabled type="number" id="animation-duration" class="form-control placeholder-duration_animation" placeholder="Duration" aria-label="">
+                                             <button disabled class="btn btn-primary save_text" type="button" id="btn-animation-duration">Salvar</button>
+                                          </div>
+                                       </div>
+      
+                                    </div>
+
+                                   </div>
+                                 </div>
+                              </div>
+
+                           </div>
+
+                        </div>
+                     </div>
+                  </div>
+
+               </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="container container-hide-control container-updates mt-1 mb-1 animate__animated container-animated-style" style="display: none;">
+         <div class="bg-srt full-h container rounded px-4 py-4 bg-light" id="featured-3">
+            <div class="auto-scrool">
+               <h2 class="pb-2 border-bottom updates_text_icon"></h2>
+ 
+               
+               <div class="row mt-1 g-4 py-2 row-cols-1 row-cols-lg-1">
+                  <div class="p-2 m-0 d-flex">
+                     <div class="ml-1">
+                        <input class="form-check-input" type="checkbox" id="autoupdateonestart">
+                        <label class="form-check-label autoupdate_text" for="autoupdateonestart"></label>
+                     </div>
+                     <div class="ml-1">
+                        <input class="form-check-input" type="checkbox" id="isNotValidFirstSearchUpdateApp">
+                        <label class="form-check-label searchUpdateAppOnStart_text" for="isNotValidFirstSearchUpdateApp"></label>
+                     </div>
+                  </div>
+
+                  <div class="p-2 m-0 w-50">
+                     <div class="ml-1">
+                        <h3 class="pb-2"><span class="version_cuttent_text"></span>: <a class="a cursor-pointer version_app">N/A</a></h3>
+                     </div>
+                  </div>
+                  <div class="p-2 m-0 float-end w-50">
+                     <button type="button" id="button-search-updates" class="btn float-right-c btn-warning mr-10px search_updates_text"></button>
+                  </div>
+
+                  <div style="display: none;" class="p-2 m-0 percent_download_update_app">
+                     <div class="ml-1">
+                        <h4 class=""><span class="download_percentage_text"></span>: <a class="a cursor-pointer percent_download_app_update">10%</a></h4>
+                     </div>
+                  </div>
+ 
+                  <div class="feature mt-0 col">
+                     <div class="ml-1"><div class="alert alert-por-local-server-modal alert-danger hidden" role="alert"></div></div>
+                  </div>
+
+                  <div class="feature mt-0 col">
+                     <div class="ml-1">
+                        <div class="card none-border bg-dark">
+                           <div class="card-header" id="headingUpdates">
+                              <h5 class="mb-0">
+                                 <button class="btn btn-dark versions_on_github_text full-w" data-toggle="collapse" data-target="#collapseUpdates" aria-expanded="true" aria-controls="collapseUpdates">
+                                 </button>
+                              </h5>
+                           </div>
+      
+                           <div id="collapseUpdates" class="collapse" aria-labelledby="headingUpdates" data-parent="#accordion">
+                              <div class="card-body bg-srt" id="webViewUpdatesGitHub">
+
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="container container-hide-control container-kys-macros mt-1 mb-1 animate__animated container-animated-style" style="display: none;">
+        <div class="bg-srt full-h container rounded px-4 py-4 bg-light" id="featured-3">
+          <div class="auto-scrool">
+            <div class="pb-2 d-flex border-bottom">
+               <h2 class="btn-full-w keys_macro_text_icon"></h2>
+               <div class="input-group">
+                  <button type="button" data-bs-toggle="modal" data-bs-target="#modal-key-macro" id="button-add-macro" onclick="clear_modal_macro()" class="btn btn-primary add_macro_text bnt-top-title-ma"></button>
+                </div>
+            </div>
+
+            <div class="row g-4 py-2 row-cols-1 row-cols-lg-1">
+              <div class="feature col">
+
+                <div class="table-responsive text-nowrap"></div>
+                  <div class="input-group mb-2">
+                     <button class="btn btn-secondary" type="button"><span class="bi bi-search"></span></button>
+                     <input type="text" name="LKMfoo_filter" id="LKMfoo_filter" class="form-control foo_filter" placeholder="Procurar...">
+                  </div>
+                  <table class="table list-keys-macros footable bg-srt border rounded" data-page-size="15" data-filter="#LKMfoo_filter">
+
+                     <thead>
+                       <tr>
+                         <th>#</th>
+                         <th class="icon_text"></th>
+                         <th class="name_text"></th>
+                         <th class="text_type"></th>
+                         <th class="macro_text"></th>
+                         <th class="options_text"></th>
+                       </tr>
+                     </thead>
+
+                     <tbody>
+                       <tr></tr>
+                     </tbody>
+
+                     <tfoot>
+                        <tr>
+                           <td colspan="6" class="border-0">
+                              <ul class="pagination">
+                              </ul>
+                           </td>
+                        </tr>
+                     </tfoot>
+                     
+                  </table>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container container-hide-control container-web-pages mt-1 mb-1 animate__animated container-animated-style"style="display: none;">
+        <div class="bg-srt full-h container rounded px-4 py-4 bg-light" id="featured-3">
+          <div class="auto-scrool">
+            <div class="pb-2 d-flex border-bottom">
+               <h2 class="btn-full-w web_pages_text_icon"></h2>
+               <div class="input-group">
+                  <button type="button" data-bs-toggle="modal" data-bs-target="#modal-webpage" id="button-add-webpage" class="btn btn-primary add_webpage_text bnt-top-title-ma"></button>
+                </div>
+            </div>
+            <div class="row g-4 py-2 row-cols-1 row-cols-lg-1">
+
+              <div class="feature col">
+              <div class="table-responsive text-nowrap"></div>
+              <div class="input-group mb-2">
+                  <button class="btn btn-secondary" type="button"><span class="bi bi-search"></span></button>
+                  <input type="text" name="LWPfoo_filter" id="LWPfoo_filter" class="form-control foo_filter" placeholder="Procurar...">
+               </div>
+               <table class="table list-web-pages footable bg-srt border rounded" data-page-size="15" data-filter="#LWPfoo_filter">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th class="open_text"></th>
+                      <th class="icon_text"></th>
+                      <th class="name_text"></th>
+                      <th>Url</th>
+                      <th>Status</th>
+                      <th class="options_text"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  
+                  </tbody>
+
+                  <tfoot>
+                     <tr>
+                        <td colspan="6" class="border-0">
+                           <ul class="pagination">
+                           </ul>
+                        </td>
+                     </tr>
+                  </tfoot>
+              </table>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container container-hide-control container-helper mt-1 mb-1 animate__animated container-animated-style" style="display: none;">
+        <div class="bg-srt full-h container rounded px-4 py-4 bg-light" id="featured-3">
+          <div class="auto-scrool">
+            <div class="pb-2 d-flex border-bottom">
+               <h2 class="btn-full-w help_text_icon"></h2>
+               <div class="input-group">
+                  <button class="btn btn-primary btn-sm quick_guide_text bnt-top-title-ma"type="button" onclick="processeApressentationApp()"></button>
+               </div>
+            </div>
+            <div class="row g-4 py-2 row-cols-1 row-cols-lg-1">
+            <div class="feature col">
+              <div class="table-responsive text-nowrap"></div>
+              <div class="cards-area aos-init aos-animate" data-aos="fade-down">
+                <div class="row">
+                  <div class="col-md-6 col-xl-4 animate__animated animate__slideInLeft">
+                    <div class="card bg-card-srt">
+                      <div class="card-header shadow-text">
+                          <span class="apps_name "></span>
+                      </div>
+                      <div class="card-body">
+                          <p class="apps_name_description"></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xl-4 animate__animated animate__slideInDown">
+                     <div class="card bg-card-srt">
+                       <div class="card-header shadow-text">
+                           <span class="keys_macro_text "></span>
+                       </div>
+                       <div class="card-body">
+                           <p class="keys_macro_text_description"></p>
+                       </div>
+                     </div>
+                   </div>
+
+                  <div class="col-md-6 col-xl-4 animate__animated animate__slideInRight">
+                     <div class="card bg-card-srt">
+                        <div class="card-header shadow-text">
+                           <span class="settings_text "></span>
+                        </div>
+                        <div class="card-body">
+                           <p class="settings_text_description"></p>
+                        </div>
+                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <br>
+
+    <div class="bg-srt-modal modals">
+      <div class="modal fade" id="modal-edit-exe" tabindex="-1" aria-labelledby="modal-edit-exeLabel" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="modal-edit-exeLabel edit_text"></h1>
+                  <button type="button" class="btn-close" onclick="clearEditExe()" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                  <div class="alert alert-exe-modal hidden" role="alert"></div>
+                  <form>
+                     <div class="mb-3">
+                        <label for="name-exe-modal" class="col-form-label name_text_expc_1"></label>
+                        <input type="text" class="form-control" id="name-exe-modal">
+                     </div>
+                     <div class="mb-3 div-edit-url hidden">
+                        <label for="edit-url-add-app" class="col-form-label web_page_text"></label>:
+                        <input type="text" placeholder="Ex.: https://www.youtube.com" class="form-control" id="edit-url-add-app">
+                     </div>
+                     <div class="mb-3 div-edit-cmd hidden">
+                        <label for="edit-cmd-add-app" class="col-form-label cmd_page_text"></label>:
+                        <input type="text" placeholder="Ex.: start chrome" class="form-control" id="edit-cmd-add-app">
+                     </div>
+                     <div class="mb-3">
+                        <label for="icon-exe-edit" class="col-form-label icon_text_expc_1"></label>
+                        <div class="input-group">
+                           <input type="file" class="form-control" id="icon-exe-edit" aria-describedby="icon-exe-edit" aria-label="Upload" accept=".jpeg, .gif, .png">
+                        </div>
+                     </div>
+                  </form>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary btn-close-exe-modal close_text" onclick="clearEditExe()" data-bs-dismiss="modal"></button>
+                  <button type="button" class="btn btn-primary save_text" onclick="saveEditExe()"></button>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="modal fade" id="modal-add-app" tabindex="-1" aria-labelledby="modal-add-app" aria-hidden="true" data-bs-keyboard="false" data-bs-backdrop="static">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h1 class="modal-title fs-5 add_text" id="modal-add-app"></h1>
+                  <button type="button" onclick="clear_add_app()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                  <div class="alert alert-add-app alert-danger hidden" role="alert"></div>
+                  <form>
+                     <label class="form-check-label bnt_select_type_add_text" for="bnt-select-type-add-app"></label>
+                     <div class="mb-3">
+                        <div class="btn-group btn-full-w">
+                           <button type="button" class="btn btn-primary dropdown-toggle select_text" id="bnt-select-type-add-app" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                           <ul class="dropdown-menu bg-srt-dropdown-menu btn-full-w">
+                              <li onclick="select_type_add_app('audio', 'type_add_app_4', '.audio_text', '#inputs-add-audio-input')"><a id="type_add_app_4" class="dropdown-item audio_text" href="#"></a></li>
+                              <li onclick="select_type_add_app('exe', 'type_add_app_1', '.app_text', '#inputs-add-exe')"><a id="type_add_app_1" class="dropdown-item app_text" href="#"></a></li>
+                              <li onclick="select_type_add_app('web_page', 'type_add_app_2', '.web_page_text', '#inputs-add-web-page-url')"><a id="type_add_app_2" class="dropdown-item web_page_text" href="#"></a></li>
+                              <li onclick="select_type_add_app('obs_wss', 'type_add_app_5', '.obs_studio_n_text', '#obs-add-app-t')"><a id="type_add_app_5" class="dropdown-item obs_studio_n_text" href="#"></a></li>
+                              <li onclick="select_type_add_app('cmd', 'type_add_app_3', '.cmd_text', '#inputs-add-cmd-input')"><a id="type_add_app_3" class="dropdown-item cmd_text" href="#"></a></li>
+                           </ul>
+                        </div>
+                     </div>
+
+                     <div id="inputs-add-audio-input" class="mb-3 hidden">
+                        <div class="mb-3">
+                           <label for="name-audio-modal-1" class="col-form-label name_text_expc_1"></label>
+                           <input type="text" class="form-control" id="name-audio-modal-1">
+                        </div>
+                        <div class="mb-3">
+                           <label for="input-app-audio" class="col-form-label audio_text"></label>:
+                           <input type="file" class="form-control" id="input-app-audio" aria-label="Upload" accept="audio/*">
+                        </div>
+                        <div class="mb-3">
+                           <label for="icon-audio-add-app-1" class="col-form-label icon_text_expc_1"></label>
+                           <input type="file" class="form-control" id="icon-audio-add-app-1" aria-describedby="icon-audio-add-app-1" aria-label="Upload" accept=".jpeg, .gif, .png, .gif">
+                        </div>
+                     </div>
+                     <div id="inputs-add-exe" class="mb-3 hidden">
+                        <div class="mb-3">
+                           <label for="name-exe-modal-1" class="col-form-label name_text_expc_1"></label>
+                           <input type="text" class="form-control" id="name-exe-modal-1">
+                        </div>
+                        <div class="mb-3">
+                           <label for="input-app-exec" class="col-form-label app_text"></label>:
+                           <input type="file" class="form-control" id="input-app-exec" aria-label="Upload" accept=".exe">
+                        </div>
+                        <div class="mb-3">
+                           <label class="col-form-label or_text"></label>:
+                        </div>
+                        <div class="mb-3">
+                           <div id="accordion">
+                              <div class="card">
+                                 <div class="card-header">
+                                    <h5 class="mb-0">
+                                       <button class="btn btn-link btn-link-collapse list_apps_name" onclick="list_installed_software()" data-toggle="collapse" data-target="#list_installed_software" aria-expanded="true" aria-controls="list_installed_software">
+                                       </button>
+                                    </h5>
+                                 </div>
+                                 <div id="list_installed_software" class="collapse">
+                                    <div class="bg-srt card-body">
+                                       <div id="list_software">
+                                       </div>
+                                       <div class="card-content-spinner">
+                                          <div class="hollow-dots-spinner spinner-center spinnerStyle">
+                                             <div class="dot"></div>
+                                             <div class="dot"></div>
+                                             <div class="dot"></div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="mb-3">
+                           <label for="icon-exe-add-app-1" class="col-form-label icon_text_expc_1">Icone:</label>
+                           <input type="file" class="form-control" id="icon-exe-add-app-1" aria-describedby="icon-exe-add-app-1" aria-label="Upload" accept=".jpeg, .gif, .png, .gif">
+                        </div>
+                     </div>
+                     <div id="inputs-add-web-page-url" class="mb-3 hidden">
+                        <div class="mb-3">
+                           <label for="name-exe-modal-2" class="col-form-label name_text_expc_1"></label>
+                           <input type="text" class="form-control" id="name-exe-modal-2">
+                        </div>
+                        <div class="mb-3">
+                           <label for="url-add-app" class="col-form-label web_page_text"></label>:
+                           <input type="text" placeholder="Ex.: https://www.youtube.com" class="form-control" id="url-add-app">
+                        </div>
+                        <div class="mb-3">
+                           <label for="icon-exe-add-app-2" class="col-form-label icon_text_expc_1"></label>
+                           <input type="file" class="form-control" id="icon-exe-add-app-2" aria-describedby="icon-exe-add-app-2" aria-label="Upload" accept=".jpeg, .gif, .png, .gif">
+                        </div>
+                     </div>
+
+                     <div id="obs-add-app-t" class="mb-3 hidden">
+                        <div class="mb-3">
+                           <label for="name-custom-obs-scene" class="col-form-label name_text_expc_1"></label>
+                           <input type="text" class="form-control name_custom_placeholder_text" id="name-custom-obs-scene">
+                        </div>
+
+                        <div class="mb-3">
+                           <label for="select-obs-scene" class="col-form-label scenes_text_sl"></label>
+                           <div class="input-group">
+                              <select id="select-obs-scene" class="form-select">
+                                 <option value="" selected class="select_obs_scene_text"></option>
+                              </select>
+                              <button id="btn-update-list-scenes-obs" class="btn btn-primary update_text" type="button"></button>
+                            </div>
+                        </div>
+                        <div class="mb-0">
+                           <label class="col-form-label or_text"></label>:
+                        </div>
+                        <div class="mb-3">
+                           <label for="select-audios-inputs" class="col-form-label obsaudio_input_text_sl"></label>
+                           <div class="input-group">
+                              <select id="select-audios-inputs" class="form-select">
+                                 <option value="" selected class="select_obs_audioinput_text"></option>
+                              </select>
+                              <button id="btn-update-list-audio-input-obs" class="btn btn-primary update_text" type="button"></button>
+                            </div>
+                        </div>
+                        <div class="mb-0">
+                           <label class="col-form-label or_text"></label>:
+                        </div>
+                        <div class="mb-3">
+                           <label for="select-obs-options" class="col-form-label obs_options_text_sl"></label>
+                           <div class="input-group">
+                              <select id="select-obs-options" class="form-select">
+                                 <option value="" selected class="select_obs_options_text"></option>
+                                 <option class="StartStream_text" id="sl-StartStream" value="StartStream"></option>
+                                 <option class="StopStream_text" id="sl-StopStream" value="StopStream"></option>
+                              </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                           <label for="icon-obs-add-app-5" class="col-form-label icon_text_expc_1"></label>
+                           <input type="file" class="form-control" id="icon-obs-add-app-5" aria-describedby="icon-obs-add-app-5" aria-label="Upload" accept=".jpeg, .gif, .png, .gif">
+                        </div>
+                     </div>
+
+                     <div id="inputs-add-cmd-input" class="mb-3 hidden">
+                        <div class="mb-3">
+                           <label for="name-exe-modal-3" class="col-form-label name_text_expc_1"></label>
+                           <input type="text" class="form-control" id="name-exe-modal-3">
+                        </div>
+                        <div class="mb-3">
+                           <label for="cmd-add-app" class="col-form-label cmd_page_text"></label>:
+                           <input type="text" placeholder="Ex.: start chrome" class="form-control" id="cmd-add-app">
+                        </div>
+                        <div class="mb-3">
+                           <label for="icon-exe-add-app-3" class="col-form-label icon_text_expc_1">Icone:</label>
+                           <input type="file" class="form-control" id="icon-exe-add-app-3" aria-describedby="icon-exe-add-app-3" aria-label="Upload" accept=".jpeg, .gif, .png, .gif">
+                        </div>
+                     </div>
+                  </form>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" onclick="clear_add_app()" class="btn bnt-close-modal-add-app btn-danger btn-close-add-app-modal close_text" data-bs-dismiss="modal"></button>
+                  <button type="button" onclick="add_new_app()" class="btn btn-primary save_text"></button>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="modal fade" id="modal-key-macro" tabindex="-1" aria-labelledby="modal-key-macro" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h1 class="modal-title fs-5 add_text" id="modal-key-macro"></h1>
+                  <button type="button" class="btn-close" onclick="clear_modal_macro()" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                  <div class="alert alert-key-macro-modal alert-danger hidden" role="alert"></div>
+                  <form>
+                     <div class="mb-3">
+                        <div class="btn-group btn-full-w">
+                           <button type="button" class="btn btn-primary dropdown-toggle btn-dropdown-key-macro apps_name" data-bs-toggle="dropdown" aria-expanded="false">
+                           </button>
+                           <ul class="dropdown-menu bg-srt-dropdown-menu btn-full-w ul-dropdown-ky-macro">
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="mb-3">
+                        <div class="input-group mb-3">
+                           <input type="button" value="" id="key-macro-modal" class="form-control hover-color-primary bg-dark text-white">
+                        </div>
+                     </div>
+                  </form>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-danger btn-close-key-macro-modal close_text" onclick="clear_modal_macro()" data-bs-dismiss="modal"></button>
+                  <button type="button" class="btn btn-primary save_text" onclick="add_new_macro()"></button>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="modal fade" id="modal-webpage" tabindex="-1" aria-labelledby="modal-webpage" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h1 class="modal-title fs-5 add_text" id="modal-webpage"></h1>
+                  <button type="button" class="btn-close" onclick="clear_modal_webpage()" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                  <div class="alert alert-webpage-modal alert-danger hidden" role="alert"></div>
+                  <form>
+                     <div class="mb-3">
+                        <label for="name_webpage" class="col-form-label name_text"></label>
+                        <div class="input-group">
+                           <input type="text" name="name_webpage" id="name_webpage" class="form-control" placeholder="Name">
+                        </div>
+                     </div>
+                     <div class="mb-3">
+                        <label for="url_webpage" class="col-form-label">URL</label>
+                        <div class="input-group">
+                           <input type="url" name="url_webpage" id="url_webpage" class="form-control" value="https://" placeholder="Url">
+                        </div>
+                     </div>
+                  </form>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-danger btn-close-webpage-modal close_text" onclick="clear_modal_webpage()" data-bs-dismiss="modal"></button>
+                  <button type="button" class="btn btn-primary save_text" onclick="add_new_webpage()"></button>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="modal fade" id="modal-edit-key-macro" tabindex="-1" aria-labelledby="modal-edit-key-macro" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h1 class="modal-title fs-5 edit_text" id="modal-edit-key-macro-title"></h1>
+                  <button type="button" class="btn-close" onclick="clear_edit_modal_macro()" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                  <div class="alert alert-edit-key-macro-modal alert-danger hidden" role="alert"></div>
+                  <form>
+                     <div class="mb-3">
+                        <div class="btn-group">
+                           <button type="button" disabled class="btn btn-primary dropdown-toggle btn-dropdown-edit-key-macro" data-bs-toggle="dropdown" aria-expanded="false">
+                           </button>
+                           <ul class="dropdown-menu bg-srt-dropdown-menu ul-dropdown-ky-macro">
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="mb-3">
+                        <div class="input-group mb-3">
+                           <input type="button" value="" id="key-edit-macro-modal" class="form-control hover-color-primary bg-dark text-white">
+                        </div>
+                     </div>
+                  </form>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-danger btn-close-edit-key-macro-modal cancel_text" onclick="clear_edit_modal_macro()" data-bs-dismiss="modal"></button>
+                  <button type="button" class="btn btn-primary save_text" onclick="edit_save_macro()"></button>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="modal fade" id="modal-qr-code" tabindex="-1" aria-labelledby="modal-qr-code" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="modal-qr-code">QR Code</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                  <img src="" id="url-qr-code-modal">
+               </div>
+               <div class="modal-footer">
+                  <button id="close_modal_qr_code" type="button" class="btn btn-danger close_text" data-bs-dismiss="modal"></button>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="modal" id="modal_dialog">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h4 id="title_modal" class="modal-title"></h4>
+                  <button id="btn_close_modal" type="button" class="btn-close" data-bs-dismiss="modal"></button>
+               </div>
+               <div id="body_modal" class="modal-body">
+               </div>
+               <div class="modal-footer">
+                  <button type="button" id="confirm_modal" class="btn btn-primary text_yes" data-bs-dismiss="modal"></button>
+                  <button type="button" id="deny_modal" class="btn btn-danger text_no" data-bs-dismiss="modal"></button>
+               </div>
+            </div>
+         </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="audios_instaces" class="hidden">
+  </div>
+</body>
+
+  <script src="../../src/jquery/jquery-3.7.1.min.js"></script>
+  <script src="../../src/jquery/jquery.min.js"></script>
+  <script src="../../src/jquery/jquery-ui.min.js"></script>
+  <script src="../../src/jquery/jquery.mask.min.js"></script>
+  <script src="../../src/bootstrap-5.0.2/js/bootstrap.bundle.min.js"></script>
+  <script src="../../src/bootstrap-5.0.2/js/bootbox.min.js"></script>
+  <script src="../../src/footable/js/footable.all.min.js"></script>
+  <script src="./js/comuns.js"></script>
+  <script src="./js/animations.js"></script>
+  <script src="../../src/js/selector_language.js"></script>
+  <script src="./back_functions.js"></script>
+  <script src="./js/updates.js"></script>
+  <script src="./js/app.js"></script>
+  <script src="./js/web_server.js"></script>
+  <script src="./js/obs.js"></script>
+  <script src="./js/keys_macro.js"></script>
+</html>

@@ -1,0 +1,94 @@
+{
+  "name": "under-deck",
+  "version": "1.3.9",
+  "description": "Under Deck",
+  "productName": "Under Deck",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "repository": "https://github.com/UNDER192103/under-deck",
+  "publish": {
+    "provider": "github",
+    "releaseType": "release"
+  },
+  "build": {
+    "asar": false,
+    "appId": "com.UNDER192103.underdeck",
+    "productName": "Under Deck",
+    "win": {
+      "target": "nsis",
+      "requestedExecutionLevel": "highestAvailable",
+      "icon": "Domain/src/img/under-icon-256x.ico"
+    },
+    "nsis": {
+      "oneClick": true,
+      "installerIcon": "Domain/src/img/under-icon-256x.ico",
+      "uninstallerIcon": "Domain/src/img/under-icon-256x.ico",
+      "installerHeaderIcon": "Domain/src/img/under-icon-256x.ico",
+      "license": "LICENSE.md",
+      "allowToChangeInstallationDirectory": false
+    },
+    "directories": {
+      "output": "biuld"
+    }
+  },
+  "homepage": "https://github.com/UNDER192103/under-deck",
+  "author": {
+    "name": "UNDER",
+    "email": "undernouzen@gmail.com",
+    "url": "https://github.com/UNDER192103"
+  },
+  "contributors": [
+    {
+      "name": "UNDER",
+      "email": "undernouzen@gmail.com",
+      "url": "https://github.com/UNDER192103"
+    }
+  ],
+  "license": "ISC",
+  "keywords": [
+    "Electron",
+    "start",
+    "biuld"
+  ],
+  "devDependencies": {
+    "@popperjs/core": "^2.11.7",
+    "electron": "^24.3.0",
+    "electron-builder": "^24.13.3",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "ip": "^1.1.8",
+    "jsoning": "^0.13.23",
+    "lepikevents": "^1.7.7",
+    "node-global-key-listener": "^0.1.1",
+    "open": "^9.1.0"
+  },
+  "dependencies": {
+    "@discordjs/collection": "^2.1.1",
+    "@popperjs/core": "^2.11.7",
+    "@vitalets/google-translate-api": "^9.2.0",
+    "axios": "^1.4.0",
+    "decompress": "^4.2.1",
+    "electron-updater": "^6.3.2",
+    "express": "^4.18.2",
+    "fetch-installed-software": "^0.0.7",
+    "file-icon-extractor": "^1.0.4",
+    "fs": "^0.0.1-security",
+    "googleapis": "^142.0.0",
+    "ip": "^1.1.8",
+    "jsoning": "^0.13.23",
+    "jwt-decode": "^4.0.0",
+    "lepikevents": "^1.7.7",
+    "node-global-key-listener": "^0.1.1",
+    "obs-websocket-js": "^5.0.6",
+    "open": "^9.1.0",
+    "qrcode": "^1.5.3",
+    "serialport": "^12.0.0",
+    "socket.io": "^4.7.5",
+    "superagent": "^8.0.9",
+    "toastify-js": "^1.12.0"
+  }
+}
