@@ -37,7 +37,7 @@ class MainScreen {
         nodeIntegration: true,
         contextIsolation: false,
         preload: path.join(__dirname, "./preload.js"),
-        devTools: true
+        devTools: false
       },
     });
 
