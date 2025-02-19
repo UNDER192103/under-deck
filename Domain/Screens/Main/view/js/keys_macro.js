@@ -12,21 +12,7 @@ $(document).ready(async () => {
     });
 
     $("#button-add-macro").click(async ()=>{
-        $('.btn-dropdown-key-macro').text(getNameTd(".apps_name")).attr("disabled", false);
-        DAO.List_programs = await DAO.ProgramsExe.get('list_programs');
-        $(".ul-dropdown-ky-macro").html("");
-        if(DAO.List_programs != null && DAO.List_programs.length > 0){
-            DAO.List_programs.forEach(item => {
-                let name = item.name.replace('.exe', '');
-                if(item.nameCustom.length > 0) name = item.nameCustom;
-                $(".ul-dropdown-ky-macro").append(`
-                    <li onClick="select_program_key_macro(${item._id})" class="d-flex" id="li-key-macro-${item._id}">
-                        <img class="img-tbody-list-keys-macros ml-1" src="${item.iconCustom}">
-                        <a class="dropdown-item" href="#">${name}</a>
-                    </li>
-                `);
-            });
-        }
+        addShortCut();
     });
 
     $("#key-macro-modal").click(() => {
@@ -123,6 +109,29 @@ $(document).ready(async () => {
 
 });
 
+async function addShortCut(idItem = null) {
+    clear_modal_macro();
+    $('.btn-dropdown-key-macro').text(getNameTd(".apps_name")).attr("disabled", false);
+    DAO.List_programs = await DAO.ProgramsExe.get('list_programs');
+    $(".ul-dropdown-ky-macro").html("");
+    if(DAO.List_programs != null && DAO.List_programs.length > 0){
+        DAO.List_programs.forEach(item => {
+            let name = item.name.replace('.exe', '');
+            let isSelected = false;
+            if(item.nameCustom.length > 0) name = item.nameCustom;
+            $(".ul-dropdown-ky-macro").append(`
+                <li onClick="select_program_key_macro(${item._id})" class="d-flex" id="li-key-macro-${item._id}">
+                    <img class="img-tbody-list-keys-macros ml-1" src="${item.iconCustom}">
+                    <a class="dropdown-item" href="#">${name}</a>
+                </li>
+            `);
+
+            if(item._id == idItem)
+                select_program_key_macro(item._id);
+        });
+    }
+}
+
 async function change_list_keys_macros(){
     let footableListKeysMacros = await $(".list-keys-macros").data('footable');
     footableListKeysMacros.removeRow($(".list-keys-macros tbody tr"));
@@ -214,6 +223,7 @@ async function delete_macro(id){
                 let newListMacros = listNowMacro.filter(m => m._id != id);
                 await DAO.List_macros.set('macros', newListMacros);
                 change_list_keys_macros();
+                toaster.success(`${getNameTd('.Successfully_removed')}`);
             }
         }
     });
@@ -264,6 +274,8 @@ async function add_new_macro(){
                     $("#key-macro-modal").blur()
                     $("#key-macro-modal").removeClass("pulse-red")
                     $(`.btn-dropdown-key-macro`).text(getNameTd(".apps_name"));
+                    ;
+                    toaster.success(`${getNameTd('.Added_successfully')}`);
                 }
                 else{
                     $(".alert-key-macro-modal").text(getNameTd(".t_a_i_a_r_i_t_l_o_s_text")).removeClass('hidden');
@@ -295,6 +307,7 @@ async function edit_save_macro(){
             await DAO.List_macros.set('macros', listNowMacro);
             await change_list_keys_macros();
             $('.btn-close-edit-key-macro-modal').click();
+            toaster.success(`${getNameTd('.Successfully_edited')}`);
         }
         else{
             $(".alert-key-macro-modal").text(getNameTd(".p_c_a_s_text")).removeClass('hidden');

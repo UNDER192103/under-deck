@@ -5,6 +5,7 @@ const translator = require(path.join(app.getAppPath(), 'Domain', 'Comun', 'Trans
 var DAO = require(path.join(app.getAppPath(), 'Repository', 'DB.js'));
 const { autoUpdater, AppUpdater } = require("electron-updater");
 const ObsService = require("../../Service/Obs");
+const PACKGEJSON = require("../../../package.json");
 
 autoUpdater.autoDownload = false;
 autoUpdater.autoInstallOnAppQuit = false;
@@ -37,7 +38,7 @@ class MainScreen {
         nodeIntegration: true,
         contextIsolation: false,
         preload: path.join(__dirname, "./preload.js"),
-        devTools: true
+        devTools: PACKGEJSON.status == 'dev' ? true : false,
       },
     });
 

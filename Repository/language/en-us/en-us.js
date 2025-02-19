@@ -20,6 +20,16 @@ var en_us = [
         text: "Version"
     },
     {
+        id: ".general_text",
+        type: "text",
+        text: "General"
+    },
+    {
+        id: ".theme_text",
+        type: "text",
+        text: "Theme"
+    },
+    {
         id: ".releaseDate_text",
         type: "text",
         text: "Update release date"
@@ -215,9 +225,29 @@ var en_us = [
         text: "Settings",
     },
     {
+        id: ".profile_text",
+        type: "text",
+        text: "Profile",
+    },
+    {
+        id: ".UND_userLogin_text",
+        type: "text",
+        text: "Login",
+    },
+    {
+        id: ".UND_userRegister_text",
+        type: "text",
+        text: "Register",
+    },
+    {
         id: ".settings_text_icon",
         type: "html",
         text: '<i class="bi bi-gear-wide-connected"></i> Settings',
+    },
+    {
+        id: ".settings_text_icon_HVRT",
+        type: "html",
+        text: '<span class="d-block hover_rotation me-1" href="#"><i class="bi bi-gear-wide-connected"></i></span> Settings',
     },
     {
         id: ".keys_macro_text",
@@ -330,6 +360,26 @@ var en_us = [
         text: "No"
     },
     {
+        id:".appearance_text",
+        type: "text",
+        text: "Appearance"
+    },
+    {
+        id:".enable_animations_text",
+        type: "text",
+        text: "Enable Animations"
+    },
+    {
+        id:".animation_models_text",
+        type: "text",
+        text: "Animation Models"
+    },
+    {
+        id:".animation_type_text",
+        type: "text",
+        text: "Animation Type"
+    },
+    {
         id:".no",
         type: "text",
         text: "No"
@@ -385,6 +435,31 @@ var en_us = [
         text: "Command"
     },
     {
+        id:".default_text",
+        type: "text",
+        text: "Default"
+    },
+    {
+        id:".screen_transitions_text",
+        type: "text",
+        text: "Screen transitions"
+    },
+    {
+        id:".duration_animation_text",
+        type: "text",
+        text: "Animation duration"
+    },
+    {
+        id: ".placeholder-duration_animation",
+        type: "attr",
+        text: {placeholder: "Animation duration" },
+    },
+    {
+        id:".skip_text",
+        type: "text",
+        text: "Skip"
+    },
+    {
         id:".select_text",
         type: "text",
         text: "Select"
@@ -437,17 +512,17 @@ var en_us = [
     {
         id: ".apps_name_description",
         type: "html",
-        text: `In <a class='a-style' onClick='selectMenu("app-main")'>Apps</a> it is possible to register executables of applications such as Discord, Steam and other applications, as well as audios to be played or even open a URL in a new tab on your browser or use a command to be executed in the Windows CMD (Command Prompt).`,
+        text: `In <a class='a-style' onClick='selectMenu("app-main")'><i class="bi bi-google-play"></i> Apps</a> it is possible to register executables of applications such as Discord, Steam and other applications, as well as audios to be played or even open a URL in a new tab on your browser or use a command to be executed in the Windows CMD (Command Prompt).`,
     },
     {
         id: ".settings_text_description",
         type: "html",
-        text: `In <a class='a-style' onClick='selectMenu("keys-macros")'>Settings</a> you can activate or deactivate shortcut keys, as well as start WEB Under Deck, WEB Under Deck allows you to run registered Applications in <a class='a-style' onClick = 'selectMenu("app-main")'>Applications</a> just by accessing the URL, you can also access it from your mobile phone using the URL or just by scanning the QR Code, NOTE: At the moment this function is only available for local access and does not support remote access or access from another Internet/Wifi network other than the same one used on your Computer.`,
+        text: `In <a class='a-style' onClick='selectMenu("config")'><i class="bi bi-gear-wide-connected"></i></span> Settings</a> you can activate or deactivate shortcut keys, as well as start WEB Under Deck, WEB Under Deck allows you to run registered Applications in <a class='a-style' onClick = 'selectMenu("app-main")'><i class="bi bi-google-play"></i> Apps</a> just by accessing the URL, you can also access it from your mobile phone using the URL or just by scanning the QR Code, NOTE: At the moment this function is only available for local access and does not support remote access or access from another Internet/Wifi network other than the same one used on your Computer.`,
     },
     {
         id: ".keys_macro_text_description",
         type: "html",
-        text: `In <a class='a-style' onClick='selectMenu("keys-macros")'>Shortcut Keys</a> you can register a specific macro for each application that has been registered in <a class='a-style' onClick ='selectMenu("app-main")'>Application</a>, this makes it possible to run an application using only keyboard shortcuts, this function requires you to enable it in: <a class='a-style' onClick='selectMenu("config")'>Settings</a>.`,
+        text: `In <a class='a-style' onClick='selectMenu("keys-macros")'><i class="bi bi-keyboard-fill"></i> Shortcut Keys</a> you can register a specific macro for each application that has been registered in <a class='a-style' onClick ='selectMenu("app-main")'><i class="bi bi-google-play"></i> Apps</a>, this makes it possible to run an application using only keyboard shortcuts, this function requires you to enable it in: <a class='a-style' onClick='selectMenu("config")'><i class="bi bi-gear-wide-connected"></i></span> Settings</a>.`,
     },
     {
         id: ".selec_type_code_edit_or_add",
@@ -483,6 +558,16 @@ var en_us = [
         id: ".select_language_translated",
         type: "text",
         text: "Select a language to which it will be translated",
+    },
+    {
+        id: ".select_language_text",
+        type: "text",
+        text: "Select a language",
+    },
+    {
+        id: ".language_text",
+        type: "text",
+        text: "Language",
     },
     {
         id: "#translate_to",
@@ -653,6 +738,26 @@ var en_us = [
         id: ".erronetupdatetheapp",
         type: "text",
         text: "Clound not search for updates due to lack of internet connection!", 
+    },
+    {
+        id: ".next_text",
+        type: "text",
+        text: "Next", 
+    },
+    {
+        id: ".back_text",
+        type: "text",
+        text: `Back`, 
+    },
+    {
+        id: ".back_icon_text",
+        type: "html",
+        text: `<i class="bi bi-arrow-left-short"></i> Back`, 
+    },
+    {
+        id: ".next_icon_text",
+        type: "html",
+        text: `Next <i class="bi bi-arrow-right-short"></i>`, 
     },
     {
         id: ".erroupdatetheapp",
@@ -898,6 +1003,186 @@ var en_us = [
         id: ".newAppUpdate",
         type: "text",
         text: "New update found.",
+    },
+    {
+        id: ".acclogout_text",
+        type: "text",
+        text: "Logout",
+    },
+    {
+        id: ".password_text",
+        type: "text",
+        text: "Password",
+    },
+    {
+        id: ".confirm_password_text",
+        type: "text",
+        text: "Confirm Password",
+    },
+    {
+        id: ".email_or_username_text",
+        type: "text",
+        text: "E-mail or Username",
+    },
+    {
+        id: ".e_or_u_placeholder",
+        type: "attr",
+        text: {placeholder: "E-mail or Username" },
+    },
+    {
+        id: ".msg_successfully_logged_text",
+        type: "text",
+        text: "Logged in successfully",
+    },
+    {
+        id: ".msg_err_u_ud_login_text",
+        type: "text",
+        text: "Invalid username or password",
+    },
+    {
+        id: ".no_accounts_found_text",
+        type: "text",
+        text: "No users found with this email address or username",
+    },
+    {
+        id: ".msg_err_u_up_login_text",
+        type: "text",
+        text: "Invalid password",
+    },
+    {
+        id: ".Forgot_your_password_text",
+        type: "text",
+        text: "Forgot your password",
+    },
+    {
+        id: ".Reset_password_text",
+        type: "text",
+        text: "Reset Password",
+    },
+    {
+        id: ".We_have_sent_a_password_reset_code_to_your_email",
+        type: "text",
+        text: "We have sent a password reset code to your email!",
+    },
+    {
+        id: ".token_reset_password_text",
+        type: "text",
+        text: "Password reset token",
+    },
+    {
+        id: ".t_r_p_placeholder",
+        type: "attr",
+        text: {placeholder: "Password reset token" },
+    },
+    {
+        id: ".Password_reset_successfully_text",
+        type: "text",
+        text: "Password reset successfully!",
+    },
+    {
+        id: ".Please_provide_a_valid_password_reset_token_text",
+        type: "text",
+        text: "Please provide a valid password reset token!",
+    },
+    {
+        id: ".chek_meets_set_password_text",
+        type: "text",
+        text: "Please check that the password reset token is correct and that the password meets the minimum 8 character requirements!",
+    },
+    {
+        id: ".An_error_occurred_when_trying_to_reset_the_password_text",
+        type: "text",
+        text: "An error occurred when trying to reset the password!",
+    },
+    {
+        id: ".doyouwanttolearnhowtousetheapplication",
+        type: "text",
+        text: "Do you want to follow the quick guide to using the application?",
+    },
+    {
+        id: ".preferredlanguage",
+        type: "text",
+        text: "Preferred Language",
+    },
+    {
+        id: ".ignore_text",
+        type: "text",
+        text: "Ignore",
+    },
+    {
+        id: ".quickguide1",
+        type: "text",
+        text: "Here you can add a type of application to be controlled by the application.",
+    },
+    {
+        id: ".quickguide2",
+        type: "text",
+        text: "You can add an application type to be controlled by the application from the options: Audio, Application (.EXE), WEB page URL, OBS Studio Functions and Windows CMD Commands.",
+    },
+    {
+        id: ".quickguide3",
+        type: "text",
+        text: `Here you can add a Key Macro to perform actions in your applications added on the <a class="a-style apps_name_icon"><i class="bi bi-google-play"></i> Apps</a >.`,
+    },
+    {
+        id: ".quickguide4",
+        type: "text",
+        text: "You can register WEB pages such as You Tube, Google and others to be accessed within the application without the need for an open browser.",
+    },
+    {
+        id: ".quickguide5",
+        type: "text",
+        text: "Here you can configure OBS Websocket to communicate with your OBS Studio installed on your machine or even remotely, but with some limitations.",
+    },
+    {
+        id: ".quickguide6",
+        type: "text",
+        text: "Here you can configure the Under Deck app to adapt to your language preferences and hotkeys and notifications will be active in Windows.",
+    },
+    {
+        id: ".quickguide7",
+        type: "text",
+        text: `Web Under Deck is a way for you to run your applications registered in <a class="a-style apps_name_icon"><i class="bi bi-google-play"></i> Apps</a> when accessing a WEB page using a cell phone or tablet or even another computer, simply configure a <a class="a-style">PORT</a> that is not being used and access it using <a class="a-style ">LINK</a> or using the <um class="a-style">QR code</a>.`,
+    },
+    {
+        id: ".quickguide8",
+        type: "text",
+        text: "Here you can customize the appearance of the application such as theme, animations and colors and formats coming soon to the Under Deck Web.",
+    },
+    {
+        id: ".quickguide9",
+        type: "text",
+        text: "Here you can check for a new update and configure automatic updating.",
+    },
+    {
+        id: ".quickguide10",
+        type: "text",
+        text: "If you need help again, you can search for help in this tab or start the quick guide again.",
+    },
+    {
+        id: ".quickguideFinish",
+        type: "text",
+        text: "Congratulations, you've finished the quick guide, if you need help again, visit the help screen for more information or get in touch.",
+    },
+    {
+        id: ".quick_guide_text",
+        type: "html",
+        text: `<i class="bi bi-card-heading"></i> Quick Guide`,
+    },
+    {
+        id: ".Added_successfully",
+        type: "text",
+        text: "Added successfully",
+    },
+    {
+        id: ".Successfully_edited",
+        type: "text",
+        text: "Successfully edited",
+    },
+    {
+        id: ".Successfully_removed",
+        type: "text",
+        text: "Successfully removed",
     },
 ]
 

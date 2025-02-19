@@ -1,7 +1,50 @@
-var _all = { list_programs: null, list_programs_json: null, isFullScreen: false }
+var _all = { list_programs: null, list_programs_json: null, isFullScreen: false }, isHorizontalMode = false;
 
 $(document).ready(function(){
     start_get_data();
+
+    $(".bnt-fullscreen").click(()=>{
+        var elem = document.documentElement;
+
+        function openFullscreen() {
+            if (elem.requestFullscreen) {
+              elem.requestFullscreen();
+            } else if (elem.webkitRequestFullscreen) { /* Safari */
+              elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { /* IE11 */
+              elem.msRequestFullscreen();
+            }
+        
+            _all.isFullScreen = true;
+        }
+          
+        function closeFullscreen() {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.webkitExitFullscreen) { /* Safari */
+            document.webkitExitFullscreen();
+          } else if (document.msExitFullscreen) { /* IE11 */
+            document.msExitFullscreen();
+          }
+          _all.isFullScreen = false;
+        }
+    
+        if(!_all.isFullScreen)
+            openFullscreen();
+        else
+            closeFullscreen()
+    });
+
+    $(".bnt-horizontalMode").click(()=>{
+        if(isHorizontalMode){
+            $('.exe-item').removeClass('horizontalMode');
+            isHorizontalMode = false;
+        }
+        else{
+            $('.exe-item').addClass('horizontalMode');
+            isHorizontalMode = true;
+        }
+    });
 });
 
 const start_get_data = async () => {
@@ -24,41 +67,9 @@ const start_get_data = async () => {
     }
 }
 
-function fullscreen(){
-    var elem = document.documentElement;
-
-    function openFullscreen() {
-        if (elem.requestFullscreen) {
-          elem.requestFullscreen();
-        } else if (elem.webkitRequestFullscreen) { /* Safari */
-          elem.webkitRequestFullscreen();
-        } else if (elem.msRequestFullscreen) { /* IE11 */
-          elem.msRequestFullscreen();
-        }
-
-        _all.isFullScreen = true;
-    }
-      
-    function closeFullscreen() {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-      } else if (document.webkitExitFullscreen) { /* Safari */
-        document.webkitExitFullscreen();
-      } else if (document.msExitFullscreen) { /* IE11 */
-        document.msExitFullscreen();
-      }
-      _all.isFullScreen = false;
-    }
-
-    if(!_all.isFullScreen)
-        openFullscreen();
-    else
-        closeFullscreen()
-}
-
 const execut_exe = async (id) =>{
-    $(`#item-exe-${id}`).css("transform", "scale(1.05)");
-    setTimeout(()=>{$(`#item-exe-${id}`).css("transform", "none");}, 200);
+    $(`#item-exe-${id}`).css("scale", "1.05");
+    setTimeout(()=>{$(`#item-exe-${id}`).css("scale", "");}, 200);
     var item = await _all.list_programs.filter(f => f._id == id)[0];
     if(item != null){
         var json = JSON.stringify(item);
@@ -81,7 +92,7 @@ const update_programs_select = async (list = _all.list_programs) => {
         var icone = location.origin+"/src/img/underbot_logo.png";
         if(item.nameCustom.length > 0)
             name = item.nameCustom;
-        $('.exe-list').append(`<li id="item-exe-${item._id}" onclick="execut_exe(${item._id})" class="col mb-2 bg-light" data-name="0-circle" data-tags="number numeral" data-categories="shapes">
+        $('.exe-list').append(`<li id="item-exe-${item._id}" onclick="execut_exe(${item._id})" class="col exe-item mb-2 bg-light ${isHorizontalMode ? "horizontalMode" : ""}" data-name="0-circle" data-tags="number numeral" data-categories="shapes">
             <a class="d-block text-body-emphasis text-decoration-none" >
             <div class="bg-body-secondary text-center rounded div-content-img-exe">
                 <img id="icon-${item._id}" src="${icone}" class="img-exe">

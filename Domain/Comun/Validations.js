@@ -6,6 +6,10 @@ const DB_default_values = async (callback) => {
     await DAO.DB.set('ShowMainScreen', null);
     await DAO.DB.set("select_folder", null);
     await DAO.DB.set("select_file", null);
+
+    if(await DAO.DB.get('isFirstStart') == null)
+        await DAO.DB.set('isFirstStart', true);
+    
     if(await DAO.DB.get('isNotValidFirstSearchUpdateApp') == null)
         await DAO.DB.set('isNotValidFirstSearchUpdateApp', true);
 
@@ -13,10 +17,19 @@ const DB_default_values = async (callback) => {
         await DAO.DB.set('first_search_update_app', true);
 
     if(DAO.DB.get('server_port') == null)
-        DAO.DB.set('server_port', 3000);
+        await DAO.DB.set('server_port', 3000);
+
+    if(DAO.DB.get('isEnableAnimations') == null)
+        await DAO.DB.set('isEnableAnimations', true);
+
+    if(DAO.DB.get('animation') == null)
+        await DAO.DB.set('animation', 'random');
+
+    if(DAO.DB.get('modelAnimation') == null)
+        await DAO.DB.set('modelAnimation', 'random');
 
     if(DAO.DB.get('bd_theme') == null)
-        DAO.DB.set('bd_theme', 'light');
+        await DAO.DB.set('bd_theme', 'light');
 
     if(DAO.DB.get('keyEvent') == null)
         await DAO.DB.set('keyEvent', true);
@@ -28,7 +41,8 @@ const DB_default_values = async (callback) => {
         await DAO.OBS.set('AutoUpdateApp', false);
     
     if(DAO.DB.get('App_notification_windows') == null)
-        DAO.DB.set('App_notification_windows', true);
+        await DAO.DB.set('App_notification_windows', true);
+
     callback();
 }
 

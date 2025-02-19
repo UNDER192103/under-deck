@@ -23,6 +23,7 @@ _all.GetDataNow = async ()=>{
     _all.ProgramsExe = new Jsoning(dir_appdata_un_data + "/DB/ProgramsExe.json");
     _all.List_programs = await _all.ProgramsExe.get('list_programs');
     _all.Macro_lis = await _all.List_macros.get('macros');
+    _all.USER = _all.DB.get('user');
     return _all;
 }
 

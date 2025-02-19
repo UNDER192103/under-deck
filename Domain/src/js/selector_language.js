@@ -5,7 +5,15 @@ var _lang = DAO.DB.get('lang_selected'), isOk = false;
 selec_lang(_lang);
 
 $.each(langs, (lang_id) => {
-    $(`.dir-icon-${lang_id}`).attr('src', langs[lang_id].icon);
+    let lang = langs[lang_id];
+    $(".s-languages").append(`<option value="${lang_id}">${lang.displayName}</option>`);
+    $(".ul-languages").append(`
+        <li onclick="selec_lang('${lang_id}', true)" type="button" class="btn">
+            <img class="icone-select-lang dir-icon-${lang_id}" src="${lang.icon}">
+            ${lang.displayName}
+        </li>
+    `);
+    $(`.dir-icon-${lang_id}`).attr('src', lang.icon);
 });
 
 async function selec_lang(id_lang, is_update_back = false){
@@ -26,6 +34,8 @@ async function selec_lang(id_lang, is_update_back = false){
     if(is_update_back){
         await BACKEND.Update_lang(id_lang);
     }
+
+    $(`.s-languages option[value="${id_lang}"]`).prop('selected', true);
 }
 
 async function changeLang(list){

@@ -20,6 +20,16 @@ var pt_br = [
         text: "Versão"
     },
     {
+        id: ".general_text",
+        type: "text",
+        text: "Geral"
+    },
+    {
+        id: ".theme_text",
+        type: "text",
+        text: "Tema"
+    },
+    {
         id: ".releaseDate_text",
         type: "text",
         text: "Data de lançamento da atualização"
@@ -195,9 +205,29 @@ var pt_br = [
         text: "Configurações",
     },
     {
+        id: ".profile_text",
+        type: "text",
+        text: "Perfil",
+    },
+    {
+        id: ".UND_userLogin_text",
+        type: "text",
+        text: "Entrar",
+    },
+    {
+        id: ".UND_userRegister_text",
+        type: "text",
+        text: "Criar conta",
+    },
+    {
         id: ".settings_text_icon",
         type: "html",
         text: '<i class="bi bi-gear-wide-connected"></i> Configurações',
+    },
+    {
+        id: ".settings_text_icon_HVRT",
+        type: "html",
+        text: '<span class="d-block hover_rotation me-1" href="#"><i class="bi bi-gear-wide-connected"></i></span> Configurações',
     },
     {
         id: ".keys_macro_text",
@@ -335,6 +365,26 @@ var pt_br = [
         text: "Não"
     },
     {
+        id:".appearance_text",
+        type: "text",
+        text: "Aparência"
+    },
+    {
+        id:".enable_animations_text",
+        type: "text",
+        text: "Habilitar Animações"
+    },
+    {
+        id:".animation_models_text",
+        type: "text",
+        text: "Modelos de Animações"
+    },
+    {
+        id:".animation_type_text",
+        type: "text",
+        text: "Tipo de Animação"
+    },
+    {
         id:".no",
         type: "text",
         text: "Não"
@@ -388,6 +438,31 @@ var pt_br = [
         id:".cmd_text",
         type: "text",
         text: "Comando"
+    },
+    {
+        id:".default_text",
+        type: "text",
+        text: "Padrão"
+    },
+    {
+        id:".skip_text",
+        type: "text",
+        text: "Pular"
+    },
+    {
+        id:".screen_transitions_text",
+        type: "text",
+        text: "Transições de telas"
+    },
+    {
+        id:".duration_animation_text",
+        type: "text",
+        text: "Duração da animação"
+    },
+    {
+        id: ".placeholder-duration_animation",
+        type: "attr",
+        text: {placeholder: "Duração da animação" },
     },
     {
         id:".select_text",
@@ -447,17 +522,17 @@ var pt_br = [
     {
         id: ".apps_name_description",
         type: "html",
-        text: `Em <a class='a-style' onClick='selectMenu("app-main")'>Aplicativos</a> é possível cadastrar executáveis ​​de aplicativos como Discord, Steam e outros aplicativos, bem como áudios para serem reproduzidos ou até mesmo abrir uma URL em uma nova aba do seu navegador ou utilizar um comando para ser executado no CMD do Windows ( Prompt de comando).`,
+        text: `Em <a class='a-style' onClick='selectMenu("app-main")'><i class="bi bi-google-play"></i> Aplicativos</a> é possível cadastrar executáveis ​​de aplicativos como Discord, Steam e outros aplicativos, bem como áudios para serem reproduzidos ou até mesmo abrir uma URL em uma nova aba do seu navegador ou utilizar um comando para ser executado no CMD do Windows ( Prompt de comando).`,
     },
     {
         id: ".keys_macro_text_description",
         type: "html",
-        text: `Em <a class='a-style' onClick='selectMenu("keys-macros")'>Teclas de Atalho</a> você pode cadastrar uma macro específico para cada aplicação que foi cadastrada em <a class='a-style' onClick = 'selectMenu("app-main")'>Aplicativos</a>, isto torna possível executar uma aplicação usando apenas atalhos no teclado, esta função exige que você habilite em: <a class='a-style' onClick='selectMenu("config")'>Configurações</a>.`,
+        text: `Em <a class='a-style' onClick='selectMenu("keys-macros")'><i class="bi bi-keyboard-fill"></i> Teclas de Atalho</a> você pode cadastrar uma macro específico para cada aplicação que foi cadastrada em <a class='a-style' onClick = 'selectMenu("app-main")'><i class="bi bi-google-play"></i> Aplicativos</a>, isto torna possível executar uma aplicação usando apenas atalhos no teclado, esta função exige que você habilite em: <a class='a-style' onClick='selectMenu("config")'><i class="bi bi-gear-wide-connected"></i> Configurações</a>.`,
     },
     {
         id: ".settings_text_description",
         type: "html",
-        text: `Em <a class='a-style' onClick='selectMenu("keys-macros")'>Teclas de Atalho</a> você pode ativar ou desativar as teclas de atalho, bem como iniciar o WEB Under Deck, o WEB Under Deck permite executar Aplicativos cadastrados em <a class='a-style' onClick = 'selectMenu("app-main")'>Aplicativos</a> apenas acessando a URL, você também pode acessá-lo do seu celular usando a URL ou apenas digitalizando o QR Code, NOTA: No momento esta função só está disponível para acesso local e não suporta acesso remoto ou de outra rede de Internet/Wifi que não seja a mesma utilizada em seu Computador.`,
+        text: `Em <a class='a-style' onClick='selectMenu("config")'><i class="bi bi-gear-wide-connected"></i></span> Configurações</a> você pode ativar ou desativar as teclas de atalho, bem como iniciar o WEB Under Deck, o WEB Under Deck permite executar Aplicativos cadastrados em <a class='a-style' onClick = 'selectMenu("app-main")'><i class="bi bi-google-play"></i> Aplicativos</a> apenas acessando a URL, você também pode acessá-lo do seu celular usando a URL ou apenas digitalizando o QR Code, NOTA: No momento esta função só está disponível para acesso local e não suporta acesso remoto ou de outra rede de Internet/Wifi que não seja a mesma utilizada em seu Computador.`,
     },
     {
         id: ".selec_type_code_edit_or_add",
@@ -493,6 +568,16 @@ var pt_br = [
         id: ".select_language_translated",
         type: "text",
         text: "Selecione um idioma",
+    },
+    {
+        id: ".select_language_text",
+        type: "text",
+        text: "Selecione um idioma",
+    },
+    {
+        id: ".language_text",
+        type: "text",
+        text: "Idioma",
     },
     {
         id: "#translate_to",
@@ -663,6 +748,26 @@ var pt_br = [
         id: ".erronetupdatetheapp",
         type: "text",
         text: "Não foi possivel procurar por atualizações devido a falta de conexão com a internet!", 
+    },
+    {
+        id: ".next_text",
+        type: "text",
+        text: "Próximo", 
+    },
+    {
+        id: ".back_text",
+        type: "text",
+        text: `Voltar`, 
+    },
+    {
+        id: ".back_icon_text",
+        type: "html",
+        text: `<i class="bi bi-arrow-left-short"></i> Voltar`, 
+    },
+    {
+        id: ".next_icon_text",
+        type: "html",
+        text: `Próximo <i class="bi bi-arrow-right-short"></i>`, 
     },
     {
         id: ".erroupdatetheapp",
@@ -898,6 +1003,186 @@ var pt_br = [
         id: ".newAppUpdate",
         type: "text",
         text: "Nova atualização encontrada.",
+    },
+    {
+        id: ".acclogout_text",
+        type: "text",
+        text: "Sair",
+    },
+    {
+        id: ".password_text",
+        type: "text",
+        text: "Senha",
+    },
+    {
+        id: ".confirm_password_text",
+        type: "text",
+        text: "Confirmar Senha",
+    },
+    {
+        id: ".email_or_username_text",
+        type: "text",
+        text: "E-mail ou Nome de usuário",
+    },
+    {
+        id: ".e_or_u_placeholder",
+        type: "attr",
+        text: {placeholder: "E-mail ou Nome de usuário" },
+    },
+    {
+        id: ".msg_successfully_logged_text",
+        type: "text",
+        text: "Logado com sucesso",
+    },
+    {
+        id: ".msg_err_u_ud_login_text",
+        type: "text",
+        text: "Nome de usuário ou senha inválida",
+    },
+    {
+        id: ".no_accounts_found_text",
+        type: "text",
+        text: "Nenhum usuário encontrado com este endereço de e-mail ou nome de usuário",
+    },
+    {
+        id: ".msg_err_u_up_login_text",
+        type: "text",
+        text: "Senha inválida",
+    },
+    {
+        id: ".Forgot_your_password_text",
+        type: "text",
+        text: "Esqueceu sua senha",
+    },
+    {
+        id: ".Reset_password_text",
+        type: "text",
+        text: "Redefinir Senha",
+    },
+    {
+        id: ".We_have_sent_a_password_reset_code_to_your_email",
+        type: "text",
+        text: "Enviamos um código de redefinição de senha para seu endereço de e-mail!",
+    },
+    {
+        id: ".token_reset_password_text",
+        type: "text",
+        text: "Token de redefinição de senha",
+    },
+    {
+        id: ".t_r_p_placeholder",
+        type: "attr",
+        text: {placeholder: "Token de redefinição de senha" },
+    },
+    {
+        id: ".Password_reset_successfully_text",
+        type: "text",
+        text: "Senha redefinida com sucesso!",
+    },
+    {
+        id: ".Please_provide_a_valid_password_reset_token_text",
+        type: "text",
+        text: "Forneça um token de redefinição de senha válido!",
+    },
+    {
+        id: ".chek_meets_set_password_text",
+        type: "text",
+        text: "Verifique se o token de redefinição de senha está correto e se a senha atende aos requisitos mínimos de 8 caracteres!",
+    },
+    {
+        id: ".An_error_occurred_when_trying_to_reset_the_password_text",
+        type: "text",
+        text: "Ocorreu um erro ao tentar redefinir a senha!",
+    },
+    {
+        id: ".doyouwanttolearnhowtousetheapplication",
+        type: "text",
+        text: "Desejá seguir o guia rápido de uso do aplicativo?",
+    },
+    {
+        id: ".preferredlanguage",
+        type: "text",
+        text: "Idioma Preferido",
+    },
+    {
+        id: ".ignore_text",
+        type: "text",
+        text: "Ignorar",
+    },
+    {
+        id: ".quickguide1",
+        type: "text",
+        text: "Aque voce poderar adicionar um tipo de aplicativo a ser controlado pelo aplicativo.",
+    },
+    {
+        id: ".quickguide2",
+        type: "text",
+        text: "Você pode adicionar um tipo de aplicativo a ser controlado pelo aplicativo a partir das opções: Áudio, Aplicativo (.EXE), URL de uma página WEB, Funções do OBS Studio e Comandos CMD do Windows.",
+    },
+    {
+        id: ".quickguide3",
+        type: "text",
+        text: `Aqui você poderar adicionar um Macro de Tecla para executar ações em suas aplicações adicionadas na tela de <a class="a-style apps_name_icon"><i class="bi bi-google-play"></i> Aplicativos</a>.`,
+    },
+    {
+        id: ".quickguide4",
+        type: "text",
+        text: "Você pode cadastrar páginas WEB como You Tube, Google e outras para serem acessadas dentro do aplicativo sem a necessidade de um navegador aberto.",
+    },
+    {
+        id: ".quickguide5",
+        type: "text",
+        text: "Aqui você pode configurar o OBS Websocket para se comunicar com seu OBS Studio instalado em sua máquina ou até mesmo remotamente, porém com algumas limitações.",
+    },
+    {
+        id: ".quickguide6",
+        type: "text",
+        text: "Aqui você pode configurar o aplicativo Under Deck para se adaptar às suas preferências de idioma e as teclas de atalho e notificações estarão ativas no Windows.",
+    },
+    {
+        id: ".quickguide7",
+        type: "text",
+        text: `O Web Under Deck é uma forma de você rodar seus aplicativos cadastrados no <a class="a-style apps_name_icon"><i class="bi bi-google-play"></i> Aplicativos</a> ao acessar uma Página WEB através de um Celular ou Tablet ou mesmo de outro Computador, basta configurar uma <a class="a-style">PORT</a> que não está sendo utilizada e acessá-la usando <a class="a-style">LINK</a> ou usando o <um class="a-style">QR code</a>.`,
+    },
+    {
+        id: ".quickguide8",
+        type: "text",
+        text: "Aqui você pode personalizar a aparência do aplicativo, como tema, animações e cores e formatos em breve na Web Under Deck.",
+    },
+    {
+        id: ".quickguide9",
+        type: "text",
+        text: "Aqui você pode procurar uma nova atualização e configurar a atualização automática.",
+    },
+    {
+        id: ".quickguide10",
+        type: "text",
+        text: "Caso precise de ajuda novamente, você pode procurar ajuda nesta guia ou iniciar o guia rápido novamente.",
+    },
+    {
+        id: ".quickguideFinish",
+        type: "text",
+        text: "Parabéns, você finalizou o guia rápido, caso precise de ajuda novamente, acesse a tela de ajuda para mais informações ou entre em contato.",
+    },
+    {
+        id: ".quick_guide_text",
+        type: "html",
+        text: `<i class="bi bi-card-heading"></i> Guia Rápido`,
+    },
+    {
+        id: ".Added_successfully",
+        type: "text",
+        text: "Adicionado com sucesso",
+    },
+    {
+        id: ".Successfully_edited",
+        type: "text",
+        text: "Editado com sucesso",
+    },
+    {
+        id: ".Successfully_removed",
+        type: "text",
+        text: "Removido com sucesso",
     },
 ];
 

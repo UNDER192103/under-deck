@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="../../src/footable/css/footable.core.css">
   <link rel="stylesheet" type="text/css" href="../../src/css/toastify.min.css">
   <link href="../../src/css/animated.min.css" rel="stylesheet">
-  <link href="../../src/css/index.css" rel="stylesheet">
+  <link href="./view/css/index.css" rel="stylesheet">
   <link href="../../src/css/loading.css" rel="stylesheet">
 </head>
 
@@ -33,37 +33,35 @@
           <hr>
           <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item d-flex">
-              <div class="btn-group m-1">
+               <div class="btn-group m-1">
                
-                <button type="button" class="btn btn-dark btn-sm border border-dark"><img class="icone-selected-lang m-1" src=""></button>
-                <button type="button" class="btn btn-light btn-sm dropdown-toggle border border-dark" data-bs-toggle="dropdown" aria-expanded="false">
-                  <span class="text-lang-selected"></span>
-                </button>
-                <ul class="dropdown-menu bg-srt-dropdown-menu ul-dropdown-lang">
-                  <li onclick="selec_lang('en_us', true)" type="button" class="btn"><img class="icone-select-lang dir-icon-en_us" src=""> English</li>
-                  <li onclick="selec_lang('pt_br', true)" type="button" class="btn"><img class="icone-select-lang dir-icon-pt_br" src=""> Português Brasileiro</li>
-                </ul>
-              </div>
+                  <button type="button" class="btn btn-dark btn-sm border border-dark"><img class="icone-selected-lang m-1" src=""></button>
+                  <button type="button" class="btn btn-light btn-sm dropdown-toggle border border-dark" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="text-lang-selected"></span>
+                  </button>
+                  <ul class="dropdown-menu bg-srt-dropdown-menu ul-dropdown-lang ul-languages">
+                  </ul>
+               </div>
               
-              <div class="dropdown">
-                <button class="btn none-border py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme (light)">
-                  <i class="bi bi-sun-fill"></i>
-                </button>
-                <ul class="dropdown-menu bg-srt-dropdown-menu" aria-labelledby="bd-theme-text">
-                  <li>
-                    <button id="bd-light" type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="true">
-                      <i class="bi bi-sun-fill"></i>
-                      Light
-                    </button>
-                  </li>
-                  <li>
-                    <button id="bd-black" type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
-                      <i class="bi bi-moon-stars-fill"></i>
-                      Dark
-                    </button>
-                  </li>
-                </ul>
-              </div>
+               <div class="dropdown">
+                  <button class="btn none-border py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme (light)">
+                    <i class="bi bi-sun-fill"></i>
+                  </button>
+                  <ul class="dropdown-menu bg-srt-dropdown-menu" aria-labelledby="bd-theme-text">
+                    <li>
+                      <button id="bd-light" type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="true">
+                        <i class="bi bi-sun-fill"></i>
+                        Light
+                      </button>
+                    </li>
+                    <li>
+                      <button id="bd-black" type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                        <i class="bi bi-moon-stars-fill"></i>
+                        Dark
+                      </button>
+                    </li>
+                  </ul>
+               </div>
             </li>
           </ul>
           <div class="auto-scrool">
@@ -84,8 +82,8 @@
                <a href="javascript:void(0)" id="nav-item-obs-studio" class="nav-link link-dark navs-item-sm obs_studio_n_text_icon">
                </a>
             </li>
-            <li onClick="selectMenu('config', true)" class="nav-item">
-              <a href="javascript:void(0)" id="nav-item-config" class="nav-link link-dark navs-item-sm settings_text_icon">
+            <li onClick="selectMenu('config', true)" class="nav-item" for="stside">
+              <a href="javascript:void(0)" id="nav-item-config" class="nav-link link-dark navs-item-sm settings_text_icon_HVRT d-flex">
               </a>
             </li>
             <li onClick="selectMenu('updates', true)" class="nav-item">
@@ -98,6 +96,29 @@
             </li>
             </ul>
           </div>
+
+          <hr>
+
+            <div class="dropdown UND_usernotloged" style="display: none;">
+               <a class="U-modal-account-l d-flex align-items-center text-decoration-none">
+                  <img src="../../src/img/profile-icon.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                  <strong class="UND_userLogin_text cursor-pointer tooltip-script" title="Login" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#modal_login" type="button"></strong>/
+                  <strong class="u-format-max-text UND_userRegister_text User-register-modal cursor-pointer tooltip-script" title="Register" data-toggle="tooltip"></strong>
+               </a>
+            </div>
+
+            <div class="dropdown UND_userloged" style="display: none;">
+               <a class="d-flex align-items-center text-decoration-none dropdown-toggle cursor-pointer" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img src="../../src/img/profile-icon.png" alt="" width="32" height="32" class="UND_usericon rounded-circle me-2">
+                  <strong class="UND_username u-format-max-text"></strong>
+               </a>
+               <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                  <li><a class="dropdown-item profile_text"></a></li>
+                  <li><a class="dropdown-item settings_text"></a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li class="logout_account"><a class="dropdown-item text-danger"><strong class="acclogout_text"></strong></a></li>
+               </ul>
+            </div>
       </nav>
 
       <div class="container container-hide-control container-home mt-1 mb-1 animate__animated container-animated-style">
@@ -106,8 +127,8 @@
             <div class="pb-2 d-flex border-bottom">
                <h2 class="btn-full-w apps_name_icon"></h2>
                <div class="input-group">
-                     <button class="btn btn-primary add_text_icon bnt-top-title-ma" data-bs-toggle="modal" data-bs-target="#modal-add-app" type="button" onclick="clear_add_app()" id="bnt_modal_add_app"></button>
-                </div>
+                  <button class="btn btn-primary add_text_icon bnt-top-title-ma" data-bs-toggle="modal" data-bs-target="#modal-add-app" type="button" onclick="clear_add_app()" id="bnt_modal_add_app"></button>
+               </div>
             </div>
             <div class="row g-4 py-3 row-cols-1 row-cols-lg-1 full-w ">
               <div class="feature col">
@@ -120,48 +141,56 @@
 
       <div class="container container-hide-control container-obs-studio mt-1 mb-1 animate__animated container-animated-style" style="display: none;">
          <div class="bg-srt full-h container rounded px-4 py-4 bg-light" id="featured-3">
-           <div class="auto-scrool">
-             <h2 class="pb-2 border-bottom obs_studio_n_text_icon"></h2>
+            <div class="auto-scrool">
+               <h2 class="pb-2 border-bottom obs_studio_n_text_icon"></h2>
  
  
-               <div class="row g-4 py-2 row-cols-1 row-cols-lg-1">
-                 <div class="p-2">
-                   <div class="ml-1">
-                     <input class="form-check-input" type="checkbox" id="obs-checkbox-start">
-                     <label class="form-check-label ccOBSWsswhenstarting" for="obs-checkbox-start"></label>
-                   </div>
-                 </div>
- 
-                 <div class="ml-1 mt-0 mr-1"><h3 class="pb-2 obs-wss-config-t"></h3></div>
- 
-                 <div class="p-2 m-0 flex-row-reverse">
-                   <div class="m-1"><button type="button" id="button-obs-wss-s-s" class="btn float-right-c hover-pulse-grean btn-success connect-obs"></button></div>
-                 </div>
- 
-                 <div class="feature mt-0 col">
-                   <div class="ml-1"><div class="alert alert-por-local-server-modal alert-danger hidden" role="alert"></div></div>
-                 </div>
- 
-                  <div class="p-2 m-0 w-50">
-                    <div class="ml-1">
-                       <label for="obs-wss-port" class="col-form-label port-e-ip-server"></label>
-                       <div class="input-group">
-                           <input type="text" id="obs-wss-ip" class="form-control placeholder-ip-server border border-secondary">
-                           <input type="number" id="obs-wss-port" class="form-control placeholder-port border border-secondary">
-                           <button class="btn btn-primary save_text" type="button" id="btn-save-osb-port"></button>
-                       </div>
-                    </div>
-                  </div>
-
-                  <div class="p-2 pr-0-8em m-0 float-end w-50">
-                     <div class="">
-                        <label for="obs-wss-password" class="col-form-label password-text"></label>
-                          <div class="input-group">
-                              <a class="btn btn-light border border-secondary" type="button" id="btn-view-osb-password"><i class="bi bi-eye-fill"></i></a>
-                              <input type="password" id="obs-wss-password" class="form-control placeholder-password-text border border-secondary">
-                              <button class="btn btn-primary save_text" type="button" id="btn-save-osb-password"></button>
+               <div class="cards-area aos-init aos-animate mb-3" data-aos="fade-down">
+                  <div class="row">
+                  
+                     <div class="col-md-12 col-xl-16 animate__animated">
+                        <div class="card bg-card-srt">
+                          <div class="card-header shadow-text">
+                              <span class="obs-wss-config-t h5"></span>
+                              <button class="btn btn-success btn-sm float-end hover-pulse-grean btn-success connect-obs" type="button" id="button-obs-wss-s-s"></button>
                           </div>
+                       
+                          <div class="card-body">
+                              <div class="alert apobswbs alert-danger hidden" role="alert"></div>
+                              
+                              <div class="forms">
+
+                                 <div class="checks mb-2">
+                                    <div class="">
+                                       <input class="form-check-input" type="checkbox" id="obs-checkbox-start">
+                                       <label class="form-check-label ccOBSWsswhenstarting" for="obs-checkbox-start"></label>
+                                    </div>
+                                 </div>
+                                 
+                                 <div class="input mb-1">
+                                    <label for="obs-wss-port" class="col-form-label p-0 port-e-ip-server"></label>
+                                    <div class="input-group">
+                                       <input type="text" id="obs-wss-ip" class="form-control placeholder-ip-server border border-secondary">
+                                       <input type="number" id="obs-wss-port" class="form-control placeholder-port border border-secondary">
+                                       <button class="btn btn-primary save_text" type="button" id="btn-save-osb-port"></button>
+                                    </div>
+                                 </div>
+
+                                 <div class="input">
+                                    <label for="obs-wss-password" class="col-form-label p-0 password-text"></label>
+                                    <div class="input-group">
+                                       <a class="btn btn-light border border-secondary" type="button" id="btn-view-osb-password"><i class="bi bi-eye-fill"></i></a>
+                                       <input type="password" id="obs-wss-password" class="form-control placeholder-password-text border border-secondary">
+                                       <button class="btn btn-primary save_text" type="button" id="btn-save-osb-password"></button>
+                                    </div>
+                                 </div>
+
+                              </div>
+                           
+                           </div>
+                        </div>
                      </div>
+                  
                   </div>
                </div>
 
@@ -257,52 +286,170 @@
       <div class="container container-hide-control container-config mt-1 mb-1 animate__animated container-animated-style" style="display: none;">
         <div class="bg-srt full-h container rounded px-4 py-4 bg-light" id="featured-3">
           <div class="auto-scrool">
-            <h2 class="pb-2 border-bottom settings_text_icon"></h2>
+            <h2 class="pb-2 border-bottom d-flex settings_text_icon_HVRT"></h2>
+ 
+            <div class="cards-area aos-init aos-animate" data-aos="fade-down">
+               <div class="row">
 
+                  <div class="col-md-12 col-xl-6 animate__animated animate__slideInLeft">
+                     <div class="card bg-card-srt">
+                       <div class="card-header shadow-text text-center">
+                           <h5 class="general_text "></h5>
+                       </div>
 
-            <div class="row g-4 py-2 row-cols-1 row-cols-lg-1">
-               <div class="p-2 d-flex">
-                  <div class="ml-1">
-                    <input class="form-check-input" type="checkbox" id="key-macro">
-                    <label class="form-check-label keys_macro_text" for="key-macro"></label>
-                  </div>
-                  <div class="ml-1">
-                     <input class="form-check-input" type="checkbox" id="notifications_on_windows">
-                     <label class="form-check-label notifications-on-windows" for="notifications_on_windows"></label>
-                  </div>
-               </div>
+                       <div class="card-body">
 
-               <div class="p-2 m-0 w-50">
-                 <div class="ml-1">
-                     <h3 class="pb-2 web_stream_deck_text"></h3>
-                 </div>
-               </div>
-               <div class="p-2 m-0 float-end w-50">
-                  <button type="button" id="button-start-local-server" class="btn float-right-c btn-success mr-10px start_text"></button>
-               </div>
+                           <div class="forms">
 
-               <div class="feature mt-0 col">
-                 <div class="ml-1"><div class="alert alert-por-local-server-modal alert-danger hidden" role="alert"></div></div>
-               </div>
+                              <div class="checks mb-3">
+                                 <div class="">
+                                    <input class="form-check-input" type="checkbox" id="key-macro">
+                                    <label class="form-check-label keys_macro_text" for="key-macro"></label>
+                                 </div>
+   
+                                 <div class="">
+                                    <input class="form-check-input" type="checkbox" id="notifications_on_windows">
+                                    <label class="form-check-label notifications-on-windows" for="notifications_on_windows"></label>
+                                 </div>
+                              </div>
 
-               <div class="p-2 m-0 w-50">
-                  <div class="ml-1">
-                     <label for="port-local-server" class="col-form-label door_text_expc_1"></label>
-                     <div class="input-group">
-                        <input type="number" id="port-local-server" class="form-control placeholder-port" placeholder="" aria-label="" aria-describedby="button-addon2">
-                        <button class="btn btn-primary save_text" type="button" id="btn-port-local-server"></button>
+                              <div class="select">
+                                 <label class="form-check-label language_text" for="s-languages"></label>
+                                 <div class="input-group">
+                                    <div class="input-group-text p-1">
+                                       <img class="icone-selected-lang m-1" src="">
+                                    </div>
+                                    <select id="s-languages" class="form-select s-languages">
+                                    </select>
+                                 </div>
+                                 
+                              </div>
+                           </div>
+
+                        </div>
                      </div>
                   </div>
-                </div>
-               <div class="p-2 m-0 float-end w-50">
-                  <div class="">
-                     <label for="local-server-adress-acess-url" class="col-form-label url_text_expc_1"></label>
-                       <div class="input-group">
-                          <input type="text" id="local-server-adress-acess-url" disabled class="form-control" placeholder="" aria-label="" aria-describedby="button-addon2">
-                          <button onclick="openIpUrlWeb()" class="btn btn-primary open_text" type="button" ></button>
-                          <button onclick="getQrCodeIpUrlWeb()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-qr-code" type="button" >QR Code</button>
-                       </div>
+
+                  <div class="col-md-12 col-xl-6 animate__animated animate__slideInRight">
+                     <div class="card bg-card-srt">
+                        <div class="card-header text-center shadow-text d-contents">
+                           <h5 class="mt-2 web_stream_deck_text"></h5>
+                           <a class="btn btn-success btn-sm mx-2 start_text" type="button" id="button-start-local-server"></a>
+                        </div>
+
+                        <div class="card-body">
+                           <div class="forms">
+                              <div class="feature mt-0 col">
+                                 <div class="alert alert-por-local-server-modal alert-danger hidden" role="alert"></div>
+                              </div>
+
+                              <div class="inputs">
+
+                                 <div class="m-0 mb-3">
+                                    <label for="port-local-server" class="form-check-label door_text_expc_1"></label>
+                                    <div class="input-group">
+                                       <input type="number" id="port-local-server" class="form-control placeholder-port" placeholder="" aria-label="" aria-describedby="button-addon2">
+                                       <button class="btn btn-primary save_text" type="button" id="btn-port-local-server"></button>
+                                    </div>
+                                 </div>
+
+                                 <div class="m-0">
+                                    <label for="local-server-adress-acess-url" class="form-check-label url_text_expc_1"></label>
+                                    <div class="input-group">
+                                       <input type="text" id="local-server-adress-acess-url" disabled class="form-control" placeholder="" aria-label="" aria-describedby="button-addon2">
+                                       <button onclick="openIpUrlWeb()" class="btn btn-primary open_text" type="button" ></button>
+                                       <button onclick="getQrCodeIpUrlWeb()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-qr-code" type="button" >QR Code</button>
+                                    </div>
+                                 </div>
+
+                              </div>
+
+                           </div>
+                        </div>
+                     </div>
                   </div>
+
+                  <div class="col-md-12 col-xl-6 animate__animated animate__slideInLeft">
+                     <div class="card bg-card-srt">
+                       <div class="card-header shadow-text text-center">
+                           <h5 class="appearance_text "></h5>
+                       </div>
+
+                       <div class="card-body">
+
+                           <div class="forms">
+
+                              <div class="select mb-3">
+                                 <label class="form-check-label theme_text" for="s-themes"></label>
+                                 <select id="s-themes" class="form-select s-themes">
+                                    <option value="light">Light</option>
+                                    <option value="black">Dark</option>
+                                 </select>
+                              </div>
+
+                              <div class="card none-border bg-secondary">
+                                 <div class="card-header" id="headingAP">
+                                    <h5 class="mb-0">
+                                       <button class="btn btn-secondary btn-sm screen_transitions_text full-w" data-toggle="collapse" data-target="#collapseAP" aria-expanded="true" aria-controls="collapseAP">
+                                       </button>
+                                    </h5>
+                                 </div>
+                             
+                                 <div id="collapseAP" class="collapse show" aria-labelledby="headingAP" data-parent="#accordion">
+                                   <div class="card-body rounded-bottom bg-srt">
+                             
+                                    <div class="select mb-3">
+                                       <label class="form-check-label enable_animations_text" for="s-themes"></label>
+                                       <select id="s-enAnimations" class="form-select">
+                                          <option value="true" class="yes"></option>
+                                          <option value="false" class="not"></option>
+                                       </select>
+                                    </div>
+      
+                                    <div class="select mb-3">
+                                       <label class="form-check-label animation_models_text" for="s-themes"></label>
+                                       <select id="s-Manimations" class="form-select">
+                                          <option value="random" class="default_text"></option>
+                                          <option value="as">Attention Seekers</option>
+                                          <option value="be">Back Entrances</option>
+                                       </select>
+                                    </div>
+      
+                                    <div class="select mb-3">
+                                       <label class="form-check-label animation_type_text" for="s-themes"></label>
+                                       <select disabled id="s-animation" class="form-select">
+                                          <option value="random" class="default_text"></option>
+                                          <option value="animate__bounce">Bounce</option>
+                                          <option value="animate__flash">Flash</option>
+                                          <option value="animate__pulse">Pulse</option>
+                                          <option value="animate__rubberBand">rubberBand</option>
+                                          <option value="animate__shakeX">shakeX</option>
+                                          <option value="animate__shakeY">shakeY</option>
+                                       </select>
+                                    </div>
+
+                                    <div class="inputs">
+
+                                       <div class="m-0">
+                                          <label for="animation-duration" class="form-check-label duration_animation_text"></label>
+                                          <div class="input-group">
+                                             <input disabled type="number" id="animation-duration" class="form-control placeholder-duration_animation" placeholder="Duration" aria-label="">
+                                             <button disabled class="btn btn-primary save_text" type="button" id="btn-animation-duration">Salvar</button>
+                                          </div>
+                                       </div>
+      
+                                    </div>
+
+                                   </div>
+                                 </div>
+                              </div>
+
+                           </div>
+
+                        </div>
+                     </div>
+                  </div>
+
                </div>
             </div>
 
@@ -473,14 +620,19 @@
       <div class="container container-hide-control container-helper mt-1 mb-1 animate__animated container-animated-style" style="display: none;">
         <div class="bg-srt full-h container rounded px-4 py-4 bg-light" id="featured-3">
           <div class="auto-scrool">
-            <h2 class="pb-2 border-bottom help_text_icon"></h2>
+            <div class="pb-2 d-flex border-bottom">
+               <h2 class="btn-full-w help_text_icon"></h2>
+               <div class="input-group">
+                  <button class="btn btn-primary btn-sm quick_guide_text bnt-top-title-ma"type="button" onclick="processeApressentationApp()"></button>
+               </div>
+            </div>
             <div class="row g-4 py-2 row-cols-1 row-cols-lg-1">
             <div class="feature col">
               <div class="table-responsive text-nowrap"></div>
               <div class="cards-area aos-init aos-animate" data-aos="fade-down">
                 <div class="row">
                   <div class="col-md-6 col-xl-4 animate__animated animate__slideInLeft">
-                    <div class="card bg-dark text-light">
+                    <div class="card bg-card-srt">
                       <div class="card-header shadow-text">
                           <span class="apps_name "></span>
                       </div>
@@ -490,7 +642,7 @@
                     </div>
                   </div>
                   <div class="col-md-6 col-xl-4 animate__animated animate__slideInDown">
-                     <div class="card bg-dark text-light">
+                     <div class="card bg-card-srt">
                        <div class="card-header shadow-text">
                            <span class="keys_macro_text "></span>
                        </div>
@@ -499,15 +651,16 @@
                        </div>
                      </div>
                    </div>
+
                   <div class="col-md-6 col-xl-4 animate__animated animate__slideInRight">
-                    <div class="card bg-dark text-light">
-                      <div class="card-header shadow-text">
-                          <span class="settings_text "></span>
-                      </div>
-                      <div class="card-body">
-                          <p class="settings_text_description"></p>
-                      </div>
-                    </div>
+                     <div class="card bg-card-srt">
+                        <div class="card-header shadow-text">
+                           <span class="settings_text "></span>
+                        </div>
+                        <div class="card-body">
+                           <p class="settings_text_description"></p>
+                        </div>
+                     </div>
                   </div>
                 </div>
               </div>
@@ -558,7 +711,7 @@
             </div>
          </div>
       </div>
-      <div class="modal fade" id="modal-add-app" tabindex="-1" aria-labelledby="modal-add-app" aria-hidden="true">
+      <div class="modal fade" id="modal-add-app" tabindex="-1" aria-labelledby="modal-add-app" aria-hidden="true" data-bs-keyboard="false" data-bs-backdrop="static">
          <div class="modal-dialog">
             <div class="modal-content">
                <div class="modal-header">
@@ -833,6 +986,144 @@
             </div>
          </div>
       </div>
+      <div class="modal fade" id="modal_login" data-bs-backdrop='static' data-keyboard="false" data-backdrop="static">
+         <div class="modal-dialog">
+            <form class="rounded modal-content" onSubmit="tryLoginUser(); return false;">
+
+               <div class="modal-header text-center">
+                  <h4 class="modal-title w-100 login_text"></h4>
+               </div>
+
+               <div class="modal-body pb-0">
+                  <div style="display: none;" id="u-form-alert" class="alert alert-danger" role="alert"></div>
+
+                  <div class="mb-3">
+                     <label for="u-email" class="form-label email_or_username_text"></label>
+                     <input required type="text" class="form-control e_or_u_placeholder" id="u-email">
+                  </div>
+                  
+                  <div class="mb-3">
+                     <label for="u-password" class="form-label password_text"></label>
+                     <div class="input-group">
+                        <a class="btn btn-light border border-secondary" type="button" id="btn-view-u-password"><i class="bi bi-eye-fill"></i></a>
+                        <input required type="password" class="form-control" id="u-password" placeholder="************">
+                     </div>
+                  </div>
+
+                  <div class="text-center">
+                     <a data-bs-toggle="modal" data-bs-target="#modal_reset_password" data-bs-dismiss="modal" type="button" class="cursor-pointer span font-12 Forgot_your_password_text"></a>
+                  </div>
+                  
+               </div>
+
+               <div class="modal-footer">
+                  <button type="button" id="deny_modal" class="btn btn-danger" data-bs-dismiss="modal">
+                     <i class="bi bi-x-lg"></i>
+                     <span class="cancel_text"></span>
+                  </button>
+                  <button type="submit" class="btn btn-primary">
+                     <i class="bi bi-send"></i>
+                     <span class="UND_userLogin_text"></span>
+                  </button>
+               </div>
+               
+            </form>
+         </div>
+      </div>
+
+      <div class="modal fade" id="modal_reset_password" data-bs-backdrop='static' data-keyboard="false" data-backdrop="static">
+         <div class="modal-dialog">
+            <form class="rounded modal-content" onSubmit="tryResetPassword(); return false;">
+
+               <div class="modal-header text-center">
+                  <h4 class="modal-title w-100 Reset_password_text"></h4>
+               </div>
+
+               <div class="modal-body pb-0">
+                  <div style="display: none;" id="rp-form-alert" class="alert alert-danger" role="alert"></div>
+
+                  <div class="mb-3">
+                     <label for="rp-email" class="form-label email_or_username_text"></label>
+                     <input required type="text" class="form-control e_or_u_placeholder" id="rp-email">
+                  </div>
+
+                  <div class="text-center">
+                     <a data-bs-toggle="modal" data-bs-target="#modal_login" data-bs-dismiss="modal" type="button" class="cursor-pointer span font-12 UND_userLogin_text"></a>
+                  </div>
+                  
+               </div>
+
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                     <i class="bi bi-x-lg"></i>
+                     <span class="cancel_text"></span>
+                  </button>
+                  <button type="submit" class="btn btn-primary">
+                     <i class="bi bi-send"></i>
+                     <span class="submit_text"></span>
+                  </button>
+               </div>
+               
+            </form>
+         </div>
+      </div>
+
+      <div class="modal fade" id="modal_set_reset_password" data-bs-backdrop='static' data-keyboard="false" data-backdrop="static">
+         <div class="modal-dialog">
+            <form class="rounded modal-content" onSubmit="trySetResetPassword(); return false;">
+
+               <div class="modal-header text-center">
+                  <h4 class="modal-title w-100 Reset_password_text"></h4>
+               </div>
+
+               <div class="modal-body pb-0">
+                  <div style="display: none;" id="srp-form-alert" class="alert alert-danger" role="alert"></div>
+
+                  <div class="mb-3">
+                     <input type="text" class="form-control hidden" id="trpemail">
+                  </div>
+
+                  <div class="mb-3">
+                     <label for="rp-token" class="form-label token_reset_password_text"></label>
+                     <input required type="number" class="form-control t_r_p_placeholder" id="rp-token">
+                  </div>
+
+                  <div class="mb-3">
+                     <label for="srp-password" class="form-label password_text"></label>
+                     <div class="user-box">
+                        <input required type="password" class="form-control placeholder-password-text" id="srp-password">
+                        <span class="password-toggle-icon"><i class="bi bi-eye-fill"></i></span>
+                     </div>
+                  </div>
+
+                  <div class="mb-3">
+                     <label for="srp-cpassword" class="form-label confirm_password_text"></label>
+                     <div class="user-box">
+                        <input required type="password" class="form-control placeholder-password-text" id="srp-cpassword">
+                        <span class="password-toggle-icon"><i class="bi bi-eye-fill"></i></span>
+                     </div>
+                  </div>
+
+                  <div class="text-center">
+                     <a data-bs-toggle="modal" data-bs-target="#modal_login" data-bs-dismiss="modal" type="button" class="cursor-pointer span font-12 UND_userLogin_text"></a>
+                  </div>
+                  
+               </div>
+
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                     <i class="bi bi-x-lg"></i>
+                     <span class="cancel_text"></span>
+                  </button>
+                  <button type="submit" class="btn btn-primary">
+                     <i class="bi bi-send"></i>
+                     <span class="submit_text"></span>
+                  </button>
+               </div>
+               
+            </form>
+         </div>
+      </div>
       <div class="modal" id="modal_dialog">
          <div class="modal-dialog">
             <div class="modal-content">
@@ -864,12 +1155,15 @@
   <script src="../../src/bootstrap-5.0.2/js/bootstrap.bundle.min.js"></script>
   <script src="../../src/bootstrap-5.0.2/js/bootbox.min.js"></script>
   <script src="../../src/footable/js/footable.all.min.js"></script>
-  <script src="./js/comuns.js"></script>
+  <script src="../../src/jquery/modalLoading.js"></script>
+  <script src="./view/js/comuns.js"></script>
+  <script src="./view/js/animations.js"></script>
   <script src="../../src/js/selector_language.js"></script>
   <script src="./back_functions.js"></script>
-  <script src="./js/updates.js"></script>
-  <script src="./js/app.js"></script>
-  <script src="./js/web_server.js"></script>
-  <script src="./js/obs.js"></script>
-  <script src="./js/keys_macro.js"></script>
+  <script src="./view/js/updates.js"></script>
+  <script src="./view/js/app.js"></script>
+  <script src="./view/js/account.js"></script>
+  <script src="./view/js/web_server.js"></script>
+  <script src="./view/js/obs.js"></script>
+  <script src="./view/js/keys_macro.js"></script>
 </html>

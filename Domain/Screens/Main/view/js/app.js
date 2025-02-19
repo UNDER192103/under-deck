@@ -316,6 +316,7 @@ const add_app_obs_options = async (typeOption, icon, nameCustom) => {
             DAO.List_programs = await DAO.ProgramsExe.get('list_programs');
             $('.bnt-close-modal-add-app').click();
             clear_add_app();
+            toaster.success(`${getNameTd('.Added_successfully')}`);
         })
     }
     else{
@@ -361,6 +362,7 @@ const add_app_obs_option_scene = async (scene, icon, nameCustom) => {
             DAO.List_programs = await DAO.ProgramsExe.get('list_programs');
             $('.bnt-close-modal-add-app').click();
             clear_add_app();
+            toaster.success(`${getNameTd('.Added_successfully')}`);
         })
     }
     else{
@@ -406,6 +408,7 @@ const add_app_obs_option_input_audio = async (audio_input, icon, nameCustom) => 
             DAO.List_programs = await DAO.ProgramsExe.get('list_programs');
             $('.bnt-close-modal-add-app').click();
             clear_add_app();
+            toaster.success(`${getNameTd('.Added_successfully')}`);
         })
     }
     else{
@@ -449,6 +452,7 @@ const add_app_for_cmd = async (cmd, icon, nameCustom) => {
             DAO.List_programs = await DAO.ProgramsExe.get('list_programs');
             $('.bnt-close-modal-add-app').click();
             clear_add_app();
+            toaster.success(`${getNameTd('.Added_successfully')}`);
         })
     }
     else{
@@ -494,6 +498,7 @@ const add_app_for_web_page = async (url, icon, nameCustom) => {
             DAO.List_programs = await DAO.ProgramsExe.get('list_programs');
             $('.bnt-close-modal-add-app').click();
             clear_add_app();
+            toaster.success(`${getNameTd('.Added_successfully')}`);
         })
     }
     else{
@@ -549,6 +554,7 @@ const add_app_for_file = async (file, icon, nameCustom) => {
             DAO.List_programs = await DAO.ProgramsExe.get('list_programs');
             $('.bnt-close-modal-add-app').click();
             clear_add_app();
+            toaster.success(`${getNameTd('.Added_successfully')}`);
         });
     }
     else{
@@ -652,11 +658,26 @@ function appendHtml(item, count){
         bg_dropdown_menu = "dropdown-menu-black";
     }
     $('.content-files-add').append(`
-        <div class="col animate__animated animate__fadeIn" id="col-exe-id-${count}"><div class="card bg-srt rounded-3 rigth-click-exe hover-exes border border-4 rounded ${bgs}"><div class="m-2 d-flex flex-row-reverse bd-highlight"><span class="dropdown-toggle dropdown-toggle-c hover-icon-edit" data-bs-auto-close="*" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><a class="nav-link tooltip-script hover_rotation" title="${getNameTd(".tooltip_config_t")}" data-toggle="tooltip" href="#" id="dropdownMenuLink-exe-id-${count}"><i class="bi bi-gear-wide"></i></a></span><ul class="dropdown-menu bg-srt-dropdown-menu ${bg_dropdown_menu}" aria-labelledby="dropdownMenuLink-exe-id-${count}">
-        <li onClick="startExe(${count})"><a class="dropdown-item" href="#"><i class="bi bi-filetype-exe"></i> ${getNameTd(".start_text")}</a></li>
-        <li onClick="editExe(${count})" type="button" data-bs-toggle="modal" data-bs-target="#modal-edit-exe"><a class="dropdown-item" href="#"><i class="bi bi-pen text-success"></i> ${getNameTd(".edit_text")}</a></li>
-        <li onClick="deleteExe(${count})"><a class="dropdown-item" href="#"><i class="bi bi-trash3 text-danger"></i> ${getNameTd(".delete_text")}</a></li>
-        </ul></div><img src="${icone}" class="card-img-top w-75 mb-2 auto-left-right rounded" alt="..."><hr><div class="card-body"><h5 class="card-title">${name}</h5><a class="hidden" id="col-title-exe-id-${count}">${item.name.replace('.exe', '')}</a></div></div></div>
+        <div class="col-md-4 col-xl-2 transition-all col animate__animated animate__fadeIn col-exe" id="col-exe-id-${count}">
+            <div class="card bg-srt rounded-3 rigth-click-exe hover-exes border border-4 rounded ${bgs}">
+                <div class="m-2 d-flex flex-row-reverse">
+                    <span class="dropdown-toggle dropdown-toggle-c hover-icon-edit" data-bs-auto-close="*" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link tooltip-script hover_rotation" title="${getNameTd(".tooltip_config_t")}" data-toggle="tooltip" href="#" id="dropdownMenuLink-exe-id-${count}"><i class="bi bi-gear-wide"></i></a>
+                    </span>
+                    <ul class="dropdown-menu bg-srt-dropdown-menu ${bg_dropdown_menu}" aria-labelledby="dropdownMenuLink-exe-id-${count}">
+                        <li onClick="addExeShotCut(${count})"><a class="dropdown-item" href="#"><i class="bi bi-plus-square"></i> ${getNameTd(".add_macro_text")}</a></li>
+                        <li onClick="startExe(${count})"><a class="dropdown-item" href="#"><i class="bi bi-filetype-exe"></i> ${getNameTd(".start_text")}</a></li>
+                        <li onClick="editExe(${count})" type="button" data-bs-toggle="modal" data-bs-target="#modal-edit-exe"><a class="dropdown-item" href="#"><i class="bi bi-pen text-success"></i> ${getNameTd(".edit_text")}</a></li>
+                        <li onClick="deleteExe(${count})"><a class="dropdown-item" href="#"><i class="bi bi-trash3 text-danger"></i> ${getNameTd(".delete_text")}</a></li>
+                    </ul>
+                </div>
+                <img src="${icone}" class="card-img-top w-75 mh-iconapp mb-0 auto-left-right rounded" alt="...">
+                
+                <div class="card-body text-center">
+                    <h5 class="card-title tooltip-script u-format-max-text m-0 cursor-pointer" title="${name}" data-toggle="tooltip">${name}</h5>
+                </div>
+            </div>
+        </div>
     `);
     $(`#col-exe-id-${count}`).dblclick(function(){
         startExe(count)
@@ -707,6 +728,7 @@ async function deleteExe(id){
                     else if(item == null){
                         $(`#col-exe-id-${id}`).remove();
                     }
+                    toaster.success(`${getNameTd('.Successfully_removed')}`);
                 }
             }
         }
@@ -813,6 +835,7 @@ async function saveEditExe(){
         $("#edit-cmd-add-app").val("");
         $('.btn-close-exe-modal').click();
         $("#icon-exe-edit").val('');
+        toaster.success(`${getNameTd('.Successfully_edited')}`);
     });
 };
 
@@ -931,5 +954,16 @@ const change_position_list = async ()=>{
                 }
             })
         }
+    }
+}
+
+async function addExeShotCut(id){
+    var list_programs = DAO.ProgramsExe.get('list_programs');
+    var item = list_programs.filter(b => b._id == id)[0];
+    if(item){
+        /*await selectMenu('keys-macros');
+        $("#button-add-macro").click();*/
+        $("#modal-key-macro").modal('show');
+        addShortCut(item._id);
     }
 }

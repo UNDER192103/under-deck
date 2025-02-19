@@ -10,4 +10,5 @@ module.exports = {
     Macro_lis: null,
     Selected_port_com: null,
     GetDataNow: null,
+    USER: null,
 };

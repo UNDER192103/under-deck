@@ -4,14 +4,17 @@ body {
     overflow-x: hidden;
 }
 
-main {
-    width: 96% !important;
+.header-buttons {
+    position: absolute;
+    display: flex;
+    padding: 5px;
+}
+.header-buttons > button {
+    margin-right: 5px;
 }
 
-.bnt-fullscreen {
-    display: flex;
-    margin-top: 5px;
-    position: absolute;
+main {
+    width: 96% !important;
 }
 
 .exe-list {
@@ -24,18 +27,19 @@ main {
     width: 31vh;
     height: 35vh;
     border-radius: 3vh;
-    transition: transform .2s;
+    transition: all .2s;
 }
 
 .div-text-name-exe{
-    display: inline-block;
+    display: grid;
     white-space: nowrap;
     overflow: hidden !important;
     text-overflow: ellipsis;
     width: 100%;
-    margin-top: 0vh;
-    height: 7vh;
+    margin-top: auto;
+    height: 9vh;
     font-size: 21px;
+    align-items: center;
 }
 
 .div-content-img-exe {
@@ -48,4 +52,11 @@ main {
     max-height: 24vh;
     max-width: 24vh;
     border-radius: 3vh;
+}
+
+.horizontalMode {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
 }

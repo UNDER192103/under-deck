@@ -8,11 +8,18 @@
   <link href="/src/bootstrap-5.0.2/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/src/bootstrap-5.0.2/css/bootstrap-icons.css">
 
-  <link href="/Screens/WebDeck/index.css" rel="stylesheet">
+  <link href="/Screens/WebDeck/view/css/index.css" rel="stylesheet">
 </head>
 
 <body class="bg-black">
-  <button type="button" onclick="fullscreen()" class="btn btn-secondary border border-dark bnt-fullscreen"><i class="bi bi-list"></i></button>
+  <div class="header-buttons">
+    <button type="button" class="btn btn-secondary border border-dark bnt-fullscreen">
+      <i class="bi bi-fullscreen"></i>
+    </button>
+    <button type="button" class="btn btn-secondary border border-dark bnt-horizontalMode">
+      <i class="bi bi-arrow-repeat"></i></i>
+    </button>
+  </div>
   
   <main class="container-xxl bd-gutter" id="content">
     <div class="my-5">
@@ -24,5 +31,7 @@
 
 
 <script src="/src/jquery/jquery.min.js"></script>
-<script src="/Screens/WebDeck/index.js"></script>
+<script src="/src/NoSleep/js/NoSleep.js"></script>
+<script src="/Screens/WebDeck/view/js/index.js"></script>
+<script src="/Screens/WebDeck/view/js/NoSleep.js"></script>
 </html>

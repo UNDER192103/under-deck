@@ -25,7 +25,7 @@ async function start_server(type, callback) {
             });
 
             app.get('/app', (req, res) => {
-                res.sendFile(prvt_MAIN_DIR+'/Domain/Screens/WebDeck/cell-html.html')
+                res.sendFile(prvt_MAIN_DIR+'/Domain/Screens/WebDeck/cell-html.html');
             });
 
             app.post("/get_data_user", async (req, res) => {
