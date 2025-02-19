@@ -1,7 +1,5 @@
 const conf = require('./data/conf.json');
 const axios = require('axios');
-var request = require('request');
-const { reject } = require('superagent/lib/request-base');
 
 class Api {
     Axios = axios;
