@@ -75,8 +75,8 @@ const start_get_data = async () => {
     try {
         $.post(`${location.origin}/get_data_user`, async ( data ) => {
             if(data != null){
-                if(JSON.stringify(data) != _all.json_data_user){
-                    _all.json_data_user = JSON.stringify(data);
+                if(await JSON.stringify(data) != _all.json_data_user){
+                    _all.json_data_user = await JSON.stringify(data);
                     _all.data_user = data;
                     _all.list_programs = _all.data_user.programs;
                     $("#custom-style").html(data.css);
@@ -87,7 +87,6 @@ const start_get_data = async () => {
                 }
             }
             setTimeout(start_get_data, 1000);
-        }).error(()=>{
         });
     } catch (error) {
         setTimeout(start_get_data, 5000);
