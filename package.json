@@ -29,6 +29,7 @@
       "installerIcon": "Domain/src/img/under-icon-256x.ico",
       "uninstallerIcon": "Domain/src/img/under-icon-256x.ico",
       "installerHeaderIcon": "Domain/src/img/under-icon-256x.ico",
+      "license": "LICENSE.md",
       "allowToChangeInstallationDirectory": false
     },
     "directories": {
