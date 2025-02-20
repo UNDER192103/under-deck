@@ -210,6 +210,11 @@ var pt_br = [
         text: "Perfil",
     },
     {
+        id: ".userProfile_text",
+        type: "text",
+        text: "Perfil do usuário",
+    },
+    {
         id: ".UND_userLogin_text",
         type: "text",
         text: "Entrar",
@@ -363,6 +368,11 @@ var pt_br = [
         id:".not",
         type: "text",
         text: "Não"
+    },
+    {
+        id:".avatar_text",
+        type: "text",
+        text: "Avatar"
     },
     {
         id:".appearance_text",
@@ -1035,6 +1045,11 @@ var pt_br = [
         text: "Logado com sucesso",
     },
     {
+        id: ".username_text",
+        type: "text",
+        text: "Nome de usuário",
+    },
+    {
         id: ".msg_err_u_ud_login_text",
         type: "text",
         text: "Nome de usuário ou senha inválida",
@@ -1183,6 +1198,41 @@ var pt_br = [
         id: ".Successfully_removed",
         type: "text",
         text: "Removido com sucesso",
+    },
+    {
+        id:".changeUserAvatar_text",
+        type: "text",
+        text: "Mudar Avatar"
+    },
+    {
+        id:".removeUserAvatar_text",
+        type: "text",
+        text: "Remover Avatar"
+    },
+    {
+        id:".customization_text",
+        type: "text",
+        text: "Costumização"
+    },
+    {
+        id:".background_color_text",
+        type: "text",
+        text: "Cor de Fundo"
+    },
+    {
+        id:".color_text_text",
+        type: "text",
+        text: "Cor do texto"
+    },
+    {
+        id:".reset_to_default_text",
+        type: "html",
+        text: "redefinir para o padrão"
+    },
+    {
+        id:".successfully_reset_text",
+        type: "html",
+        text: "Redefinido com sucesso"
     },
 ];
 

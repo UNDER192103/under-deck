@@ -10,6 +10,7 @@ var _all  = require(_MAIN_DIR + 'Domain/Model/DB_model.js');
 
 _all.DB = new Jsoning(dir_appdata_un_data + "/DB/DB.json");
 _all.OBS = new Jsoning(dir_appdata_un_data + "/DB/OBS.json");
+_all.WEBDECK = new Jsoning(dir_appdata_un_data + "/DB/WEBDECK.json");
 _all.Opens_windows = new Jsoning(dir_appdata_un_data + "/DB/Opens_windows.json");
 _all.List_macros = new Jsoning(dir_appdata_un_data + "/DB/Macros.json");
 _all.ProgramsExe = new Jsoning(dir_appdata_un_data + "/DB/ProgramsExe.json");
@@ -18,6 +19,7 @@ _all.DB_DIR = path.join(process.env.APPDATA, packageJson.productName);
 _all.GetDataNow = async ()=>{
     _all.DB = new Jsoning(dir_appdata_un_data + "/DB/DB.json");
     _all.OBS = new Jsoning(dir_appdata_un_data + "/DB/OBS.json");
+    _all.WEBDECK = new Jsoning(dir_appdata_un_data + "/DB/WEBDECK.json");
     _all.Opens_windows = new Jsoning(dir_appdata_un_data + "/DB/Opens_windows.json");
     _all.List_macros = new Jsoning(dir_appdata_un_data + "/DB/Macros.json");
     _all.ProgramsExe = new Jsoning(dir_appdata_un_data + "/DB/ProgramsExe.json");

@@ -1,6 +1,6 @@
 {
   "name": "under-deck",
-  "version": "1.3.10",
+  "version": "1.3.11",
   "description": "Under Deck",
   "productName": "Under Deck",
   "main": "index.js",
@@ -29,7 +29,6 @@
       "installerIcon": "Domain/src/img/under-icon-256x.ico",
       "uninstallerIcon": "Domain/src/img/under-icon-256x.ico",
       "installerHeaderIcon": "Domain/src/img/under-icon-256x.ico",
-      "license": "LICENSE.md",
       "allowToChangeInstallationDirectory": false
     },
     "directories": {

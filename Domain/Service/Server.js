@@ -34,13 +34,22 @@ async function start_server(type, callback) {
                 if(DAO.List_programs != null && DAO.List_programs.length > 0){
                     new_list = DAO.List_programs;
                 }
-                res.send(JSON.stringify(new_list))
+                let exe_background = await DAO.WEBDECK.get('exe-background');
+                let exe_color_text = await DAO.WEBDECK.get('exe-color-text');
+                let data = {
+                    css: `:root {
+                        ${exe_background ? `--backgound-exe-item: ${exe_background};` : ""}
+                        ${exe_color_text ? `--color-exe-item: ${exe_color_text};` : ""}
+                    }`,
+                    programs: new_list,
+                }
+                res.send(data);
             })
 
             app.post("/execute_exe", async (req, res) => {
                 DAO = await DAO.GetDataNow();
                 exec_program(req.body);
-                res.send("Ok")
+                res.send("Ok");
             })
 
             app.post("/get_base64", async (req, res) => {

@@ -25,79 +25,79 @@
     <main class="full-page d-flex flex-nowrap">
 
       <nav id="Menu" class="mt-1 mb-1 animate__animated animate__slideInLeft">
-        <div class="bg-srt h-100 rounded-end d-flex flex-column flex-shrink-0 p-3 bg-light">
-          <a href="javascript:void(0)" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-            <img src="../../src/img/under-icon.png" style="width:40px;border-radius: 5px;">
-            <span class="p-1 fs-4 menu_text"></span>
-          </a>
-          <hr>
-          <ul class="nav nav-pills flex-column mb-auto">
-            <li class="nav-item d-flex">
-               <div class="btn-group m-1">
-               
-                  <button type="button" class="btn btn-dark btn-sm border border-dark"><img class="icone-selected-lang m-1" src=""></button>
-                  <button type="button" class="btn btn-light btn-sm dropdown-toggle border border-dark" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="text-lang-selected"></span>
-                  </button>
-                  <ul class="dropdown-menu bg-srt-dropdown-menu ul-dropdown-lang ul-languages">
-                  </ul>
-               </div>
-              
-               <div class="dropdown">
-                  <button class="btn none-border py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme (light)">
-                    <i class="bi bi-sun-fill"></i>
-                  </button>
-                  <ul class="dropdown-menu bg-srt-dropdown-menu" aria-labelledby="bd-theme-text">
-                    <li>
-                      <button id="bd-light" type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="true">
-                        <i class="bi bi-sun-fill"></i>
-                        Light
-                      </button>
-                    </li>
-                    <li>
-                      <button id="bd-black" type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
-                        <i class="bi bi-moon-stars-fill"></i>
-                        Dark
-                      </button>
-                    </li>
-                  </ul>
-               </div>
-            </li>
-          </ul>
-          <div class="auto-scrool">
+         <div class="bg-srt h-100 rounded-end d-flex flex-column flex-shrink-0 p-3 bg-light">
+            <a href="javascript:void(0)" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+              <img src="../../src/img/under-icon.png" style="width:40px;border-radius: 5px;">
+              <span class="p-1 fs-4 menu_text"></span>
+            </a>
+            <hr>
             <ul class="nav nav-pills flex-column mb-auto">
-  
-            <li onClick="selectMenu('app-main', true)" class="nav-item">
-              <a href="javascript:void(0)" id="nav-item-app-main" class="nav-link link-dark navs-item-sm active apps_name_icon" aria-current="page">
-              </a>
-            </li>
-            <li onClick="selectMenu('keys-macros', true)" class="nav-item">
-              <a href="javascript:void(0)" id="nav-item-keys-macros" class="nav-link link-dark navs-item-sm keys_macro_text_icon">
-              </a>
-            </li>
-            <li onClick="selectMenu('web-pages', true)" class="nav-item">
-              <a href="javascript:void(0)" id="nav-item-web-pages" class="nav-link link-dark navs-item-sm web_pages_text_icon"></a>
-            </li>
-            <li onClick="selectMenu('obs-studio', true)" class="nav-item">
-               <a href="javascript:void(0)" id="nav-item-obs-studio" class="nav-link link-dark navs-item-sm obs_studio_n_text_icon">
-               </a>
-            </li>
-            <li onClick="selectMenu('config', true)" class="nav-item" for="stside">
-              <a href="javascript:void(0)" id="nav-item-config" class="nav-link link-dark navs-item-sm settings_text_icon_HVRT d-flex">
-              </a>
-            </li>
-            <li onClick="selectMenu('updates', true)" class="nav-item">
-               <a href="javascript:void(0)" id="nav-item-updates" class="nav-link link-dark navs-item-sm updates_text_icon">
-               </a>
-            </li>
-            <li onClick="selectMenu('help', true)" class="nav-item">
-              <a href="javascript:void(0)" id="nav-item-help" class="nav-link link-dark navs-item-sm help_text_icon">
-              </a>
-            </li>
+               <li class="nav-item d-flex">
+                  <div class="btn-group m-1">
+                  
+                     <button type="button" class="btn btn-dark btn-sm border border-dark"><img class="icone-selected-lang m-1" src=""></button>
+                     <button type="button" class="btn btn-light btn-sm dropdown-toggle border border-dark" data-bs-toggle="dropdown" aria-expanded="false">
+                       <span class="text-lang-selected"></span>
+                     </button>
+                     <ul class="dropdown-menu bg-srt-dropdown-menu ul-dropdown-lang ul-languages">
+                     </ul>
+                  </div>
+               
+                  <div class="dropdown">
+                     <button class="btn none-border py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme (light)">
+                       <i class="bi bi-sun-fill"></i>
+                     </button>
+                     <ul class="dropdown-menu bg-srt-dropdown-menu" aria-labelledby="bd-theme-text">
+                       <li>
+                         <button id="bd-light" type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="true">
+                           <i class="bi bi-sun-fill"></i>
+                           Light
+                         </button>
+                       </li>
+                       <li>
+                         <button id="bd-black" type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                           <i class="bi bi-moon-stars-fill"></i>
+                           Dark
+                         </button>
+                       </li>
+                     </ul>
+                  </div>
+               </li>
             </ul>
-          </div>
+            <div class="auto-scrool">
+               <ul class="nav nav-pills flex-column mb-auto">
+               
+               <li onClick="selectMenu('app-main', true)" class="nav-item">
+                 <a href="javascript:void(0)" id="nav-item-app-main" class="nav-link link-dark navs-item-sm active apps_name_icon" aria-current="page">
+                 </a>
+               </li>
+               <li onClick="selectMenu('keys-macros', true)" class="nav-item">
+                 <a href="javascript:void(0)" id="nav-item-keys-macros" class="nav-link link-dark navs-item-sm keys_macro_text_icon">
+                 </a>
+               </li>
+               <li onClick="selectMenu('web-pages', true)" class="nav-item">
+                 <a href="javascript:void(0)" id="nav-item-web-pages" class="nav-link link-dark navs-item-sm web_pages_text_icon"></a>
+               </li>
+               <li onClick="selectMenu('obs-studio', true)" class="nav-item">
+                  <a href="javascript:void(0)" id="nav-item-obs-studio" class="nav-link link-dark navs-item-sm obs_studio_n_text_icon">
+                  </a>
+               </li>
+               <li onClick="selectMenu('config', true)" class="nav-item" for="stside">
+                 <a href="javascript:void(0)" id="nav-item-config" class="nav-link link-dark navs-item-sm settings_text_icon_HVRT d-flex">
+                 </a>
+               </li>
+               <li onClick="selectMenu('updates', true)" class="nav-item">
+                  <a href="javascript:void(0)" id="nav-item-updates" class="nav-link link-dark navs-item-sm updates_text_icon">
+                  </a>
+               </li>
+               <li onClick="selectMenu('help', true)" class="nav-item">
+                 <a href="javascript:void(0)" id="nav-item-help" class="nav-link link-dark navs-item-sm help_text_icon">
+                 </a>
+               </li>
+               </ul>
+            </div>
 
-          <hr>
+            <hr>
 
             <div class="dropdown UND_usernotloged" style="display: none;">
                <a class="U-modal-account-l d-flex align-items-center text-decoration-none">
@@ -113,10 +113,10 @@
                   <strong class="UND_username u-format-max-text"></strong>
                </a>
                <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                  <li><a class="dropdown-item profile_text"></a></li>
-                  <li><a class="dropdown-item settings_text"></a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li class="logout_account"><a class="dropdown-item text-danger"><strong class="acclogout_text"></strong></a></li>
+                  <li class="UND_profileView cursor-pointer"><a class="dropdown-item profile_text"></a></li>
+                  <li class="cursor-pointer"><a class="dropdown-item settings_text"></a></li>
+                  <li class="cursor-pointer"><hr class="dropdown-divider"></li>
+                  <li class="logout_account cursor-pointer"><a class="dropdown-item text-danger"><strong class="acclogout_text"></strong></a></li>
                </ul>
             </div>
       </nav>
@@ -291,7 +291,7 @@
             <div class="cards-area aos-init aos-animate" data-aos="fade-down">
                <div class="row">
 
-                  <div class="col-md-12 col-xl-6 animate__animated animate__slideInLeft">
+                  <div class="col-md-12 col-xl-4 animate__animated animate__slideInLeft">
                      <div class="card bg-card-srt">
                        <div class="card-header shadow-text text-center">
                            <h5 class="general_text "></h5>
@@ -330,7 +330,7 @@
                      </div>
                   </div>
 
-                  <div class="col-md-12 col-xl-6 animate__animated animate__slideInRight">
+                  <div class="col-md-12 col-xl-4 animate__animated animate__slideInDown">
                      <div class="card bg-card-srt">
                         <div class="card-header text-center shadow-text d-contents">
                            <h5 class="mt-2 web_stream_deck_text"></h5>
@@ -353,13 +353,35 @@
                                     </div>
                                  </div>
 
-                                 <div class="m-0">
+                                 <div class="m-0 mb-3">
                                     <label for="local-server-adress-acess-url" class="form-check-label url_text_expc_1"></label>
                                     <div class="input-group">
                                        <input type="text" id="local-server-adress-acess-url" disabled class="form-control" placeholder="" aria-label="" aria-describedby="button-addon2">
                                        <button onclick="openIpUrlWeb()" class="btn btn-primary open_text" type="button" ></button>
                                        <button onclick="getQrCodeIpUrlWeb()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-qr-code" type="button" >QR Code</button>
                                     </div>
+                                 </div>
+
+                                 <div class="m-0 text-center">
+                                    <label class="form-check-label customization_text"></label>
+                                 </div>
+
+                                 <div class="m-0 mb-3">
+                                    <label class="form-check-label background_color_text"></label>
+                                    <div class="input-group">
+                                       <input type="color" id="webdeck_background_color" class="form-control">
+                                    </div>
+                                 </div>
+
+                                 <div class="m-0 mb-3">
+                                    <label class="form-check-label color_text_text"></label>
+                                    <div class="input-group">
+                                       <input type="color" id="webdeck_color_text" class="form-control">
+                                    </div>
+                                 </div>
+
+                                 <div class="m-0 text-center">
+                                    <button id="reset_to_default_webdeck_colors" class="btn btn-primary btn-sm reset_to_default_text" type="button" ></button>
                                  </div>
 
                               </div>
@@ -369,7 +391,7 @@
                      </div>
                   </div>
 
-                  <div class="col-md-12 col-xl-6 animate__animated animate__slideInLeft">
+                  <div class="col-md-12 col-xl-4 animate__animated animate__slideInRight">
                      <div class="card bg-card-srt">
                        <div class="card-header shadow-text text-center">
                            <h5 class="appearance_text "></h5>
@@ -669,11 +691,13 @@
           </div>
         </div>
       </div>
+
     </main>
 
     <br>
 
     <div class="bg-srt-modal modals">
+
       <div class="modal fade" id="modal-edit-exe" tabindex="-1" aria-labelledby="modal-edit-exeLabel" aria-hidden="true">
          <div class="modal-dialog">
             <div class="modal-content">
@@ -711,6 +735,7 @@
             </div>
          </div>
       </div>
+
       <div class="modal fade" id="modal-add-app" tabindex="-1" aria-labelledby="modal-add-app" aria-hidden="true" data-bs-keyboard="false" data-bs-backdrop="static">
          <div class="modal-dialog">
             <div class="modal-content">
@@ -875,6 +900,7 @@
             </div>
          </div>
       </div>
+
       <div class="modal fade" id="modal-key-macro" tabindex="-1" aria-labelledby="modal-key-macro" aria-hidden="true">
          <div class="modal-dialog">
             <div class="modal-content">
@@ -907,6 +933,7 @@
             </div>
          </div>
       </div>
+
       <div class="modal fade" id="modal-webpage" tabindex="-1" aria-labelledby="modal-webpage" aria-hidden="true">
          <div class="modal-dialog">
             <div class="modal-content">
@@ -938,6 +965,7 @@
             </div>
          </div>
       </div>
+
       <div class="modal fade" id="modal-edit-key-macro" tabindex="-1" aria-labelledby="modal-edit-key-macro" aria-hidden="true">
          <div class="modal-dialog">
             <div class="modal-content">
@@ -970,6 +998,7 @@
             </div>
          </div>
       </div>
+
       <div class="modal fade" id="modal-qr-code" tabindex="-1" aria-labelledby="modal-qr-code" aria-hidden="true">
          <div class="modal-dialog">
             <div class="modal-content">
@@ -986,6 +1015,7 @@
             </div>
          </div>
       </div>
+
       <div class="modal fade" id="modal_login" data-bs-backdrop='static' data-keyboard="false" data-backdrop="static">
          <div class="modal-dialog">
             <form class="rounded modal-content" onSubmit="tryLoginUser(); return false;">
@@ -1124,7 +1154,72 @@
             </form>
          </div>
       </div>
-      <div class="modal" id="modal_dialog">
+
+      <div class="modal fade" id="modal_UND_profileView" data-bs-backdrop='static' data-keyboard="false" data-backdrop="static">
+         <div class="modal-dialog">
+            <div class="modal-content">
+
+               <div class="modal-header" style="border-bottom: none !important;">
+                  <h4 class="modal-title userProfile_text"></h4>
+                  <button id="btn_close_modal" type="button" class="btn-close" data-bs-dismiss="modal"></button>
+               </div>
+
+               <div class="modal-body" style="border-top: none !important;">
+
+                  <div class="cards-area aos-init aos-animate" data-aos="fade-down">
+                     <div class="row">
+
+                        <div class="col-md-12 col-xl-12">
+                           <div class="card bg-card-srt bg-dark text-light">
+
+                              <div class="card-body">
+
+                                 <div class="d-flex">
+                                    <div class="input-group" style="height: 100px;">
+                                       <div class="m-auto ms-0 d-flex">
+                                          <div class="ms-2">
+                                             <h5 class="form-check-label avatar_text"></h5>
+                                             <button class="btn btn-primary btn-sm changeUserAvatar_text" type="button"></button>
+                                             <button class="btn btn-danger ms-3 btn-sm removeUserAvatar_text" type="button"></button>
+                                          </div>
+                                       </div>
+                                    </div>
+   
+                                    <div class="input-group">
+                                       <img src="../../src/img/profile-icon.png" alt="" width="100" height="100" class="m-auto UND_usericon ">
+                                    </div>
+                                 </div>
+
+                                 <hr>
+
+                                 <div class="d-flex">
+                                    <div class="input-group" style="height: 100px;">
+                                       <div class="m-auto ms-0 d-flex">
+                                          <div class="ms-2 d-grid">
+                                             <h5 class="form-check-label username_text m-0"></h5>
+                                          </div>
+                                       </div>
+                                    </div>
+
+                                    <div class="input-group">
+                                       <input type="text" id="insertUND_username" class="form-control m-auto ValUND_username">
+                                    </div>
+                                 </div>
+                                 
+                              </div>
+
+                           </div>
+                        </div>
+
+                     </div>
+                  </div>
+               </div>
+
+            </div>
+         </div>
+      </div>
+
+      <div class="modal fade" id="modal_dialog">
          <div class="modal-dialog">
             <div class="modal-content">
                <div class="modal-header">
@@ -1162,6 +1257,7 @@
   <script src="./back_functions.js"></script>
   <script src="./view/js/updates.js"></script>
   <script src="./view/js/app.js"></script>
+  <script src="./view/js/config.js"></script>
   <script src="./view/js/account.js"></script>
   <script src="./view/js/web_server.js"></script>
   <script src="./view/js/obs.js"></script>

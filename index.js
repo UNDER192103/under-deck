@@ -49,6 +49,7 @@ const check_folder_data_UN_DB = async (list, callback, count = 0) => {
 var list_dirs = [
     BasePathDataDB + "/DB.json",
     BasePathDataDB + "/OBS.json",
+    BasePathDataDB + "/WEBDECK.json",
     BasePathDataDB + "/Opens_windows.json",
     BasePathDataDB + "/Macros.json",
     BasePathDataDB + "/ProgramsExe.json",

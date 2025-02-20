@@ -1,9 +1,10 @@
-var _all = { list_programs: null, list_programs_json: null, isFullScreen: false }, isHorizontalMode = false;
+var _all = { data_user: null, list_programs: null, json_data_user: null, isFullScreen: false }, isRotetionMode = '';
+
 
 $(document).ready(function(){
     start_get_data();
 
-    $(".bnt-fullscreen").click(()=>{
+    $(document).on('click', '.bnt-fullscreen', (r) => {
         var elem = document.documentElement;
 
         function openFullscreen() {
@@ -35,14 +36,37 @@ $(document).ready(function(){
             closeFullscreen()
     });
 
-    $(".bnt-horizontalMode").click(()=>{
-        if(isHorizontalMode){
-            $('.exe-item').removeClass('horizontalMode');
-            isHorizontalMode = false;
-        }
-        else{
-            $('.exe-item').addClass('horizontalMode');
-            isHorizontalMode = true;
+    $(document).on('click', '.bnt-refreshList', (r) => {
+        _all = { data_user: null, list_programs: null, json_data_user: null, isFullScreen: _all.isFullScreen };
+        update_programs_select();
+    })
+
+    $(document).on('click', '.bnt-rotetionMode', (r) => {
+        $('.set-rotetionS').removeClass(isRotetionMode);
+
+        switch (isRotetionMode) {
+            case '':
+                isRotetionMode = 'horizontalMode';
+                $('.set-rotetionS').addClass(isRotetionMode);
+                $(".bnt-rotetionMode").html('<i class="bi bi-distribute-vertical"></i>');
+            break;
+        
+            case 'horizontalMode':
+                isRotetionMode = 'originalTopMode';
+                $('.set-rotetionS').addClass(isRotetionMode);
+                $(".bnt-rotetionMode").html('<i class="bi bi-distribute-horizontal"></i>');
+            break;
+
+            case 'originalTopMode':
+                isRotetionMode = 'horizontal2Mode';
+                $('.set-rotetionS').addClass(isRotetionMode);
+                $(".bnt-rotetionMode").html('<i class="bi bi-distribute-vertical"></i>');
+            break;
+
+            default:
+                isRotetionMode = '';
+                $(".bnt-rotetionMode").html('<i class="bi bi-distribute-horizontal"></i>');
+            break;
         }
     });
 });
@@ -51,9 +75,11 @@ const start_get_data = async () => {
     try {
         $.post(`${location.origin}/get_data_user`, async ( data ) => {
             if(data != null){
-                if(data != _all.list_programs_json){
-                    _all.list_programs = JSON.parse(data);
-                    _all.list_programs_json = data;
+                if(JSON.stringify(data) != _all.json_data_user){
+                    _all.json_data_user = JSON.stringify(data);
+                    _all.data_user = data;
+                    _all.list_programs = _all.data_user.programs;
+                    $("#custom-style").html(data.css);
                     update_programs_select();
                 }
                 else{
@@ -61,9 +87,10 @@ const start_get_data = async () => {
                 }
             }
             setTimeout(start_get_data, 1000);
+        }).error(()=>{
         });
     } catch (error) {
-        setTimeout(start_get_data, 1000);
+        setTimeout(start_get_data, 5000);
     }
 }
 
@@ -92,13 +119,14 @@ const update_programs_select = async (list = _all.list_programs) => {
         var icone = location.origin+"/src/img/underbot_logo.png";
         if(item.nameCustom.length > 0)
             name = item.nameCustom;
-        $('.exe-list').append(`<li id="item-exe-${item._id}" onclick="execut_exe(${item._id})" class="col exe-item mb-2 bg-light ${isHorizontalMode ? "horizontalMode" : ""}" data-name="0-circle" data-tags="number numeral" data-categories="shapes">
-            <a class="d-block text-body-emphasis text-decoration-none" >
-            <div class="bg-body-secondary text-center rounded div-content-img-exe">
-                <img id="icon-${item._id}" src="${icone}" class="img-exe">
+        $('.exe-list').append(`<li id="item-exe-${item._id}" onclick="execut_exe(${item._id})" class="col exe-item xwh-1 set-rotetionS mb-2 ${isRotetionMode}">
+            <div class="exe-item-content">
+                <div class="exe-item-content-icon">
+                    <img id="icon-${item._id}" src="${icone}" class="exe-icon">
+                </div>
+                <div class="exe-item-content-text text-center">${name}</div>
             </div>
-            <div class="name text-dark div-text-name-exe text-decoration-none text-center">${name}</div>
-            </a>
+            
         </li>`);
         $.ajax({
             url: `${location.origin}/get_base64`,

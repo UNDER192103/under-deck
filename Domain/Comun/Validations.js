@@ -43,6 +43,12 @@ const DB_default_values = async (callback) => {
     if(DAO.DB.get('App_notification_windows') == null)
         await DAO.DB.set('App_notification_windows', true);
 
+    if(DAO.DB.get('exe-background') == null)
+        await DAO.DB.set('exe-background', '#370179');
+
+    if(DAO.DB.get('exe-color-text') == null)
+        await DAO.DB.set('exe-color-text', 'white');
+
     callback();
 }
 

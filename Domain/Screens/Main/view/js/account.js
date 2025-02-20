@@ -2,6 +2,14 @@
 $(document).ready(async () => {
     loadUserData();
 
+    $(document).on('click', '.UND_profileView', (r) => {
+        $("#modal_UND_profileView").modal('show');
+    });
+
+    $("#insertUND_username").on( 'keyup', () => {
+        $(".UND_username").html($("#insertUND_username").val());
+    })
+
     $(document).on('click', '.logout_account', (r) => {
         if(DAO.USER != null){
             bootbox.confirm({
@@ -55,6 +63,7 @@ const loadUserData = () => {
         $(".UND_usernotloged").hide();
         $(".UND_userloged").show();
         $(".UND_username").html(DAO.USER.account);
+        $(".ValUND_username").val(DAO.USER.account);
         if(DAO.USER.icon != null && DAO.USER.icon.length > 6){
             $(".UND_usericon").attr('src', DAO.USER.icon);
         }
@@ -70,6 +79,7 @@ const loadUserData = () => {
                 DAO.USER = null;
                 await DAO.DB.set('user', DAO.USER);
                 $(".UND_username").html("");
+                $(".ValUND_username").val("");
                 $(".UND_usericon").attr('src', "");
                 $(".UND_usernotloged").show();
                 $(".UND_userloged").hide();
@@ -79,6 +89,7 @@ const loadUserData = () => {
                     await DAO.DB.set('user', res.data.account);
                     DAO.USER = res.data.account;
                     $(".UND_username").html(DAO.USER.account);
+                    $(".ValUND_username").val(DAO.USER.account);
                     if(DAO.USER.icon != null && DAO.USER.icon.length > 6){
                         $(".UND_usericon").attr('src', DAO.USER.icon);
                     }

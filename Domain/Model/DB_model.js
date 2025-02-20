@@ -1,6 +1,7 @@
 module.exports = {
     DB_DIR: null,
     DB: null,
+    WEBDECK: null,
     Opens_windows: null,
     ProgramsExe: null,
     Server_port: null,

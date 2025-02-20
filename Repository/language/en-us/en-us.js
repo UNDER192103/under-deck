@@ -230,6 +230,11 @@ var en_us = [
         text: "Profile",
     },
     {
+        id: ".userProfile_text",
+        type: "text",
+        text: "User profile",
+    },
+    {
         id: ".UND_userLogin_text",
         type: "text",
         text: "Login",
@@ -358,6 +363,11 @@ var en_us = [
         id:".not",
         type: "text",
         text: "No"
+    },
+    {
+        id:".avatar_text",
+        type: "text",
+        text: "Avatar"
     },
     {
         id:".appearance_text",
@@ -1035,6 +1045,11 @@ var en_us = [
         text: "Logged in successfully",
     },
     {
+        id: ".username_text",
+        type: "text",
+        text: "Username",
+    },
+    {
         id: ".msg_err_u_ud_login_text",
         type: "text",
         text: "Invalid username or password",
@@ -1183,6 +1198,41 @@ var en_us = [
         id: ".Successfully_removed",
         type: "text",
         text: "Successfully removed",
+    },
+    {
+        id:".changeUserAvatar_text",
+        type: "text",
+        text: "Change Avatar"
+    },
+    {
+        id:".removeUserAvatar_text",
+        type: "text",
+        text: "Remove Avatar"
+    },
+    {
+        id:".customization_text",
+        type: "text",
+        text: "Customization"
+    },
+    {
+        id:".background_color_text",
+        type: "text",
+        text: "Background color"
+    },
+    {
+        id:".color_text_text",
+        type: "text",
+        text: "Text color"
+    },
+    {
+        id:".reset_to_default_text",
+        type: "html",
+        text: "Reset to default"
+    },
+    {
+        id:".successfully_reset_text",
+        type: "html",
+        text: "Successfully reset"
     },
 ]
 
