@@ -103,7 +103,7 @@
                <a class="U-modal-account-l d-flex align-items-center text-decoration-none">
                   <img src="../../src/img/profile-icon.png" alt="" width="32" height="32" class="rounded-circle me-2">
                   <strong class="UND_userLogin_text cursor-pointer tooltip-script" title="Login" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#modal_login" type="button"></strong>/
-                  <strong class="u-format-max-text UND_userRegister_text User-register-modal cursor-pointer tooltip-script" title="Register" data-toggle="tooltip"></strong>
+                  <strong class="u-format-max-text UND_userRegister_text User-register-modal cursor-pointer tooltip-script" title="Register" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#modal_register" type="button"></strong>
                </a>
             </div>
 
@@ -114,7 +114,7 @@
                </a>
                <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
                   <li class="UND_profileView cursor-pointer"><a class="dropdown-item profile_text"></a></li>
-                  <li class="cursor-pointer"><a class="dropdown-item settings_text"></a></li>
+                  <li class="UND_profileView cursor-pointer"><a class="dropdown-item settings_text"></a></li>
                   <li class="cursor-pointer"><hr class="dropdown-divider"></li>
                   <li class="logout_account cursor-pointer"><a class="dropdown-item text-danger"><strong class="acclogout_text"></strong></a></li>
                </ul>
@@ -1020,11 +1020,11 @@
          <div class="modal-dialog">
             <form class="rounded modal-content" onSubmit="tryLoginUser(); return false;">
 
-               <div class="modal-header text-center">
-                  <h4 class="modal-title w-100 login_text"></h4>
+               <div class="modal-header text-center" style="border-bottom: none !important;">
+                  <h4 class="modal-title w-100 UND_userLogin_text"></h4>
                </div>
 
-               <div class="modal-body pb-0">
+               <div class="modal-body pb-0" style="border-top: none !important; border-bottom: none !important;">
                   <div style="display: none;" id="u-form-alert" class="alert alert-danger" role="alert"></div>
 
                   <div class="mb-3">
@@ -1035,18 +1035,20 @@
                   <div class="mb-3">
                      <label for="u-password" class="form-label password_text"></label>
                      <div class="input-group">
-                        <a class="btn btn-light border border-secondary" type="button" id="btn-view-u-password"><i class="bi bi-eye-fill"></i></a>
+                        <a class="btn btn-light border border-secondary view-password" type="button"><i class="bi bi-eye-fill"></i></a>
                         <input required type="password" class="form-control" id="u-password" placeholder="************">
                      </div>
                   </div>
 
                   <div class="text-center">
                      <a data-bs-toggle="modal" data-bs-target="#modal_reset_password" data-bs-dismiss="modal" type="button" class="cursor-pointer span font-12 Forgot_your_password_text"></a>
+                     |
+                     <a data-bs-toggle="modal" data-bs-target="#modal_register" data-bs-dismiss="modal" type="button" class="cursor-pointer span font-12 UND_userRegister_text"></a>
                   </div>
                   
                </div>
 
-               <div class="modal-footer">
+               <div class="modal-footer" style="border-top: none !important;">
                   <button type="button" id="deny_modal" class="btn btn-danger" data-bs-dismiss="modal">
                      <i class="bi bi-x-lg"></i>
                      <span class="cancel_text"></span>
@@ -1061,15 +1063,78 @@
          </div>
       </div>
 
+      <div class="modal fade" id="modal_register" data-bs-backdrop='static' data-keyboard="false" data-backdrop="static">
+         <div class="modal-dialog">
+            <form class="rounded modal-content" onSubmit="tryRegisterUser(); return false;">
+
+               <div class="modal-header text-center" style="border-bottom: none !important;">
+                  <h4 class="modal-title w-100 UND_userRegister_text"></h4>
+               </div>
+
+               <div class="modal-body pb-0" style="border-top: none !important; border-bottom: none !important;">
+                  <div style="display: none;" id="u-form-r-alert" class="alert alert-danger" role="alert"></div>
+
+                  <div class="mb-3">
+                     <label for="ur-name" class="form-label display_name_text"></label>
+                     <input required type="text" class="form-control display_name_placeholder" id="ur-name">
+                  </div>
+
+                  <div class="mb-3">
+                     <label for="ur-username" class="form-label username_text"></label>
+                     <input required type="text" class="form-control username_placeholder" id="ur-username">
+                  </div>
+
+                  <div class="mb-3">
+                     <label for="ur-email" class="form-label email_text"></label>
+                     <input required type="email" class="form-control email_placeholder" id="ur-email">
+                  </div>
+                  
+                  <div class="mb-3">
+                     <label for="ur-password" class="form-label password_text"></label>
+                     <div class="input-group">
+                        <a class="btn btn-light border border-secondary view-password" type="button"><i class="bi bi-eye-fill"></i></a>
+                        <input required type="password" class="form-control" id="ur-password" placeholder="************">
+                     </div>
+                  </div>
+
+                  <div class="mb-3">
+                     <label for="ur-cpassword" class="form-label confirm_password_text"></label>
+                     <div class="input-group">
+                        <a class="btn btn-light border border-secondary view-password" type="button"><i class="bi bi-eye-fill"></i></a>
+                        <input required type="password" class="form-control" id="ur-cpassword" placeholder="************">
+                     </div>
+                  </div>
+
+                  <div class="text-center">
+                     <a data-bs-toggle="modal" data-bs-target="#modal_login" data-bs-dismiss="modal" type="button" class="cursor-pointer span font-12 UND_userLogin_text"></a>
+                  </div>
+                  
+               </div>
+
+               <div class="modal-footer" style="border-top: none !important;">
+                  <button type="button" id="deny_modal" class="btn btn-danger" data-bs-dismiss="modal">
+                     <i class="bi bi-x-lg"></i>
+                     <span class="cancel_text"></span>
+                  </button>
+                  <button type="submit" class="btn btn-primary">
+                     <i class="bi bi-send"></i>
+                     <span class="UND_userRegister_text"></span>
+                  </button>
+               </div>
+               
+            </form>
+         </div>
+      </div>
+
       <div class="modal fade" id="modal_reset_password" data-bs-backdrop='static' data-keyboard="false" data-backdrop="static">
          <div class="modal-dialog">
             <form class="rounded modal-content" onSubmit="tryResetPassword(); return false;">
 
-               <div class="modal-header text-center">
+               <div class="modal-header text-center" style="border-bottom: none !important;">
                   <h4 class="modal-title w-100 Reset_password_text"></h4>
                </div>
 
-               <div class="modal-body pb-0">
+               <div class="modal-body pb-0" style="border-top: none !important; border-bottom: none !important;">
                   <div style="display: none;" id="rp-form-alert" class="alert alert-danger" role="alert"></div>
 
                   <div class="mb-3">
@@ -1079,11 +1144,13 @@
 
                   <div class="text-center">
                      <a data-bs-toggle="modal" data-bs-target="#modal_login" data-bs-dismiss="modal" type="button" class="cursor-pointer span font-12 UND_userLogin_text"></a>
+                     |
+                     <a data-bs-toggle="modal" data-bs-target="#modal_register" data-bs-dismiss="modal" type="button" class="cursor-pointer span font-12 UND_userRegister_text"></a>
                   </div>
                   
                </div>
 
-               <div class="modal-footer">
+               <div class="modal-footer" style="border-top: none !important;">
                   <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                      <i class="bi bi-x-lg"></i>
                      <span class="cancel_text"></span>
@@ -1102,11 +1169,11 @@
          <div class="modal-dialog">
             <form class="rounded modal-content" onSubmit="trySetResetPassword(); return false;">
 
-               <div class="modal-header text-center">
+               <div class="modal-header text-center" style="border-bottom: none !important;">
                   <h4 class="modal-title w-100 Reset_password_text"></h4>
                </div>
 
-               <div class="modal-body pb-0">
+               <div class="modal-body pb-0" style="border-top: none !important; border-bottom: none !important;">
                   <div style="display: none;" id="srp-form-alert" class="alert alert-danger" role="alert"></div>
 
                   <div class="mb-3">
@@ -1140,7 +1207,7 @@
                   
                </div>
 
-               <div class="modal-footer">
+               <div class="modal-footer" style="border-top: none !important;">
                   <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                      <i class="bi bi-x-lg"></i>
                      <span class="cancel_text"></span>
@@ -1164,7 +1231,7 @@
                   <button id="btn_close_modal" type="button" class="btn-close" data-bs-dismiss="modal"></button>
                </div>
 
-               <div class="modal-body" style="border-top: none !important;">
+               <div class="modal-body" style="border-top: none !important; border-bottom: none !important;">
 
                   <div class="cards-area aos-init aos-animate" data-aos="fade-down">
                      <div class="row">
@@ -1179,21 +1246,36 @@
                                        <div class="m-auto ms-0 d-flex">
                                           <div class="ms-2">
                                              <h5 class="form-check-label avatar_text"></h5>
-                                             <button class="btn btn-primary btn-sm changeUserAvatar_text" type="button"></button>
-                                             <button class="btn btn-danger ms-3 btn-sm removeUserAvatar_text" type="button"></button>
+                                             <button id="changeUserAvatar" class="btn btn-primary btn-sm changeUserAvatar_text" type="button"></button>
+                                             <input type="file" class="form-control hidden" id="uInput-changeUserAvatar" accept=".jpeg, .gif, .png">
+                                             <button class="btn btn-danger ms-3 btn-sm removeUserAvatar_text btn_remove_account_avatar" type="button"></button>
                                           </div>
                                        </div>
                                     </div>
    
                                     <div class="input-group">
-                                       <img src="../../src/img/profile-icon.png" alt="" width="100" height="100" class="m-auto UND_usericon ">
+                                       <img src="../../src/img/profile-icon.png" alt="" width="100" height="100" class="m-auto UND_usericon UND_usericonPrevEdit">
                                     </div>
                                  </div>
 
                                  <hr>
 
-                                 <div class="d-flex">
-                                    <div class="input-group" style="height: 100px;">
+                                 <div class="d-flex mt-3">
+                                    <div class="input-group">
+                                       <div class="m-auto ms-0 d-flex">
+                                          <div class="ms-2 d-grid">
+                                             <h5 class="form-check-label display_name_text m-0"></h5>
+                                          </div>
+                                       </div>
+                                    </div>
+
+                                    <div class="input-group">
+                                       <input type="text" id="insertUND_DisplayUsername" class="form-control m-auto ValUND_DisplayUsername ValUND_DisplayUsernameEdit">
+                                    </div>
+                                 </div>
+
+                                 <div class="d-flex mt-3">
+                                    <div class="input-group">
                                        <div class="m-auto ms-0 d-flex">
                                           <div class="ms-2 d-grid">
                                              <h5 class="form-check-label username_text m-0"></h5>
@@ -1202,7 +1284,35 @@
                                     </div>
 
                                     <div class="input-group">
-                                       <input type="text" id="insertUND_username" class="form-control m-auto ValUND_username">
+                                       <input disabled type="text" class="form-control m-auto ValUND_username">
+                                    </div>
+                                 </div>
+
+                                 <div class="d-flex mt-3">
+                                    <div class="input-group">
+                                       <div class="m-auto ms-0 d-flex">
+                                          <div class="ms-2 d-grid">
+                                             <h5 class="form-check-label email_text m-0"></h5>
+                                          </div>
+                                       </div>
+                                    </div>
+
+                                    <div class="input-group">
+                                       <input disabled type="text" class="form-control m-auto ValUND_email">
+                                    </div>
+                                 </div>
+
+                                 <div class="d-flex mt-3 mb-3">
+                                    <div class="input-group">
+                                       <div class="m-auto ms-0 d-flex">
+                                          <div class="ms-2 d-grid">
+                                             <h5 class="form-check-label creation_data_text m-0"></h5>
+                                          </div>
+                                       </div>
+                                    </div>
+
+                                    <div class="input-group">
+                                       <h5 class="form-check-label UND_datecreated m-0"></h5>
                                     </div>
                                  </div>
                                  
@@ -1215,6 +1325,9 @@
                   </div>
                </div>
 
+               <div class="modal-footer" style="border-top: none !important;">
+                  <button type="button" class="btn btn-success save_text btn_UpdateUserData" style="display: none;"></button>
+               </div>
             </div>
          </div>
       </div>
@@ -1226,8 +1339,10 @@
                   <h4 id="title_modal" class="modal-title"></h4>
                   <button id="btn_close_modal" type="button" class="btn-close" data-bs-dismiss="modal"></button>
                </div>
+
                <div id="body_modal" class="modal-body">
                </div>
+
                <div class="modal-footer">
                   <button type="button" id="confirm_modal" class="btn btn-primary text_yes" data-bs-dismiss="modal"></button>
                   <button type="button" id="deny_modal" class="btn btn-danger text_no" data-bs-dismiss="modal"></button>

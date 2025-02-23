@@ -35,6 +35,11 @@ var en_us = [
         text: "Update release date"
     },
     {
+        id: ".creation_data_text",
+        type: "text",
+        text: "Creation date"
+    },
+    {
         id: ".download_percentage_text",
         type: "text",
         text: "Download percentage"
@@ -233,6 +238,11 @@ var en_us = [
         id: ".userProfile_text",
         type: "text",
         text: "User profile",
+    },
+    {
+        id: ".Login_text",
+        type: "text",
+        text: "Login",
     },
     {
         id: ".UND_userLogin_text",
@@ -962,7 +972,7 @@ var en_us = [
     {
         id: ".update_and_restart",
         type: "text",
-        text: "Yes, update and restart",
+        text: "Install update",
     },
     {
         id: ".update_later",
@@ -972,7 +982,7 @@ var en_us = [
     {
         id: ".application_update",
         type: "text",
-        text: "New application update",
+        text: "New application update Under Deck",
     },
     {
         id: ".newversionhasbeendownloaded_msg",
@@ -1035,9 +1045,39 @@ var en_us = [
         text: "E-mail or Username",
     },
     {
+        id: ".email_text",
+        type: "text",
+        text: "E-mail",
+    },
+    {
+        id: ".username_text",
+        type: "text",
+        text: "Username",
+    },
+    {
         id: ".e_or_u_placeholder",
         type: "attr",
         text: {placeholder: "E-mail or Username" },
+    },
+    {
+        id: ".email_placeholder",
+        type: "attr",
+        text: {placeholder: "E-mail" },
+    },
+    {
+        id: ".username_placeholder",
+        type: "attr",
+        text: {placeholder: "Username" },
+    },
+    {
+        id: ".display_username_placeholder",
+        type: "attr",
+        text: {placeholder: "Display username" },
+    },
+    {
+        id: ".display_name_placeholder",
+        type: "attr",
+        text: {placeholder: "Display name" },
     },
     {
         id: ".msg_successfully_logged_text",
@@ -1050,9 +1090,24 @@ var en_us = [
         text: "Username",
     },
     {
+        id: ".display_username_text",
+        type: "text",
+        text: "Display username",
+    },
+    {
+        id: ".display_name_text",
+        type: "text",
+        text: "Display name",
+    },
+    {
         id: ".msg_err_u_ud_login_text",
         type: "text",
         text: "Invalid username or password",
+    },
+    {
+        id: ".msg_err_u_ud_register_text",
+        type: "text",
+        text: "Please check that all fields are filled in correctly",
     },
     {
         id: ".no_accounts_found_text",
@@ -1233,6 +1288,11 @@ var en_us = [
         id:".successfully_reset_text",
         type: "html",
         text: "Successfully reset"
+    },
+    {
+        id:".msg_unable_to_perform_this_action",
+        type: "html",
+        text: "Unable to perform this action"
     },
 ]
 

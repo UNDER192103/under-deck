@@ -35,6 +35,11 @@ var pt_br = [
         text: "Data de lançamento da atualização"
     },
     {
+        id: ".creation_data_text",
+        type: "text",
+        text: "Data de criação"
+    },
+    {
         id: ".uupdate_text",
         type: "text",
         text: "Atualização"
@@ -213,6 +218,11 @@ var pt_br = [
         id: ".userProfile_text",
         type: "text",
         text: "Perfil do usuário",
+    },
+    {
+        id: ".Login_text",
+        type: "text",
+        text: "Entrar",
     },
     {
         id: ".UND_userLogin_text",
@@ -962,7 +972,7 @@ var pt_br = [
     {
         id: ".update_and_restart",
         type: "text",
-        text: "Sim, Atualizar e reiniciar",
+        text: "Instalar atualização",
     },
     {
         id: ".update_later",
@@ -972,7 +982,7 @@ var pt_br = [
     {
         id: ".application_update",
         type: "text",
-        text: "Nova atualização do aplicativo",
+        text: "Nova atualização do aplicativo Under Deck",
     },
     {
         id: ".newversionhasbeendownloaded_msg",
@@ -1035,9 +1045,39 @@ var pt_br = [
         text: "E-mail ou Nome de usuário",
     },
     {
+        id: ".email_text",
+        type: "text",
+        text: "E-mail",
+    },
+    {
+        id: ".username_text",
+        type: "text",
+        text: "Nome de usuário",
+    },
+    {
         id: ".e_or_u_placeholder",
         type: "attr",
         text: {placeholder: "E-mail ou Nome de usuário" },
+    },
+    {
+        id: ".email_placeholder",
+        type: "attr",
+        text: {placeholder: "E-mail" },
+    },
+    {
+        id: ".username_placeholder",
+        type: "attr",
+        text: {placeholder: "Nome de usuário" },
+    },
+    {
+        id: ".display_username_placeholder",
+        type: "attr",
+        text: {placeholder: "Nome de usuário de exibição" },
+    },
+    {
+        id: ".display_name_placeholder",
+        type: "attr",
+        text: {placeholder: "Nome de exibição" },
     },
     {
         id: ".msg_successfully_logged_text",
@@ -1050,9 +1090,24 @@ var pt_br = [
         text: "Nome de usuário",
     },
     {
+        id: ".display_username_text",
+        type: "text",
+        text: "Nome de usuário de exibição",
+    },
+    {
+        id: ".display_name_text",
+        type: "text",
+        text: "Nome de exibição",
+    },
+    {
         id: ".msg_err_u_ud_login_text",
         type: "text",
         text: "Nome de usuário ou senha inválida",
+    },
+    {
+        id: ".msg_err_u_ud_register_text",
+        type: "text",
+        text: "Por favor verifique se todos os campos estão preenchidos corretamente",
     },
     {
         id: ".no_accounts_found_text",
@@ -1233,6 +1288,11 @@ var pt_br = [
         id:".successfully_reset_text",
         type: "html",
         text: "Redefinido com sucesso"
+    },
+    {
+        id:".msg_unable_to_perform_this_action",
+        type: "html",
+        text: "Não foi possível executar esta ação"
     },
 ];
 

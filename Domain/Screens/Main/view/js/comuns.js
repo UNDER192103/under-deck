@@ -279,6 +279,21 @@ async function selectTheme(id){
 $(document).ready(async () => {
     await BACKEND.Send('Obs_wss_p', {stage: 'Status'});
     
+
+    $(document).on('click', '.view-password', function(e){
+        e.preventDefault();
+        let input = $(getParent(e.currentTarget).find('input')[0]);
+        if(input.attr('type') != 'password'){
+            $(e.currentTarget).html('<i class="bi bi-eye-fill"></i>')
+            input.attr('type', 'password');
+        }
+        else {
+            $(e.currentTarget).html('<i class="bi bi-eye-slash-fill"></i>')
+            input.attr('type', 'text');
+        }
+    });
+
+
     await $('.footable').footable();
     $( ".list_apps" ).sortable({
         start: (event) => {
@@ -311,6 +326,7 @@ $(document).ready(async () => {
         e.preventDefault();
         selectTheme($(this).val());
     });
+    
     $(document).on('change', '.s-languages', function(e){
         e.preventDefault();
         selec_lang($(this).val(), true);
@@ -733,4 +749,8 @@ async function apressentationSteps() {
             bootbox.alert(`<h5>${getNameTd('.quickguideFinish')}</h5>`);
         break;
     }
+}
+
+function getParent(elem) {
+    return $($(elem).parent()[0]);
 }

@@ -12,4 +12,9 @@ module.exports = {
     Selected_port_com: null,
     GetDataNow: null,
     USER: null,
+    USERDATAUPDATE: {
+        icon: null,
+        name: null,
+        username: null,
+    },
 };

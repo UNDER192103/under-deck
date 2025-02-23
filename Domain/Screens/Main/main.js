@@ -20,7 +20,7 @@ class MainScreen {
     width: 800,
     height: 600,
     minWidth: 800,
-    minHeight: 500,
+    minHeight: 600,
     maximized: false,
   };
 
