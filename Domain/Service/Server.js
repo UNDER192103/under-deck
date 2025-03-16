@@ -29,21 +29,7 @@ async function start_server(type, callback) {
             });
 
             app.post("/get_data_user", async (req, res) => {
-                DAO = await DAO.GetDataNow();
-                var new_list = new Array();
-                if(DAO.List_programs != null && DAO.List_programs.length > 0){
-                    new_list = DAO.List_programs;
-                }
-                let exe_background = await DAO.WEBDECK.get('exe-background');
-                let exe_color_text = await DAO.WEBDECK.get('exe-color-text');
-                let data = {
-                    css: `:root {
-                        ${exe_background ? `--backgound-exe-item: ${exe_background};` : ""}
-                        ${exe_color_text ? `--color-exe-item: ${exe_color_text};` : ""}
-                    }`,
-                    programs: new_list,
-                }
-                res.send(data);
+                res.send( await GetDataListProgramsForLocalHost() );
             })
 
             app.post("/execute_exe", async (req, res) => {
@@ -59,7 +45,7 @@ async function start_server(type, callback) {
                     } else {
                         res.send("data:image;base64,"+buffer);
                     }
-                })
+                });
             })
 
             app.all("*", (req, res, next) => {

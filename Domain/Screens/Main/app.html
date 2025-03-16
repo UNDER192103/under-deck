@@ -109,12 +109,12 @@
 
             <div class="dropdown UND_userloged" style="display: none;">
                <a class="d-flex align-items-center text-decoration-none dropdown-toggle cursor-pointer" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img src="../../src/img/profile-icon.png" alt="" width="32" height="32" class="UND_usericon rounded-circle me-2">
+                  <img src="../../src/img/profile-icon.png" alt="" width="32" height="32" class="UND_usericon MM rounded-circle me-2">
                   <strong class="UND_username u-format-max-text"></strong>
                </a>
                <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                  <li class="UND_profileView cursor-pointer"><a class="dropdown-item profile_text"></a></li>
-                  <li class="UND_profileView cursor-pointer"><a class="dropdown-item settings_text"></a></li>
+                  <li class="UND_profileView cursor-pointer notification-box"><a class="dropdown-item profile_text"></a></li>
+                  <li class="UND_profileConfig cursor-pointer notification-box"><a class="dropdown-item settings_text"></a></li>
                   <li class="cursor-pointer"><hr class="dropdown-divider"></li>
                   <li class="logout_account cursor-pointer"><a class="dropdown-item text-danger"><strong class="acclogout_text"></strong></a></li>
                </ul>
@@ -334,31 +334,38 @@
                      <div class="card bg-card-srt">
                         <div class="card-header text-center shadow-text d-contents">
                            <h5 class="mt-2 web_stream_deck_text"></h5>
-                           <a class="btn btn-success btn-sm mx-2 start_text" type="button" id="button-start-local-server"></a>
+                           <div class="text-center shadow-text d-contents">
+                              <label class="w100 webdeck_local_version_text"></label>
+                           </div>
                         </div>
 
                         <div class="card-body">
                            <div class="forms">
-                              <div class="feature mt-0 col">
-                                 <div class="alert alert-por-local-server-modal alert-danger hidden" role="alert"></div>
-                              </div>
 
                               <div class="inputs">
 
-                                 <div class="m-0 mb-3">
+                                 <div class="feature mt-1 mb-2 col">
+                                    <div class="alert alert-por-local-server-modal alert-danger hidden" role="alert"></div>
+                                 </div>
+
+                                 <div class="feature mb-2 col">
+                                    <a class="btn w100 btn-success btn-sm m-0 start_text" type="button" id="button-start-local-server"></a>
+                                 </div>
+
+                                 <div class="m-0 mb-2">
                                     <label for="port-local-server" class="form-check-label door_text_expc_1"></label>
                                     <div class="input-group">
-                                       <input type="number" id="port-local-server" class="form-control placeholder-port" placeholder="" aria-label="" aria-describedby="button-addon2">
+                                       <input type="number" id="port-local-server" class="form-control input_select_all placeholder-port" placeholder="" aria-label="" aria-describedby="button-addon2">
                                        <button class="btn btn-primary save_text" type="button" id="btn-port-local-server"></button>
                                     </div>
                                  </div>
 
-                                 <div class="m-0 mb-3">
+                                 <div class="m-0 mb-2">
                                     <label for="local-server-adress-acess-url" class="form-check-label url_text_expc_1"></label>
                                     <div class="input-group">
-                                       <input type="text" id="local-server-adress-acess-url" disabled class="form-control" placeholder="" aria-label="" aria-describedby="button-addon2">
+                                       <input type="text" id="local-server-adress-acess-url" class="form-control input_select_all desable_texting_input" placeholder="" aria-label="" aria-describedby="button-addon2">
                                        <button onclick="openIpUrlWeb()" class="btn btn-primary open_text" type="button" ></button>
-                                       <button onclick="getQrCodeIpUrlWeb()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-qr-code" type="button" >QR Code</button>
+                                       <button onclick="getQrCodeIpUrlWeb()" class="btn btn-primary" type="button" >QR Code</button>
                                     </div>
                                  </div>
 
@@ -366,14 +373,14 @@
                                     <label class="form-check-label customization_text"></label>
                                  </div>
 
-                                 <div class="m-0 mb-3">
+                                 <div class="m-0 mb-2">
                                     <label class="form-check-label background_color_text"></label>
                                     <div class="input-group">
                                        <input type="color" id="webdeck_background_color" class="form-control">
                                     </div>
                                  </div>
 
-                                 <div class="m-0 mb-3">
+                                 <div class="m-0 mb-2">
                                     <label class="form-check-label color_text_text"></label>
                                     <div class="input-group">
                                        <input type="color" id="webdeck_color_text" class="form-control">
@@ -382,6 +389,31 @@
 
                                  <div class="m-0 text-center">
                                     <button id="reset_to_default_webdeck_colors" class="btn btn-primary btn-sm reset_to_default_text" type="button" ></button>
+                                 </div>
+
+                                 <hr>
+                                 <div class="text-center shadow-text d-contents">
+                                    <label class="m-0 w100 webdeck_remote_version_text"></label>
+                                 </div>
+
+                                 <div class="m-0 mb-2">
+                                    <div class="input-group">
+                                       <input type="text" value="N/A" class="form-control input_select_all desable_texting_input underdeck_url_remote_version" placeholder="" aria-label="" aria-describedby="button-addon2">
+                                       <button id="openUNDRemotVersion" class="btn btn-primary btn-sm open_text" type="button" ></button>
+                                       <button id="openQRCODEUNDRemotVersion" class="btn btn-primary" type="button" >QR Code</button>
+                                    </div>
+                                 </div>
+
+                                 <div class="m-0 text-center mb-2">
+                                    <label class="form-check-label w100 connection_invitation_text"></label>
+                                    <div class="input-group">
+                                       <input type="text" value="N/A" class="form-control input_select_all desable_texting_input underdeck_url_invite_remote_version" placeholder="" aria-label="" aria-describedby="button-addon2">
+                                       <button id="openInvitationUNDRemotVersion" class="btn btn-primary btn-sm open_text" type="button" ></button>
+                                       <button id="openInvitationQRCODEUNDRemotVersion" class="btn btn-primary" type="button" >QR Code</button>
+                                    </div>
+                                 </div>
+                                 <div class="m-0 text-center">
+                                    <button id="revoke_all_permissions_UNDRemoteVersion" class="btn btn-primary btn-sm revoke_all_permissions_text" type="button" ></button>
                                  </div>
 
                               </div>
@@ -1006,9 +1038,13 @@
                   <h1 class="modal-title fs-5" id="modal-qr-code">QR Code</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                </div>
+
                <div class="modal-body">
-                  <img src="" id="url-qr-code-modal">
+                  <img src="" class="m-auto d-flex url-qr-code-modal">
+                  <hr>
+                  <input type="text" value="N/A" class="form-control input_select_all desable_texting_input url_qr_code_modal_i" placeholder="" aria-label="" aria-describedby="button-addon2">
                </div>
+
                <div class="modal-footer">
                   <button id="close_modal_qr_code" type="button" class="btn btn-danger close_text" data-bs-dismiss="modal"></button>
                </div>
@@ -1187,17 +1223,17 @@
 
                   <div class="mb-3">
                      <label for="srp-password" class="form-label password_text"></label>
-                     <div class="user-box">
-                        <input required type="password" class="form-control placeholder-password-text" id="srp-password">
-                        <span class="password-toggle-icon"><i class="bi bi-eye-fill"></i></span>
+                     <div class="input-group">
+                        <a class="btn btn-light border border-secondary view-password" type="button"><i class="bi bi-eye-fill"></i></a>
+                        <input required type="password" class="form-control placeholder-password-text" id="srp-password" placeholder="************">
                      </div>
                   </div>
 
                   <div class="mb-3">
                      <label for="srp-cpassword" class="form-label confirm_password_text"></label>
-                     <div class="user-box">
-                        <input required type="password" class="form-control placeholder-password-text" id="srp-cpassword">
-                        <span class="password-toggle-icon"><i class="bi bi-eye-fill"></i></span>
+                     <div class="input-group">
+                        <a class="btn btn-light border border-secondary view-password" type="button"><i class="bi bi-eye-fill"></i></a>
+                        <input required type="password" class="form-control placeholder-password-text" id="srp-cpassword" placeholder="************">
                      </div>
                   </div>
 
@@ -1302,6 +1338,22 @@
                                     </div>
                                  </div>
 
+                                 <div class="mt-1 d-ConfirmEmailAddress" style="display: none;">
+                                    <div class="d-flex">
+                                       <div class="input-group">
+                                          <div class="m-auto ms-0 d-flex">
+                                             <div class="ms-2 d-grid">
+                                                <h5 class="form-check-label m-0"></h5>
+                                             </div>
+                                          </div>
+                                       </div>
+   
+                                       <div class="input-group">
+                                          <button type="button" class="btn btn-primary confirm_email_text m-auto btn_ConfirmEmail"></button>
+                                       </div>
+                                    </div>
+                                 </div>
+
                                  <div class="d-flex mt-3 mb-3">
                                     <div class="input-group">
                                        <div class="m-auto ms-0 d-flex">
@@ -1367,6 +1419,7 @@
   <script src="../../src/footable/js/footable.all.min.js"></script>
   <script src="../../src/jquery/modalLoading.js"></script>
   <script src="./view/js/comuns.js"></script>
+  <script src="./view/js/WebSocket.js"></script>
   <script src="./view/js/animations.js"></script>
   <script src="../../src/js/selector_language.js"></script>
   <script src="./back_functions.js"></script>

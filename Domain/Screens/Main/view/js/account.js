@@ -2,8 +2,13 @@
 $(document).ready(async () => {
     loadUserData();
 
+    $(document).on('click', '.UND_profileConfig', (r) => {
+        changeUserInfoData();
+        $("#modal_UND_profileView").modal('show');
+    });
+    
     $(document).on('click', '.UND_profileView', (r) => {
-        resetUserProfileEdit();
+        changeUserInfoData();
         $("#modal_UND_profileView").modal('show');
     });
 
@@ -19,6 +24,43 @@ $(document).ready(async () => {
     });
 
     $("#changeUserAvatar").click(()=>{ $("#uInput-changeUserAvatar").click(); });
+
+    $(document).on('click', '.btn_ConfirmEmail', (r) => {
+        $("body").modalLoading('show', false);
+        try {
+            let formData = new FormData();
+
+            formData.append('_lang', _lang);
+            formData.append('method', "Confirm-Email-Address");
+            formData.append('client_id', DAO.USER.client_id);
+            formData.append('token', DAO.USER.token);
+
+            API.App.post('', formData)
+            .then(async ( res ) => {
+                let resData = res.data;
+                setTimeout(async ()=>{
+                    if(res.data.success == true && resData.result == true && resData.account){
+                        await DAO.DB.set('user', resData.account);
+                        DAO.USER = resData.account;
+                        changeUserInfoData();
+                        bootbox.alert(resData.msg);
+                    }
+                    else{
+                        toaster.danger(resData.msg);
+                        bootbox.alert(resData.msg);
+                    }
+                    $("body").modalLoading('hide');
+                }, 250);
+            })
+            .catch( error => {
+                $("body").modalLoading('hide');
+                bootbox.alert(getNameTd('.msg_unable_to_perform_this_action'));
+            });
+        } catch (error) {
+            $("body").modalLoading('hide');
+            bootbox.alert(getNameTd('.msg_unable_to_perform_this_action'));
+        }
+    });
 
     $(document).on('click', '.logout_account', (r) => {
         if(DAO.USER != null){
@@ -38,10 +80,7 @@ $(document).ready(async () => {
                     if(res){
                         DAO.USER = null;
                         await DAO.DB.set('user', DAO.USER);
-                        $(".UND_username").html("");
-                        $(".UND_usericon").attr('src', "");
-                        $(".UND_usernotloged").show();
-                        $(".UND_userloged").hide();
+                        loadUserData();
                     }
                 }
             });
@@ -50,7 +89,7 @@ $(document).ready(async () => {
 
     $(document).on('click', '.btn_remove_account_avatar', (r) => {
         if(DAO.USERDATAUPDATE.icon != null){
-            resetUserProfileEdit();
+            changeUserInfoData();
         }
         else if(DAO.USER != null){
             bootbox.confirm({
@@ -118,7 +157,7 @@ $(document).ready(async () => {
         await checkUserProfileEnableEditButton();
     });
 
-    $('#modal_UND_profileView').on('hidden.bs.modal', resetUserProfileEdit);
+    $('#modal_UND_profileView').on('hidden.bs.modal', changeUserInfoData);
 
     $(document).on('click', '.btn_UpdateUserData', (r) => {
         $("body").modalLoading('show', false);
@@ -141,7 +180,7 @@ $(document).ready(async () => {
                     if(res.data.success == true && resData.result && resData.result.account){
                         await DAO.DB.set('user', resData.result.account);
                         DAO.USER = resData.result.account;
-                        resetUserProfileEdit();
+                        changeUserInfoData();
                         loadUserData();
                         toaster.success(resData.msg);
                     }
@@ -172,18 +211,58 @@ $(document).ready(async () => {
     setInterval(loadUserData, 1800000);
 });
 
-const resetUserProfileEdit = async () => {
+
+const checkUserProfileEnableEditButton = async () => {
+    if(DAO.USERDATAUPDATE && DAO.USERDATAUPDATE.icon != null || DAO.USERDATAUPDATE && DAO.USERDATAUPDATE.name != null){
+        $(".btn_UpdateUserData").show('slow');
+    }
+    else{
+        $(".btn_UpdateUserData").hide('slow');
+    }
+}
+
+const checkUserNotifys = async () => {
+    if(DAO.USER && DAO.USER.email_verified == false){
+        $(".UND_usericon.MM").addClass('pulse-orange');
+        $(".ValUND_email").addClass('pulse-orange');
+        $(".UND_profileView a").addClass('text-warning');
+        $(".d-ConfirmEmailAddress").show();
+    }
+    else{
+        $(".UND_usericon.MM").removeClass('pulse-orange');
+        $(".ValUND_email").removeClass('pulse-orange');
+        $(".UND_profileView a").removeClass('text-warning');
+        $(".d-ConfirmEmailAddress").hide('slow');
+    }
+    
+}
+
+const changeUserInfoData = async () => {
     DAO.USERDATAUPDATE.icon = null;
     DAO.USERDATAUPDATE.name = null;
     DAO.USERDATAUPDATE.username = null;
 
-    $("#uInput-changeUserAvatar").val('');
-    $(".ValUND_username").val(DAO.USER.username);
-    $(".ValUND_email").val(DAO.USER.email);
-    $(".UND_username").html(DAO.USER.account);
-    $(".UND_datecreated").html(new Date(DAO.USER.created_date).toLocaleString());
-    $(".ValUND_DisplayUsername").val(DAO.USER.account);
-    if(DAO.USER.icon != null && DAO.USER.icon.length > 6){
+    if(DAO.USER == null){
+        await DAO.DB.set('user', DAO.USER);
+        $(".UND_username").html("");
+        $(".UND_datecreated").html("");
+        $(".ValUND_username").val("");
+        $(".ValUND_email").val("");
+        $(".ValUND_DisplayUsername").val("");
+        $(".UND_usericon").attr('src', "");
+        $(".UND_usernotloged").show();
+        $(".UND_userloged").hide();
+    }
+    else{
+        $("#uInput-changeUserAvatar").val('');
+        $(".ValUND_username").val(DAO.USER.username);
+        $(".ValUND_email").val(DAO.USER.email);
+        $(".UND_username").html(DAO.USER.account);
+        $(".UND_datecreated").html(new Date(DAO.USER.created_date).toLocaleString());
+        $(".ValUND_DisplayUsername").val(DAO.USER.account);
+    }
+
+    if(DAO.USER && DAO.USER.icon != null && DAO.USER.icon.length > 6){
         $(".UND_usericonPrevEdit").attr('src', DAO.USER.icon);
         $(".UND_usericon").attr('src', DAO.USER.icon);
     }
@@ -193,15 +272,9 @@ const resetUserProfileEdit = async () => {
     }
 
     await checkUserProfileEnableEditButton();
-}
-
-const checkUserProfileEnableEditButton = async () => {
-    if(DAO.USERDATAUPDATE.icon != null || DAO.USERDATAUPDATE.name != null){
-        $(".btn_UpdateUserData").show('slow');
-    }
-    else{
-        $(".btn_UpdateUserData").hide('slow');
-    }
+    await checkUserNotifys();
+    await UpdatePCACC();
+    await changeUrlRemoteUnderDeck();
 }
 
 const loadUserData = async () => {
@@ -209,7 +282,7 @@ const loadUserData = async () => {
         $(".UND_usernotloged").hide();
         $(".UND_userloged").show();
         
-        await resetUserProfileEdit();
+        await changeUserInfoData();
 
         API.App.post('', {
             _lang: _lang,
@@ -220,42 +293,22 @@ const loadUserData = async () => {
         .then(async ( res ) => {
             if(res.data.result != true){
                 DAO.USER = null;
-                await DAO.DB.set('user', DAO.USER);
-                $(".UND_username").html("");
-                $(".UND_datecreated").html("");
-                $(".ValUND_username").val("");
-                $(".ValUND_email").val("");
-                $(".ValUND_DisplayUsername").val("");
-                $(".UND_usericon").attr('src', "");
-                $(".UND_usernotloged").show();
-                $(".UND_userloged").hide();
+                await changeUserInfoData();
             }
             else{
+
                 if(JSON.stringify(DAO.USER) != JSON.stringify(res.data.account)){
                     await DAO.DB.set('user', res.data.account);
                     DAO.USER = res.data.account;
-                    $(".ValUND_username").val(DAO.USER.username);
-                    $(".ValUND_email").val(DAO.USER.email);
-                    $(".UND_username").html(DAO.USER.account);
-                    $(".UND_datecreated").html(new Date(DAO.USER.created_date).toLocaleString());
-                    $(".ValUND_DisplayUsername").val(DAO.USER.account);
-                    if(DAO.USER.icon != null && DAO.USER.icon.length > 6){
-                        $(".UND_usericon").attr('src', DAO.USER.icon);
-                    }
-                    else{
-                        $(".UND_usericon").attr('src', '../../src/img/profile-icon.png');
-                    }
+                    await changeUserInfoData();
                 }
+
                 setTimeout(loadUserData, 1800000);
             }
-        })
-        .catch( error => {
-
         });
     }
     else{
-        $(".UND_usernotloged").show();
-        $(".UND_userloged").hide();
+        await changeUserInfoData();
     }
 }
 

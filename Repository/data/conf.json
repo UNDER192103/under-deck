@@ -2,6 +2,11 @@
     "API" : {
         "URL"      : "http://underdeck.serveftp.com:3000",
         "ROUTE"    : "/?ng=api.underdeck",
-        "TOKEN"      : "rlk+0h8657gnbgg1e+xou*yrzz563lu4s3sjz5ng3-wrsowisk7c-5k376l0n.qr-dqyy-6y0qs6r*n546tshe30xmrazvk4v*4n"
+        "TOKEN"    : "rlk+0h8657gnbgg1e+xou*yrzz563lu4s3sjz5ng3-wrsowisk7c-5k376l0n.qr-dqyy-6y0qs6r*n546tshe30xmrazvk4v*4n"
+    },
+    "WEBSOCKET" : {
+        "URI"      : "ws://underdeck.serveftp.com:4001",
+        "ROUTE"    : "/?token=",
+        "TOKEN"    : "srgy34bkgon-zl5r.61*-i0twy3l5r-7y6s58605s*kvsjn3zyk+0r4qhr3eqg5x4nwzo76suve43cruqm-sdax*nl0+66kngz7h"
     }
 }

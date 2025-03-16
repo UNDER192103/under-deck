@@ -137,7 +137,7 @@ var pt_br = [
     {
         id: ".url_text_expc_1",
         type: "text",
-        text: "LINK:"
+        text: "Url:"
     },
     {
         id: ".door_text_expc_1",
@@ -292,7 +292,7 @@ var pt_br = [
     {
         id: ".this_is_web_page_already_registered",
         type: "text",
-        text: "Já existe um site registrado com este URL!"
+        text: "Já existe um site registrado com este Url!"
     },
     {
         id: ".this_is_audio_already_registered",
@@ -452,7 +452,12 @@ var pt_br = [
     {
         id:".web_page_text",
         type: "text",
-        text: "URL"
+        text: "Url"
+    },
+    {
+        id:".submit_text",
+        type: "text",
+        text: "Enviar"
     },
     {
         id:".cmd_text",
@@ -512,7 +517,7 @@ var pt_br = [
     {
         id:".requere_url_add_app",
         type: "text",
-        text: "Por favor informe uma URL."
+        text: "Por favor informe uma Url."
     },
     {
         id:".requere_cmd_add_app",
@@ -542,7 +547,7 @@ var pt_br = [
     {
         id: ".apps_name_description",
         type: "html",
-        text: `Em <a class='a-style' onClick='selectMenu("app-main")'><i class="bi bi-google-play"></i> Aplicativos</a> é possível cadastrar executáveis ​​de aplicativos como Discord, Steam e outros aplicativos, bem como áudios para serem reproduzidos ou até mesmo abrir uma URL em uma nova aba do seu navegador ou utilizar um comando para ser executado no CMD do Windows ( Prompt de comando).`,
+        text: `Em <a class='a-style' onClick='selectMenu("app-main")'><i class="bi bi-google-play"></i> Aplicativos</a> é possível cadastrar executáveis ​​de aplicativos como Discord, Steam e outros aplicativos, bem como áudios para serem reproduzidos ou até mesmo abrir uma Url em uma nova aba do seu navegador ou utilizar um comando para ser executado no CMD do Windows ( Prompt de comando).`,
     },
     {
         id: ".keys_macro_text_description",
@@ -552,7 +557,7 @@ var pt_br = [
     {
         id: ".settings_text_description",
         type: "html",
-        text: `Em <a class='a-style' onClick='selectMenu("config")'><i class="bi bi-gear-wide-connected"></i></span> Configurações</a> você pode ativar ou desativar as teclas de atalho, bem como iniciar o WEB Under Deck, o WEB Under Deck permite executar Aplicativos cadastrados em <a class='a-style' onClick = 'selectMenu("app-main")'><i class="bi bi-google-play"></i> Aplicativos</a> apenas acessando a URL, você também pode acessá-lo do seu celular usando a URL ou apenas digitalizando o QR Code, NOTA: No momento esta função só está disponível para acesso local e não suporta acesso remoto ou de outra rede de Internet/Wifi que não seja a mesma utilizada em seu Computador.`,
+        text: `Em <a class='a-style' onClick='selectMenu("config")'><i class="bi bi-gear-wide-connected"></i></span> Configurações</a> você pode ativar ou desativar as teclas de atalho, bem como iniciar o WEB Under Deck, o WEB Under Deck permite executar Aplicativos cadastrados em <a class='a-style' onClick = 'selectMenu("app-main")'><i class="bi bi-google-play"></i> Aplicativos</a> apenas acessando a Url, você também pode acessá-lo do seu celular usando a Url ou apenas digitalizando o QR Code, NOTA: No momento esta função só está disponível para acesso local e não suporta acesso remoto ou de outra rede de Internet/Wifi que não seja a mesma utilizada em seu Computador.`,
     },
     {
         id: ".selec_type_code_edit_or_add",
@@ -672,7 +677,7 @@ var pt_br = [
     {
         id: ".trad_ty_web_page",
         type: "text",
-        text: "URL",
+        text: "Url",
     },
     {
         id: ".trad_ty_cmd",
@@ -1187,7 +1192,7 @@ var pt_br = [
     {
         id: ".quickguide2",
         type: "text",
-        text: "Você pode adicionar um tipo de aplicativo a ser controlado pelo aplicativo a partir das opções: Áudio, Aplicativo (.EXE), URL de uma página WEB, Funções do OBS Studio e Comandos CMD do Windows.",
+        text: "Você pode adicionar um tipo de aplicativo a ser controlado pelo aplicativo a partir das opções: Áudio, Aplicativo (.EXE), Url de uma página WEB, Funções do OBS Studio e Comandos CMD do Windows.",
     },
     {
         id: ".quickguide3",
@@ -1212,7 +1217,7 @@ var pt_br = [
     {
         id: ".quickguide7",
         type: "text",
-        text: `O Web Under Deck é uma forma de você rodar seus aplicativos cadastrados no <a class="a-style apps_name_icon"><i class="bi bi-google-play"></i> Aplicativos</a> ao acessar uma Página WEB através de um Celular ou Tablet ou mesmo de outro Computador, basta configurar uma <a class="a-style">PORT</a> que não está sendo utilizada e acessá-la usando <a class="a-style">LINK</a> ou usando o <um class="a-style">QR code</a>.`,
+        text: `O Web Under Deck é uma forma de você rodar seus aplicativos cadastrados no <a class="a-style apps_name_icon"><i class="bi bi-google-play"></i> Aplicativos</a> ao acessar uma Página WEB através de um Celular ou Tablet ou mesmo de outro Computador, basta configurar uma <a class="a-style">PORT</a> que não está sendo utilizada e acessá-la usando <a class="a-style">Url</a> ou usando o <um class="a-style">QR code</a>.`,
     },
     {
         id: ".quickguide8",
@@ -1293,6 +1298,91 @@ var pt_br = [
         id:".msg_unable_to_perform_this_action",
         type: "html",
         text: "Não foi possível executar esta ação"
+    },
+    {
+        id:".confirm_email_text",
+        type: "html",
+        text: "Confirmar endereço de E-mail"
+    },
+    {
+        id:".webdeck_remote_version_text",
+        type: "html",
+        text: "Versão Remota"
+    },
+    {
+        id:".webdeck_local_version_text",
+        type: "html",
+        text: "Versão Local"
+    },
+    {
+        id:".this_feature_is_only_available_when_logged_into_an_account_text",
+        type: "html",
+        text: "Este recurso só está disponível apos estar logado a uma conta"
+    },
+    {
+        id:".connection_invitation_text",
+        type: "html",
+        text: "Convite de conexão"
+    },
+    {
+        id:".invite_text",
+        type: "html",
+        text: "Convidar"
+    },
+    {
+        id:".revoke_all_permissions_text",
+        type: "html",
+        text: "Revogar todas as permissões"
+    },
+    {
+        id:".access_permissions_for_all_users_have_been_revoked",
+        type: "html",
+        text: "As permissões de acesso para todos os usuários foram revogadas"
+    },
+    {
+        id:".To_accept_text",
+        type: "html",
+        text: "Aceitar"
+    },
+    {
+        id:".To_deny_text",
+        type: "html",
+        text: "Negar"
+    },
+    {
+        id:".confirm_new_acess_remote_1_text",
+        type: "html",
+        text: "O usuário <a class='a-style'>{{user}}</a> está solicitando acesso remoto ao Web Under Deck!"
+    },
+    {
+        id:".confirm_new_acess_remote_2_text",
+        type: "html",
+        text: "Ao conceder a permissão de acesso remoto, você permite que outra pessoa controle seu computador à distância. Certifique-se de que confia na pessoa ou empresa que está solicitando o acesso, pois ela poderá visualizar e manipular seu dispositivo."
+    },
+    {
+        id:".confirm_new_acess_remote_3_text",
+        type: "html",
+        text: `Se você deseja revogar a permissão, basta acessar a guia Web Under Deck em <a class='a-style'><i class="bi bi-gear-wide-connected"></i> Configurações</a> e revogar todas as permissões.`
+    },
+    {
+        id:".Attention_text",
+        type: "html",
+        text: `Atenção`
+    },
+    {
+        id:".Notice_text",
+        type: "html",
+        text: `Aviso`
+    },
+    {
+        id:".You_successfully_accept_the_request_text",
+        type: "html",
+        text: `Você aceitou a solicitação com sucesso`
+    },
+    {
+        id:".You_successfully_declined_the_request_text",
+        type: "html",
+        text: `Você recusou a solicitação com sucesso`
     },
 ];
 

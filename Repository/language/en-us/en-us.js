@@ -137,7 +137,7 @@ var en_us = [
     {
         id: ".url_text_expc_1",
         type: "text",
-        text: "URL:"
+        text: "Url:"
     },
     {
         id: ".door_text_expc_1",
@@ -167,7 +167,12 @@ var en_us = [
     {
         id: ".this_is_web_page_already_registered",
         type: "text",
-        text: "There is already a website registered with this URL!"
+        text: "There is already a website registered with this Url!"
+    },
+    {
+        id:".submit_text",
+        type: "text",
+        text: "Send"
     },
     {
         id: ".this_is_audio_already_registered",
@@ -447,7 +452,7 @@ var en_us = [
     {
         id:".web_page_text",
         type: "text",
-        text: "Page URL"
+        text: "Page Url"
     },
     {
         id:".cmd_text",
@@ -502,7 +507,7 @@ var en_us = [
     {
         id:".requere_url_add_app",
         type: "text",
-        text: "Please provide a URL."
+        text: "Please provide a Url."
     },
     {
         id:".requere_cmd_add_app",
@@ -532,12 +537,12 @@ var en_us = [
     {
         id: ".apps_name_description",
         type: "html",
-        text: `In <a class='a-style' onClick='selectMenu("app-main")'><i class="bi bi-google-play"></i> Apps</a> it is possible to register executables of applications such as Discord, Steam and other applications, as well as audios to be played or even open a URL in a new tab on your browser or use a command to be executed in the Windows CMD (Command Prompt).`,
+        text: `In <a class='a-style' onClick='selectMenu("app-main")'><i class="bi bi-google-play"></i> Apps</a> it is possible to register executables of applications such as Discord, Steam and other applications, as well as audios to be played or even open a Url in a new tab on your browser or use a command to be executed in the Windows CMD (Command Prompt).`,
     },
     {
         id: ".settings_text_description",
         type: "html",
-        text: `In <a class='a-style' onClick='selectMenu("config")'><i class="bi bi-gear-wide-connected"></i></span> Settings</a> you can activate or deactivate shortcut keys, as well as start WEB Under Deck, WEB Under Deck allows you to run registered Applications in <a class='a-style' onClick = 'selectMenu("app-main")'><i class="bi bi-google-play"></i> Apps</a> just by accessing the URL, you can also access it from your mobile phone using the URL or just by scanning the QR Code, NOTE: At the moment this function is only available for local access and does not support remote access or access from another Internet/Wifi network other than the same one used on your Computer.`,
+        text: `In <a class='a-style' onClick='selectMenu("config")'><i class="bi bi-gear-wide-connected"></i></span> Settings</a> you can activate or deactivate shortcut keys, as well as start WEB Under Deck, WEB Under Deck allows you to run registered Applications in <a class='a-style' onClick = 'selectMenu("app-main")'><i class="bi bi-google-play"></i> Apps</a> just by accessing the Url, you can also access it from your mobile phone using the Url or just by scanning the QR Code, NOTE: At the moment this function is only available for local access and does not support remote access or access from another Internet/Wifi network other than the same one used on your Computer.`,
     },
     {
         id: ".keys_macro_text_description",
@@ -667,7 +672,7 @@ var en_us = [
     {
         id: ".trad_ty_web_page",
         type: "text",
-        text: "URL",
+        text: "Url",
     },
     {
         id: ".trad_ty_cmd",
@@ -1187,7 +1192,7 @@ var en_us = [
     {
         id: ".quickguide2",
         type: "text",
-        text: "You can add an application type to be controlled by the application from the options: Audio, Application (.EXE), WEB page URL, OBS Studio Functions and Windows CMD Commands.",
+        text: "You can add an application type to be controlled by the application from the options: Audio, Application (.EXE), WEB page Url, OBS Studio Functions and Windows CMD Commands.",
     },
     {
         id: ".quickguide3",
@@ -1293,6 +1298,91 @@ var en_us = [
         id:".msg_unable_to_perform_this_action",
         type: "html",
         text: "Unable to perform this action"
+    },
+    {
+        id:".confirm_email_text",
+        type: "html",
+        text: "Confirm E-mail address"
+    },
+    {
+        id:".webdeck_remote_version_text",
+        type: "html",
+        text: "Remote Version"
+    },
+    {
+        id:".webdeck_local_version_text",
+        type: "html",
+        text: "Local Version"
+    },
+    {
+        id:".this_feature_is_only_available_when_logged_into_an_account_text",
+        type: "html",
+        text: "This feature is only available after you are logged into an account"
+    },
+    {
+        id:".connection_invitation_text",
+        type: "html",
+        text: "Connection invitation"
+    },
+    {
+        id:".invite_text",
+        type: "html",
+        text: "Invite"
+    },
+    {
+        id:".revoke_all_permissions_text",
+        type: "html",
+        text: "Revoke all permissions"
+    },
+    {
+        id:".access_permissions_for_all_users_have_been_revoked",
+        type: "html",
+        text: "Access permissions for all users have been revoked"
+    },
+    {
+        id:".To_accept_text",
+        type: "html",
+        text: "To accept"
+    },
+    {
+        id:".To_deny_text",
+        type: "html",
+        text: "To deny"
+    },
+    {
+        id:".confirm_new_acess_remote_1_text",
+        type: "html",
+        text: "User <a class='a-style'>{{user}}</a> is requesting remote access to Web Under Deck!"
+    },
+    {
+        id:".confirm_new_acess_remote_2_text",
+        type: "html",
+        text: "By granting remote access permission, you allow someone else to control your computer remotely. Make sure you trust the person or company requesting access, as they will be able to view and manipulate your device."
+    },
+    {
+        id:".confirm_new_acess_remote_3_text",
+        type: "html",
+        text: `If you wish to revoke the permission, simply go to the Web Under Deck tab and <a class='a-style'><i class="bi bi-gear-wide-connected"></i> Settings</a> and revoke all permissions.`
+    },
+    {
+        id:".Attention_text",
+        type: "html",
+        text: `Attention`
+    },
+    {
+        id:".Notice_text",
+        type: "html",
+        text: `Notice`
+    },
+    {
+        id:".You_successfully_accept_the_request_text",
+        type: "html",
+        text: `You have successfully accepted the request`
+    },
+    {
+        id:".You_successfully_declined_the_request_text",
+        type: "html",
+        text: `You successfully declined the request`
     },
 ]
 

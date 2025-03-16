@@ -78,65 +78,69 @@ const get_icon_by_exe = async (exe, dir) => {
 };
 
 const exec_program = async (data, type = null) =>{
-    if(data != null){
-        if(type == null){
-            if(data.type_exec != null)
-                type = data.type_exec;
-            else
-                type = "exe";
-        }
-
-        let name = data.name;
-        if(data.nameCustom != null)
-            name = data.nameCustom;
-
-        if(type == "exe"){
-            console.log(`App: ${name} Iniciado!`)
-            exec(`"${data.path}"`, () => {});
-        }
-        else if(type == "web_page"){
-            console.log(`Pagina web aberta, Nome: ${name} Iniciado!`)
-            exec(`start "" "${data.path}"`, () => {});
-        }
-        else if(type == "cmd"){
-            console.log(`Comando executado, Nome: ${name} Iniciado!`)
-            exec(`${data.path}`, () => {});
-        }
-        else if(type == 'audio'){
-            var audio_token = await token();
-            $("#audios_instaces").append(`
-                <audio id="${audio_token}-player" class="hidden" controls='false'>
-                    <source id="${audio_token}-src" src="${data.path}">
-                </audio>
-            `);
-            try {
-                var instace_audio = $(`#${audio_token}-player`)[0];
-                await instace_audio.load();
-                $(`#${audio_token}-player`).on('ended', function() {
-                    $(`#${audio_token}-player`).remove();
-                });
-                instace_audio.play();
-            } catch (error) {
-                $(`#${audio_token}-player`).remove();
+    try {
+        if(data != null){
+            if(type == null){
+                if(data.type_exec != null)
+                    type = data.type_exec;
+                else
+                    type = "exe";
             }
-        }
-        else if(type == "obs_wss"){
-            if(data.obsOption == 'scene')
-                await BACKEND.Send('Obs_wss_p', { stage: 'select_scene', sceneName: data.scene.sceneName, id: data.scene.sceneUuid});
-            else if(data.obsOption == "audioinput_mute" && data.audioInput != null){
-                if(DAO.OBS.get(`input_muted-${data.audioInput.inputUuid}`) == true){
-                    await DAO.OBS.set(`input_muted-${data.audioInput.inputUuid}`, null);
-                    await BACKEND.Send('Obs_wss_p', { stage: 'MuteInputAudio', notify: false, inputMuted: false, inputName: data.audioInput.inputName, inputUuid: data.audioInput.inputUuid});
+    
+            let name = data.name;
+            if(data.nameCustom != null)
+                name = data.nameCustom;
+    
+            if(type == "exe"){
+                console.log(`App: ${name} Iniciado!`)
+                exec(`"${data.path}"`, () => {});
+            }
+            else if(type == "web_page"){
+                console.log(`Pagina web aberta, Nome: ${name} Iniciado!`)
+                exec(`start "" "${data.path}"`, () => {});
+            }
+            else if(type == "cmd"){
+                console.log(`Comando executado, Nome: ${name} Iniciado!`)
+                exec(`${data.path}`, () => {});
+            }
+            else if(type == 'audio'){
+                var audio_token = await token();
+                $("#audios_instaces").append(`
+                    <audio id="${audio_token}-player" class="hidden" controls='false'>
+                        <source id="${audio_token}-src" src="${data.path}">
+                    </audio>
+                `);
+                try {
+                    var instace_audio = $(`#${audio_token}-player`)[0];
+                    await instace_audio.load();
+                    $(`#${audio_token}-player`).on('ended', function() {
+                        $(`#${audio_token}-player`).remove();
+                    });
+                    instace_audio.play();
+                } catch (error) {
+                    $(`#${audio_token}-player`).remove();
+                }
+            }
+            else if(type == "obs_wss"){
+                if(data.obsOption == 'scene')
+                    await BACKEND.Send('Obs_wss_p', { stage: 'select_scene', sceneName: data.scene.sceneName, id: data.scene.sceneUuid});
+                else if(data.obsOption == "audioinput_mute" && data.audioInput != null){
+                    if(DAO.OBS.get(`input_muted-${data.audioInput.inputUuid}`) == true){
+                        await DAO.OBS.set(`input_muted-${data.audioInput.inputUuid}`, null);
+                        await BACKEND.Send('Obs_wss_p', { stage: 'MuteInputAudio', notify: false, inputMuted: false, inputName: data.audioInput.inputName, inputUuid: data.audioInput.inputUuid});
+                    }
+                    else{
+                        await DAO.OBS.set(`input_muted-${data.audioInput.inputUuid}`, true);
+                        await BACKEND.Send('Obs_wss_p', { stage: 'MuteInputAudio', notify: false, inputMuted: true, inputName: data.audioInput.inputName, inputUuid: data.audioInput.inputUuid});
+                    }
                 }
                 else{
-                    await DAO.OBS.set(`input_muted-${data.audioInput.inputUuid}`, true);
-                    await BACKEND.Send('Obs_wss_p', { stage: 'MuteInputAudio', notify: false, inputMuted: true, inputName: data.audioInput.inputName, inputUuid: data.audioInput.inputUuid});
+                    BACKEND.Send('Obs_wss_p', {stage: data.obsOption, notify: false});
                 }
             }
-            else{
-                BACKEND.Send('Obs_wss_p', {stage: data.obsOption, notify: false});
-            }
         }
+    } catch (error) {
+        
     }
 }
 

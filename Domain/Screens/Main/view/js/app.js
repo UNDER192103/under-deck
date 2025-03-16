@@ -90,16 +90,16 @@ const add_im_list_webpages = async (item) => {
 }
 
 const getQrCodeIpUrlWeb = async () => {
-    QRCode.toDataURL(`http://${ip.address("public", "ipv4")}:${DAO.DB.get('server_port')}`, function (err, url) {
+    let uri = `http://${ip.address("public", "ipv4")}:${DAO.DB.get('server_port')}`;
+    QRCode.toDataURL(uri, function (err, url) {
         if(!err){
-            $("#url-qr-code-modal").attr("src", url);
+            $("#modal-qr-code").modal('show');
+            $(".url-qr-code-modal").attr("src", url);
+            $(".url_qr_code_modal_i").val(uri);
         }
         else{
-            setTimeout(()=>{
-                $("#close_modal_qr_code").click();
-            }, 500)
         }
-    })
+    });
 }
 
 async function clear_add_app(){

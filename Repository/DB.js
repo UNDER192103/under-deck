@@ -26,6 +26,7 @@ _all.GetDataNow = async ()=>{
     _all.List_programs = await _all.ProgramsExe.get('list_programs');
     _all.Macro_lis = await _all.List_macros.get('macros');
     _all.USER = _all.DB.get('user');
+    _all.PC = _all.DB.get('user_pc');
     return _all;
 }
 
