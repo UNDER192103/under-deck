@@ -5,13 +5,13 @@ var key_sequence_press_edit = [];
 
 $(document).ready(async () => {
 
-    $('#key-macro').click(function(){
-        let isCheck =  document.getElementById('key-macro').checked;
+    $('#key-macro').click(function () {
+        let isCheck = document.getElementById('key-macro').checked;
         keyEvent.startStopKeysEvents(isCheck);
         DAO.DB.set('keyEvent', isCheck);
     });
 
-    $("#button-add-macro").click(async ()=>{
+    $("#button-add-macro").click(async () => {
         addShortCut();
     });
 
@@ -33,19 +33,19 @@ $(document).ready(async () => {
         let text = "";
         for (let index = 0; index < key_sequence_press_edit.length; index++) {
             var item = key_sequence_press_edit[index];
-            if(index >= (key_sequence_press_edit.length-1))
+            if (index >= (key_sequence_press_edit.length - 1))
                 text += item.nameKey;
             else
-                text += item.nameKey+" + ";
+                text += item.nameKey + " + ";
         }
         $("#key-edit-macro-modal").val(text);
     });
-    
+
     $("#key-edit-macro-modal").keydown((event) => {
         let objEvent = event.originalEvent;
-        if(objEvent.key != "AltGraph"){
+        if (objEvent.key != "AltGraph") {
             let busca = key_sequence_press_edit.filter(f => f.key == objEvent.key.toLowerCase().replace('Meta', 'windows'))[0]
-            if(busca == undefined){
+            if (busca == undefined) {
                 let namekey = objEvent.key.toUpperCase();
                 let key = objEvent.key;
                 key = key.replace('Meta', 'windows');
@@ -70,13 +70,13 @@ $(document).ready(async () => {
         $("#key-macro-modal").blur();
         $("#key-macro-modal").removeClass("pulse-red");
         let text = "";
-        if(key_sequence_press.length > 0){
+        if (key_sequence_press.length > 0) {
             for (let index = 0; index < key_sequence_press.length; index++) {
                 var item = key_sequence_press[index];
-                if(index >= (key_sequence_press.length-1))
+                if (index >= (key_sequence_press.length - 1))
                     text += item.nameKey;
                 else
-                    text += item.nameKey+" + ";
+                    text += item.nameKey + " + ";
             }
             $("#key-macro-modal").val(text);
         }
@@ -84,9 +84,9 @@ $(document).ready(async () => {
 
     $("#key-macro-modal").keydown((event) => {
         let objEvent = event.originalEvent;
-        if(objEvent.key != "AltGraph"){
+        if (objEvent.key != "AltGraph") {
             let busca = key_sequence_press.filter(f => f.key == objEvent.key.toLowerCase().replace('Meta', 'windows'))[0]
-            if(busca == undefined){
+            if (busca == undefined) {
                 let namekey = objEvent.key.toUpperCase();
                 let key = objEvent.key;
                 key = key.replace('Meta', 'windows');
@@ -114,11 +114,11 @@ async function addShortCut(idItem = null) {
     $('.btn-dropdown-key-macro').text(getNameTd(".apps_name")).attr("disabled", false);
     DAO.List_programs = await DAO.ProgramsExe.get('list_programs');
     $(".ul-dropdown-ky-macro").html("");
-    if(DAO.List_programs != null && DAO.List_programs.length > 0){
+    if (DAO.List_programs != null && DAO.List_programs.length > 0) {
         DAO.List_programs.forEach(item => {
             let name = item.name.replace('.exe', '');
             let isSelected = false;
-            if(item.nameCustom.length > 0) name = item.nameCustom;
+            if (item.nameCustom.length > 0) name = item.nameCustom;
             $(".ul-dropdown-ky-macro").append(`
                 <li onClick="select_program_key_macro(${item._id})" class="d-flex" id="li-key-macro-${item._id}">
                     <img class="img-tbody-list-keys-macros ml-1" src="${item.iconCustom}">
@@ -126,36 +126,34 @@ async function addShortCut(idItem = null) {
                 </li>
             `);
 
-            if(item._id == idItem)
+            if (item._id == idItem)
                 select_program_key_macro(item._id);
         });
     }
 }
 
-async function change_list_keys_macros(){
-    let footableListKeysMacros = await $(".list-keys-macros").data('footable');
-    footableListKeysMacros.removeRow($(".list-keys-macros tbody tr"));
+async function change_list_keys_macros() {
+    $(".list-keys-macros tbody").html('');
     let list_macros = await DAO.List_macros.get('macros');
-    if(list_macros != null && list_macros.length > 0){
+    if (list_macros != null && list_macros.length > 0) {
         await list_macros.forEach(async item => {
             let appr = await getAppById(item.idProgram);
-            if(appr != null){
+            if (appr != null) {
                 item.app = appr;
                 item.name = await getNameApp(item.app);
                 let _macro = "";
                 for (let index = 0; index < item.keys.length; index++) {
                     var itemKey = item.keys[index];
-                    if(index >= (item.keys.length-1)) _macro += itemKey.nameKey; else _macro += itemKey.nameKey+" + ";
+                    if (index >= (item.keys.length - 1)) _macro += itemKey.nameKey; else _macro += itemKey.nameKey + " + ";
                 }
                 var type_exc = item.app.type_exec;
-                
-                let footableListKeysMacros = await $(".list-keys-macros").data('footable');
-                footableListKeysMacros.appendRow(`
+
+                $(".list-keys-macros tbody").append(`
                     <tr class="hover-color-primary animate__animated animate__headShake">
                             <th scope="row">${item._id}</th>
                             <td><img class="img-tbody-list-keys-macros" src="${item.app.iconCustom}"></td>
                             <td>${item.name}</td>
-                            <td>${getNameTd(".trad_ty_"+type_exc)}</td>
+                            <td>${getNameTd(".trad_ty_" + type_exc)}</td>
                             <td>${_macro}</td>
                         <td>
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown_edit_macro" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -179,32 +177,37 @@ async function change_list_keys_macros(){
                     </tr>
                 `);
             }
-            else{
+            else {
                 list_macros = await list_macros.filter(r => r.idProgram != item.idProgram);
                 await DAO.List_macros.set('macros', list_macros);
+            }
+
+            if (item == list_macros[list_macros.length - 1]) {
+                var table = $('.footable').footable();
+                table.trigger('footable_resize');
             }
         });
         await DAO.List_macros.set('macros', list_macros);
     }
 }
 
-async function edit_macro(id){
+async function edit_macro(id) {
     id_macro_id = id;
     key_sequence_press_edit = [];
     let item = await get_macro_updated(id);
     let text = "";
     for (let index = 0; index < item.keys.length; index++) {
         var elem = item.keys[index];
-        if(index >= (item.keys.length-1))
+        if (index >= (item.keys.length - 1))
             text += elem.nameKey;
         else
-            text += elem.nameKey+" + ";
+            text += elem.nameKey + " + ";
     }
     $("#key-edit-macro-modal").val(text);
     $('.btn-dropdown-edit-key-macro').text(item.name).attr("disabled", true);
 }
 
-async function delete_macro(id){
+async function delete_macro(id) {
     bootbox.confirm({
         message: `<h4 class="are_you_sure_of_that_text">${getNameTd('.are_you_sure_of_that_text')}</h4>`,
         buttons: {
@@ -218,7 +221,7 @@ async function delete_macro(id){
             }
         },
         callback: async (res) => {
-            if(res){
+            if (res) {
                 let listNowMacro = await DAO.List_macros.get('macros');
                 let newListMacros = listNowMacro.filter(m => m._id != id);
                 await DAO.List_macros.set('macros', newListMacros);
@@ -229,41 +232,41 @@ async function delete_macro(id){
     });
 }
 
-function select_program_key_macro(id){
+function select_program_key_macro(id) {
     var list_programs = DAO.ProgramsExe.get('list_programs');
     var item = list_programs.filter(b => b._id == id)[0], icone = path.join(__dirname, "/src/img/underbot_logo.svg");
     program_key_macro_selected = id;
     var name = item.name.replace('.exe', '');
-    if(item.nameCustom.length > 0)
+    if (item.nameCustom.length > 0)
         name = item.nameCustom;
-    if(item.iconCustom != null)
+    if (item.iconCustom != null)
         icone = item.iconCustom;
     else
         item.iconCustom = icone;
     $(`.btn-dropdown-key-macro`).text(name);
 }
 
-async function add_new_macro(){
-    if(program_key_macro_selected != null){
+async function add_new_macro() {
+    if (program_key_macro_selected != null) {
         $(".alert-key-macro-modal").text('').addClass('hidden');
         var list_programs = DAO.ProgramsExe.get('list_programs');
         var item = list_programs.filter(b => b._id == program_key_macro_selected)[0];
-        if(item != null){
+        if (item != null) {
             var name = item.name.replace('.exe', '');
-            if(item.nameCustom.length > 0)
+            if (item.nameCustom.length > 0)
                 name = item.nameCustom;
 
-            if(key_sequence_press.length > 0){
+            if (key_sequence_press.length > 0) {
                 let listKeyMacroNow = await DAO.List_macros.get('macros'), _id = null, validExist = null;
-                if(listKeyMacroNow != null)
+                if (listKeyMacroNow != null)
                     validExist = listKeyMacroNow.filter(b => b.idProgram == program_key_macro_selected)[0];
 
-                if(validExist == null){
-                    if(listKeyMacroNow != null && listKeyMacroNow.length > 0)
-                        _id = (listKeyMacroNow[listKeyMacroNow.length-1]._id+1)
+                if (validExist == null) {
+                    if (listKeyMacroNow != null && listKeyMacroNow.length > 0)
+                        _id = (listKeyMacroNow[listKeyMacroNow.length - 1]._id + 1)
                     else
                         _id = 1;
-                    var dt = {_id: _id, idProgram: program_key_macro_selected, name: name, keys: key_sequence_press, app: item}
+                    var dt = { _id: _id, idProgram: program_key_macro_selected, name: name, keys: key_sequence_press, app: item }
                     await DAO.List_macros.push('macros', dt);
                     await change_list_keys_macros();
                     $('.btn-close-key-macro-modal').click();
@@ -277,30 +280,30 @@ async function add_new_macro(){
                     ;
                     toaster.success(`${getNameTd('.Added_successfully')}`);
                 }
-                else{
+                else {
                     $(".alert-key-macro-modal").text(getNameTd(".t_a_i_a_r_i_t_l_o_s_text")).removeClass('hidden');
                 }
             }
-            else{
+            else {
                 $(".alert-key-macro-modal").text(getNameTd(".p_c_a_s_text")).removeClass('hidden');
             }
         }
-        else{
+        else {
             $(".alert-key-macro-modal").text(getNameTd(".p_s_a_a_text")).removeClass('hidden');
         }
     }
-    else{
+    else {
         $(".alert-key-macro-modal").text(getNameTd(".p_s_a_a_text")).removeClass('hidden');
     }
 }
 
-async function edit_save_macro(){
-    if(id_macro_id != null){
+async function edit_save_macro() {
+    if (id_macro_id != null) {
         $(".alert-edit-key-macro-modal").text('').addClass('hidden');
-        if(key_sequence_press_edit.length > 0){
+        if (key_sequence_press_edit.length > 0) {
             let listNowMacro = await DAO.List_macros.get('macros');
             listNowMacro.forEach(i => {
-                if(i._id == id_macro_id){
+                if (i._id == id_macro_id) {
                     i.keys = key_sequence_press_edit;
                 }
             });
@@ -309,13 +312,13 @@ async function edit_save_macro(){
             $('.btn-close-edit-key-macro-modal').click();
             toaster.success(`${getNameTd('.Successfully_edited')}`);
         }
-        else{
+        else {
             $(".alert-key-macro-modal").text(getNameTd(".p_c_a_s_text")).removeClass('hidden');
         }
     }
 }
 
-function clear_modal_macro(){
+function clear_modal_macro() {
     $(".alert-key-macro-modal").text('').addClass('hidden');
     key_sequence_press = [];
     program_key_macro_selected = null;
@@ -325,7 +328,7 @@ function clear_modal_macro(){
     $("#key-macro-modal").val(`${getNameTd(".edit_text")} ${getNameTd(".shortcut_text")}`);
 }
 
-function clear_edit_modal_macro(){
+function clear_edit_modal_macro() {
     $(".alert-key-edit-macro-modal").text('').addClass('hidden');
     key_sequence_press_edit = [];
     id_macro_id = null;
@@ -335,7 +338,7 @@ function clear_edit_modal_macro(){
     $("#key-edit-macro-modal").val(`${getNameTd(".edit_text")} ${getNameTd(".shortcut_text")}`);
 }
 
-async function get_macro_updated(id){
+async function get_macro_updated(id) {
     let listNowMacro = await DAO.List_macros.get('macros');
     let item = listNowMacro.filter(m => m._id == id)[0];
     item.app = await getAppById(item.idProgram);

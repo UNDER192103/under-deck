@@ -20,6 +20,21 @@ var en_us = [
         text: "Version"
     },
     {
+        id: ".soundpad",
+        type: "text",
+        text: `SoundPad`
+    },
+    {
+        id: ".soundpad_icon",
+        type: "html",
+        text: `<svg xmlns="http://www.w3.org/2000/svg" width="20px" heigth="20px" version="1.0" preserveAspectRatio="xMidYMid meet" viewBox="34.92 33.19 447.58 447.77"><g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#f5f5f5" stroke="none"><path d="M2440 4779 c-203 -17 -413 -76 -608 -171 -439 -214 -799 -618 -996 -1119 l-38 -96 -60 -17 c-96 -27 -158 -64 -234 -140 -74 -74 -114 -143 -139 -237 -21 -78 -21 -502 0 -582 44 -169 163 -302 330 -368 56 -22 76 -24 329 -29 l269 -5 23 -67 c77 -230 227 -462 410 -638 534 -513 1315 -473 1812 93 123 141 248 351 312 527 l28 75 112 3 112 3 -7 -28 c-14 -59 -79 -222 -122 -307 -85 -169 -174 -299 -306 -447 l-59 -66 -84 -6 c-239 -14 -421 -221 -401 -456 23 -272 289 -452 549 -371 169 52 283 198 296 377 5 84 -8 145 -49 226 l-30 59 54 61 c221 253 389 573 481 917 l18 65 81 39 c143 68 253 204 289 357 9 36 13 131 13 284 0 193 -3 240 -19 290 -46 152 -140 265 -276 334 -43 21 -96 42 -118 46 -39 6 -39 7 -72 93 -126 333 -353 660 -609 873 -305 256 -634 395 -1011 429 -126 11 -142 11 -280 -1z m418 -339 c391 -79 739 -323 984 -689 61 -92 153 -259 178 -327 l10 -24 -114 0 -114 0 -42 78 c-264 490 -692 772 -1175 772 -333 0 -635 -131 -890 -387 -106 -107 -205 -240 -272 -370 l-48 -93 -117 0 -117 0 16 38 c28 67 85 175 133 254 267 429 682 711 1130 767 111 14 321 5 438 -19z m-216 -1460 c371 -176 681 -329 691 -341 22 -27 31 -62 23 -93 -3 -13 -14 -33 -23 -45 -10 -11 -319 -176 -688 -366 -487 -251 -679 -345 -703 -345 -25 0 -43 9 -68 34 l-34 34 0 685 c0 684 0 684 21 711 24 30 51 44 86 45 12 1 325 -143 695 -319z" fill="#f5f5f5"/></g></svg> SoundPad`
+    },
+    {
+        id: ".soundpad_icon30px",
+        type: "html",
+        text: `<svg xmlns="http://www.w3.org/2000/svg" width="30px" heigth="30px" version="1.0" preserveAspectRatio="xMidYMid meet" viewBox="34.92 33.19 447.58 447.77"><g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#f5f5f5" stroke="none"><path d="M2440 4779 c-203 -17 -413 -76 -608 -171 -439 -214 -799 -618 -996 -1119 l-38 -96 -60 -17 c-96 -27 -158 -64 -234 -140 -74 -74 -114 -143 -139 -237 -21 -78 -21 -502 0 -582 44 -169 163 -302 330 -368 56 -22 76 -24 329 -29 l269 -5 23 -67 c77 -230 227 -462 410 -638 534 -513 1315 -473 1812 93 123 141 248 351 312 527 l28 75 112 3 112 3 -7 -28 c-14 -59 -79 -222 -122 -307 -85 -169 -174 -299 -306 -447 l-59 -66 -84 -6 c-239 -14 -421 -221 -401 -456 23 -272 289 -452 549 -371 169 52 283 198 296 377 5 84 -8 145 -49 226 l-30 59 54 61 c221 253 389 573 481 917 l18 65 81 39 c143 68 253 204 289 357 9 36 13 131 13 284 0 193 -3 240 -19 290 -46 152 -140 265 -276 334 -43 21 -96 42 -118 46 -39 6 -39 7 -72 93 -126 333 -353 660 -609 873 -305 256 -634 395 -1011 429 -126 11 -142 11 -280 -1z m418 -339 c391 -79 739 -323 984 -689 61 -92 153 -259 178 -327 l10 -24 -114 0 -114 0 -42 78 c-264 490 -692 772 -1175 772 -333 0 -635 -131 -890 -387 -106 -107 -205 -240 -272 -370 l-48 -93 -117 0 -117 0 16 38 c28 67 85 175 133 254 267 429 682 711 1130 767 111 14 321 5 438 -19z m-216 -1460 c371 -176 681 -329 691 -341 22 -27 31 -62 23 -93 -3 -13 -14 -33 -23 -45 -10 -11 -319 -176 -688 -366 -487 -251 -679 -345 -703 -345 -25 0 -43 9 -68 34 l-34 34 0 685 c0 684 0 684 21 711 24 30 51 44 86 45 12 1 325 -143 695 -319z" fill="#f5f5f5"/></g></svg> SoundPad`
+    },
+    {
         id: ".general_text",
         type: "text",
         text: "General"
@@ -63,6 +78,11 @@ var en_us = [
         id: ".uupdate_text",
         type: "text",
         text: "Update"
+    },
+    {
+        id: ".update_icon",
+        type: "html",
+        text: `<i class="bi bi-arrow-clockwise"></i> Update`
     },
     {
         id: ".releaseNotes_text",
@@ -170,7 +190,7 @@ var en_us = [
         text: "There is already a website registered with this Url!"
     },
     {
-        id:".submit_text",
+        id: ".submit_text",
         type: "text",
         text: "Send"
     },
@@ -227,7 +247,7 @@ var en_us = [
     {
         id: ".name_custom_placeholder_text",
         type: "attr",
-        text: {placeholder: "Custom name" },
+        text: { placeholder: "Custom name" },
     },
     {
         id: ".settings_text",
@@ -345,177 +365,182 @@ var en_us = [
         text: "Warning"
     },
     {
-        id:".p_c_a_s_text",
+        id: ".p_c_a_s_text",
         type: "text",
         text: "Please configure a shortcut!"
     },
     {
-        id:".p_s_a_a_text",
+        id: ".p_s_a_a_text",
         type: "text",
         text: "Please select an app!"
     },
     {
-        id:".p_s_a_e_text",
+        id: ".p_s_a_e_text",
         type: "text",
         text: "Please select an executable!"
     },
     {
-        id:".text_type",
+        id: ".text_type",
         type: "text",
         text: "Type"
     },
     {
-        id:".p_s_a_audio_text",
+        id: ".p_s_a_audio_text",
         type: "text",
         text: "Please select an audio!"
     },
     {
-        id:".not_selected_com",
+        id: ".not_selected_com",
         type: "text",
         text: "Please select an available port!"
     },
     {
-        id:".not",
+        id: ".not",
         type: "text",
         text: "No"
     },
     {
-        id:".avatar_text",
+        id: ".avatar_text",
         type: "text",
         text: "Avatar"
     },
     {
-        id:".appearance_text",
+        id: ".appearance_text",
         type: "text",
         text: "Appearance"
     },
     {
-        id:".enable_animations_text",
+        id: ".enable_animations_text",
         type: "text",
         text: "Enable Animations"
     },
     {
-        id:".animation_models_text",
+        id: ".animation_models_text",
         type: "text",
         text: "Animation Models"
     },
     {
-        id:".animation_type_text",
+        id: ".animation_type_text",
         type: "text",
         text: "Animation Type"
     },
     {
-        id:".no",
+        id: ".no",
         type: "text",
         text: "No"
     },
     {
-        id:".active_text",
+        id: ".active_text",
         type: "text",
         text: "Active?"
     },
     {
-        id:".yes",
+        id: ".yes",
         type: "text",
         text: "Yes"
     },
     {
-        id:".selector_com_port",
+        id: ".selector_com_port",
         type: "text",
         text: "Port"
     },
     {
-        id:".information_serialport",
+        id: ".information_serialport",
         type: "text",
         text: "Arduino information:"
     },
     {
-        id:".selector-port-serialport",
+        id: ".selector-port-serialport",
         type: "text",
         text: "Arduino Port:"
     },
     {
-        id:".err_execute_SerialPort",
+        id: ".err_execute_SerialPort",
         type: "text",
         text: "An error occurred when running Arduino on SerialPort:"
     },
     {
-        id:".icon_text",
+        id: ".icon_text",
         type: "text",
         text: "Icon"
     },
     {
-        id:".app_text",
+        id: ".app_text",
         type: "text",
         text: "App"
     },
     {
-        id:".web_page_text",
+        id: ".web_page_text",
         type: "text",
         text: "Page Url"
     },
     {
-        id:".cmd_text",
+        id: ".cmd_text",
         type: "text",
         text: "Command"
     },
     {
-        id:".default_text",
+        id: ".default_text",
         type: "text",
         text: "Default"
     },
     {
-        id:".screen_transitions_text",
+        id: ".screen_transitions_text",
         type: "text",
         text: "Screen transitions"
     },
     {
-        id:".duration_animation_text",
+        id: ".duration_animation_text",
         type: "text",
         text: "Animation duration"
     },
     {
         id: ".placeholder-duration_animation",
         type: "attr",
-        text: {placeholder: "Animation duration" },
+        text: { placeholder: "Animation duration" },
     },
     {
-        id:".skip_text",
+        id: ".skip_text",
         type: "text",
         text: "Skip"
     },
     {
-        id:".select_text",
+        id: ".select_text",
         type: "text",
         text: "Select"
     },
     {
-        id:".bnt_select_type_add_text",
+        id: ".select_path_SoundPad_text",
+        type: "text",
+        text: "Select SoundPad"
+    },
+    {
+        id: ".bnt_select_type_add_text",
         type: "text",
         text: "Select an execution type:"
     },
     {
-        id:".err_select_type_add_text",
+        id: ".err_select_type_add_text",
         type: "text",
         text: "Select an application type"
     },
     {
-        id:".requere_name_add_app",
+        id: ".requere_name_add_app",
         type: "text",
         text: "Please provide a name."
     },
     {
-        id:".requere_url_add_app",
+        id: ".requere_url_add_app",
         type: "text",
         text: "Please provide a Url."
     },
     {
-        id:".requere_cmd_add_app",
+        id: ".requere_cmd_add_app",
         type: "text",
         text: "Please the command to be executed."
     },
     {
-        id:".cmd_page_text",
+        id: ".cmd_page_text",
         type: "text",
         text: "Command"
     },
@@ -597,12 +622,12 @@ var en_us = [
     {
         id: "#translate_to",
         type: "attr",
-        text: {placeholder: "Translation" },
+        text: { placeholder: "Translation" },
     },
     {
         id: "#translate_de",
         type: "attr",
-        text: {placeholder: "Enter text" },
+        text: { placeholder: "Enter text" },
     },
     {
         id: ".in",
@@ -687,17 +712,17 @@ var en_us = [
     {
         id: ".foo_filter",
         type: "attr",
-        text: {placeholder: "To search for" },
+        text: { placeholder: "To search for" },
     },
     {
         id: ".placeholder-port",
         type: "attr",
-        text: {placeholder: "Port" },
+        text: { placeholder: "Port" },
     },
     {
         id: ".placeholder-ip-server",
         type: "attr",
-        text: {placeholder: "Server IP" },
+        text: { placeholder: "Server IP" },
     },
     {
         id: ".port-e-ip-server",
@@ -712,7 +737,7 @@ var en_us = [
     {
         id: ".placeholder-password-text",
         type: "attr",
-        text: {placeholder: "Access password" },
+        text: { placeholder: "Access password" },
     },
     {
         id: ".relaunch_app",
@@ -742,17 +767,17 @@ var en_us = [
     {
         id: ".looking_for_updates",
         type: "text",
-        text: "Looking for updates", 
+        text: "Looking for updates",
     },
     {
         id: ".auiapwftdtc",
         type: "text",
-        text: "An update is available, please wait for the download to complete!", 
+        text: "An update is available, please wait for the download to complete!",
     },
     {
         id: ".taiaitlastv",
         type: "text",
-        text: "The application is already in the latest version", 
+        text: "The application is already in the latest version",
     },
     {
         id: ".updateds",
@@ -762,92 +787,92 @@ var en_us = [
     {
         id: ".erronetupdatetheapp",
         type: "text",
-        text: "Clound not search for updates due to lack of internet connection!", 
+        text: "Clound not search for updates due to lack of internet connection!",
     },
     {
         id: ".next_text",
         type: "text",
-        text: "Next", 
+        text: "Next",
     },
     {
         id: ".back_text",
         type: "text",
-        text: `Back`, 
+        text: `Back`,
     },
     {
         id: ".back_icon_text",
         type: "html",
-        text: `<i class="bi bi-arrow-left-short"></i> Back`, 
+        text: `<i class="bi bi-arrow-left-short"></i> Back`,
     },
     {
         id: ".next_icon_text",
         type: "html",
-        text: `Next <i class="bi bi-arrow-right-short"></i>`, 
+        text: `Next <i class="bi bi-arrow-right-short"></i>`,
     },
     {
         id: ".erroupdatetheapp",
         type: "text",
-        text: "Error updating the application!", 
+        text: "Error updating the application!",
     },
     {
         id: ".update_text",
         type: "text",
-        text: "Update", 
+        text: "Update",
     },
     {
         id: ".obswsshbc",
         type: "text",
-        text: "OBS websocket server has been closed", 
+        text: "OBS websocket server has been closed",
     },
     {
         id: ".unabletoconnecttoOBSWebsocket",
         type: "text",
-        text: "Unable to connect to OBS Websocket!", 
+        text: "Unable to connect to OBS Websocket!",
     },
     {
         id: ".obswssconneted",
         type: "text",
-        text: "Successfully connected to OBS Websocket", 
+        text: "Successfully connected to OBS Websocket",
     },
     {
         id: ".obswssdesconnectedss",
         type: "text",
-        text: "Successfully disconnected from OBS Websocket!", 
+        text: "Successfully disconnected from OBS Websocket!",
     },
     {
         id: ".obswssdesconnectdromdss",
         type: "text",
-        text: "Disconnected from OBS Websocket!", 
+        text: "Disconnected from OBS Websocket!",
     },
     {
         id: ".desconnect-obs",
         type: "text",
-        text: "Disconnect OBS WebSocket", 
+        text: "Disconnect OBS WebSocket",
     },
     {
         id: ".connect-obs",
         type: "text",
-        text: "Connect OBS WebSocket", 
+        text: "Connect OBS WebSocket",
     },
     {
         id: ".server-IP",
         type: "text",
-        text: "Server IP:", 
+        text: "Server IP:",
     },
     {
         id: ".invalid-port-or-ip",
         type: "text",
-        text: "Invalid server port or IP!", 
+        text: "Invalid server port or IP!",
     },
     {
         id: ".sucess-save-port-or-ip",
         type: "text",
-        text: "Server port and IP saved successfully!", 
+        text: "Server port and IP saved successfully!",
     },
     {
         id: ".sucess-save-obs-password",
         type: "text",
-        text: "Password saved successfully!", 
+        text: "Password saved successfully!",
     },
     {
         id: ".invalidpasswordobswss",
@@ -890,12 +915,12 @@ var en_us = [
         text: "Set up OBS WebSocket so you can connect to your OBS and list your scenes, access the screen:",
     },
     {
-        id:".select_obs_scene_text",
+        id: ".select_obs_scene_text",
         type: "text",
         text: "Select an OBS Studio scene"
     },
     {
-        id:".select_obs_audioinput_text",
+        id: ".select_obs_audioinput_text",
         type: "text",
         text: "Select an OBS Studio audio input"
     },
@@ -948,6 +973,11 @@ var en_us = [
         id: ".this_is_cmd_already_registered",
         type: "text",
         text: "There is already a record of this Windows CMD command.",
+    },
+    {
+        id: ".this_is_soundpad_already_registered",
+        type: "text",
+        text: "There is already a recording of this SoundPad audio.",
     },
     {
         id: ".obs_options_text_sl",
@@ -1062,27 +1092,27 @@ var en_us = [
     {
         id: ".e_or_u_placeholder",
         type: "attr",
-        text: {placeholder: "E-mail or Username" },
+        text: { placeholder: "E-mail or Username" },
     },
     {
         id: ".email_placeholder",
         type: "attr",
-        text: {placeholder: "E-mail" },
+        text: { placeholder: "E-mail" },
     },
     {
         id: ".username_placeholder",
         type: "attr",
-        text: {placeholder: "Username" },
+        text: { placeholder: "Username" },
     },
     {
         id: ".display_username_placeholder",
         type: "attr",
-        text: {placeholder: "Display username" },
+        text: { placeholder: "Display username" },
     },
     {
         id: ".display_name_placeholder",
         type: "attr",
-        text: {placeholder: "Display name" },
+        text: { placeholder: "Display name" },
     },
     {
         id: ".msg_successfully_logged_text",
@@ -1147,7 +1177,7 @@ var en_us = [
     {
         id: ".t_r_p_placeholder",
         type: "attr",
-        text: {placeholder: "Password reset token" },
+        text: { placeholder: "Password reset token" },
     },
     {
         id: ".Password_reset_successfully_text",
@@ -1198,6 +1228,11 @@ var en_us = [
         id: ".quickguide3",
         type: "text",
         text: `Here you can add a Key Macro to perform actions in your applications added on the <a class="a-style apps_name_icon"><i class="bi bi-google-play"></i> Apps</a >.`,
+    },
+    {
+        id: ".quickguide3R",
+        type: "text",
+        text: `Here you can configure the integration with SoundPad, just select the SoundPad.exe directory and use.`,
     },
     {
         id: ".quickguide4",
@@ -1260,129 +1295,184 @@ var en_us = [
         text: "Successfully removed",
     },
     {
-        id:".changeUserAvatar_text",
+        id: ".changeUserAvatar_text",
         type: "text",
         text: "Change Avatar"
     },
     {
-        id:".removeUserAvatar_text",
+        id: ".removeUserAvatar_text",
         type: "text",
         text: "Remove Avatar"
     },
     {
-        id:".customization_text",
+        id: ".customization_text",
         type: "text",
         text: "Customization"
     },
     {
-        id:".background_color_text",
+        id: ".background_color_text",
         type: "text",
         text: "Background color"
     },
     {
-        id:".color_text_text",
+        id: ".color_text_text",
         type: "text",
         text: "Text color"
     },
     {
-        id:".reset_to_default_text",
+        id: ".reset_to_default_text",
         type: "html",
         text: "Reset to default"
     },
     {
-        id:".successfully_reset_text",
+        id: ".successfully_reset_text",
         type: "html",
         text: "Successfully reset"
     },
     {
-        id:".msg_unable_to_perform_this_action",
+        id: ".msg_unable_to_perform_this_action",
         type: "html",
         text: "Unable to perform this action"
     },
     {
-        id:".confirm_email_text",
+        id: ".confirm_email_text",
         type: "html",
         text: "Confirm E-mail address"
     },
     {
-        id:".webdeck_remote_version_text",
+        id: ".webdeck_remote_version_text",
         type: "html",
         text: "Remote Version"
     },
     {
-        id:".webdeck_local_version_text",
+        id: ".webdeck_local_version_text",
         type: "html",
         text: "Local Version"
     },
     {
-        id:".this_feature_is_only_available_when_logged_into_an_account_text",
+        id: ".this_feature_is_only_available_when_logged_into_an_account_text",
         type: "html",
         text: "This feature is only available after you are logged into an account"
     },
     {
-        id:".connection_invitation_text",
+        id: ".connection_invitation_text",
         type: "html",
         text: "Connection invitation"
     },
     {
-        id:".invite_text",
+        id: ".invite_text",
         type: "html",
         text: "Invite"
     },
     {
-        id:".revoke_all_permissions_text",
+        id: ".revoke_all_permissions_text",
         type: "html",
         text: "Revoke all permissions"
     },
     {
-        id:".access_permissions_for_all_users_have_been_revoked",
+        id: ".access_permissions_for_all_users_have_been_revoked",
         type: "html",
         text: "Access permissions for all users have been revoked"
     },
     {
-        id:".To_accept_text",
+        id: ".To_accept_text",
         type: "html",
         text: "To accept"
     },
     {
-        id:".To_deny_text",
+        id: ".To_deny_text",
         type: "html",
         text: "To deny"
     },
     {
-        id:".confirm_new_acess_remote_1_text",
+        id: ".confirm_new_acess_remote_1_text",
         type: "html",
         text: "User <a class='a-style'>{{user}}</a> is requesting remote access to Web Under Deck!"
     },
     {
-        id:".confirm_new_acess_remote_2_text",
+        id: ".confirm_new_acess_remote_2_text",
         type: "html",
         text: "By granting remote access permission, you allow someone else to control your computer remotely. Make sure you trust the person or company requesting access, as they will be able to view and manipulate your device."
     },
     {
-        id:".confirm_new_acess_remote_3_text",
+        id: ".confirm_new_acess_remote_3_text",
         type: "html",
         text: `If you wish to revoke the permission, simply go to the Web Under Deck tab and <a class='a-style'><i class="bi bi-gear-wide-connected"></i> Settings</a> and revoke all permissions.`
     },
     {
-        id:".Attention_text",
+        id: ".Attention_text",
         type: "html",
         text: `Attention`
     },
     {
-        id:".Notice_text",
+        id: ".Notice_text",
         type: "html",
         text: `Notice`
     },
     {
-        id:".You_successfully_accept_the_request_text",
+        id: ".You_successfully_accept_the_request_text",
         type: "html",
         text: `You have successfully accepted the request`
     },
     {
-        id:".You_successfully_declined_the_request_text",
+        id: ".You_successfully_declined_the_request_text",
         type: "html",
         text: `You successfully declined the request`
+    },
+    {
+        id: ".date_text",
+        type: "html",
+        text: `Date`
+    },
+    {
+        id: ".duration_text",
+        type: "html",
+        text: `Duration`
+    },
+    {
+        id: ".artist_text",
+        type: "html",
+        text: `Artist`
+    },
+    {
+        id: ".Play_text",
+        type: "html",
+        text: `Play`
+    },
+    {
+        id: ".date_created_text",
+        type: "html",
+        text: `Data created`
+    },
+    {
+        id: ".PswSpeiisycutic_text",
+        type: "text",
+        text: `Please select where Soundpad.exe is installed so you can use the integration correctly:`
+    },
+    {
+        id: ".PswSpeiisycutic_SUCC_text",
+        type: "text",
+        text: `Soundpad location selected successfully`
+    },
+    {
+        id: ".PswSpeiisycutic_ERRO1_text",
+        type: "text",
+        text: `Please select the Soundpad.exe file correctly!`
+    },
+    {
+        id: ".To_check_text",
+        type: "text",
+        text: `To check`
+    },
+    {
+        id: ".select_soundpad_sound",
+        type: "text",
+        text: `Select an Audio`
+    },
+    {
+        id: ".p_s_a_s_soundpad_audio_text",
+        type: "text",
+        text: `Select an audio from SoundPad`
     },
 ]
 

@@ -155,8 +155,13 @@ const change_list_web_pages = async () => {
     await footableListWebPages.removeRow($(".list-web-pages tbody tr"));
     var list_webpages = await DAO.DB.get("web_page_saved");
     if (list_webpages != null && list_webpages.length > 0) {
-        list_webpages.forEach(item => {
-            add_im_list_webpages(item);
+        list_webpages.forEach(async item => {
+            await add_im_list_webpages(item);
+            if (item == list_webpages[list_webpages.length - 1]) {
+                setTimeout(() => {
+                    $('.list-web-pages').footable().trigger('footable_resize');
+                }, 100);
+            }
         });
     }
 }
@@ -192,6 +197,10 @@ async function selectMenu(id, uC = false) {
     if (id == 'app-main') {
         changeAppsHtml();
         _page_selected = `.container-home`;
+    }
+    else if (id == 'soundpad') {
+        changeAppsHtml();
+        _page_selected = `.container-soundpad`;
     }
     else if (id == 'keys-macros') {
         if (uC)
@@ -484,6 +493,7 @@ async function apressentationSteps() {
     $("#s-themes").prop('disabled', false);
     $("#button-search-updates").prop('disabled', false);
     $("#nav-item-help").prop('disabled', false);
+    $("#local-path-soundpad").prop('disabled', false);
 
     let elem;
 
@@ -543,6 +553,31 @@ async function apressentationSteps() {
             break;
 
         case 3:
+            await selectMenu('soundpad');
+            tempBlockSelecMenu = true;
+            elem = $("#local-path-soundpad");
+            elem.prop('disabled', true);
+            elem.popover({
+                html: true,
+                title: `<span class="keys_macro_text_icon"><i class="bi bi-mic-fill"></i> ${getNameTd('.soundpad_icon')}</span>`,
+                content: `
+                    <div class="row m-0">
+                        <div class="m-0 mb-3 p-0 quickguide3">
+                            ${getNameTd('.quickguide3R')}
+                        </div>
+                        <div class="m-0 p-0">
+                            <a class="btn btn-secondary btn-xs float-start back_step_paapp back_icon_text" type="button">${getNameTd('.back_icon_text')}</a>
+                            <a class="btn btn-primary btn-xs float-end next_step_paapp next_icon_text" type="button">${getNameTd('.next_icon_text')}</a>
+                        </div>
+                    </div>
+                    `,
+            });
+
+            setTimeout(() => {
+                elem.popover('show');
+            }, 1000);
+            break;
+        case 4:
             await selectMenu('keys-macros');
             tempBlockSelecMenu = true;
             elem = $("#button-add-macro");
@@ -568,7 +603,7 @@ async function apressentationSteps() {
             }, 1000);
             break;
 
-        case 4:
+        case 5:
             await selectMenu('web-pages');
             tempBlockSelecMenu = true;
             elem = $("#button-add-webpage");
@@ -594,7 +629,7 @@ async function apressentationSteps() {
             }, 1000);
             break;
 
-        case 5:
+        case 6:
             await selectMenu('obs-studio');
             tempBlockSelecMenu = true;
             elem = $("#obs-wss-password");
@@ -620,7 +655,7 @@ async function apressentationSteps() {
             }, 1000);
             break;
 
-        case 6:
+        case 7:
             await selectMenu('config');
             tempBlockSelecMenu = true;
             elem = $("#s-languages");
@@ -647,7 +682,7 @@ async function apressentationSteps() {
             }, 1000);
             break;
 
-        case 7:
+        case 8:
             await selectMenu('config');
             tempBlockSelecMenu = true;
             elem = $("#local-server-adress-acess-url");
@@ -674,7 +709,7 @@ async function apressentationSteps() {
             }, 1000);
             break;
 
-        case 8:
+        case 9:
             await selectMenu('config');
             tempBlockSelecMenu = true;
             elem = $("#s-themes");
@@ -701,7 +736,7 @@ async function apressentationSteps() {
             }, 1000);
             break;
 
-        case 9:
+        case 10:
             await selectMenu('updates');
             tempBlockSelecMenu = true;
             elem = $("#button-search-updates");
@@ -728,7 +763,7 @@ async function apressentationSteps() {
             }, 1000);
             break;
 
-        case 10:
+        case 11:
             await selectMenu('help');
             tempBlockSelecMenu = true;
             elem = $("#nav-item-help");

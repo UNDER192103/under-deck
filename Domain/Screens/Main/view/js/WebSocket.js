@@ -19,10 +19,10 @@ const webSocketClient = {
     send: (json, callback = null) => {
         if (callback != null)
             this.callback = callback;
-        if (conn.readyState == 3) {
+        if (conn.readyState != 1) {
             return 'off';
         }
-        else
+        else if (conn.readyState == 1)
             return conn.send(json);
     },
     receiver: (data) => {
