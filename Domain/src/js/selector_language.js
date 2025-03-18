@@ -7,12 +7,6 @@ selec_lang(_lang);
 $.each(langs, (lang_id) => {
     let lang = langs[lang_id];
     $(".s-languages").append(`<option value="${lang_id}">${lang.displayName}</option>`);
-    $(".ul-languages").append(`
-        <li onclick="selec_lang('${lang_id}', true)" type="button" class="btn">
-            <img class="icone-select-lang dir-icon-${lang_id}" src="${lang.icon}">
-            ${lang.displayName}
-        </li>
-    `);
     $(`.dir-icon-${lang_id}`).attr('src', lang.icon);
 });
 

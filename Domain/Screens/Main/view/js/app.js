@@ -8,6 +8,11 @@ $(document).ready(async () => {
         DAO.DB.set('App_notification_windows', isCheck);
     });
 
+    $('#isMinimizeToBar').click(function () {
+        let isCheck = document.getElementById('isMinimizeToBar').checked;
+        DAO.DB.set('isMinimizeToBar', isCheck);
+    });
+
     $('#autoupdateonestart').click(function () {
         let isCheck = document.getElementById('autoupdateonestart').checked;
         DAO.DB.set('AutoUpdateApp', isCheck);
@@ -39,6 +44,7 @@ $(document).ready(async () => {
                 $("#name-audio-modal-1").val("");
         }
     });
+
 });
 
 const open_webpage = async (id, name, url) => {
@@ -100,6 +106,366 @@ const getQrCodeIpUrlWeb = async () => {
     });
 }
 
+function compare_positon_l(a, b) {
+    if (a.positon_l < b.positon_l) {
+        return -1;
+    }
+    if (a.positon_l > b.positon_l) {
+        return 1;
+    }
+    return 0;
+}
+
+function compare__id(a, b) {
+    if (a._id < b._id) {
+        return -1;
+    }
+    if (a._id > b._id) {
+        return 1;
+    }
+    return 0;
+}
+
+const save_icon_app_file = async (data_img, name, callback) => {
+    if (data_img) {
+        var dirCopy = path.join(DAO.DB_DIR, 'UN-DATA', 'icons-exe', `${name.replace('.', '-')}-${data_img.name}`);
+        if (fs.existsSync(dirCopy) == false) {
+            fs.copyFile(data_img.path, dirCopy, (err) => {
+                callback(dirCopy);
+            })
+        }
+        else
+            callback(dirCopy);
+    } else {
+        callback(null);
+    }
+};
+
+function appendHtml(item, count) {
+    var name = item.name.replace('.exe', '');
+    var icone = MAIN_DIR + "/Domain/src/img/underbot_logo-68.png";
+    if (item.nameCustom.length > 0)
+        name = item.nameCustom;
+    if (item.iconCustom != null)
+        icone = item.iconCustom;
+    var bgs = 'bg-light';
+    var bg_dropdown_menu = "dropdown-menu-light";
+    if (DAO.DB.get('bd_theme') == 'black') {
+        bgs = 'bg-black';
+        bg_dropdown_menu = "dropdown-menu-black";
+    }
+    $('.content-files-add').append(`
+        <div class="col-md-4 col-xl-2 transition-all col animate__animated animate__fadeIn col-exe" id="col-exe-id-${count}">
+            <div class="card rounded-3 rigth-click-exe hover-exes border border-4 rounded ${bgs}">
+                <div class="d-btn-exe-F m-1 d-flex flex-row-reverse">
+                    <span class="dropdown-toggle dropdown-toggle-c fillter-shadow-text hover-icon-edit" data-bs-auto-close="*" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link tooltip-script hover_rotation" title="${getNameTd(".tooltip_config_t")}" data-toggle="tooltip" href="#" id="dropdownMenuLink-exe-id-${count}"><i class="bi bi-gear-wide"></i></a>
+                    </span>
+                    <ul class="dropdown-menu fillter-shadow-box ${bg_dropdown_menu}" aria-labelledby="dropdownMenuLink-exe-id-${count}">
+                        <li onClick="addExeShotCut(${count})"><a class="dropdown-item ligth" href="#"><i class="bi bi-plus-square"></i> ${getNameTd(".add_macro_text")}</a></li>
+                        <li onClick="startExe(${count})"><a class="dropdown-item ligth" href="#"><i class="bi bi-filetype-exe"></i> ${getNameTd(".start_text")}</a></li>
+                        <li onClick="editExe(${count})" type="button" data-bs-toggle="modal" data-bs-target="#modal-edit-exe"><a class="dropdown-item" href="#"><i class="bi bi-pen text-success"></i> ${getNameTd(".edit_text")}</a></li>
+                        <li onClick="deleteExe(${count})"><a class="dropdown-item ligth" href="#"><i class="bi bi-trash3 text-danger"></i> ${getNameTd(".delete_text")}</a></li>
+                    </ul>
+                </div>
+                <img src="${icone}" class="card-img-top w-100 mh-iconapp mb-0 auto-left-right" alt="...">
+                
+                <div class="d-footer-exe card-body text-center">
+                    <h5 class="card-title text-light tooltip-script u-format-max-text exeT m-0 cursor-pointer" title="${name}" data-toggle="tooltip">${name}</h5>
+                </div>
+            </div>
+        </div>
+    `);
+    $(`#col-exe-id-${count}`).dblclick(function () {
+        startExe(count)
+    });
+
+    setTimeout(() => {
+        $(".tooltip-script").tooltip();
+    }, 500)
+}
+
+async function deleteExe(id) {
+    bootbox.confirm({
+        message: `<h4 class="are_you_sure_of_that_text">${getNameTd('.are_you_sure_of_that_text')}</h4>`,
+        buttons: {
+            confirm: {
+                label: getNameTd('.yes'),
+                className: 'btn-success yes'
+            },
+            cancel: {
+                label: getNameTd('.no'),
+                className: 'btn-danger not'
+            }
+        },
+        callback: async (res) => {
+            if (res) {
+                var list_programs = DAO.ProgramsExe.get('list_programs');
+                if (list_programs != null) {
+                    var item = list_programs.filter(b => b._id == id)[0];
+                    if (item != null && item.isExe != "browser") {
+                        DAO.ProgramsExe.set('list_programs', list_programs.filter(b => b._id != id));
+                        let listNowMacro = await DAO.List_macros.get('macros');
+                        if (listNowMacro != null) {
+                            let newListMacros = listNowMacro.filter(m => m.idProgram != id);
+                            await DAO.List_macros.set('macros', newListMacros);
+                        }
+                        change_list_keys_macros(DAO.List_macros.get('macros'));
+                        $(`#col-exe-id-${id}`).remove();
+                        if (item.iconCustom != null) {
+                            if (item.iconCustom.includes(path.join(DAO.DB_DIR, 'UN-DATA', 'icons-exe'))) {
+                                fs.access(item.iconCustom, fs.constants.F_OK, (err) => {
+                                    if (!err)
+                                        fs.unlinkSync(item.iconCustom)
+                                })
+                            }
+                        }
+                        DAO.List_programs = await DAO.ProgramsExe.get('list_programs');
+                    }
+                    else if (item == null) {
+                        $(`#col-exe-id-${id}`).remove();
+                    }
+                    toaster.success(`${getNameTd('.Successfully_removed')}`);
+                }
+            }
+        }
+    });
+};
+
+async function changeAppsHtml() {
+    let listApps = await DAO.ProgramsExe.get('list_programs');
+    $('.content-files-add').html('');
+    if (listApps != null) {
+        await listApps.forEach(item => {
+            appendHtml(item, item._id);
+        });
+    }
+}
+
+async function getAppById(id) {
+    if (id != null) {
+        var list_programs = await DAO.ProgramsExe.get('list_programs');
+        if (list_programs != null && list_programs.length > 0)
+            return list_programs.filter(b => b._id == id)[0];
+        else
+            return null;
+    }
+    else
+        return null;
+}
+
+async function getNameApp(app) {
+
+    if (app != null && app.name != null && app.name.length > 0) {
+        var name = app.name.replace('.exe', '');
+        if (app.nameCustom.length > 0)
+            name = app.nameCustom;
+        return name;
+    }
+    else
+        return null;
+}
+
+function editExe(id) {
+    $("#icon-exe-edit").val('');
+    var list_programs = DAO.ProgramsExe.get('list_programs');
+    var item = list_programs.filter(b => b._id == id)[0];
+    $(".div-edit-url").addClass("hidden");
+    $(".div-edit-cmd").addClass("hidden");
+    $("#edit-url-add-app").val("");
+    $("#edit-cmd-add-app").val("");
+
+    editExeNow = item;
+    if (item.type_exec == "web_page") {
+        $(".div-edit-url").removeClass("hidden");
+        $("#edit-url-add-app").val(item.path);
+    }
+    else if (item.type_exec == "cmd") {
+        $(".div-edit-cmd").removeClass("hidden");
+        $("#edit-cmd-add-app").val(item.path);
+    }
+
+    var name = item.name.replace('.exe', '');
+    if (item.nameCustom.length > 0)
+        name = item.nameCustom;
+    $('#modal-edit-exeLabel').text(`${getNameTd(".edit_text")} ( ${name} )`);
+    $('#name-exe-modal').val(name);
+};
+
+async function saveEditExe() {
+    var file = $('#icon-exe-edit')[0].files[0];
+    await saveIconFile(file, async (fileOld) => {
+        var newName = $('#name-exe-modal').val();
+        if (newName.length > 0 && newName != editExeNow.nameCustom && newName != editExeNow.name) {
+            editExeNow.nameCustom = newName;
+        }
+
+        if (editExeNow.type_exec == "web_page") {
+            editExeNow.path = $("#edit-url-add-app").val();
+        }
+        else if (editExeNow.type_exec == "cmd") {
+            editExeNow.path = $("#edit-cmd-add-app").val();
+        }
+
+        var list_programs = DAO.ProgramsExe.get('list_programs'), newList = new Array();
+        await list_programs.forEach(element => {
+            if (element.name == editExeNow.name)
+                element = editExeNow;
+            newList.push(element);
+        });
+        await DAO.ProgramsExe.set('list_programs', newList);
+        DAO.List_programs = newList;
+        await changeAppsHtml();
+
+        if (fileOld) {
+            if (fileOld.includes(path.join(DAO.DB_DIR, 'UN-DATA', 'icons-exe')) && fileOld != editExeNow['iconCustom']) {
+                fs.access(fileOld, fs.constants.F_OK, (err) => {
+                    if (!err)
+                        fs.unlinkSync(fileOld)
+                })
+            }
+        }
+
+        $(".div-edit-url").addClass("hidden");
+        $(".div-edit-cmd").addClass("hidden");
+        $("#edit-url-add-app").val("");
+        $("#edit-cmd-add-app").val("");
+        $('.btn-close-exe-modal').click();
+        $("#icon-exe-edit").val('');
+        toaster.success(`${getNameTd('.Successfully_edited')}`);
+    });
+};
+
+async function saveIconFile(fileInput, callback) {
+    if (fileInput) {
+        var dirCopy = path.join(DAO.DB_DIR, 'UN-DATA', 'icons-exe', `${editExeNow.name.replace('.', '-').replaceAll('/', '-').replaceAll('\\', '-')}-${fileInput.name}`);
+        const oldFile = editExeNow.iconCustom;
+        fs.copyFile(fileInput.path, dirCopy, (err) => {
+            if (err) throw err;
+            editExeNow['iconCustom'] = dirCopy;
+            callback(oldFile);
+        })
+    } else {
+        callback();
+    }
+};
+
+const add_new_webpage = async () => {
+    var name = $("#name_webpage").val();
+    var url = $("#url_webpage").val();
+    if (name.length > 0 && url.length > 0) {
+        var list_webpages = await DAO.DB.get("web_page_saved");
+        var id = 1;
+        if (list_webpages == null)
+            list_webpages = [];
+        else {
+            let max_id = 0;
+            list_webpages.forEach(i => {
+                if (i.id > max_id)
+                    max_id = i.id;
+            })
+            id = max_id + 1;
+        }
+
+        var obj = {
+            id: id,
+            name: name,
+            url: url,
+            status: "no open",
+        }
+        list_webpages.push(obj);
+        await DAO.DB.set("web_page_saved", list_webpages);
+        await add_im_list_webpages(obj);
+        $(".btn-close-webpage-modal").click();
+        $('.footable').footable().trigger('footable_resize');
+    }
+    else {
+        if (name.length < 1) {
+            toaster.danger(getNameTd('.requere_name_add_app'));
+        }
+        if (name.length < 1) {
+            toaster.danger(getNameTd('.requere_url_add_app'));
+        }
+    }
+}
+
+const installed_software_select = async (id) => {
+    var item = _list_installed_software.filter(f => f.id_for_select == id)[0];
+    if (item) {
+        if ($("#name-exe-modal-1").val() == '' || $("#name-exe-modal-1").val() == radio_select_name_file) {
+            $("#name-exe-modal-1").val(item.DisplayName)
+            radio_select_name_file = item.DisplayName;
+        }
+        radio_select_file_dir = item.DisplayIcon;
+        radio_select_file_info = await fs.statSync(radio_select_file_dir);
+    }
+}
+
+const list_installed_software = async () => {
+    if ($("#list_installed_software").hasClass('show') != true) {
+        if (_list_installed_software.length == 0 && im_list != true) {
+            toaster.warning(getNameTd(".please_wait"));
+            im_list = true;
+            setTimeout(async () => {
+                var temp_list = await getAllInstalledSoftwareSync();
+                temp_list = await temp_list.filter(f => f.DisplayIcon != null && f.DisplayIcon.includes('.exe') == true && fs.existsSync(f.DisplayIcon) == true && !f.DisplayIcon.includes('ProgramData') && !f.DisplayIcon.includes('Windows') && !f.DisplayIcon.includes('System32') && !f.DisplayIcon.includes('unis'));
+                $($("#list_installed_software").find('.card-content-spinner')[0]).hide('slow');
+                var count_id = 1000;
+                temp_list.forEach(item => {
+                    if (item.DisplayIcon.includes(".exe,"))
+                        item.DisplayIcon = item.DisplayIcon.split(".exe,")[0] + ".exe";
+                    item.id_for_select = count_id;
+
+                    $("#list_software").append(`<div class="form-check form-check-for-${item.id_for_select}">
+                        <input class="form-check-input" type="radio" onClick='installed_software_select(${item.id_for_select})' name="flexRadioDefault" id="radio-select-${item.id_for_select}">
+                        <label class="form-check-label" for="radio-select-${item.id_for_select}">
+                          ${item.DisplayName}
+                        </label>
+                        <button title="${getNameTd(".locate_dir")} " class="btn btn-primary btn-sm-custom float-right" onClick="open_file_brosewr(${item.id_for_select})"><i class="bi bi-folder-fill"></i></button>
+                    </div>`);
+                    _list_installed_software.push(item);
+                    count_id = count_id + 1;
+                })
+            }, 1000);
+        }
+    }
+}
+
+const change_position_list = async () => {
+    let listApps = await DAO.ProgramsExe.get('list_programs');
+    var con = 1, list = [];
+    for (let index = 0; index < $(".list_apps div.col").length; index++) {
+        const element = $(".list_apps div.col")[index];
+        var _ir = element.id.replaceAll('col-exe-id-', '');
+        list.push({ pos: index + 1, _id: _ir });
+
+        if (element == $(".list_apps div.col")[$(".list_apps div.col").length - 1]) {
+            var new_l = [];
+            listApps.forEach(async e => {
+                var dtr = await list.filter(f => f._id == e._id)[0];
+                if (dtr) {
+                    e.positon_l = dtr.pos;
+                }
+                await new_l.push(e);
+                if (e == listApps[listApps.length - 1]) {
+                    await DAO.ProgramsExe.set('list_programs', await new_l.sort(compare_positon_l));
+                }
+            })
+        }
+    }
+}
+
+async function addExeShotCut(id) {
+    var list_programs = DAO.ProgramsExe.get('list_programs');
+    var item = list_programs.filter(b => b._id == id)[0];
+    if (item) {
+        /*await selectMenu('keys-macros');
+        $("#button-add-macro").click();*/
+        $("#modal-key-macro").modal('show');
+        addShortCut(item._id);
+    }
+}
+
 async function clear_add_app() {
     $("#inputs-add-exe").addClass("hidden");
     $("#inputs-add-audio-input").addClass("hidden");
@@ -135,6 +501,50 @@ async function clear_add_app() {
     $("#list_software").html("");
     $($("#list_installed_software").find('.card-content-spinner')[0]).show('slow');
     $("#list_installed_software").collapse('hide');
+}
+
+async function select_type_add_app(type, id, text_type, id_remove_hidden) {
+    $('.alert-add-app').html(``).addClass('hidden');
+    $("#inputs-add-audio-input").addClass("hidden");
+    $("#soundpad-add-app").addClass("hidden");
+    $("#name-audio-modal-1").val("");
+    $("#input-app-audio").val('');
+    $("#icon-audio-add-app-1").val('');
+    $("#select-obs-scene").val('');
+    $('#select-audios-inputs').val('');
+    $("#inputs-add-exe").addClass("hidden");
+    $("#inputs-add-web-page-url").addClass("hidden");
+    $("#inputs-add-cmd-input").addClass("hidden");
+    $("#obs-add-app-t").addClass("hidden");
+    $("#name-exe-modal-1").val("");
+    $("#name-exe-modal-2").val("");
+    $("#name-exe-modal-3").val("");
+    $("#name-exe-modal-6").val("");
+    $("#select-soundpad-audio").val("");
+    $("#url-add-app").val("");
+    $("#cmd-add-app").val("");
+    $('#input-app-exec').val("");
+    $('#input-app-audio').val("");
+    $('#icon-exe-add-app-1').val("");
+    $('#icon-exe-add-app-2').val("");
+    $('#icon-exe-add-app-3').val("");
+    $("#icon-soundpad-add-app-1").val('');
+    $("#name-custom-obs-scene").val("");
+    $("#select-obs-options").val('');
+    old_sbs_scene_selected = null;
+    $('#icon-obs-add-app-5').val("");
+    if (type == 'obs_wss') {
+        if (await BACKEND.Send('Obs_wss_p', { stage: 'is_started' }) != true) {
+            $('.alert-add-app').html(`
+                ${getNameTd('.plsconfigureandconnectwssobs')} <a class='a-style' onClick="$('.bnt-close-modal-add-app').click();selectMenu('obs-studio');">${getNameTd('.obs_studio_n_text')}</a>.
+            `).removeClass('hidden');
+            //toaster.danger(getNameTd('.notpossibleaddappobs'));
+            return;
+        }
+    }
+    add_app.type_exec = type;
+    $("#bnt-select-type-add-app").text(getNameTd(text_type));
+    $(id_remove_hidden).removeClass("hidden");
 }
 
 async function add_new_app() {
@@ -624,409 +1034,5 @@ const add_app_for_file = async (file, icon, nameCustom) => {
             toaster.warning(getNameTd(".t_e_i_a_r_text"));
             $('.alert-add-app').text(getNameTd(".t_e_i_a_r_text")).removeClass('hidden');
         }
-    }
-}
-
-function compare_positon_l(a, b) {
-    if (a.positon_l < b.positon_l) {
-        return -1;
-    }
-    if (a.positon_l > b.positon_l) {
-        return 1;
-    }
-    return 0;
-}
-
-function compare__id(a, b) {
-    if (a._id < b._id) {
-        return -1;
-    }
-    if (a._id > b._id) {
-        return 1;
-    }
-    return 0;
-}
-
-const save_icon_app_file = async (data_img, name, callback) => {
-    if (data_img) {
-        var dirCopy = path.join(DAO.DB_DIR, 'UN-DATA', 'icons-exe', `${name.replace('.', '-')}-${data_img.name}`);
-        if (fs.existsSync(dirCopy) == false) {
-            fs.copyFile(data_img.path, dirCopy, (err) => {
-                callback(dirCopy);
-            })
-        }
-        else
-            callback(dirCopy);
-    } else {
-        callback(null);
-    }
-};
-
-async function select_type_add_app(type, id, text_type, id_remove_hidden) {
-    $('.alert-add-app').html(``).addClass('hidden');
-    $("#inputs-add-audio-input").addClass("hidden");
-    $("#soundpad-add-app").addClass("hidden");
-    $("#name-audio-modal-1").val("");
-    $("#input-app-audio").val('');
-    $("#icon-audio-add-app-1").val('');
-    $("#select-obs-scene").val('');
-    $('#select-audios-inputs').val('');
-    $("#inputs-add-exe").addClass("hidden");
-    $("#inputs-add-web-page-url").addClass("hidden");
-    $("#inputs-add-cmd-input").addClass("hidden");
-    $("#obs-add-app-t").addClass("hidden");
-    $("#name-exe-modal-1").val("");
-    $("#name-exe-modal-2").val("");
-    $("#name-exe-modal-3").val("");
-    $("#name-exe-modal-6").val("");
-    $("#select-soundpad-audio").val("");
-    $("#url-add-app").val("");
-    $("#cmd-add-app").val("");
-    $('#input-app-exec').val("");
-    $('#input-app-audio').val("");
-    $('#icon-exe-add-app-1').val("");
-    $('#icon-exe-add-app-2').val("");
-    $('#icon-exe-add-app-3').val("");
-    $("#icon-soundpad-add-app-1").val('');
-    $("#name-custom-obs-scene").val("");
-    $("#select-obs-options").val('');
-    old_sbs_scene_selected = null;
-    $('#icon-obs-add-app-5').val("");
-    if (type == 'obs_wss') {
-        if (await BACKEND.Send('Obs_wss_p', { stage: 'is_started' }) != true) {
-            $('.alert-add-app').html(`
-                ${getNameTd('.plsconfigureandconnectwssobs')} <a class='a-style' onClick="$('.bnt-close-modal-add-app').click();selectMenu('obs-studio');">${getNameTd('.obs_studio_n_text')}</a>.
-            `).removeClass('hidden');
-            //toaster.danger(getNameTd('.notpossibleaddappobs'));
-            return;
-        }
-    }
-    add_app.type_exec = type;
-    $("#bnt-select-type-add-app").text(getNameTd(text_type));
-    $(id_remove_hidden).removeClass("hidden");
-}
-
-function appendHtml(item, count) {
-    var name = item.name.replace('.exe', '');
-    var icone = MAIN_DIR + "/Domain/src/img/underbot_logo-68.png";
-    if (item.nameCustom.length > 0)
-        name = item.nameCustom;
-    if (item.iconCustom != null)
-        icone = item.iconCustom;
-    var bgs = 'bg-light';
-    var bg_dropdown_menu = "dropdown-menu-light";
-    if (DAO.DB.get('bd_theme') == 'black') {
-        bgs = 'bg-black';
-        bg_dropdown_menu = "dropdown-menu-black";
-    }
-    $('.content-files-add').append(`
-        <div class="col-md-4 col-xl-2 transition-all col animate__animated animate__fadeIn col-exe" id="col-exe-id-${count}">
-            <div class="card bg-srt rounded-3 rigth-click-exe hover-exes border border-4 rounded ${bgs}">
-                <div class="m-2 d-flex flex-row-reverse">
-                    <span class="dropdown-toggle dropdown-toggle-c hover-icon-edit" data-bs-auto-close="*" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <a class="nav-link tooltip-script hover_rotation" title="${getNameTd(".tooltip_config_t")}" data-toggle="tooltip" href="#" id="dropdownMenuLink-exe-id-${count}"><i class="bi bi-gear-wide"></i></a>
-                    </span>
-                    <ul class="dropdown-menu bg-srt-dropdown-menu ${bg_dropdown_menu}" aria-labelledby="dropdownMenuLink-exe-id-${count}">
-                        <li onClick="addExeShotCut(${count})"><a class="dropdown-item" href="#"><i class="bi bi-plus-square"></i> ${getNameTd(".add_macro_text")}</a></li>
-                        <li onClick="startExe(${count})"><a class="dropdown-item" href="#"><i class="bi bi-filetype-exe"></i> ${getNameTd(".start_text")}</a></li>
-                        <li onClick="editExe(${count})" type="button" data-bs-toggle="modal" data-bs-target="#modal-edit-exe"><a class="dropdown-item" href="#"><i class="bi bi-pen text-success"></i> ${getNameTd(".edit_text")}</a></li>
-                        <li onClick="deleteExe(${count})"><a class="dropdown-item" href="#"><i class="bi bi-trash3 text-danger"></i> ${getNameTd(".delete_text")}</a></li>
-                    </ul>
-                </div>
-                <img src="${icone}" class="card-img-top w-75 mh-iconapp mb-0 auto-left-right rounded" alt="...">
-                
-                <div class="card-body text-center">
-                    <h5 class="card-title tooltip-script u-format-max-text m-0 cursor-pointer" title="${name}" data-toggle="tooltip">${name}</h5>
-                </div>
-            </div>
-        </div>
-    `);
-    $(`#col-exe-id-${count}`).dblclick(function () {
-        startExe(count)
-    });
-
-    setTimeout(() => {
-        $(".tooltip-script").tooltip();
-    }, 500)
-}
-
-async function deleteExe(id) {
-    bootbox.confirm({
-        message: `<h4 class="are_you_sure_of_that_text">${getNameTd('.are_you_sure_of_that_text')}</h4>`,
-        buttons: {
-            confirm: {
-                label: getNameTd('.yes'),
-                className: 'btn-success yes'
-            },
-            cancel: {
-                label: getNameTd('.no'),
-                className: 'btn-danger not'
-            }
-        },
-        callback: async (res) => {
-            if (res) {
-                var list_programs = DAO.ProgramsExe.get('list_programs');
-                if (list_programs != null) {
-                    var item = list_programs.filter(b => b._id == id)[0];
-                    if (item != null && item.isExe != "browser") {
-                        DAO.ProgramsExe.set('list_programs', list_programs.filter(b => b._id != id));
-                        let listNowMacro = await DAO.List_macros.get('macros');
-                        if (listNowMacro != null) {
-                            let newListMacros = listNowMacro.filter(m => m.idProgram != id);
-                            await DAO.List_macros.set('macros', newListMacros);
-                        }
-                        change_list_keys_macros(DAO.List_macros.get('macros'));
-                        $(`#col-exe-id-${id}`).remove();
-                        if (item.iconCustom != null) {
-                            if (item.iconCustom.includes(path.join(DAO.DB_DIR, 'UN-DATA', 'icons-exe'))) {
-                                fs.access(item.iconCustom, fs.constants.F_OK, (err) => {
-                                    if (!err)
-                                        fs.unlinkSync(item.iconCustom)
-                                })
-                            }
-                        }
-                        DAO.List_programs = await DAO.ProgramsExe.get('list_programs');
-                    }
-                    else if (item == null) {
-                        $(`#col-exe-id-${id}`).remove();
-                    }
-                    toaster.success(`${getNameTd('.Successfully_removed')}`);
-                }
-            }
-        }
-    });
-};
-
-async function changeAppsHtml() {
-    let listApps = await DAO.ProgramsExe.get('list_programs');
-    $('.content-files-add').html('');
-    if (listApps != null) {
-        await listApps.forEach(item => {
-            appendHtml(item, item._id);
-        });
-    }
-}
-
-async function getAppById(id) {
-    if (id != null) {
-        var list_programs = await DAO.ProgramsExe.get('list_programs');
-        if (list_programs != null && list_programs.length > 0)
-            return list_programs.filter(b => b._id == id)[0];
-        else
-            return null;
-    }
-    else
-        return null;
-}
-
-async function getNameApp(app) {
-
-    if (app != null && app.name != null && app.name.length > 0) {
-        var name = app.name.replace('.exe', '');
-        if (app.nameCustom.length > 0)
-            name = app.nameCustom;
-        return name;
-    }
-    else
-        return null;
-}
-
-function editExe(id) {
-    $("#icon-exe-edit").val('');
-    var list_programs = DAO.ProgramsExe.get('list_programs');
-    var item = list_programs.filter(b => b._id == id)[0];
-    $(".div-edit-url").addClass("hidden");
-    $(".div-edit-cmd").addClass("hidden");
-    $("#edit-url-add-app").val("");
-    $("#edit-cmd-add-app").val("");
-
-    editExeNow = item;
-    if (item.type_exec == "web_page") {
-        $(".div-edit-url").removeClass("hidden");
-        $("#edit-url-add-app").val(item.path);
-    }
-    else if (item.type_exec == "cmd") {
-        $(".div-edit-cmd").removeClass("hidden");
-        $("#edit-cmd-add-app").val(item.path);
-    }
-
-    var name = item.name.replace('.exe', '');
-    if (item.nameCustom.length > 0)
-        name = item.nameCustom;
-    $('#modal-edit-exeLabel').text(`${getNameTd(".edit_text")} ( ${name} )`);
-    $('#name-exe-modal').val(name);
-};
-
-async function saveEditExe() {
-    var file = $('#icon-exe-edit')[0].files[0];
-    await saveIconFile(file, async (fileOld) => {
-        var newName = $('#name-exe-modal').val();
-        if (newName.length > 0 && newName != editExeNow.nameCustom && newName != editExeNow.name) {
-            editExeNow.nameCustom = newName;
-        }
-
-        if (editExeNow.type_exec == "web_page") {
-            editExeNow.path = $("#edit-url-add-app").val();
-        }
-        else if (editExeNow.type_exec == "cmd") {
-            editExeNow.path = $("#edit-cmd-add-app").val();
-        }
-
-        var list_programs = DAO.ProgramsExe.get('list_programs'), newList = new Array();
-        await list_programs.forEach(element => {
-            if (element.name == editExeNow.name)
-                element = editExeNow;
-            newList.push(element);
-        });
-        await DAO.ProgramsExe.set('list_programs', newList);
-        DAO.List_programs = newList;
-        await changeAppsHtml();
-
-        if (fileOld) {
-            if (fileOld.includes(path.join(DAO.DB_DIR, 'UN-DATA', 'icons-exe')) && fileOld != editExeNow['iconCustom']) {
-                fs.access(fileOld, fs.constants.F_OK, (err) => {
-                    if (!err)
-                        fs.unlinkSync(fileOld)
-                })
-            }
-        }
-
-        $(".div-edit-url").addClass("hidden");
-        $(".div-edit-cmd").addClass("hidden");
-        $("#edit-url-add-app").val("");
-        $("#edit-cmd-add-app").val("");
-        $('.btn-close-exe-modal').click();
-        $("#icon-exe-edit").val('');
-        toaster.success(`${getNameTd('.Successfully_edited')}`);
-    });
-};
-
-async function saveIconFile(fileInput, callback) {
-    if (fileInput) {
-        var dirCopy = path.join(DAO.DB_DIR, 'UN-DATA', 'icons-exe', `${editExeNow.name.replace('.', '-')}-${fileInput.name}`);
-        const oldFile = editExeNow.iconCustom;
-        fs.copyFile(fileInput.path, dirCopy, (err) => {
-            if (err) throw err;
-            editExeNow['iconCustom'] = dirCopy;
-            callback(oldFile);
-        })
-    } else {
-        callback();
-    }
-};
-
-const add_new_webpage = async () => {
-    var name = $("#name_webpage").val();
-    var url = $("#url_webpage").val();
-    if (name.length > 0 && url.length > 0) {
-        var list_webpages = await DAO.DB.get("web_page_saved");
-        var id = 1;
-        if (list_webpages == null)
-            list_webpages = [];
-        else {
-            let max_id = 0;
-            list_webpages.forEach(i => {
-                if (i.id > max_id)
-                    max_id = i.id;
-            })
-            id = max_id + 1;
-        }
-
-        var obj = {
-            id: id,
-            name: name,
-            url: url,
-            status: "no open",
-        }
-        list_webpages.push(obj);
-        await DAO.DB.set("web_page_saved", list_webpages);
-        await add_im_list_webpages(obj);
-        $(".btn-close-webpage-modal").click();
-        $('.footable').footable().trigger('footable_resize');
-    }
-    else {
-        if (name.length < 1) {
-            toaster.danger(getNameTd('.requere_name_add_app'));
-        }
-        if (name.length < 1) {
-            toaster.danger(getNameTd('.requere_url_add_app'));
-        }
-    }
-}
-
-const installed_software_select = async (id) => {
-    var item = _list_installed_software.filter(f => f.id_for_select == id)[0];
-    if (item) {
-        if ($("#name-exe-modal-1").val() == '' || $("#name-exe-modal-1").val() == radio_select_name_file) {
-            $("#name-exe-modal-1").val(item.DisplayName)
-            radio_select_name_file = item.DisplayName;
-        }
-        radio_select_file_dir = item.DisplayIcon;
-        radio_select_file_info = await fs.statSync(radio_select_file_dir);
-    }
-}
-
-const list_installed_software = async () => {
-    if ($("#list_installed_software").hasClass('show') != true) {
-        if (_list_installed_software.length == 0 && im_list != true) {
-            toaster.warning(getNameTd(".please_wait"));
-            im_list = true;
-            setTimeout(async () => {
-                var temp_list = await getAllInstalledSoftwareSync();
-                temp_list = await temp_list.filter(f => f.DisplayIcon != null && f.DisplayIcon.includes('.exe') == true && fs.existsSync(f.DisplayIcon) == true && !f.DisplayIcon.includes('ProgramData') && !f.DisplayIcon.includes('Windows') && !f.DisplayIcon.includes('System32') && !f.DisplayIcon.includes('unis'));
-                $($("#list_installed_software").find('.card-content-spinner')[0]).hide('slow');
-                var count_id = 1000;
-                temp_list.forEach(item => {
-                    if (item.DisplayIcon.includes(".exe,"))
-                        item.DisplayIcon = item.DisplayIcon.split(".exe,")[0] + ".exe";
-                    item.id_for_select = count_id;
-
-                    $("#list_software").append(`<div class="form-check form-check-for-${item.id_for_select}">
-                        <input class="form-check-input" type="radio" onClick='installed_software_select(${item.id_for_select})' name="flexRadioDefault" id="radio-select-${item.id_for_select}">
-                        <label class="form-check-label" for="radio-select-${item.id_for_select}">
-                          ${item.DisplayName}
-                        </label>
-                        <button title="${getNameTd(".locate_dir")} " class="btn btn-primary btn-sm-custom float-right" onClick="open_file_brosewr(${item.id_for_select})"><i class="bi bi-folder-fill"></i></button>
-                    </div>`);
-                    _list_installed_software.push(item);
-                    count_id = count_id + 1;
-                })
-            }, 1000);
-        }
-    }
-}
-
-const change_position_list = async () => {
-    let listApps = await DAO.ProgramsExe.get('list_programs');
-    var con = 1, list = [];
-    for (let index = 0; index < $(".list_apps div.col").length; index++) {
-        const element = $(".list_apps div.col")[index];
-        var _ir = element.id.replaceAll('col-exe-id-', '');
-        list.push({ pos: index + 1, _id: _ir });
-
-        if (element == $(".list_apps div.col")[$(".list_apps div.col").length - 1]) {
-            var new_l = [];
-            listApps.forEach(async e => {
-                var dtr = await list.filter(f => f._id == e._id)[0];
-                if (dtr) {
-                    e.positon_l = dtr.pos;
-                }
-                await new_l.push(e);
-                if (e == listApps[listApps.length - 1]) {
-                    await DAO.ProgramsExe.set('list_programs', await new_l.sort(compare_positon_l));
-                }
-            })
-        }
-    }
-}
-
-async function addExeShotCut(id) {
-    var list_programs = DAO.ProgramsExe.get('list_programs');
-    var item = list_programs.filter(b => b._id == id)[0];
-    if (item) {
-        /*await selectMenu('keys-macros');
-        $("#button-add-macro").click();*/
-        $("#modal-key-macro").modal('show');
-        addShortCut(item._id);
     }
 }

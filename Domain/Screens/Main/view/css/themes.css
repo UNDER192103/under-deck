@@ -1,0 +1,79 @@
+@import "./light.theme.css";
+@import "./black.theme.css";
+@import "./sakura.theme.css";
+
+:root {
+    --color-MenuBar: white;
+    --bg-MenuBar: linear-gradient(300deg, #20009e, #712cf9, #4c0bce);
+    --bg-size-MenuBar: 120% 120%;
+    --animation-MenuBar: gradient-animation 5s ease infinite;
+    --padding-height-MenuBar: 30px;
+    --height-MenuBar: 28px;
+    --bg-x-close-app: transparent;
+    --bg-square-maximize-app: transparent;
+    --bg---minimize-app: transparent;
+    --color-x-close-app: white;
+    --bg-defull-hove-btn-app: #000000;
+
+    --theme-color: var(--bs-black);
+    --theme-bg: var(--bs-light);
+    --theme-bg-bg: black;
+    --theme-bg-size: none;
+    --theme-bg-repeat: no-repeat;
+    --theme-side-bar-color: var(--bs-black);
+    --theme-bg-side-bar: var(--bs-light);
+    --theme-bg-side-bar-size: none;
+    --theme-bg-side-bar-repeat: no-repeat;
+    --theme-card-bg: var(--bs-light);
+    --theme-card-color: var(--bs-black);
+    --theme-table-color: var(--bs-body-color);
+    --theme-table-bg: transparent;
+    --theme-bg-scroll-bar: #8F43EE;
+    --theme-bg-scroll-bar-hover: #a052ff;
+
+    --bd-purple: #4c0bce;
+    --bd-violet: #712cf9;
+}
+
+.Dpreload-app {
+    background: var(--bs-black);
+}
+
+.THCG-BGG {
+    color: var(--theme-color);
+    background: var(--theme-bg-bg);
+    background-size: var(--theme-bg-size);
+    background-repeat: var(--theme-bg-repeat);
+}
+
+.THCG-SB {
+    color: var(--theme-side-bar-color);
+    background: var(--theme-bg-side-bar);
+    background-size: var(--theme-bg-side-bar-size);
+    background-repeat: var(--theme-bg-side-bar-repeat);
+}
+
+.THCG-SB .tTitle,
+.THCG-SB .nav-link,
+.THCG-SB .themeCG {
+    color: var(--theme-side-bar-color);
+}
+
+.THCG-CT {
+    color: var(--theme-color);
+    background: var(--theme-bg);
+}
+
+.card {
+    color: var(--theme-card-color);
+    background: var(--theme-card-bg);
+}
+
+.table {
+    --bs-table-color: var(--theme-table-color);
+    --bs-table-bg: var(--theme-table-bg);
+}
+
+.dropdown-menu {
+    --bs-dropdown-padding-y: 0rem;
+}

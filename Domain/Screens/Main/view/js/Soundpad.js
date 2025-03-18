@@ -76,9 +76,10 @@ $(document).ready(async () => {
 
 const ChangeListSoundPad = async () => {
     $("#list-sounds-soundpad").html('');
+    $("#select-soundpad-audio .ssa").remove();
     ListSoundPad.forEach(sound => {
         $("#list-sounds-soundpad").append(`
-            <tr>
+            <tr class="hover-color-primary animate__animated animate__headShake">
                 <td>${sound.index}</td>
                 <td>${sound.name}</td>
                 <td>${sound.artist}</td>
@@ -90,7 +91,7 @@ const ChangeListSoundPad = async () => {
             </tr>
         `);
         $("#select-soundpad-audio").append(`
-            <option value="${sound.hash}">${sound.name}</option>
+            <option class="ssa" value="${sound.hash}">${sound.name}</option>
         `)
         if (sound == ListSoundPad[ListSoundPad.length - 1]) {
             var table = $('.footable').footable();

@@ -46,13 +46,18 @@ var DAO = require(MAIN_DIR + "/Repository/DB.js"),
 ///      Variables      ///
 
 ///      Pre-load values      ///
+///      Load theme      ///
 
+selectTheme(DAO.DB.get('bd_theme'));
+
+///      Load theme      ///
 DAO.Server_port = DAO.DB.get('server_port');
 DAO.List_programs = DAO.ProgramsExe.get('list_programs');
 DAO.USER = DAO.DB.get('user');
 DAO.PC = DAO.DB.get('user_pc');
 document.getElementById('key-macro').checked = DAO.DB.get('keyEvent');
 document.getElementById('notifications_on_windows').checked = DAO.DB.get('App_notification_windows');
+document.getElementById('isMinimizeToBar').checked = DAO.DB.get('isMinimizeToBar');
 document.getElementById('autoupdateonestart').checked = DAO.DB.get('AutoUpdateApp');
 document.getElementById('isNotValidFirstSearchUpdateApp').checked = DAO.DB.get('isNotValidFirstSearchUpdateApp');
 document.getElementById('obs-checkbox-start').checked = DAO.OBS.get('ObsWssStartOnApp');
@@ -61,20 +66,6 @@ $('#port-local-server').val(GNDATA.server_port);
 $('#local-server-adress-acess-url').val(`http://${ip.address("public", "ipv4")}:${GNDATA.server_port}`);
 
 ///      Pre-load values      ///
-
-///      Load theme      ///
-
-$("#bd-light").click(function (e) {
-    selectTheme('light');
-});
-
-$("#bd-black").click(function (e) {
-    selectTheme('black');
-});
-
-selectTheme(DAO.DB.get('bd_theme'));
-
-///      Load theme      ///
 
 
 ///      Pre load funcions      ///
@@ -224,6 +215,9 @@ async function selectMenu(id, uC = false) {
     else if (id == 'help') {
         _page_selected = `.container-helper`;
     }
+    else if (id == 'appearance') {
+        _page_selected = `.container-appearance`;
+    }
 
     if (await localStorage.getItem('page') != id || !uC) {
         $(`.container-hide-control`).removeClass('hidden').hide();
@@ -236,54 +230,21 @@ async function selectMenu(id, uC = false) {
 
 
 async function selectTheme(id) {
-    switch (id) {
+    $("body").removeClass().addClass('full-page');
 
-        case 'black':
-            $(".bg-card-srt").addClass('bg-dark text-light');
-            $(".bg-srt").addClass('bg-black').removeClass('bg-light');
-            $("#c_tooltip-inner").text('.tooltip-inner{color: black !important;background-color: white !important;}');
-            $(".bg-srt-modal .modal-dialog .modal-content").addClass('bg-black').removeClass('bg-light');
-            $(".bg-srt-dropdown-menu").addClass('dropdown-menu-black').removeClass('dropdown-menu-light');
-            $('#bd-theme').html('<i class="bi bi-moon-stars-fill"></i>');
-            $("#c_bootbox").html(`
-                .modal-content > * {
-                   background-color: black;
-                   color: white;
-                }
-                .modal-body, .modal-header, .modal-footer, .modal-header {
-                   border: var(--bs-modal-border-width) solid rgb(255 255 255) !important;
-                }
-                .modal-body{
-                   border-bottom-left-radius: 5px;
-                   border-bottom-right-radius: 5px;
-                }
-                .bootbox-close-button.close.btn-close {
-                   background-color: #e30909;
-                }
-            `);
-            DAO.DB.set('bd_theme', 'black');
-            break;
+    $("body").addClass('theme-' + id);
+    DAO.DB.set('bd_theme', id);
 
-        case 'light':
-            $(".bg-card-srt").removeClass('bg-dark text-light');
-            $(".bg-srt").addClass('bg-light').removeClass('bg-black');
-            $("#c_tooltip-inner").text('');
-            $(".bg-srt-modal .modal-dialog .modal-content").addClass('bg-light').removeClass('bg-black');
-            $(".bg-srt-dropdown-menu").removeClass('dropdown-menu-light').removeClass('dropdown-menu-black');
-            $('#bd-theme').html('<i class="bi bi-sun-fill"></i>');
-            $("#c_bootbox").html(``);
-            DAO.DB.set('bd_theme', 'light');
-            break
-
-        default:
-            selectTheme('light');
-            break;
+    let isEnb = DAO.DB.get('isEnableAnimationsHover');
+    if (isEnb == "true" || isEnb == true) {
+        $("body").addClass('enb-animations');
+    }
+    else {
+        $("body").removeClass('enb-animations');
     }
     $(`#s-themes option[value="${id}"]`).prop('selected', true);
 }
 ///      Pre load funcions      ///
-
-
 
 ///      App ready      //
 
@@ -292,8 +253,13 @@ $(document).ready(async () => {
     await BACKEND.Send('Obs_wss_p', { stage: 'Status' });
 
     $('.desable_texting_input').on('keydown', function (event) {
-        event.preventDefault();
-        return false;
+        //event.preventDefault();
+        if (event.ctrlKey == true && event.keyCode == 67) {
+            console.log(event.keyCode)
+        }
+        else {
+            return false
+        }
     });
 
     $(".input_select_all").on("click", function () {
@@ -370,7 +336,7 @@ $(document).ready(async () => {
     change_list_web_pages();
 
     setTimeout(async () => {
-        $("#preload-app").hide();
+        $("#preload-app").fadeOut(250);
         $("#main-app").fadeIn(500);
         if (await DAO.DB.get('isFirstStart') != true) {
             if (await DAO.DB.get('first_search_update_app') == true) {
@@ -418,8 +384,9 @@ async function checkPreferredLanguage(callback) {
             <div class="select mb-3">
                 <label class="form-check-label theme_text" for="s-themes">${getNameTd('.theme_text')}:</label>
                 <select class="form-select s-themes">
-                    <option value="light">Light</option>
-                    <option value="black">Dark</option>
+                    <option value="light" class="TLight_text">${getNameTd('.TLight_text')}</option>
+                    <option value="black" class="TOLEDBLACK_text">${getNameTd('.TOLEDBLACK_text')}</option>
+                    <option value="light-sakura" class="TSakura_text">${getNameTd('.TSakura_text')}</option>
                 </select>
             </div>
             `,
@@ -553,31 +520,6 @@ async function apressentationSteps() {
             break;
 
         case 3:
-            await selectMenu('soundpad');
-            tempBlockSelecMenu = true;
-            elem = $("#local-path-soundpad");
-            elem.prop('disabled', true);
-            elem.popover({
-                html: true,
-                title: `<span class="keys_macro_text_icon"><i class="bi bi-mic-fill"></i> ${getNameTd('.soundpad_icon')}</span>`,
-                content: `
-                    <div class="row m-0">
-                        <div class="m-0 mb-3 p-0 quickguide3">
-                            ${getNameTd('.quickguide3R')}
-                        </div>
-                        <div class="m-0 p-0">
-                            <a class="btn btn-secondary btn-xs float-start back_step_paapp back_icon_text" type="button">${getNameTd('.back_icon_text')}</a>
-                            <a class="btn btn-primary btn-xs float-end next_step_paapp next_icon_text" type="button">${getNameTd('.next_icon_text')}</a>
-                        </div>
-                    </div>
-                    `,
-            });
-
-            setTimeout(() => {
-                elem.popover('show');
-            }, 1000);
-            break;
-        case 4:
             await selectMenu('keys-macros');
             tempBlockSelecMenu = true;
             elem = $("#button-add-macro");
@@ -603,7 +545,7 @@ async function apressentationSteps() {
             }, 1000);
             break;
 
-        case 5:
+        case 4:
             await selectMenu('web-pages');
             tempBlockSelecMenu = true;
             elem = $("#button-add-webpage");
@@ -629,18 +571,19 @@ async function apressentationSteps() {
             }, 1000);
             break;
 
-        case 6:
-            await selectMenu('obs-studio');
+        case 5:
+            await selectMenu('appearance');
             tempBlockSelecMenu = true;
-            elem = $("#obs-wss-password");
-            $(".container-obs-studio *").prop('disabled', true);
+            elem = $("#s-themes");
+            elem.prop('disabled', true);
             elem.popover({
                 html: true,
-                title: `<span class="obs_studio_n_text_icon">${getNameTd('.obs_studio_n_text_icon')}</span>`,
+                title: `<span class="settings_text_icon">${getNameTd('.settings_text_icon')}</span>`,
+                placement: 'bottom',
                 content: `
                 <div class="row m-0">
-                    <div class="m-0 mb-3 p-0 quickguide5">
-                        ${getNameTd('.quickguide5')}
+                    <div class="m-0 mb-3 p-0 quickguide8">
+                        ${getNameTd('.quickguide8')}
                     </div>
                     <div class="m-0 p-0">
                         <a class="btn btn-secondary btn-xs float-start back_step_paapp back_icon_text" type="button">${getNameTd('.back_icon_text')}</a>
@@ -655,7 +598,7 @@ async function apressentationSteps() {
             }, 1000);
             break;
 
-        case 7:
+        case 6:
             await selectMenu('config');
             tempBlockSelecMenu = true;
             elem = $("#s-languages");
@@ -682,7 +625,7 @@ async function apressentationSteps() {
             }, 1000);
             break;
 
-        case 8:
+        case 7:
             await selectMenu('config');
             tempBlockSelecMenu = true;
             elem = $("#local-server-adress-acess-url");
@@ -709,19 +652,44 @@ async function apressentationSteps() {
             }, 1000);
             break;
 
-        case 9:
-            await selectMenu('config');
+        case 8:
+            await selectMenu('soundpad');
             tempBlockSelecMenu = true;
-            elem = $("#s-themes");
+            elem = $("#local-path-soundpad");
             elem.prop('disabled', true);
             elem.popover({
                 html: true,
-                title: `<span class="settings_text_icon">${getNameTd('.settings_text_icon')}</span>`,
-                placement: 'bottom',
+                title: `<span class="keys_macro_text_icon"><i class="bi bi-mic-fill"></i> ${getNameTd('.soundpad_icon')}</span>`,
+                content: `
+                        <div class="row m-0">
+                            <div class="m-0 mb-3 p-0 quickguide3">
+                                ${getNameTd('.quickguide3R')}
+                            </div>
+                            <div class="m-0 p-0">
+                                <a class="btn btn-secondary btn-xs float-start back_step_paapp back_icon_text" type="button">${getNameTd('.back_icon_text')}</a>
+                                <a class="btn btn-primary btn-xs float-end next_step_paapp next_icon_text" type="button">${getNameTd('.next_icon_text')}</a>
+                            </div>
+                        </div>
+                        `,
+            });
+
+            setTimeout(() => {
+                elem.popover('show');
+            }, 1000);
+            break;
+
+        case 9:
+            await selectMenu('obs-studio');
+            tempBlockSelecMenu = true;
+            elem = $("#obs-wss-password");
+            $(".container-obs-studio *").prop('disabled', true);
+            elem.popover({
+                html: true,
+                title: `<span class="obs_studio_n_text_icon">${getNameTd('.obs_studio_n_text_icon')}</span>`,
                 content: `
                 <div class="row m-0">
-                    <div class="m-0 mb-3 p-0 quickguide8">
-                        ${getNameTd('.quickguide8')}
+                    <div class="m-0 mb-3 p-0 quickguide5">
+                        ${getNameTd('.quickguide5')}
                     </div>
                     <div class="m-0 p-0">
                         <a class="btn btn-secondary btn-xs float-start back_step_paapp back_icon_text" type="button">${getNameTd('.back_icon_text')}</a>

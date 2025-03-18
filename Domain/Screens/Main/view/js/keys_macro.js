@@ -233,6 +233,7 @@ async function delete_macro(id) {
 }
 
 function select_program_key_macro(id) {
+    $('.CF-active').removeClass('CF-active');
     var list_programs = DAO.ProgramsExe.get('list_programs');
     var item = list_programs.filter(b => b._id == id)[0], icone = path.join(__dirname, "/src/img/underbot_logo.svg");
     program_key_macro_selected = id;
@@ -244,6 +245,7 @@ function select_program_key_macro(id) {
     else
         item.iconCustom = icone;
     $(`.btn-dropdown-key-macro`).text(name);
+    $("#li-key-macro-" + id).addClass('CF-active');
 }
 
 async function add_new_macro() {
@@ -319,6 +321,7 @@ async function edit_save_macro() {
 }
 
 function clear_modal_macro() {
+    $('.CF-active').removeClass('CF-active');
     $(".alert-key-macro-modal").text('').addClass('hidden');
     key_sequence_press = [];
     program_key_macro_selected = null;

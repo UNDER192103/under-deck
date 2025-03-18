@@ -1,7 +1,7 @@
-let stylesAnimmetedC = [ 'animate__slideInDown', /*'animate__slideInLeft',*/ 'animate__slideInRight', 'animate__slideInUp' ];
+let stylesAnimmetedC = ['animate__slideInDown', /*'animate__slideInLeft',*/ 'animate__slideInRight', 'animate__slideInUp'];
 let styleNowstylesAnimmetedC = stylesAnimmetedC[Math.floor((Math.random() * stylesAnimmetedC.length))];
 
-if(DAO.DB.get('isEnableAnimations') == true){
+if (DAO.DB.get('isEnableAnimations') == true) {
     $(".container-animated-style").addClass(styleNowstylesAnimmetedC);
 }
 
@@ -30,21 +30,21 @@ $(document).ready(async () => {
 });
 
 function enbAnimations(isEnb) {
-    if(isEnb == "true" || isEnb == true){
+    if (isEnb == "true" || isEnb == true) {
         $(".container-animated-style").addClass(styleNowstylesAnimmetedC);
         $("#s-enAnimations option[value='true']").prop("selected", true);
         $("#s-Manimations").prop("disabled", false);
         let value = $("#s-Manimations").val();
-        if(value != "random"){
+        if (value != "random") {
             $("#s-animation").prop("disabled", false);
         }
-        else{
+        else {
             $("#s-animation").prop("disabled", true);
             $("#s-animation option[value='random']").prop("selected", true);
         }
         DAO.DB.set('isEnableAnimations', true);
     }
-    else{
+    else {
         $(".container-animated-style").removeClass(styleNowstylesAnimmetedC);
         $("#s-enAnimations option[value='false']").prop("selected", true);
         $("#s-Manimations").prop("disabled", true);
@@ -54,18 +54,18 @@ function enbAnimations(isEnb) {
 }
 
 function selectModelAnimation(type) {
-    if(type != "random" && type != null){
-        if(DAO.DB.get('isEnableAnimations') == true){
+    if (type != "random" && type != null) {
+        if (DAO.DB.get('isEnableAnimations') == true) {
             $("#s-Manimations").prop("disabled", false);
             $("#s-animation").prop("disabled", false);
         }
-        $("#s-Manimations option[value='"+type+"']").prop("selected", true);
+        $("#s-Manimations option[value='" + type + "']").prop("selected", true);
         DAO.DB.set('modelAnimation', type);
     }
-    else{
+    else {
         selectAnimation('random');
         DAO.DB.set('modelAnimation', 'random');
-        if(DAO.DB.get('isEnableAnimations') == false)
+        if (DAO.DB.get('isEnableAnimations') == false)
             $("#s-Manimations").prop("disabled", true);
         $("#s-animation").prop("disabled", true);
         $("#s-Manimations option[value='random']").prop("selected", true);
@@ -73,11 +73,11 @@ function selectModelAnimation(type) {
 }
 
 function selectAnimation(type) {
-    if(type != "random" && type != null){
-        $("#s-animation option[value='"+type+"']").prop("selected", true);
+    if (type != "random" && type != null) {
+        $("#s-animation option[value='" + type + "']").prop("selected", true);
         DAO.DB.set('animation', type);
     }
-    else{
+    else {
         DAO.DB.set('animation', 'random');
         $("#s-animation option[value='random']").prop("selected", true);
     }
