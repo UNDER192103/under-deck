@@ -220,6 +220,11 @@ var en_us = [
         text: "Cancel"
     },
     {
+        id: ".cancel_icon_text",
+        type: "html",
+        text: `<i class="bi bi-x-lg"></i> Cancel`
+    },
+    {
         id: ".s_s_text",
         type: "text",
         text: "Saved successfully"
@@ -375,6 +380,11 @@ var en_us = [
         text: "Save",
     },
     {
+        id: ".save_icon_text",
+        type: "html",
+        text: `<i class="bi bi-check-lg"></i> Save`,
+    },
+    {
         id: ".recording_text",
         type: "text",
         text: "Recording"
@@ -383,6 +393,16 @@ var en_us = [
         id: ".start_text",
         type: "text",
         text: "Start"
+    },
+    {
+        id: ".Add_App_text",
+        type: "text",
+        text: "Add to Applications"
+    },
+    {
+        id: ".Add_App_icon_text",
+        type: "html",
+        text: `<i class="bi bi-plus"></i> Add to Applications`
     },
     {
         id: ".edit_text",
@@ -1110,6 +1130,11 @@ var en_us = [
         text: "Apply",
     },
     {
+        id: ".apply_icon_text",
+        type: "html",
+        text: `<i class="bi bi-check-square"></i> Apply`,
+    },
+    {
         id: ".update_and_restart",
         type: "text",
         text: "Install update",
@@ -1401,8 +1426,8 @@ var en_us = [
     },
     {
         id: ".changeUserAvatar_text",
-        type: "text",
-        text: "Change Avatar"
+        type: "html",
+        text: `<i class="bi bi-person-square"></i> Change Avatar`
     },
     {
         id: ".removeUserAvatar_text",
@@ -1543,6 +1568,11 @@ var en_us = [
         id: ".Play_text",
         type: "html",
         text: `Play`
+    },
+    {
+        id: ".Play_icon_text",
+        type: "html",
+        text: `<i class="bi bi-play-fill"></i> Play`
     },
     {
         id: ".date_created_text",

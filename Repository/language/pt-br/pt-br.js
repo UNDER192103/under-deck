@@ -350,6 +350,11 @@ var pt_br = [
         text: "Salvar",
     },
     {
+        id: ".save_icon_text",
+        type: "html",
+        text: `<i class="bi bi-check-lg"></i> Salvar`,
+    },
+    {
         id: ".recording_text",
         type: "text",
         text: "Gravando"
@@ -375,9 +380,24 @@ var pt_br = [
         text: "Iniciar"
     },
     {
+        id: ".Add_App_text",
+        type: "text",
+        text: "Adicionar em Aplicativos"
+    },
+    {
+        id: ".Add_App_icon_text",
+        type: "html",
+        text: `<i class="bi bi-plus"></i> Adicionar em Aplicativos`
+    },
+    {
         id: ".cancel_text",
         type: "text",
         text: "Cancelar"
+    },
+    {
+        id: ".cancel_icon_text",
+        type: "html",
+        text: `<i class="bi bi-x-lg"></i> Cancelar`
     },
     {
         id: ".edit_text",
@@ -1110,6 +1130,11 @@ var pt_br = [
         text: "Aplicar",
     },
     {
+        id: ".apply_icon_text",
+        type: "html",
+        text: `<i class="bi bi-check-square"></i> Aplicar`,
+    },
+    {
         id: ".update_and_restart",
         type: "text",
         text: "Instalar atualização",
@@ -1401,8 +1426,8 @@ var pt_br = [
     },
     {
         id: ".changeUserAvatar_text",
-        type: "text",
-        text: "Mudar Avatar"
+        type: "html",
+        text: `<i class="bi bi-person-square"></i> Mudar Avatar`
     },
     {
         id: ".removeUserAvatar_text",
@@ -1543,6 +1568,11 @@ var pt_br = [
         id: ".Play_text",
         type: "html",
         text: `Play`
+    },
+    {
+        id: ".Play_icon_text",
+        type: "html",
+        text: `<i class="bi bi-play-fill"></i> Play`
     },
     {
         id: ".date_created_text",

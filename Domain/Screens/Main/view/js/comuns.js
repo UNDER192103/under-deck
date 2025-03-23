@@ -26,6 +26,7 @@ var DAO = require(MAIN_DIR + "/Repository/DB.js"),
     keyEvent = require(MAIN_DIR + '/Domain/Service/KeyMacros.js'),
     localServer = require(MAIN_DIR + '/Domain/Service/Server.js'),
     localServer = require(MAIN_DIR + '/Domain/Service/Server.js'),
+    mac = null,
     list_routs = null,
     old_sbs_scene_selected = null,
     _list_installed_software = [],
@@ -88,6 +89,9 @@ const checkUserLogin = () => {
             console.log(erro)
         });
 }
+
+const b64toBlob = (base64) =>
+    fetch(base64).then(res => res.blob());
 
 const load_custom_files = async () => {
     try {
@@ -307,17 +311,19 @@ async function loadThemesOptions(isPreloadd = false) {
 async function selectTheme(id, isPreloadd = false) {
     $("body").removeClass().addClass('full-page');
     let isOTheme = DAO.ThemesData.list.find(item => item.tid == id);
+    $(".btn-apply-themeD.isDownloaded").show('slow');
     if (isOTheme) {
         if (!isPreloadd) {
             SetCustomTheme(isOTheme, isPreloadd);
         }
+        $(".btn-apply-themeD#" + isOTheme.tid).hide('slow');
         $("body").addClass('theme-' + isOTheme.class);
     }
     else {
         SetCustomTheme(null, isPreloadd);
         $("body").addClass('theme-' + id);
     }
-    DAO.DB.set('bd_theme', id);
+    await DAO.DB.set('bd_theme', id);
 
     let isEnb = DAO.DB.get('isEnableAnimationsHover');
     if (isEnb == "true" || isEnb == true) {

@@ -30,7 +30,7 @@ const webSocketClient = {
             this.callback(webSocketClient.formatJson(data));
         } catch (error) { }
         try {
-            callBackDefault(webSocketClient.formatJson(data));
+            callBackDefault(webSocketClient.formatJson(data), data);
         } catch (error) { }
         if (this.callback2 != null)
             this.callback2(webSocketClient.formatJson(data));
@@ -54,6 +54,7 @@ const startWS = () => {
     conn.onopen = async function (e) {
         console.log("WebSocket Is Open");
         UpdatePCACC();
+        GetACC();
     };
     conn.onclose = function (e) {
         startWs10Segundos()
@@ -74,27 +75,51 @@ function startWs10Segundos() {
 }
 
 
-function UpdatePCACC() {
-    macaddress.one().then(function (mac) {
-        webSocketClient.send(
-            webSocketClient.ToJson(
-                {
-                    lang: _lang,
-                    method: 'confirm-pc-account',
-                    user: {
-                        pc_name: process.env.COMPUTERNAME,
-                        mac: mac,
-                        client_id: DAO.USER ? DAO.USER.client_id : 0
-                    }
+async function UpdatePCACC() {
+    if (!mac)
+        mac = await macaddress.one();
+    await webSocketClient.send(
+        await webSocketClient.ToJson(
+            {
+                lang: _lang,
+                method: 'confirm-pc-account',
+                user: {
+                    pc_name: process.env.COMPUTERNAME,
+                    mac: mac,
+                    client_id: DAO.USER ? DAO.USER.client_id : 0
                 }
-            )
-        );
-    });
+            }
+        )
+    );
 }
 
-const callBackDefault = async (data) => {
+async function GetACC() {
+    await webSocketClient.send(
+        await webSocketClient.ToJson(
+            {
+                lang: _lang,
+                method: 'get-account',
+                user: {
+                    client_id: DAO.USER ? DAO.USER.client_id : 0
+                }
+            }
+        )
+    );
+}
+
+const callBackDefault = async (data, json) => {
     if (data) {
         switch (data.method) {
+
+            case "get-account":
+                if (data.user) {
+                    if (JSON.stringify(DAO.USER) != JSON.stringify(data.user)) {
+                        await DAO.DB.set('user', data.user);
+                        DAO.USER = data.user;
+                        await changeUserInfoData();
+                    }
+                }
+                break;
 
             case "confirm-pc-account":
                 if (data.pc_id && !isNaN(data.pc_id)) {
@@ -256,5 +281,11 @@ setInterval(() => {
         UpdatePCACC();
     }
 }, 2000);
+
+setInterval(() => {
+    if (conn && conn.readyState == 1) {
+        GetACC();
+    }
+}, 10000);
 
 startWS();

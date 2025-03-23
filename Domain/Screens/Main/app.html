@@ -7,6 +7,7 @@
    <link href="../../src/bootstrap-5.0.2/css/bootstrap.min.css" rel="stylesheet">
    <link rel="stylesheet" href="../../src/bootstrap-5.0.2/css/bootstrap-icons.css">
    <link rel="stylesheet" href="../../src/footable/css/footable.core.css">
+   <link rel="stylesheet" href="../../src/croppic/croppie.min.css">
    <link rel="stylesheet" type="text/css" href="../../src/css/toastify.min.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
       integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
@@ -1660,105 +1661,124 @@
 
                                  <div class="card-body">
 
-                                    <div class="d-flex">
-                                       <div class="input-group" style="height: 100px;">
-                                          <div class="m-auto ms-0 d-flex">
-                                             <div class="ms-2">
-                                                <h5 class="form-check-label avatar_text"></h5>
-                                                <button id="changeUserAvatar"
-                                                   class="btn btn-primary btn-sm changeUserAvatar_text"
-                                                   type="button"></button>
-                                                <input type="file" class="form-control hidden"
-                                                   id="uInput-changeUserAvatar" accept=".jpeg, .gif, .png">
-                                                <button
-                                                   class="btn btn-danger ms-3 btn-sm removeUserAvatar_text btn_remove_account_avatar"
-                                                   type="button"></button>
-                                             </div>
-                                          </div>
+                                    <div id="croppie-demo" style="display: none;">
+                                       <h5 class="form-check-label avatar_text"></h5>
+                                       <div class="croppie-avatar-wrap">
+                                          <div id="croppie-avatar-export" style="display: none;"></div>
+                                          <div id="croppie-avatar"></div>
                                        </div>
-
-                                       <div class="input-group">
-                                          <img src="../../src/img/profile-icon.png" alt="" width="100" height="100"
-                                             class="m-auto UND_usericon UND_usericonPrevEdit">
+                                       <div class="d-flex justify-content-center">
+                                          <button id="cancelExportAvatar" type="button"
+                                             class="btn btn-danger cancel_icon_text"></button>
+                                          <button
+                                             class="btn btn-primary ms-2 me-2 changeUserAvatar btn-sm changeUserAvatar_text"
+                                             type="button"></button>
+                                          <button id="croppieExportAvatar" type="button"
+                                             class="btn btn-success save_icon_text"></button>
                                        </div>
                                     </div>
+                                    <div id="tesss"></div>
 
-                                    <hr>
-
-                                    <div class="d-flex mt-3">
-                                       <div class="input-group">
-                                          <div class="m-auto ms-0 d-flex">
-                                             <div class="ms-2 d-grid">
-                                                <h5 class="form-check-label display_name_text m-0"></h5>
-                                             </div>
-                                          </div>
-                                       </div>
-
-                                       <div class="input-group">
-                                          <input type="text" id="insertUND_DisplayUsername"
-                                             class="form-control m-auto ValUND_DisplayUsername ValUND_DisplayUsernameEdit">
-                                       </div>
-                                    </div>
-
-                                    <div class="d-flex mt-3">
-                                       <div class="input-group">
-                                          <div class="m-auto ms-0 d-flex">
-                                             <div class="ms-2 d-grid">
-                                                <h5 class="form-check-label username_text m-0"></h5>
-                                             </div>
-                                          </div>
-                                       </div>
-
-                                       <div class="input-group">
-                                          <input disabled type="text" class="form-control m-auto ValUND_username">
-                                       </div>
-                                    </div>
-
-                                    <div class="d-flex mt-3">
-                                       <div class="input-group">
-                                          <div class="m-auto ms-0 d-flex">
-                                             <div class="ms-2 d-grid">
-                                                <h5 class="form-check-label email_text m-0"></h5>
-                                             </div>
-                                          </div>
-                                       </div>
-
-                                       <div class="input-group">
-                                          <input disabled type="text" class="form-control m-auto ValUND_email">
-                                       </div>
-                                    </div>
-
-                                    <div class="mt-1 d-ConfirmEmailAddress" style="display: none;">
+                                    <div id="info-profile">
                                        <div class="d-flex">
-                                          <div class="input-group">
+                                          <div class="input-group" style="height: 100px;">
                                              <div class="m-auto ms-0 d-flex">
-                                                <div class="ms-2 d-grid">
-                                                   <h5 class="form-check-label m-0"></h5>
+                                                <div class="ms-2">
+                                                   <h5 class="form-check-label avatar_text"></h5>
+                                                   <button
+                                                      class="btn btn-primary changeUserAvatar btn-sm changeUserAvatar_text"
+                                                      type="button"></button>
+                                                   <input type="file" class="form-control hidden"
+                                                      id="uInput-changeUserAvatar" accept=".jpeg, .gif, .png">
+                                                   <button
+                                                      class="btn btn-danger ms-3 btn-sm removeUserAvatar_text btn_remove_account_avatar"
+                                                      type="button"></button>
                                                 </div>
                                              </div>
                                           </div>
 
                                           <div class="input-group">
-                                             <button type="button"
-                                                class="btn btn-primary confirm_email_text m-auto btn_ConfirmEmail"></button>
+                                             <img src="../../src/img/profile-icon.png" alt="" width="100" height="100"
+                                                class="m-auto UND_usericon UND_usericonPrevEdit">
                                           </div>
                                        </div>
-                                    </div>
 
-                                    <div class="d-flex mt-3 mb-3">
-                                       <div class="input-group">
-                                          <div class="m-auto ms-0 d-flex">
-                                             <div class="ms-2 d-grid">
-                                                <h5 class="form-check-label creation_data_text m-0"></h5>
+                                       <hr>
+
+                                       <div class="d-flex mt-3">
+                                          <div class="input-group">
+                                             <div class="m-auto ms-0 d-flex">
+                                                <div class="ms-2 d-grid">
+                                                   <h5 class="form-check-label display_name_text m-0"></h5>
+                                                </div>
+                                             </div>
+                                          </div>
+
+                                          <div class="input-group">
+                                             <input type="text" id="insertUND_DisplayUsername"
+                                                class="form-control m-auto ValUND_DisplayUsername ValUND_DisplayUsernameEdit">
+                                          </div>
+                                       </div>
+
+                                       <div class="d-flex mt-3">
+                                          <div class="input-group">
+                                             <div class="m-auto ms-0 d-flex">
+                                                <div class="ms-2 d-grid">
+                                                   <h5 class="form-check-label username_text m-0"></h5>
+                                                </div>
+                                             </div>
+                                          </div>
+
+                                          <div class="input-group">
+                                             <input disabled type="text" class="form-control m-auto ValUND_username">
+                                          </div>
+                                       </div>
+
+                                       <div class="d-flex mt-3">
+                                          <div class="input-group">
+                                             <div class="m-auto ms-0 d-flex">
+                                                <div class="ms-2 d-grid">
+                                                   <h5 class="form-check-label email_text m-0"></h5>
+                                                </div>
+                                             </div>
+                                          </div>
+
+                                          <div class="input-group">
+                                             <input disabled type="text" class="form-control m-auto ValUND_email">
+                                          </div>
+                                       </div>
+
+                                       <div class="mt-1 d-ConfirmEmailAddress" style="display: none;">
+                                          <div class="d-flex">
+                                             <div class="input-group">
+                                                <div class="m-auto ms-0 d-flex">
+                                                   <div class="ms-2 d-grid">
+                                                      <h5 class="form-check-label m-0"></h5>
+                                                   </div>
+                                                </div>
+                                             </div>
+
+                                             <div class="input-group">
+                                                <button type="button"
+                                                   class="btn btn-primary confirm_email_text m-auto btn_ConfirmEmail"></button>
                                              </div>
                                           </div>
                                        </div>
 
-                                       <div class="input-group">
-                                          <h5 class="form-check-label UND_datecreated m-0"></h5>
+                                       <div class="d-flex mt-3 mb-3">
+                                          <div class="input-group">
+                                             <div class="m-auto ms-0 d-flex">
+                                                <div class="ms-2 d-grid">
+                                                   <h5 class="form-check-label creation_data_text m-0"></h5>
+                                                </div>
+                                             </div>
+                                          </div>
+
+                                          <div class="input-group">
+                                             <h5 class="form-check-label UND_datecreated m-0"></h5>
+                                          </div>
                                        </div>
                                     </div>
-
                                  </div>
 
                               </div>
@@ -1822,6 +1842,7 @@
 <script src="../../src/jquery/jquery.min.js"></script>
 <script src="../../src/jquery/jquery-ui.min.js"></script>
 <script src="../../src/jquery/jquery.mask.min.js"></script>
+<script src="../../src/croppic/croppie.min.js"></script>
 <script src="../../src/bootstrap-5.0.2/js/bootstrap.bundle.min.js"></script>
 <script src="../../src/bootstrap-5.0.2/js/bootbox.min.js"></script>
 <script src="../../src/footable/js/footable.all.min.js"></script>

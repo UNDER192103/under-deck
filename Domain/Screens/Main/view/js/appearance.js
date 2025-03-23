@@ -59,12 +59,21 @@ $(document).ready(async () => {
                     await DAO.DB.set('bd_theme', 'light');
                 }
                 loadThemesOptions(true);
+                await GetListThemes();
                 if (theme.isLocal) {
                     fs.rmSync(path.join(DAO.THEME_DIR, path.dirname(theme.css)), { recursive: true, force: true });
                 }
                 toaster.success(getNameTd('.theme_successfully_removed_text'));
             }
         });
+
+    });
+
+    $(document).on('click', '.btn-apply-themeD', (e) => {
+
+        selectTheme(e.target.id);
+        $(".btn-apply-themeD#" + e.target.id).hide('slow');
+        toaster.success(getNameTd('.theme_successfully_removed_text'));
 
     });
 
@@ -118,6 +127,7 @@ async function SetRemoteTheme(id) {
             $(".btn-addnew-themeD#" + id).hide();
             toaster.success(getNameTd('.Added_successfully'));
             loadThemesOptions();
+            await GetListThemes();
         }
     }
 }
@@ -138,6 +148,7 @@ async function StartDownloadTheme(id) {
                         $(".btn-addnew-themeD#" + theme.tid).hide();
                         $(".isLocated_in#" + theme.tid).html(getNameTd('.locally_text'));
                         loadThemesOptions();
+                        await GetListThemes();
                     }).catch(async (err) => {
                         console.log(err);
                         toaster.danger(getNameTd('.error_downloading_theme_text'));
@@ -322,12 +333,16 @@ async function GetListThemes() {
                                 <td class="isLocated_in" id="${Item.tid}">${isLocatedPc}</td>
                                 <td>
                             ${is_installed ?
-                                `<button id="${Item.tid}" type="button" class="btn btn-sm btn-danger btn-uninstall-themeD remove_icon">${getNameTd('.remove_icon')}</button>` :
-                                `<button style="display: none;" id="${Item.tid}" type="button" class="btn btn-sm btn-danger btn-uninstall-themeD remove_icon">${getNameTd('.remove_icon')}</button>`
+                                `<button id="${Item.tid}" type="button" class="btn btn-xs btn-success isDownloaded btn-apply-themeD apply_icon_text">${getNameTd('.apply_icon_text')}</button>` :
+                                `<button style="display: none;" id="${Item.tid}" type="button" class="btn btn-xs btn-success btn-apply-themeD apply_icon_text">${getNameTd('.apply_icon_text')}</button>`
+                            }
+                            ${is_installed ?
+                                `<button id="${Item.tid}" type="button" class="btn btn-xs btn-danger btn-uninstall-themeD remove_icon">${getNameTd('.remove_icon')}</button>` :
+                                `<button style="display: none;" id="${Item.tid}" type="button" class="btn btn-xs btn-danger btn-uninstall-themeD remove_icon">${getNameTd('.remove_icon')}</button>`
                             }
                             ${!is_installed ?
-                                `<button id="${Item.tid}" type="button" class="btn btn-sm btn-success btn-addnew-themeD add_text_icon">${getNameTd('.add_text_icon')}</button>` :
-                                `<button style="display: none;" id="${Item.tid}" type="button" class="btn btn-sm btn-success btn-addnew-themeD add_text_icon">${getNameTd('.add_text_icon')}</button>`
+                                `<button id="${Item.tid}" type="button" class="btn btn-xs btn-success btn-addnew-themeD add_text_icon">${getNameTd('.add_text_icon')}</button>` :
+                                `<button style="display: none;" id="${Item.tid}" type="button" class="btn btn-xs btn-success btn-addnew-themeD add_text_icon">${getNameTd('.add_text_icon')}</button>`
                             }
                                 </td>
                             </tr>

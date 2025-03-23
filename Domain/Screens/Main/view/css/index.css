@@ -959,3 +959,27 @@ svg.SvgSoundpadColor g path {
   background: linear-gradient(300deg, #20009e, var(--bs-primary)) !important;
   background-size: 150% 150%;
 }
+
+.croppie-avatar-wrap {
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+}
+
+.cr-viewport {
+  border-radius: 10em;
+}
+
+.croppie-avatar .container {
+  margin-left: 0px;
+  padding-left: 0px;
+}
+
+.croppie-container .cr-slider-wrap {
+  width: 100%;
+  padding: 15px auto;
+}
+
+.modal-content {
+  margin-bottom: 40px;
+}

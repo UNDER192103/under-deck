@@ -57,6 +57,14 @@ $(document).ready(async () => {
         Comun.exec_soundpad(pathSoundPadExe, e.currentTarget.id);
     });
 
+    $(document).on('click', '.btn_addappplay-soundpad', async (e) => {
+        let item = ListSoundPad.find(f => f.index == e.currentTarget.id);
+        if (item) {
+            add_app.type_exec = "soundpad_audio";
+            add_app_for_soundpad_audio(item.hash, null, item.name);
+        }
+    });
+
     $('#select-soundpad-audio').change(function () {
         let f = ListSoundPad.filter(f => f.hash == $('#select-soundpad-audio').val());
         if (f[0] != undefined) {
@@ -86,7 +94,8 @@ const ChangeListSoundPad = async () => {
                 <td>${sound.duration}</td>
                 <td>${sound.addedOn}</td>
                 <td>
-                    <a id="${sound.index}" class="btn btn-light btn-sm btn_play-soundpad"><i class="bi bi-play-fill"></i> ${getNameTd('.Play_text')}</a>
+                    <a id="${sound.index}" class="btn btn-light btn-xs btn_play-soundpad Play_icon_text">${getNameTd('.Play_icon_text')}</a>
+                    <a id="${sound.index}" class="btn btn-light btn-xs btn_addappplay-soundpad Add_App_icon_text">${getNameTd('.Add_App_icon_text')}</a>
                 </td>
             </tr>
         `);

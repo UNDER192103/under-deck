@@ -1,3 +1,5 @@
+const { file } = require("googleapis/build/src/apis/file");
+
 module.exports = {
     DB_DIR: null,
     THEME_DIR: null,
@@ -18,6 +20,10 @@ module.exports = {
     USER: null,
     PC: null,
     USERDATAUPDATE: {
+        croppie: {
+            file: null,
+            base64: null,
+        },
         icon: null,
         name: null,
         username: null,
