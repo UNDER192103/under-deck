@@ -30,13 +30,32 @@ async function start_server(type, callback) {
 
             app.post("/get_data_user", async (req, res) => {
                 res.send(await GetDataListProgramsForLocalHost());
-            })
+            });
+
+            app.post("/set_volume", async (req, res) => {
+                if (req.body.volume) {
+                    let volume = parseInt(req.body.volume);
+                    if (volume > 0) {
+                        app_un.isMuted = await loudness.getMuted();
+                        if (app_un.isMuted) {
+                            await loudness.setMuted(false);
+                        }
+                        await loudness.setVolume(parseInt(volume));
+                    }
+                    else {
+                        await loudness.setMuted(true);
+                    }
+
+                    app_un.isMuted = await loudness.getMuted();
+                }
+                res.send("OK");
+            });
 
             app.post("/execute_exe", async (req, res) => {
                 await DAO.GetDataNow();
                 exec_program(req.body);
                 res.send("Ok");
-            })
+            });
 
             app.post("/get_base64", async (req, res) => {
                 fs.readFile(req.body.icon, "base64", function (err, buffer) {

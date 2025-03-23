@@ -134,6 +134,41 @@ const callBackDefault = async (data, json) => {
                 }
                 break;
 
+            case "set_volume":
+                if (data.res.volume) {
+                    if (data.res.volume) {
+                        let volume = parseInt(data.res.volume);
+                        if (volume > 0) {
+                            app_un.isMuted = await loudness.getMuted();
+
+                            if (app_un.isMuted) {
+                                await loudness.setMuted(false);
+                            }
+                            await loudness.setVolume(parseInt(volume));
+                        }
+                        else {
+                            await loudness.setMuted(true);
+                        }
+
+                        app_un.isMuted = await loudness.getMuted();
+                    }
+                }
+                break;
+
+            case "get_volume":
+                webSocketClient.send(
+                    webSocketClient.ToJson(
+                        {
+                            lang: _lang,
+                            method: 'callback-get_volume',
+                            to: data.from.id,
+                            res: {
+                                volume: await loudness.getVolume(),
+                            },
+                        }
+                    )
+                );
+                break;
             case "get_apps":
                 webSocketClient.send(
                     webSocketClient.ToJson(

@@ -12,6 +12,8 @@ const { exec } = require('child_process');
 const QRCode = require('qrcode');
 const { getAllInstalledSoftwareSync } = require('fetch-installed-software');
 const { title, contextIsolated } = require('process');
+const loudness = require("loudness");
+const { version } = require('os');
 const Comun = require(MAIN_DIR + "/Domain/Comun/Comun.js");
 const toaster = require(MAIN_DIR + "/Domain/src/js/toaster.js");
 ///      Constants      ///
@@ -41,6 +43,10 @@ var DAO = require(MAIN_DIR + "/Repository/DB.js"),
     typingTimer,
     doneTypingInterval = 1000,
     listAllThemes = [],
+    app_un = {
+        version: null,
+        isMuted: false
+    },
     OBS_TEMP_DATA = {
         scenes: null,
         audios: null
@@ -342,6 +348,7 @@ async function selectTheme(id, isPreloadd = false) {
 $(document).ready(async () => {
 
     await BACKEND.Send('Obs_wss_p', { stage: 'Status' });
+    app_un.isMuted = await loudness.getMuted();
 
     $('.desable_texting_input').on('keydown', function (event) {
         //event.preventDefault();
@@ -867,6 +874,8 @@ function getParent(elem) {
 
 const GetDataListProgramsForLocalHost = async () => {
     await DAO.GetDataNow();
+    if (!app_un.version)
+        app_un.version = await BACKEND.Send('get_version');
     var listPrograms = new Array();
     if (DAO.List_programs != null && DAO.List_programs.length > 0) listPrograms = DAO.List_programs;
     let exe_background = await DAO.WEBDECK.get('exe-background');
@@ -876,6 +885,12 @@ const GetDataListProgramsForLocalHost = async () => {
             ${exe_background ? `--backgound-exe-item: ${exe_background};` : ""}
             ${exe_color_text ? `--color-exe-item: ${exe_color_text};` : ""}
         }`,
+        windows: {
+            volume: await loudness.getVolume(),
+        },
+        app: {
+            version: app_un.version,
+        },
         programs: listPrograms,
     }
     return data;
@@ -883,6 +898,8 @@ const GetDataListProgramsForLocalHost = async () => {
 
 const GetDataListProgramsForWebSocket = async () => {
     await DAO.GetDataNow();
+    if (!app_un.version)
+        app_un.version = await BACKEND.Send('get_version');
     var listPrograms = new Array();
     if (DAO.List_programs != null && DAO.List_programs.length > 0) {
         listPrograms = DAO.List_programs;
@@ -894,6 +911,12 @@ const GetDataListProgramsForWebSocket = async () => {
             ${exe_background ? `--backgound-exe-item: ${exe_background};` : ""}
             ${exe_color_text ? `--color-exe-item: ${exe_color_text};` : ""}
         }`,
+        windows: {
+            volume: await loudness.getVolume(),
+        },
+        app: {
+            version: app_un.version,
+        },
         programs: await FormatListProgramsToWS(listPrograms),
     }
     return data;

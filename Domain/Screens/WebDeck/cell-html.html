@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <title>Under Deck</title>
   <meta charset="utf-8">
@@ -12,7 +13,13 @@
 </head>
 
 <body class="bg-black">
-  
+  <div class="sidebar d-flex flex-column flex-shrink-0 p-2 text-white bg-dark">
+    <span id="range-volume-demo">0</span>
+    <div class="range-slider">
+      <input id="range-volume" class="input-range" orient="vertical" type="range" value="0" min="0" max="100">
+    </div>
+  </div>
+
   <main class="container-xxl bd-gutter" id="content">
     <div class="my-5">
       <ul id="exe-list" class="exe-list row row-cols-3 row-cols-sm-4 row-cols-lg-6 row-cols-xl-8 list-unstyled list">
@@ -38,4 +45,5 @@
 <script src="/src/NoSleep/js/NoSleep.js"></script>
 <script src="/Screens/WebDeck/view/js/index.js"></script>
 <script src="/Screens/WebDeck/view/js/NoSleep.js"></script>
+
 </html>

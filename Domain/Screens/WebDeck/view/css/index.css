@@ -9,12 +9,26 @@ body {
     overflow-x: hidden;
 }
 
+.sidebar {
+    position: fixed;
+    height: 100%;
+    left: 0;
+    background: #000000;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
 .header-buttons {
     position: fixed;
     display: flex;
     padding: 5px;
 }
-.header-buttons > button {
+
+.header-buttons>button {
     margin-right: 5px;
 }
 
@@ -24,7 +38,7 @@ main {
 
 .exe-list {
     display: flex;
-    justify-content: center;   
+    justify-content: center;
 }
 
 .exe-item {
@@ -107,4 +121,19 @@ main {
     -moz-transform: rotate(270deg);
     -o-transform: rotate(270deg);
     transform: rotate(270deg);
+}
+
+.range-slider {
+    height: 100%;
+}
+
+.range-slider .input-range {
+    width: 5px;
+    height: 100%;
+    border-radius: 5px;
+    background: #ccc;
+    outline: none;
+    writing-mode: bt-lr;
+    -webkit-appearance: slider-vertical;
+
 }
