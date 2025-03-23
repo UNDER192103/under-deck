@@ -22,7 +22,6 @@ var GNDATA = {
     server_port: null,
 }
 var API = require(MAIN_DIR + "/Repository/Api.js");
-var DBCLASS = require(MAIN_DIR + "/Repository/DBCLASS.js");
 var DAO = require(MAIN_DIR + "/Repository/DB.js"),
     keyEvent = require(MAIN_DIR + '/Domain/Service/KeyMacros.js'),
     localServer = require(MAIN_DIR + '/Domain/Service/Server.js'),
