@@ -2,32 +2,45 @@ const path = require('path');
 const fs = require("fs");
 const { app } = require('electron');
 const _MAIN_DIR = __dirname.split('Repository')[0];
-const packageJson = require(_MAIN_DIR+"/package.json");
+const packageJson = require(_MAIN_DIR + "/package.json");
 const Jsoning = require("jsoning");
 const dir_appdata_un_data = path.join(path.join(process.env.APPDATA, packageJson.productName), 'UN-DATA');
+var _all = require(_MAIN_DIR + 'Domain/Model/DB_model.js');
 
-var _all  = require(_MAIN_DIR + 'Domain/Model/DB_model.js');
+class DBCLASS {
+    constructor() {
+        Object.keys(_all).forEach(key => {
+            this[key] = _all[key];
+        });
 
-_all.DB = new Jsoning(dir_appdata_un_data + "/DB/DB.json");
-_all.OBS = new Jsoning(dir_appdata_un_data + "/DB/OBS.json");
-_all.WEBDECK = new Jsoning(dir_appdata_un_data + "/DB/WEBDECK.json");
-_all.Opens_windows = new Jsoning(dir_appdata_un_data + "/DB/Opens_windows.json");
-_all.List_macros = new Jsoning(dir_appdata_un_data + "/DB/Macros.json");
-_all.ProgramsExe = new Jsoning(dir_appdata_un_data + "/DB/ProgramsExe.json");
-_all.DB_DIR = path.join(process.env.APPDATA, packageJson.productName);
+        this.DB = new Jsoning(dir_appdata_un_data + "/DB/DB.json");
+        this.OBS = new Jsoning(dir_appdata_un_data + "/DB/OBS.json");
+        this.WEBDECK = new Jsoning(dir_appdata_un_data + "/DB/WEBDECK.json");
+        this.THEMES = new Jsoning(dir_appdata_un_data + "/DB/THEMES.json");
+        this.Opens_windows = new Jsoning(dir_appdata_un_data + "/DB/Opens_windows.json");
+        this.List_macros = new Jsoning(dir_appdata_un_data + "/DB/Macros.json");
+        this.ProgramsExe = new Jsoning(dir_appdata_un_data + "/DB/ProgramsExe.json");
+        this.DB_DIR = path.join(process.env.APPDATA, packageJson.productName);
+        this.THEME_DIR = path.join(process.env.APPDATA, packageJson.productName, 'UN-DATA', 'themes');
+    }
 
-_all.GetDataNow = async ()=>{
-    _all.DB = new Jsoning(dir_appdata_un_data + "/DB/DB.json");
-    _all.OBS = new Jsoning(dir_appdata_un_data + "/DB/OBS.json");
-    _all.WEBDECK = new Jsoning(dir_appdata_un_data + "/DB/WEBDECK.json");
-    _all.Opens_windows = new Jsoning(dir_appdata_un_data + "/DB/Opens_windows.json");
-    _all.List_macros = new Jsoning(dir_appdata_un_data + "/DB/Macros.json");
-    _all.ProgramsExe = new Jsoning(dir_appdata_un_data + "/DB/ProgramsExe.json");
-    _all.List_programs = await _all.ProgramsExe.get('list_programs');
-    _all.Macro_lis = await _all.List_macros.get('macros');
-    _all.USER = _all.DB.get('user');
-    _all.PC = _all.DB.get('user_pc');
-    return _all;
+    async GetDataNow() {
+        this.DB = new Jsoning(dir_appdata_un_data + "/DB/DB.json");
+        this.OBS = new Jsoning(dir_appdata_un_data + "/DB/OBS.json");
+        this.WEBDECK = new Jsoning(dir_appdata_un_data + "/DB/WEBDECK.json");
+        this.THEMES = new Jsoning(dir_appdata_un_data + "/DB/THEMES.json");
+        this.Opens_windows = new Jsoning(dir_appdata_un_data + "/DB/Opens_windows.json");
+        this.List_macros = new Jsoning(dir_appdata_un_data + "/DB/Macros.json");
+        this.ProgramsExe = new Jsoning(dir_appdata_un_data + "/DB/ProgramsExe.json");
+        this.List_programs = await this.ProgramsExe.get('list_programs');
+        this.Macro_lis = await this.List_macros.get('macros');
+        this.USER = this.DB.get('user');
+        this.PC = this.DB.get('user_pc');
+        let themesLocal = await this.THEMES.get('local');
+        let themesRemote = await this.THEMES.get('remote');
+        this.ThemesData.list = themesLocal.concat(themesRemote);
+        return this;
+    }
 }
 
-module.exports = _all;
+module.exports = new DBCLASS();

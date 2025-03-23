@@ -55,6 +55,11 @@ var en_us = [
         text: "Theme"
     },
     {
+        id: ".themes_text",
+        type: "text",
+        text: "Themes"
+    },
+    {
         id: ".releaseDate_text",
         type: "text",
         text: "Update release date"
@@ -103,6 +108,41 @@ var en_us = [
         id: ".download_text",
         type: "text",
         text: "Download"
+    },
+    {
+        id: ".download_text_icon",
+        type: "html",
+        text: `<i class="bi bi-cloud-arrow-down-fill"></i> Baixar`
+    },
+    {
+        id: ".view_text",
+        type: "text",
+        text: "View"
+    },
+    {
+        id: ".view_text_icon",
+        type: "html",
+        text: `<i class="bi bi-eye"></i> View`
+    },
+    {
+        id: ".uninstall_text",
+        type: "html",
+        text: `Uninstall`
+    },
+    {
+        id: ".uninstall_icon",
+        type: "html",
+        text: `<i class="bi bi-trash3"></i> Uninstall`
+    },
+    {
+        id: ".remove_text",
+        type: "html",
+        text: `Remove`
+    },
+    {
+        id: ".remove_icon",
+        type: "html",
+        text: `<i class="bi bi-trash3"></i> Remove`
     },
     {
         id: ".versions_text",
@@ -417,17 +457,42 @@ var en_us = [
     {
         id: ".TSakura_text",
         type: "html",
-        text: "Sakura (White) New"
+        text: "The promise I've made to you ( <strong>By goaba</strong> )"
     },
     {
         id: ".TLight_text",
         type: "text",
-        text: "White"
+        text: "White Light"
     },
     {
         id: ".TOLEDBLACK_text",
         type: "text",
-        text: "OLED (Black)"
+        text: "Black"
+    },
+    {
+        id: ".theme_library_text",
+        type: "text",
+        text: "Theme library"
+    },
+    {
+        id: ".downloading_text",
+        type: "text",
+        text: "Downloading"
+    },
+    {
+        id: ".theme_download_completed_text",
+        type: "text",
+        text: "Theme Download Completed!"
+    },
+    {
+        id: ".downloading_theme_text",
+        type: "text",
+        text: "Downloading theme"
+    },
+    {
+        id: ".error_downloading_theme_text",
+        type: "text",
+        text: "Failed to download theme!"
     },
     {
         id: ".animations_text",
@@ -532,7 +597,7 @@ var en_us = [
     {
         id: ".duration_animation_text",
         type: "text",
-        text: "Animation duration"
+        text: "Animation duration in milliseconds"
     },
     {
         id: ".placeholder-duration_animation",
@@ -1518,6 +1583,66 @@ var en_us = [
         id: ".Hide_screen_when_minimizing_text",
         type: "text",
         text: `Hide screen when minimizing`
+    },
+    {
+        id: ".size_text",
+        type: "text",
+        text: `Size`
+    },
+    {
+        id: ".remote_text",
+        type: "text",
+        text: `Remote`
+    },
+    {
+        id: ".locally_text",
+        type: "text",
+        text: `Locally`
+    },
+    {
+        id: ".Located_in_text",
+        type: "text",
+        text: `Located in`
+    },
+    {
+        id: ".Located_text",
+        type: "text",
+        text: `Located`
+    },
+    {
+        id: ".theme_already_downloaded_text",
+        type: "text",
+        text: `Theme already downloaded!`
+    },
+    {
+        id: ".theme_already_added_text",
+        type: "text",
+        text: `Theme already added!`
+    },
+    {
+        id: ".remoted_text",
+        type: "text",
+        text: `Remotely`
+    },
+    {
+        id: ".remoted_link_text_icon",
+        type: "html",
+        text: `<i class="bi bi-link-45deg"></i> Remotely`
+    },
+    {
+        id: ".remote_link_text_icon",
+        type: "html",
+        text: `<i class="bi bi-link-45deg"></i> Remote`
+    },
+    {
+        id: ".theme_successfully_removed_text",
+        type: "text",
+        text: `Theme successfully removed`
+    },
+    {
+        id: ".theme_add_description_text",
+        type: "text",
+        text: `Want to download the theme or use it remotely over the internet?`
     },
 ]
 

@@ -1,7 +1,7 @@
 const macaddress = require('macaddress');
 const conf = require(MAIN_DIR + '/Repository/data/conf.json');
 const WS = require('ws');
-var conn = null, ws10Segundos = false;
+var conn = null, ws10Segundos = false, inGetPermissions = [];
 
 const webSocketClient = {
     callback: null,
@@ -150,69 +150,77 @@ const callBackDefault = async (data) => {
 
             case "UND-request-remote-permission-acess-this-pc":
                 if (data.res.user_request && data.res.user_request.name) {
-
                     let dataUserRQ = data.res.user_request;
-
-                    bootbox.confirm({
-                        title: `<h3>${getNameTd('.Notice_text')}</h3>`,
-                        message: `
-                            ${getNameTd('.confirm_new_acess_remote_1_text').replaceAll('{{user}}', dataUserRQ.name)}
-                            <br><br>
-                            ${getNameTd('.Attention_text')}:<br>
-                            ${getNameTd('.confirm_new_acess_remote_2_text')}
-                            <br><br>
-                            OBS:<br>
-                            ${getNameTd('.confirm_new_acess_remote_3_text')}
-                        `,
-                        buttons: {
-                            confirm: {
-                                label: getNameTd('.To_accept_text'),
-                                className: 'btn-success yes'
+                    if (!inGetPermissions[dataUserRQ.client_id]) {
+                        inGetPermissions[dataUserRQ.client_id] = data;
+                        bootbox.confirm({
+                            title: `<h3>${getNameTd('.Notice_text')}</h3>`,
+                            message: `
+                                ${getNameTd('.confirm_new_acess_remote_1_text').replaceAll('{{user}}', dataUserRQ.name)}
+                                <br><br>
+                                ${getNameTd('.Attention_text')}:<br>
+                                ${getNameTd('.confirm_new_acess_remote_2_text')}
+                                <br><br>
+                                OBS:<br>
+                                ${getNameTd('.confirm_new_acess_remote_3_text')}
+                            `,
+                            buttons: {
+                                confirm: {
+                                    label: getNameTd('.To_accept_text'),
+                                    className: 'btn-success To_accept_text'
+                                },
+                                cancel: {
+                                    label: getNameTd('.To_deny_text'),
+                                    className: 'btn-danger To_deny_text'
+                                }
                             },
-                            cancel: {
-                                label: getNameTd('.To_deny_text'),
-                                className: 'btn-danger not'
-                            }
-                        },
-                        callback: async (res) => {
-                            if (res) {
-                                webSocketClient.send(
-                                    await webSocketClient.ToJson(
-                                        {
-                                            lang: _lang,
-                                            method: 'callback-UND-request-remote-permission-acess-this-pc',
-                                            to: data.from.id,
-                                            res: {
-                                                pc_id: DAO.PC.id,
-                                                isAccept: true,
-                                                user_request: dataUserRQ,
-                                                acessToken: data.newAcessToken
+                            callback: async (res) => {
+                                let dataToRes = inGetPermissions[dataUserRQ.client_id];
+                                if (res) {
+                                    await webSocketClient.send(
+                                        await webSocketClient.ToJson(
+                                            {
+                                                lang: _lang,
+                                                method: 'callback-UND-request-remote-permission-acess-this-pc',
+                                                to: dataToRes.from.id,
+                                                res: {
+                                                    pc_id: DAO.PC.id,
+                                                    isAccept: true,
+                                                    user_request: dataToRes.res.user_request,
+                                                    acessToken: dataToRes.newAcessToken
+                                                }
                                             }
-                                        }
-                                    )
-                                );
-                                toaster.success(getNameTd('.You_successfully_accept_the_request_text'));
-                            }
-                            else {
-                                webSocketClient.send(
-                                    await webSocketClient.ToJson(
-                                        {
-                                            lang: _lang,
-                                            method: 'callback-UND-request-remote-permission-acess-this-pc',
-                                            to: data.from.id,
-                                            res: {
-                                                pc_id: DAO.PC.id,
-                                                isAccept: false,
-                                                user_request: dataUserRQ,
-                                                acessToken: null
+                                        )
+                                    );
+                                    toaster.success(getNameTd('.You_successfully_accept_the_request_text'));
+                                    delete inGetPermissions[dataUserRQ.client_id];
+                                }
+                                else {
+                                    await webSocketClient.send(
+                                        await webSocketClient.ToJson(
+                                            {
+                                                lang: _lang,
+                                                method: 'callback-UND-request-remote-permission-acess-this-pc',
+                                                to: dataToRes.from.id,
+                                                res: {
+                                                    pc_id: DAO.PC.id,
+                                                    isAccept: false,
+                                                    user_request: dataToRes.res.user_request,
+                                                    acessToken: null
+                                                }
                                             }
-                                        }
-                                    )
-                                );
-                                toaster.warning(getNameTd('.You_successfully_declined_the_request_text'));
+                                        )
+                                    );
+                                    toaster.warning(getNameTd('.You_successfully_declined_the_request_text'));
+                                    delete inGetPermissions[dataUserRQ.client_id];
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
+                    else {
+                        inGetPermissions[dataUserRQ.client_id] = data;
+                    }
+
                 }
                 break;
 

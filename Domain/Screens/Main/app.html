@@ -15,6 +15,8 @@
    <link href="./view/css/themes.css" rel="stylesheet">
    <link href="./view/css/index.css" rel="stylesheet">
    <link href="../../src/css/loading.css" rel="stylesheet">
+   <link id="custom-theme-stylesheet" href="" rel="stylesheet">
+   <style id="sAnimationDr"></style>
 </head>
 
 <body class="full-page">
@@ -39,6 +41,12 @@
    <div class="THCG-BGG full-page"></div>
 
    <div id="main-app" class="full-page" style="display: none;">
+      <div id="theme-bckI" class="THCG-CTV full-page" style="display: none;">
+         <video style="display: none;" autoplay loop muted plays-inline>
+            <source src="" type="video/mp4">
+         </video>
+         <img src="" style="display: none;">
+      </div>
 
       <main class="full-page d-flex flex-nowrap">
 
@@ -831,7 +839,7 @@
                   <div class="cards-area aos-init aos-animate" data-aos="fade-down">
                      <div class="row">
 
-                        <div class="col-md-12 col-xl-6 animate__animated animate__slideInLeft">
+                        <div class="col-md-12 col-xl-7 animate__animated animate__slideInLeft">
                            <div class="card theme-card">
                               <div class="card-header shadow-text text-center">
                                  <h5 class="themes_icon "></h5>
@@ -841,12 +849,64 @@
                                  <div class="forms">
 
                                     <div class="select mb-3">
-                                       <label class="form-check-label theme_text" for="s-themes"></label>
+                                       <label class="form-check-label themes_text" for="s-themes"></label>
                                        <select id="s-themes" class="form-select s-themes">
                                           <option value="light" class="TLight_text"></option>
                                           <option value="black" class="TOLEDBLACK_text"></option>
                                           <option value="light-sakura" class="TSakura_text"></option>
                                        </select>
+                                    </div>
+                                    <hr>
+
+                                    <div class="card none-border bg-dark text-light">
+                                       <div class="card-header" id="headingOne">
+                                          <h5 class="mb-0">
+                                             <button id="get_list_themes" class="btn btn-dark theme_library_text full-w"
+                                                data-toggle="collapse" data-target="#collapseLThemes"
+                                                aria-expanded="true" aria-controls="collapseLThemes">
+                                             </button>
+                                          </h5>
+                                       </div>
+
+                                       <div id="collapseLThemes" class="collapse" aria-labelledby="headingOne"
+                                          data-parent="#accordion">
+                                          <div class="card-body">
+
+                                             <div class="input-group mb-2">
+                                                <button class="btn btn-secondary" type="button"><span
+                                                      class="bi bi-search"></span></button>
+                                                <input type="text" name="GLTFTfoo_filter" id="GLTFTfoo_filter"
+                                                   class="form-control foo_filter" placeholder="">
+                                             </div>
+
+                                             <table class="table footable border text-light rounded" data-page-size="10"
+                                                data-filter="#GLTFTfoo_filter">
+
+                                                <thead>
+                                                   <tr>
+                                                      <th class="name_text"></th>
+                                                      <th class="size_text"></th>
+                                                      <th class="Located_in_text"></th>
+                                                      <th class="options_text"></th>
+                                                   </tr>
+                                                </thead>
+
+                                                <tbody id="list-themes-to-download">
+                                                </tbody>
+
+                                                <tfoot>
+                                                   <tr>
+                                                      <td colspan="6" class="border-0">
+                                                         <ul class="pagination">
+                                                         </ul>
+                                                      </td>
+                                                   </tr>
+                                                </tfoot>
+
+                                             </table>
+
+                                          </div>
+                                       </div>
                                     </div>
 
                                  </div>
@@ -854,7 +914,7 @@
                            </div>
                         </div>
 
-                        <div class="col-md-12 col-xl-6 animate__animated animate__slideInRight">
+                        <div class="col-md-12 col-xl-5 animate__animated animate__slideInRight">
                            <div class="card theme-card">
                               <div class="card-header shadow-text text-center">
                                  <h5 class="animations_icon"></h5>
@@ -880,7 +940,7 @@
 
                                              <div class="select mb-3">
                                                 <label class="form-check-label enable_animations_text"
-                                                   for="s-themes"></label>
+                                                   for="s-enAnimations"></label>
                                                 <select id="s-enAnimations" class="form-select">
                                                    <option value="true" class="yes"></option>
                                                    <option value="false" class="not"></option>
@@ -889,25 +949,17 @@
 
                                              <div class="select mb-3">
                                                 <label class="form-check-label animation_models_text"
-                                                   for="s-themes"></label>
+                                                   for="s-Manimations"></label>
                                                 <select id="s-Manimations" class="form-select">
                                                    <option value="random" class="default_text"></option>
-                                                   <option value="as">Attention Seekers</option>
-                                                   <option value="be">Back Entrances</option>
                                                 </select>
                                              </div>
 
                                              <div class="select mb-3">
                                                 <label class="form-check-label animation_type_text"
-                                                   for="s-themes"></label>
+                                                   for="s-animation"></label>
                                                 <select disabled id="s-animation" class="form-select">
                                                    <option value="random" class="default_text"></option>
-                                                   <option value="animate__bounce">Bounce</option>
-                                                   <option value="animate__flash">Flash</option>
-                                                   <option value="animate__pulse">Pulse</option>
-                                                   <option value="animate__rubberBand">rubberBand</option>
-                                                   <option value="animate__shakeX">shakeX</option>
-                                                   <option value="animate__shakeY">shakeY</option>
                                                 </select>
                                              </div>
 
@@ -917,10 +969,10 @@
                                                    <label for="animation-duration"
                                                       class="form-check-label duration_animation_text"></label>
                                                    <div class="input-group">
-                                                      <input disabled type="number" id="animation-duration"
+                                                      <input type="number" id="animation-duration"
                                                          class="form-control placeholder-duration_animation"
                                                          placeholder="Duration" aria-label="">
-                                                      <button disabled class="btn btn-primary save_text" type="button"
+                                                      <button class="btn btn-primary save_text" type="button"
                                                          id="btn-animation-duration">Salvar</button>
                                                    </div>
                                                 </div>
@@ -1776,7 +1828,7 @@
 <script src="../../src/jquery/modalLoading.js"></script>
 <script src="./view/js/comuns.js"></script>
 <script src="./view/js/WebSocket.js"></script>
-<script src="./view/js/animations.js"></script>
+<script src="./view/js/appearance.js"></script>
 <script src="../../src/js/selector_language.js"></script>
 <script src="./back_functions.js"></script>
 <script src="./view/js/updates.js"></script>

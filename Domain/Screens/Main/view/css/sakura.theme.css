@@ -1,6 +1,6 @@
 .theme-light-sakura {
     --theme-bg-bg: black;
-    --theme-bg: url('../backgrounds/bg-container-sakura.png');
+    --theme-bg: url('../backgrounds/static/bg-container-sakura.png');
     --theme-bg-side-bar: var(--theme-bg);
 }
 

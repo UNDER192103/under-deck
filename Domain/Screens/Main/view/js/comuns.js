@@ -6,11 +6,12 @@ const path = require('path');
 const Jsoning = require("jsoning");
 const ip = require("ip");
 const fs = require("fs");
+const axios = require('axios');
 const fsPromises = require('fs').promises;
 const { exec } = require('child_process');
 const QRCode = require('qrcode');
 const { getAllInstalledSoftwareSync } = require('fetch-installed-software');
-const { title } = require('process');
+const { title, contextIsolated } = require('process');
 const Comun = require(MAIN_DIR + "/Domain/Comun/Comun.js");
 const toaster = require(MAIN_DIR + "/Domain/src/js/toaster.js");
 ///      Constants      ///
@@ -21,6 +22,7 @@ var GNDATA = {
     server_port: null,
 }
 var API = require(MAIN_DIR + "/Repository/Api.js");
+var DBCLASS = require(MAIN_DIR + "/Repository/DBCLASS.js");
 var DAO = require(MAIN_DIR + "/Repository/DB.js"),
     keyEvent = require(MAIN_DIR + '/Domain/Service/KeyMacros.js'),
     localServer = require(MAIN_DIR + '/Domain/Service/Server.js'),
@@ -38,6 +40,7 @@ var DAO = require(MAIN_DIR + "/Repository/DB.js"),
     tempBlockSelecMenu = false,
     typingTimer,
     doneTypingInterval = 1000,
+    listAllThemes = [],
     OBS_TEMP_DATA = {
         scenes: null,
         audios: null
@@ -47,10 +50,9 @@ var DAO = require(MAIN_DIR + "/Repository/DB.js"),
 
 ///      Pre-load values      ///
 ///      Load theme      ///
-
-selectTheme(DAO.DB.get('bd_theme'));
-
+loadThemesOptions(true);
 ///      Load theme      ///
+
 DAO.Server_port = DAO.DB.get('server_port');
 DAO.List_programs = DAO.ProgramsExe.get('list_programs');
 DAO.USER = DAO.DB.get('user');
@@ -90,26 +92,30 @@ const checkUserLogin = () => {
 
 const load_custom_files = async () => {
     try {
-        var past_js = MAIN_DIR + "\\Domain\\src\\js\\custom_js";
-        var list_js = await Comun.listAllFilesInFolder(past_js);
-        list_js.forEach(file_dir => {
-            if (file_dir.includes(".js") == true) {
-                $.getScript(file_dir, function () {
-                    console.log(`JS File custom: ${path.basename(file_dir)}, is loaded sucess`);
-                });
-            }
-        });
+        var paths_js_C = path.join(DAO.DB_DIR, 'UN-DATA', 'custom_js');
+        if (fs.existsSync(paths_js_C)) {
+            var list_path_js_c = await Comun.listAllFilesInFolder(paths_js_C);
+            list_path_js_c.forEach(file_dir => {
+                if (file_dir.includes(".js") == true) {
+                    $.getScript(file_dir, function () {
+                        console.log(`JS File custom: ${path.basename(file_dir)}, is loaded sucess`);
+                    });
+                }
+            });
+        }
     } catch (error) { console.log(error) };
 
     try {
-        var past_js = MAIN_DIR + "\\Domain\\src\\css\\custom_css";
-        var list_js = await Comun.listAllFilesInFolder(past_js);
-        list_js.forEach(file_dir => {
-            if (file_dir.includes(".css") == true) {
-                $('head').append($('<link rel="stylesheet" type="text/css" />').attr('href', file_dir));
-                console.log(`CSS custom: ${path.basename(file_dir)}, is loaded sucess`);
-            }
-        });
+        var paths_css_C = path.join(DAO.DB_DIR, 'UN-DATA', 'custom_css');
+        if (fs.existsSync(paths_css_C)) {
+            var list_path_css_c = await Comun.listAllFilesInFolder(paths_css_C);
+            list_path_css_c.forEach(file_dir => {
+                if (file_dir.includes(".css") == true) {
+                    $('head').append($('<link rel="stylesheet" type="text/css" />').attr('href', file_dir));
+                    console.log(`CSS custom: ${path.basename(file_dir)}, is loaded sucess`);
+                }
+            });
+        }
     } catch (error) { console.log(error) };
 }
 load_custom_files();
@@ -228,11 +234,90 @@ async function selectMenu(id, uC = false) {
     $(".toastify .toast-close").click();
 };
 
+async function SetCustomTheme(theme, isPreloadd = false) {
+    if (theme) {
+        if (theme.isLocal == true) {
+            if (theme.type == "VIDEO") {
+                $("#custom-theme-stylesheet").attr('href', path.join(DAO.THEME_DIR, theme.css));
+                $("#theme-bckI video source").attr('src', path.join(DAO.THEME_DIR, theme.uri));
+            }
+            else {
+                $("#custom-theme-stylesheet").attr('href', path.join(DAO.THEME_DIR, theme.css));
+                $("#theme-bckI img").attr('src', theme.uri_bck);
+            }
+        }
+        else {
+            if (theme.type == "VIDEO") {
+                $("#custom-theme-stylesheet").attr('href', theme.uri_css);
+                $("#theme-bckI video source").attr('src', theme.uri_bck);
+            }
+            else {
+                $("#custom-theme-stylesheet").attr('href', theme.uri_css);
+                $("#theme-bckI img").attr('src', theme.uri_bck);
+            }
+        }
 
-async function selectTheme(id) {
+        if (theme.type == "VIDEO") {
+            $("#theme-bckI img").attr('src', '').hide();
+            $("#theme-bckI video").show().get(0).load();
+            $("#theme-bckI").show();
+        }
+        else {
+            $("#theme-bckI img").show();
+            $("#theme-bckI video").hide().get(0).load();
+            $("#theme-bckI").show();
+        }
+    }
+    else {
+        $("#custom-theme-stylesheet").attr('href', '');
+        $("#theme-bckI video source").attr('src', '');
+        $("#theme-bckI img").attr('src', '').hide();
+        $("#theme-bckI video").get(0).load();
+        $("#theme-bckI").hide();
+    }
+
+}
+
+async function loadThemesOptions(isPreloadd = false) {
+    let themesLocal = await DAO.THEMES.get('local');
+    let themesRemote = await DAO.THEMES.get('remote');
+    if (themesLocal == null) {
+        themesLocal = [];
+        await DAO.THEMES.set('local', themesLocal);
+    }
+    if (themesRemote == null) {
+        themesRemote = [];
+        await DAO.THEMES.set('remote', themesRemote);
+    }
+    DAO.ThemesData.list = themesLocal.concat(themesRemote);
+    $(".s-themes option.RDM").remove();
+    $(".s-themes").append(``);
+    if (DAO.ThemesData.list.length > 0) {
+        let themeNow = await DAO.DB.get('bd_theme');
+        DAO.ThemesData.list.forEach(item => {
+            $(".s-themes").append(`<option ${themeNow == item.tid ? 'selected' : ''} class="RDM" value="${item.tid}">${item.name}</option>`);
+            if (themeNow == item.tid && isPreloadd == true) {
+                SetCustomTheme(item, isPreloadd);
+            }
+        });
+    }
+
+    selectTheme(DAO.DB.get('bd_theme'), true);
+}
+
+async function selectTheme(id, isPreloadd = false) {
     $("body").removeClass().addClass('full-page');
-
-    $("body").addClass('theme-' + id);
+    let isOTheme = DAO.ThemesData.list.find(item => item.tid == id);
+    if (isOTheme) {
+        if (!isPreloadd) {
+            SetCustomTheme(isOTheme, isPreloadd);
+        }
+        $("body").addClass('theme-' + isOTheme.class);
+    }
+    else {
+        SetCustomTheme(null, isPreloadd);
+        $("body").addClass('theme-' + id);
+    }
     DAO.DB.set('bd_theme', id);
 
     let isEnb = DAO.DB.get('isEnableAnimationsHover');
@@ -242,6 +327,7 @@ async function selectTheme(id) {
     else {
         $("body").removeClass('enb-animations');
     }
+
     $(`#s-themes option[value="${id}"]`).prop('selected', true);
 }
 ///      Pre load funcions      ///
@@ -363,7 +449,6 @@ function getElmByParentsClass(elem, _class, callback) {
 }
 
 async function checkPreferredLanguage(callback) {
-
     bootbox.confirm(
         {
             title: `<span class="preferredlanguage">${getNameTd('.preferredlanguage')}</span>`,
@@ -382,8 +467,8 @@ async function checkPreferredLanguage(callback) {
             </div>
 
             <div class="select mb-3">
-                <label class="form-check-label theme_text" for="s-themes">${getNameTd('.theme_text')}:</label>
-                <select class="form-select s-themes">
+                <label class="form-check-label themes_text" for="s-themes">${getNameTd('.themes_text')}:</label>
+                <select class="form-select s-themes USLT">
                     <option value="light" class="TLight_text">${getNameTd('.TLight_text')}</option>
                     <option value="black" class="TOLEDBLACK_text">${getNameTd('.TOLEDBLACK_text')}</option>
                     <option value="light-sakura" class="TSakura_text">${getNameTd('.TSakura_text')}</option>
@@ -405,8 +490,12 @@ async function checkPreferredLanguage(callback) {
             }
         }
     );
+    let themeNow = await DAO.DB.get('bd_theme');
+    DAO.ThemesData.list.forEach(item => {
+        $(".USLT").append(`<option ${themeNow == item.tid ? 'selected' : ''} class="RDM" value="${item.tid}">${item.name}</option>`);
+    });
     $(`.s-languages option[value="${_lang}"]`).prop('selected', true);
-    $(`.s-themes option[value="${await DAO.DB.get('bd_theme')}"]`).prop('selected', true);
+    $(`.s-themes option[value="${themeNow}"]`).prop('selected', true);
     $(".icone-selected-lang").attr("src", langs[_lang].icon);
 }
 
@@ -772,7 +861,7 @@ function getParent(elem) {
 
 
 const GetDataListProgramsForLocalHost = async () => {
-    DAO = await DAO.GetDataNow();
+    await DAO.GetDataNow();
     var listPrograms = new Array();
     if (DAO.List_programs != null && DAO.List_programs.length > 0) listPrograms = DAO.List_programs;
     let exe_background = await DAO.WEBDECK.get('exe-background');
@@ -788,7 +877,7 @@ const GetDataListProgramsForLocalHost = async () => {
 }
 
 const GetDataListProgramsForWebSocket = async () => {
-    DAO = await DAO.GetDataNow();
+    await DAO.GetDataNow();
     var listPrograms = new Array();
     if (DAO.List_programs != null && DAO.List_programs.length > 0) {
         listPrograms = DAO.List_programs;
@@ -835,4 +924,24 @@ const getBase64ByDir = async (DIR) => {
             }
         });
     })
+}
+
+const B_are_you_sure = async () => {
+    return new Promise((resolve) => {
+        bootbox.confirm({
+            message: `<h4 class="are_you_sure_of_that_text">${getNameTd('.are_you_sure_of_that_text')}</h4>`,
+            buttons: {
+                confirm: {
+                    label: '<i class="bi bi-check2"></i> ' + getNameTd('.yes'),
+                    className: 'btn-success yes'
+                },
+                cancel: {
+                    label: '<i class="bi bi-x-lg"></i> ' + getNameTd('.no'),
+                    className: 'btn-danger not'
+                }
+            },
+            callback: resolve
+        });
+    })
+
 }

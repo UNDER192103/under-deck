@@ -16,44 +16,51 @@ const DB_default_values = async (callback) => {
     if (await DAO.DB.get('isNotValidFirstSearchUpdateApp') != false)
         await DAO.DB.set('first_search_update_app', true);
 
-    if (DAO.DB.get('server_port') == null)
+    if (await DAO.DB.get('server_port') == null)
         await DAO.DB.set('server_port', 3000);
 
-    if (DAO.DB.get('isEnableAnimations') == null)
+    if (await DAO.DB.get('isEnableAnimations') == null)
         await DAO.DB.set('isEnableAnimations', true);
 
-    if (DAO.DB.get('animation') == null)
+    if (await DAO.DB.get('animation') == null)
         await DAO.DB.set('animation', 'random');
 
-    if (DAO.DB.get('modelAnimation') == null)
+    if (await DAO.DB.get('modelAnimation') == null)
         await DAO.DB.set('modelAnimation', 'random');
 
-    if (DAO.DB.get('bd_theme') == null)
+    if (await DAO.DB.get('bd_theme') == null)
         await DAO.DB.set('bd_theme', 'light');
 
-    if (DAO.DB.get('keyEvent') == null)
+    if (await DAO.DB.get('keyEvent') == null)
         await DAO.DB.set('keyEvent', true);
 
-    if (DAO.OBS.get('ObsWssStartOnApp') == null)
+    if (await DAO.OBS.get('ObsWssStartOnApp') == null)
         await DAO.OBS.set('ObsWssStartOnApp', false);
 
-    if (DAO.OBS.get('AutoUpdateApp') == null)
+    if (await DAO.OBS.get('AutoUpdateApp') == null)
         await DAO.OBS.set('AutoUpdateApp', false);
 
-    if (DAO.DB.get('App_notification_windows') == null)
+    if (await DAO.DB.get('App_notification_windows') == null)
         await DAO.DB.set('App_notification_windows', true);
 
-    if (DAO.DB.get('exe-background') == null)
+    if (await DAO.DB.get('exe-background') == null)
         await DAO.DB.set('exe-background', '#370179');
 
-    if (DAO.DB.get('exe-color-text') == null)
+    if (await DAO.DB.get('exe-color-text') == null)
         await DAO.DB.set('exe-color-text', 'white');
 
-    if (DAO.DB.get('isEnableAnimationsHover') == null)
-        DAO.DB.set('isEnableAnimationsHover', true);
+    if (await DAO.DB.get('isEnableAnimationsHover') == null)
+        await DAO.DB.set('isEnableAnimationsHover', true);
 
-    if (DAO.DB.get('isMinimizeToBar') == null)
-        DAO.DB.set('isMinimizeToBar', true);
+    if (await DAO.DB.get('isMinimizeToBar') == null)
+        await DAO.DB.set('isMinimizeToBar', true);
+
+    if (await DAO.THEMES.get('local') == null)
+        await DAO.THEMES.set('local', []);
+
+    if (await DAO.THEMES.get('remote') == null)
+        await DAO.THEMES.set('remote', []);
+
     callback();
 }
 

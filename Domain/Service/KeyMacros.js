@@ -22,34 +22,34 @@ var sequenceClick = [];
 starStop = DAO.DB.get('keyEvent');
 
 
-function startStopKeysEvents(type){
-    if(type != null)
+function startStopKeysEvents(type) {
+    if (type != null)
         starStop = type;
 }
 
 // Key Ketbord Down //
 lepikEvents.events.on('keyPress', async (data) => {
-    if(starStop){
+    if (starStop) {
         data = await formatDataKeyPress(data);
         var res = keyOptions.filter(f => f == data);
         var exist = sequenceClick.filter(b => b == data);
-        if(res.length > 0 && exist.length == 0){
+        if (res.length > 0 && exist.length == 0) {
             sequenceClick.push(data);
         }
-        else if(res.length == 0 && exist.length == 0){
+        else if (res.length == 0 && exist.length == 0) {
             sequenceClick.push(data);
         }
-        DAO = await DAO.GetDataNow();
+        await DAO.GetDataNow();
     }
 });
 
 // Key Ketbord Up //
 lepikEvents.events.on('keyRelease', async (data) => {
-    if(starStop){
-        DAO = await DAO.GetDataNow();
+    if (starStop) {
+        await DAO.GetDataNow();
         await event_key(data, sequenceClick);
         data = await formatDataKeyPress(data);
-        if( await DAO.DB.get('clear_event_macro') != true)
+        if (await DAO.DB.get('clear_event_macro') != true)
             sequenceClick = await sequenceClick.filter(f => f != data);
         else
             sequenceClick = [];
@@ -60,17 +60,17 @@ lepikEvents.events.on('keyRelease', async (data) => {
 
 
 
-async function event_key(key, sequenceClick){
-    if(DAO.Macro_lis != null && sequenceClick != null && DAO.Macro_lis.length > 0 && sequenceClick.length > 0)
+async function event_key(key, sequenceClick) {
+    if (DAO.Macro_lis != null && sequenceClick != null && DAO.Macro_lis.length > 0 && sequenceClick.length > 0)
         DAO.Macro_lis.forEach(async app => {
             let keys = await formatMacroKey(app.keys);
-            if(sequenceClick.length == keys.length){
+            if (sequenceClick.length == keys.length) {
                 let contEq = 0;
                 for (let cont = 0; cont < sequenceClick.length; cont++) {
-                    if(sequenceClick[cont] == keys[cont].key)
+                    if (sequenceClick[cont] == keys[cont].key)
                         contEq++;
 
-                    if(contEq == sequenceClick.length){
+                    if (contEq == sequenceClick.length) {
                         macro_start_app(app.app)
                     }
                 }
@@ -78,7 +78,7 @@ async function event_key(key, sequenceClick){
         });
 }
 
-async function formatMacroKey(list){
+async function formatMacroKey(list) {
     await list.forEach(async item => {
         item.key = await item.key.replace('Control', 'ctrl');
         item.key = await item.key.replace('control', 'ctrl');
@@ -87,7 +87,7 @@ async function formatMacroKey(list){
     return list;
 }
 
-async function formatDataKeyPress(data){
+async function formatDataKeyPress(data) {
     data = `${data}`;
     var dt = null;
     dt = await data.replace('left ', "");
@@ -99,12 +99,12 @@ async function formatDataKeyPress(data){
     dt = await dt.replace(' gr', "");
     dt = await dt.replace(' Gr', "");
     dt = await dt.replace(' GR', "");
-    if(dt == "caps lock")
+    if (dt == "caps lock")
         dt = "capslock";
     return dt.toLowerCase();
 }
 
-function macro_start_app(app){
+function macro_start_app(app) {
     exec_program(app);
 }
 
