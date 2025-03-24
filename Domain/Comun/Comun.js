@@ -92,7 +92,20 @@ const exec_program = async (data, type = null) => {
             if (data.nameCustom != null)
                 name = data.nameCustom;
 
-            if (type == "exe") {
+            if (type == "discord") {
+                if (DiscordRPCLogged) {
+                    if (data.path == "toggle-mute-unmute-mic") {
+                        MuteOrUnmuteMic();
+                    }
+                    else if (data.path == "toggle-mute-unmute-audio") {
+                        MuteOrUnmuteAudio();
+                    }
+                }
+                else {
+                    toaster.danger(getNameTd('.This_action_cannot_be_performed_because_the_Discord_integration_is_not_connected_please_check_if_it_is_connected'))
+                }
+            }
+            else if (type == "exe") {
                 console.log(`App: ${name} Iniciado!`)
                 exec(`"${data.path}"`, () => { });
             }
@@ -146,6 +159,9 @@ const exec_program = async (data, type = null) => {
                         exec_soundpad(pathSoundPadExe, soundP.index)
                     }
                 }
+
+            }
+            else {
 
             }
         }

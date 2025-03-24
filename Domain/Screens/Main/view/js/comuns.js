@@ -224,6 +224,9 @@ async function selectMenu(id, uC = false) {
     else if (id == 'config') {
         _page_selected = `.container-config`;
     }
+    else if (id == 'discord') {
+        _page_selected = `.container-discord`;
+    }
     else if (id == 'updates') {
         _page_selected = `.container-updates`;
     }
@@ -754,13 +757,40 @@ async function apressentationSteps() {
             break;
 
         case 8:
+            await selectMenu('discord');
+            tempBlockSelecMenu = true;
+            elem = $("#button-login-discord-rpc");
+            elem.prop('disabled', true);
+            elem.popover({
+                html: true,
+                title: `<div class="discord_icon_text"><i class="bi bi-discord"></i> ${getNameTd('.discord_text')}</div>`,
+                placement: 'bottom',
+                content: `
+                <div class="row m-0">
+                    <div class="m-0 mb-3 p-0 quickguide7">
+                        ${getNameTd('.quickguide8Discord')}
+                    </div>
+                    <div class="m-0 p-0">
+                        <a class="btn btn-secondary btn-xs float-start back_step_paapp back_icon_text" type="button">${getNameTd('.back_icon_text')}</a>
+                        <a class="btn btn-primary btn-xs float-end next_step_paapp next_icon_text" type="button">${getNameTd('.next_icon_text')}</a>
+                    </div>
+                </div>
+                `,
+            });
+
+            setTimeout(() => {
+                elem.popover('show');
+            }, 1000);
+            break;
+
+        case 9:
             await selectMenu('soundpad');
             tempBlockSelecMenu = true;
             elem = $("#local-path-soundpad");
             elem.prop('disabled', true);
             elem.popover({
                 html: true,
-                title: `<span class="keys_macro_text_icon"><i class="bi bi-mic-fill"></i> ${getNameTd('.soundpad_icon')}</span>`,
+                title: `<div class="keys_macro_text_icon"><i class="bi bi-mic-fill"></i> ${getNameTd('.soundpad_icon')}</div>`,
                 content: `
                         <div class="row m-0">
                             <div class="m-0 mb-3 p-0 quickguide3">
@@ -779,14 +809,14 @@ async function apressentationSteps() {
             }, 1000);
             break;
 
-        case 9:
+        case 10:
             await selectMenu('obs-studio');
             tempBlockSelecMenu = true;
             elem = $("#obs-wss-password");
             $(".container-obs-studio *").prop('disabled', true);
             elem.popover({
                 html: true,
-                title: `<span class="obs_studio_n_text_icon">${getNameTd('.obs_studio_n_text_icon')}</span>`,
+                title: `<div class="obs_studio_n_text_icon">${getNameTd('.obs_studio_n_text_icon')}</div>`,
                 content: `
                 <div class="row m-0">
                     <div class="m-0 mb-3 p-0 quickguide5">
@@ -805,7 +835,7 @@ async function apressentationSteps() {
             }, 1000);
             break;
 
-        case 10:
+        case 11:
             await selectMenu('updates');
             tempBlockSelecMenu = true;
             elem = $("#button-search-updates");
@@ -832,7 +862,7 @@ async function apressentationSteps() {
             }, 1000);
             break;
 
-        case 11:
+        case 12:
             await selectMenu('help');
             tempBlockSelecMenu = true;
             elem = $("#nav-item-help");

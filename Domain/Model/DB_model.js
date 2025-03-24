@@ -4,6 +4,7 @@ module.exports = {
     DB_DIR: null,
     THEME_DIR: null,
     DB: null,
+    DISCORD: null,
     WEBDECK: null,
     THEMES: null,
     Opens_windows: null,

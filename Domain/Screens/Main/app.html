@@ -86,6 +86,11 @@
                            class="nav-link navs-item-sm settings_text_icon_HVRT d-flex">
                         </a>
                      </li>
+                     <li onClick="selectMenu('discord', true)" class="nav-item" for="stside">
+                        <a href="javascript:void(0)" id="nav-item-discord"
+                           class="nav-link navs-item-sm discord_icon_text d-flex">
+                        </a>
+                     </li>
                      <li onClick="selectMenu('soundpad', true)" class="nav-item">
                         <a href="javascript:void(0)" id="nav-item-soundpad" class="nav-link navs-item-sm soundpad_icon"
                            aria-current="page">
@@ -157,7 +162,7 @@
                            id="bnt_modal_add_app"></button>
                      </div>
                   </div>
-                  <div class="row g-4 py-3 row-cols-1 row-cols-lg-1 full-w ">
+                  <div class="row g-4 py-3 row-cols-1 row-cols-lg-1">
                      <div class="feature col">
                         <div class="row row-cols-1 row-cols-md-5 g-2 list_apps content-files-add"></div>
                      </div>
@@ -585,6 +590,64 @@
                            </div>
                         </div>
 
+                     </div>
+                  </div>
+
+               </div>
+            </div>
+         </div>
+
+         <div
+            class="container container-hide-control container-discord mt-1 mb-1 animate__animated container-animated-style"
+            style="display: none;">
+            <div class="THCG-CT full-h container rounded px-3 py-3" id="featured-3">
+               <div class="auto-scrool">
+                  <h2 class="pb-2 border-bottom discord_icon_text Svg30px"></h2>
+
+
+                  <div class="cards-area aos-init aos-animate mb-3" data-aos="fade-down">
+                     <div class="row">
+
+                        <div class="col-md-12 col-xl-16 animate__animated">
+                           <div class="card theme-card">
+                              <div class="card-header shadow-text">
+                                 <span class="discord_integration_ipc_text h5"></span>
+                                 <button
+                                    class="btn btn-success btn-sm float-end hover-pulse-grean btn-success connect-discord"
+                                    type="button" id="button-login-discord-rpc"></button>
+                              </div>
+
+                              <div class="card-body">
+                                 <div class="alert apobswbs alert-danger hidden" role="alert"></div>
+
+                                 <div class="forms d-flex">
+                                    <div class="input mb-1 w-50">
+                                       <label class="col-form-label p-0 discordProfile_text"></label>
+                                       <div class="input-group">
+                                          <a class="d-flex align-items-center text-decoration-none">
+                                             <img src="../../src/img/profile-icon.png" alt="" width="50" height="50"
+                                                class="DC_usericon MM rounded-circle me-2">
+                                             <strong class="DC_global_name u-format-max-text"></strong>
+                                          </a>
+                                       </div>
+                                    </div>
+
+                                    <div class="input mb-1 w-50">
+                                       <label class="col-form-label p-0 discordAppProfile_text"></label>
+                                       <div class="input-group">
+                                          <a class="d-flex align-items-center text-decoration-none">
+                                             <img src="../../src/img/profile-icon.png" alt="" width="50" height="50"
+                                                class="DC_appicon MM rounded-circle me-2">
+                                             <strong class="DC_app_name u-format-max-text"></strong>
+                                          </a>
+                                       </div>
+                                    </div>
+
+                                 </div>
+
+                              </div>
+                           </div>
+                        </div>
                      </div>
                   </div>
 
@@ -1066,6 +1129,10 @@
                                  id="bnt-select-type-add-app" data-bs-toggle="dropdown" aria-expanded="false"></button>
                               <ul class="dropdown-menu btn-full-w">
                                  <li
+                                    onclick="select_type_add_app('discord', 'type_add_app_0', '.discord_text', '#inputs-add-discord-integration')">
+                                    <a id="type_add_app_0" class="dropdown-item discord_text" href="#"></a>
+                                 </li>
+                                 <li
                                     onclick="select_type_add_app('audio', 'type_add_app_4', '.audio_text', '#inputs-add-audio-input')">
                                     <a id="type_add_app_4" class="dropdown-item audio_text" href="#"></a>
                                  </li>
@@ -1107,6 +1174,31 @@
                               <label for="icon-audio-add-app-1" class="col-form-label icon_text_expc_1"></label>
                               <input type="file" class="form-control" id="icon-audio-add-app-1"
                                  aria-describedby="icon-audio-add-app-1" aria-label="Upload"
+                                 accept=".jpeg, .gif, .png, .gif">
+                           </div>
+                        </div>
+
+                        <div id="inputs-add-discord-integration" class="mb-3 hidden">
+                           <div class="mb-3">
+                              <label for="name-exe-modal-0" class="col-form-label name_text_expc_1"></label>
+                              <input type="text" class="form-control" id="name-exe-modal-0">
+                           </div>
+
+                           <div class="mb-3">
+                              <label for="select-discord-integration" class="col-form-label discord_text"></label>:
+                              <select id="select-discord-integration" class="form-select">
+                                 <option value="" selected class="Select_the_type_of_action_text"></option>
+                                 <option value="toggle-mute-unmute-mic" selected
+                                    class="discord_toggle_mute_unmute_mic_text"></option>
+                                 <option value="toggle-mute-unmute-audio" selected
+                                    class="discord_toggle_mute_unmute_audio_text"></option>
+                              </select>
+                           </div>
+
+                           <div class="mb-3">
+                              <label for="icon-discord-add-app-0" class="col-form-label icon_text_expc_1"></label>
+                              <input type="file" class="form-control" id="icon-discord-add-app-0"
+                                 aria-describedby="icon-discord-add-app-0" aria-label="Upload"
                                  accept=".jpeg, .gif, .png, .gif">
                            </div>
                         </div>
@@ -1849,6 +1941,7 @@
 <script src="../../src/jquery/modalLoading.js"></script>
 <script src="./view/js/comuns.js"></script>
 <script src="./view/js/WebSocket.js"></script>
+<script src="./view/js/Discord.js"></script>
 <script src="./view/js/appearance.js"></script>
 <script src="../../src/js/selector_language.js"></script>
 <script src="./back_functions.js"></script>

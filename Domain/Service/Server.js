@@ -24,6 +24,11 @@ async function start_server(type, callback) {
                 res.redirect("/app")
             });
 
+            app.get('/api', (req, res) => {
+                console.log(req.body);
+                res.send('OK');
+            });
+
             app.get('/app', (req, res) => {
                 res.sendFile(prvt_MAIN_DIR + '/Domain/Screens/WebDeck/cell-html.html');
             });

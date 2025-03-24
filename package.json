@@ -1,6 +1,6 @@
 {
   "name": "under-deck",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "Under Deck",
   "productName": "Under Deck",
   "main": "index.js",
@@ -73,6 +73,7 @@
     "@vitalets/google-translate-api": "^9.2.0",
     "axios": "^1.4.0",
     "decompress": "^4.2.1",
+    "discord-rpc": "^4.0.1",
     "electron-updater": "^6.3.2",
     "express": "^4.18.2",
     "fetch-installed-software": "^0.0.7",

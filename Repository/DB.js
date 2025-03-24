@@ -14,6 +14,7 @@ class DBCLASS {
         });
 
         this.DB = new Jsoning(dir_appdata_un_data + "/DB/DB.json");
+        this.DISCORD = new Jsoning(dir_appdata_un_data + "/DB/DISCORD.json");
         this.OBS = new Jsoning(dir_appdata_un_data + "/DB/OBS.json");
         this.WEBDECK = new Jsoning(dir_appdata_un_data + "/DB/WEBDECK.json");
         this.THEMES = new Jsoning(dir_appdata_un_data + "/DB/THEMES.json");
@@ -26,6 +27,7 @@ class DBCLASS {
 
     async GetDataNow() {
         this.DB = new Jsoning(dir_appdata_un_data + "/DB/DB.json");
+        this.DISCORD = new Jsoning(dir_appdata_un_data + "/DB/DISCORD.json");
         this.OBS = new Jsoning(dir_appdata_un_data + "/DB/OBS.json");
         this.WEBDECK = new Jsoning(dir_appdata_un_data + "/DB/WEBDECK.json");
         this.THEMES = new Jsoning(dir_appdata_un_data + "/DB/THEMES.json");

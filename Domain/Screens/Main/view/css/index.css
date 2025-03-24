@@ -861,6 +861,10 @@ hr {
   --bs-backdrop-opacity: 0.8;
 }
 
+svg.bi-discord {
+  margin: auto 3px auto 0;
+}
+
 .SvgSoundpadColor g path,
 svg.SvgSoundpadColor g path {
   fill: red;

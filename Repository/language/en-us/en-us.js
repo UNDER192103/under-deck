@@ -35,6 +35,11 @@ var en_us = [
         text: `SoundPad`
     },
     {
+        id: ".trad_ty_soundpad_audio",
+        type: "text",
+        text: `SoundPad`
+    },
+    {
         id: ".soundpad_icon",
         type: "html",
         text: `<svg class="SvgSoundpadColor" xmlns="http://www.w3.org/2000/svg" width="20px" heigth="20px" version="1.0" preserveAspectRatio="xMidYMid meet" viewBox="34.92 33.19 447.58 447.77"><g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#f5f5f5" stroke="none"><path d="M2440 4779 c-203 -17 -413 -76 -608 -171 -439 -214 -799 -618 -996 -1119 l-38 -96 -60 -17 c-96 -27 -158 -64 -234 -140 -74 -74 -114 -143 -139 -237 -21 -78 -21 -502 0 -582 44 -169 163 -302 330 -368 56 -22 76 -24 329 -29 l269 -5 23 -67 c77 -230 227 -462 410 -638 534 -513 1315 -473 1812 93 123 141 248 351 312 527 l28 75 112 3 112 3 -7 -28 c-14 -59 -79 -222 -122 -307 -85 -169 -174 -299 -306 -447 l-59 -66 -84 -6 c-239 -14 -421 -221 -401 -456 23 -272 289 -452 549 -371 169 52 283 198 296 377 5 84 -8 145 -49 226 l-30 59 54 61 c221 253 389 573 481 917 l18 65 81 39 c143 68 253 204 289 357 9 36 13 131 13 284 0 193 -3 240 -19 290 -46 152 -140 265 -276 334 -43 21 -96 42 -118 46 -39 6 -39 7 -72 93 -126 333 -353 660 -609 873 -305 256 -634 395 -1011 429 -126 11 -142 11 -280 -1z m418 -339 c391 -79 739 -323 984 -689 61 -92 153 -259 178 -327 l10 -24 -114 0 -114 0 -42 78 c-264 490 -692 772 -1175 772 -333 0 -635 -131 -890 -387 -106 -107 -205 -240 -272 -370 l-48 -93 -117 0 -117 0 16 38 c28 67 85 175 133 254 267 429 682 711 1130 767 111 14 321 5 438 -19z m-216 -1460 c371 -176 681 -329 691 -341 22 -27 31 -62 23 -93 -3 -13 -14 -33 -23 -45 -10 -11 -319 -176 -688 -366 -487 -251 -679 -345 -703 -345 -25 0 -43 9 -68 34 l-34 34 0 685 c0 684 0 684 21 711 24 30 51 44 86 45 12 1 325 -143 695 -319z" fill="#f5f5f5"/></g></svg> SoundPad`
@@ -190,6 +195,11 @@ var en_us = [
         text: "OBS WebSocket Settings"
     },
     {
+        id: ".discord_integration_ipc_text",
+        type: "text",
+        text: "Discord integration"
+    },
+    {
         id: ".menu_text",
         type: "text",
         text: "Menu"
@@ -318,6 +328,16 @@ var en_us = [
         id: ".userProfile_text",
         type: "text",
         text: "User profile",
+    },
+    {
+        id: ".discordProfile_text",
+        type: "text",
+        text: "Discord Profile",
+    },
+    {
+        id: ".discordAppProfile_text",
+        type: "text",
+        text: "Application Profile",
     },
     {
         id: ".Login_text",
@@ -975,9 +995,19 @@ var en_us = [
         text: "Disconnect OBS WebSocket",
     },
     {
+        id: ".desconnect-discord",
+        type: "text",
+        text: "Disconnect Discord",
+    },
+    {
         id: ".connect-obs",
         type: "text",
         text: "Connect OBS WebSocket",
+    },
+    {
+        id: ".connect-discord",
+        type: "text",
+        text: "Connect Discord",
     },
     {
         id: ".server-IP",
@@ -1095,6 +1125,11 @@ var en_us = [
         text: "This obs studio audio input is already registered.",
     },
     {
+        id: ".this_is_discord_action_already_registered",
+        type: "text",
+        text: "There is already a record of this Discord action.",
+    },
+    {
         id: ".this_is_cmd_already_registered",
         type: "text",
         text: "There is already a record of this Windows CMD command.",
@@ -1128,6 +1163,21 @@ var en_us = [
         id: ".apply_text",
         type: "text",
         text: "Apply",
+    },
+    {
+        id: ".discord_text",
+        type: "text",
+        text: `Discord`,
+    },
+    {
+        id: ".trad_ty_discord",
+        type: "text",
+        text: `Discord`,
+    },
+    {
+        id: ".discord_icon_text",
+        type: "html",
+        text: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-discord" viewBox="0 0 16 16"><path d="M13.545 2.907a13.2 13.2 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.2 12.2 0 0 0-3.658 0 8 8 0 0 0-.412-.833.05.05 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.04.04 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032q.003.022.021.037a13.3 13.3 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019q.463-.63.818-1.329a.05.05 0 0 0-.01-.059l-.018-.011a9 9 0 0 1-1.248-.595.05.05 0 0 1-.02-.066l.015-.019q.127-.095.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.05.05 0 0 1 .053.007q.121.1.248.195a.05.05 0 0 1-.004.085 8 8 0 0 1-1.249.594.05.05 0 0 0-.03.03.05.05 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.2 13.2 0 0 0 4.001-2.02.05.05 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.03.03 0 0 0-.02-.019m-8.198 7.307c-.789 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612m5.316 0c-.788 0-1.438-.724-1.438-1.612s.637-1.613 1.438-1.613c.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612"/></svg> Discord`,
     },
     {
         id: ".apply_icon_text",
@@ -1352,7 +1402,7 @@ var en_us = [
     {
         id: ".quickguide2",
         type: "text",
-        text: "You can add an application type to be controlled by the application from the options: Audio, Application (.EXE), WEB page Url, OBS Studio Functions and Windows CMD Commands.",
+        text: "You can add an application type to be controlled by the application from the options: Discord, Audio, Application (.EXE), WEB page Url, OBS Studio Functions and Windows CMD Commands.",
     },
     {
         id: ".quickguide3",
@@ -1383,6 +1433,11 @@ var en_us = [
         id: ".quickguide7",
         type: "text",
         text: `Web Under Deck is a way for you to run your applications registered in <a class="a-style apps_name_icon"><i class="bi bi-google-play"></i> Apps</a> when accessing a WEB page using a cell phone or tablet or even another computer, simply configure a <a class="a-style">PORT</a> that is not being used and access it using <a class="a-style ">LINK</a> or using the <um class="a-style">QR code</a>.`,
+    },
+    {
+        id: ".quickguide8Discord",
+        type: "text",
+        text: `Here you can integrate the application with Discord, just click on <a class="a-style">Connect Discord</a> and follow the instructions.`,
     },
     {
         id: ".quickguide8",
@@ -1673,6 +1728,46 @@ var en_us = [
         id: ".theme_add_description_text",
         type: "text",
         text: `Want to download the theme or use it remotely over the internet?`
+    },
+    {
+        id: ".unable_to_connect_to_Discord_text",
+        type: "text",
+        text: "Unable to connect to Discord",
+    },
+    {
+        id: ".Connected_to_discord_successfully_text",
+        type: "text",
+        text: "Connected to discord successfully",
+    },
+    {
+        id: ".Disconnected_from_discord_successfully_text",
+        type: "text",
+        text: "Disconnected from discord successfully",
+    },
+    {
+        id: ".Connecting_to_Discord_text",
+        type: "text",
+        text: "Connecting to Discord",
+    },
+    {
+        id: ".Select_the_type_of_action_text",
+        type: "text",
+        text: "Select the type of action",
+    },
+    {
+        id: ".discord_toggle_mute_unmute_mic_text",
+        type: "text",
+        text: "Mute or unmute microphone",
+    },
+    {
+        id: ".discord_toggle_mute_unmute_audio_text",
+        type: "text",
+        text: "Mute or unmute audio",
+    },
+    {
+        id: ".This_action_cannot_be_performed_because_the_Discord_integration_is_not_connected_please_check_if_it_is_connected",
+        type: "text",
+        text: "This action cannot be performed because the Discord integration is not connected, please check if it is connected",
     },
 ]
 

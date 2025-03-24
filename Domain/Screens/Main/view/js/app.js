@@ -469,6 +469,7 @@ async function addExeShotCut(id) {
 async function clear_add_app() {
     $("#inputs-add-exe").addClass("hidden");
     $("#inputs-add-audio-input").addClass("hidden");
+    $("#inputs-add-discord-integration").addClass("hidden");
     $("#soundpad-add-app").addClass("hidden");
     $("#inputs-add-web-page-url").addClass("hidden");
     $("#inputs-add-cmd-input").addClass("hidden");
@@ -491,6 +492,9 @@ async function clear_add_app() {
     $("#select-obs-scene").val('');
     $('#select-audios-inputs').val('');
     $("#select-obs-options").val('')
+    $("#name-exe-modal-0").val('');
+    $("#select-discord-integration").val('');
+    $('#icon-discord-add-app-0').val('');
     old_sbs_scene_selected = null;
     add_app.type_exec = null;
     _list_installed_software = [];
@@ -506,6 +510,7 @@ async function clear_add_app() {
 async function select_type_add_app(type, id, text_type, id_remove_hidden) {
     $('.alert-add-app').html(``).addClass('hidden');
     $("#inputs-add-audio-input").addClass("hidden");
+    $("#inputs-add-discord-integration").addClass("hidden");
     $("#soundpad-add-app").addClass("hidden");
     $("#name-audio-modal-1").val("");
     $("#input-app-audio").val('');
@@ -531,6 +536,9 @@ async function select_type_add_app(type, id, text_type, id_remove_hidden) {
     $("#icon-soundpad-add-app-1").val('');
     $("#name-custom-obs-scene").val("");
     $("#select-obs-options").val('');
+    $("#name-exe-modal-0").val('');
+    $("#select-discord-integration").val('');
+    $('#icon-discord-add-app-0').val('');
     old_sbs_scene_selected = null;
     $('#icon-obs-add-app-5').val("");
     if (type == 'obs_wss') {
@@ -551,7 +559,26 @@ async function add_new_app() {
     $('.alert-add-app').text("").addClass('hidden');
     var icon = null;
     var nameCustom = "";
-    if (add_app.type_exec == "audio") {
+
+    if (add_app.type_exec == "discord") {
+        if ($("#name-exe-modal-0").val().length == 0) {
+            toaster.warning(getNameTd(".requere_name_add_app"));
+            $('.alert-add-app').text(getNameTd(".requere_name_add_app")).removeClass('hidden');
+            $('#name-exe-modal-0').focus();
+            return;
+        }
+        if ($("#select-discord-integration").val().length == 0) {
+            toaster.warning(getNameTd(".requere_cmd_add_app"));
+            $('.alert-add-app').text(getNameTd(".requere_cmd_add_app")).removeClass('hidden');
+            $('#select-discord-integration').focus();
+            return;
+        }
+        icon = $('#icon-discord-add-app-0')[0].files[0];
+        nameCustom = $("#name-exe-modal-0").val();
+        let discord_option = $("#select-discord-integration").val();
+        add_app_for_discord(discord_option, icon, nameCustom);
+    }
+    else if (add_app.type_exec == "audio") {
         var executable = $('#input-app-audio')[0].files[0];
         icon = $('#icon-audio-add-app-1')[0].files[0];
         nameCustom = $("#name-audio-modal-1").val();
@@ -582,10 +609,16 @@ async function add_new_app() {
         }
         add_app_for_file(executable, icon, nameCustom);
     }
-    if (add_app.type_exec == "soundpad_audio") {
+    else if (add_app.type_exec == "soundpad_audio") {
         icon = $('#icon-soundpad-add-app-1')[0].files[0];
         nameCustom = $("#name-exe-modal-6").val();
         let soundpad_audio = $("#select-soundpad-audio").val();
+        if (nameCustom.length == 0) {
+            toaster.warning(getNameTd(".requere_name_add_app"));
+            $('.alert-add-app').text(getNameTd(".requere_name_add_app")).removeClass('hidden');
+            $("#name-exe-modal-6").focus();
+            return;
+        }
         if (soundpad_audio == '') {
             toaster.warning(getNameTd(".p_s_a_s_soundpad_audio_text"));
             $('.alert-add-app').text(getNameTd(".p_s_a_s_soundpad_audio_text")).removeClass('hidden');
@@ -882,6 +915,50 @@ const add_app_for_soundpad_audio = async (soundpadHash, icon, nameCustom) => {
     else {
         toaster.warning(getNameTd(".this_is_soundpad_already_registered"));
         $('.alert-add-app').text(getNameTd(".this_is_soundpad_already_registered")).removeClass('hidden');
+    }
+}
+
+const add_app_for_discord = async (discord_action, icon, nameCustom) => {
+    var filesSaved = await DAO.ProgramsExe.get('list_programs'), isFileSaved = false;
+    if (filesSaved != null) {
+        await filesSaved.forEach(item => {
+            if (item.name == nameCustom)
+                isFileSaved = true;
+            else if (item.path == discord_action)
+                isFileSaved = true;
+        });
+    }
+    if (!isFileSaved) {
+        var _idItem = null;
+        var positon_rl = 1;
+        if (filesSaved != null && filesSaved.length > 0) {
+            if (filesSaved.length > 1) {
+                var iret = filesSaved.sort(compare__id).pop();
+                _idItem = iret._id + 1;
+            }
+            else
+                _idItem = filesSaved[0]._id + 1;
+
+            var lra = await filesSaved.sort(compare_positon_l);
+            positon_rl = lra[lra.length - 1].positon_l + 1;
+        }
+        else
+            _idItem = 1;
+        save_icon_app_file(icon, nameCustom, async (dir_icon) => {
+            if (dir_icon == null)
+                dir_icon = path.join(MAIN_DIR, "/Domain/src/img/underbot_logo.png");
+            var item = { _id: _idItem, positon_l: positon_rl, type_exec: add_app.type_exec, lastModified: "", lastModifiedDate: "", name: nameCustom, nameCustom: nameCustom, path: discord_action, scene: null, obsOption: null, type: "", size: "", iconCustom: dir_icon }
+            await DAO.ProgramsExe.push("list_programs", item);
+            appendHtml(item, _idItem);
+            DAO.List_programs = await DAO.ProgramsExe.get('list_programs');
+            $('.bnt-close-modal-add-app').click();
+            clear_add_app();
+            toaster.success(`${getNameTd('.Added_successfully')}`);
+        })
+    }
+    else {
+        toaster.warning(getNameTd(".this_is_discord_action_already_registered"));
+        $('.alert-add-app').text(getNameTd(".this_is_discord_action_already_registered")).removeClass('hidden');
     }
 }
 
