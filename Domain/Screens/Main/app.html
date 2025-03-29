@@ -1507,6 +1507,86 @@
             </div>
          </div>
 
+         <div class="modal fade" id="modal_discord_integration" data-bs-backdrop='static' data-keyboard="false"
+            data-backdrop="static">
+            <div class="modal-dialog">
+               <form class="rounded modal-content" onSubmit="tryLoginDiscordRpc(); return false;">
+
+                  <div class="modal-header text-center" style="border-bottom: none !important;">
+                     <h4 class="modal-title w-100 discord_integration_ipc_text"></h4>
+                  </div>
+
+                  <div class="modal-body pb-0" style="border-top: none !important; border-bottom: none !important;">
+                     <div style="display: none;" id="dc-rpc-form-alert" class="alert alert-danger" role="alert"></div>
+
+                     <div class="mb-3">
+                        <label for="dc-rpc-clientId" class="form-label">Client ID / Application ID</label>
+                        <input required type="text" class="form-control" placeholder="Client ID / Application ID"
+                           id="dc-rpc-clientId">
+                     </div>
+
+                     <div class="mb-3">
+                        <label for="dc-rpc-clientSecret" class="form-label">Client Secret</label>
+                        <div class="input-group">
+                           <a class="btn btn-light border border-secondary view-password" type="button"><i
+                                 class="bi bi-eye-fill"></i></a>
+                           <input required type="password" class="form-control" id="dc-rpc-clientSecret"
+                              placeholder="Client Secret">
+                        </div>
+                     </div>
+
+                     <div class="text-center">
+                        <a data-bs-toggle="modal" data-bs-target="#modal_HtgyDCClientIDaClientSecret"
+                           data-bs-dismiss="modal" class="cursor-pointer span font-12 HtgyDCClientIDaClientSecret">
+                        </a>
+                     </div>
+
+                  </div>
+
+                  <div class="modal-footer" style="border-top: none !important;">
+                     <button type="button" id="deny_modal" class="btn btn-danger" data-bs-dismiss="modal">
+                        <i class="bi bi-x-lg"></i>
+                        <span class="cancel_text"></span>
+                     </button>
+                     <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-send"></i>
+                        <span class="UND_userLogin_text"></span>
+                     </button>
+                  </div>
+
+               </form>
+            </div>
+         </div>
+
+         <div class="modal fade" id="modal_HtgyDCClientIDaClientSecret" data-bs-backdrop='static' data-keyboard="false"
+            data-backdrop="static">
+            <div class="modal-dialog">
+               <div class="modal-content">
+                  <div class="modal-header text-center" style="border-bottom: none !important;">
+                     <h5 class="modal-title w-100 HtgyDCClientIDaClientSecret"></h5>
+                  </div>
+
+                  <div class="modal-body pb-0" style="border-top: none !important; border-bottom: none !important;">
+                     <label class="form-label HtgyDCC_title_text"></label>
+                     <ul class="list-group">
+                        <li class="list-group-item bg-dark bg-gradient text-light HtgyDCC_1_text"></li>
+                        <li class="list-group-item bg-dark bg-gradient text-light HtgyDCC_2_text"></li>
+                        <li class="list-group-item bg-dark bg-gradient text-light HtgyDCC_3_text"></li>
+                        <li class="list-group-item bg-dark bg-gradient text-light HtgyDCC_4_text"></li>
+                        <li class="list-group-item bg-dark bg-gradient text-light HtgyDCC_5_text"></li>
+                        <li class="list-group-item bg-dark bg-gradient text-light HtgyDCC_6_text"></li>
+                     </ul>
+                  </div>
+
+                  <div class="modal-footer" style="border-top: none !important;">
+                     <button type="button" data-bs-toggle="modal" data-bs-target="#modal_discord_integration"
+                        class="btn btn-primary back_icon_text" data-bs-dismiss="modal">
+                     </button>
+                  </div>
+               </div>
+            </div>
+         </div>
+
          <div class="modal fade" id="modal_login" data-bs-backdrop='static' data-keyboard="false"
             data-backdrop="static">
             <div class="modal-dialog">

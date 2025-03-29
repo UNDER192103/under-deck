@@ -198,6 +198,10 @@ class MainScreen {
   }
 
   startAllHandleMessages() {
+    this.handleMessages('app-maxmize-force', async (event, dt) => {
+      this.window.show();
+      this.window.maximize();
+    });
     this.handleMessages('app-minimize', async (event, dt) => {
       if (await DAO.DB.get('isMinimizeToBar') == true)
         this.window.hide();

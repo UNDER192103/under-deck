@@ -1769,6 +1769,56 @@ var en_us = [
         type: "text",
         text: "This action cannot be performed because the Discord integration is not connected, please check if it is connected",
     },
+    {
+        id: ".Please_check_the_discord_application_installed_on_your_machine",
+        type: "text",
+        text: "Please check the discord application installed on your machine.",
+    },
+    {
+        id: ".Please_check_if_the_Client_ID_Application_ID_and_Client_Secret_have_been_entered_correctly",
+        type: "text",
+        text: "Please check if the Client ID / Application ID and Client Secret have been entered correctly.",
+    },
+    {
+        id: ".HtgyDCClientIDaClientSecret",
+        type: "text",
+        text: "How to get your Discord Client ID / Application ID and Client Secret",
+    },
+    {
+        id: ".HtgyDCC_title_text",
+        type: "html",
+        text: "To get your Discord client ID and client secret, you can:",
+    },
+    {
+        id: ".HtgyDCC_1_text",
+        type: "html",
+        text: `Log in to the <a class="open-url-Discord-Developer-Portal cursor-pointer a-style">Discord developer portal</a>`,
+    },
+    {
+        id: ".HtgyDCC_2_text",
+        type: "html",
+        text: "Create a new application or access one of your existing applications",
+    },
+    {
+        id: ".HtgyDCC_3_text",
+        type: "html",
+        text: "Name your application",
+    },
+    {
+        id: ".HtgyDCC_4_text",
+        type: "html",
+        text: "Click OAuth2 in the side menu",
+    },
+    {
+        id: ".HtgyDCC_5_text",
+        type: "html",
+        text: "In OAuth2 > General, copy the Client ID and Client secret",
+    },
+    {
+        id: ".HtgyDCC_6_text",
+        type: "html",
+        text: "If the client secret is not showing, select Reset Secret",
+    },
 ]
 
 module.exports.list_td = en_us;

@@ -6,9 +6,11 @@ function StartDCRPC(isPreload = false) {
 
     DC_RPC_Client.on('ready', async () => {
         await DAO.DISCORD.set('accessToken', DC_RPC_Client.accessToken);
+        await BACKEND.Send('app-maxmize-force', '');
         DiscordRPCLogged = true;
         if (DC_RPC_Client.application) {
-            $(".DC_appicon").attr('src', `https://cdn.discordapp.com/avatars/${DC_RPC_Client.application.id}/${DC_RPC_Client.application.bot.avatar}`);
+            if (DC_RPC_Client.application.bot.avatar)
+                $(".DC_appicon").attr('src', `https://cdn.discordapp.com/avatars/${DC_RPC_Client.application.id}/${DC_RPC_Client.application.bot.avatar}`);
             $(".DC_app_name").html(DC_RPC_Client.application.name);
         }
         if (DC_RPC_Client.user) {
@@ -16,6 +18,7 @@ function StartDCRPC(isPreload = false) {
             $(".DC_global_name").html(DC_RPC_Client.user.global_name);
         }
         toaster.success(getNameTd('.Connected_to_discord_successfully_text'));
+        $(".bootbox-close-button").click();
         $("#button-login-discord-rpc")
             .removeClass('btn-success')
             .addClass('btn-danger')
@@ -42,9 +45,15 @@ function StartDCRPC(isPreload = false) {
         $(".DC_global_name").html('');
     });
 
-    DC_RPC_Client.on('ERROR', async () => {
+    DC_RPC_Client.on('ERROR', async (err) => {
         DiscordRPCLogged = false;
         StartDCRPC();
+        $(".bootbox-close-button").click();
+        bootbox.alert({
+            title: getNameTd('.unable_to_connect_to_Discord_text'),
+            message: err.message,
+            callback: function () { }
+        });
         toaster.success(getNameTd('.Disconnected_from_discord_successfully_text'));
         $("#button-login-discord-rpc")
             .addClass('btn-success')
@@ -64,14 +73,14 @@ function StartDCRPC(isPreload = false) {
 }
 
 async function LoginDCRPC(ForceNewLogin = false) {
-    try {
+    /*try {
         toaster.success(getNameTd('.Connecting_to_Discord_text'));
-    } catch (error) { }
+    } catch (error) { }*/
     var DC_RPC_CONFIG = {
-        clientId: conf.DISCORD.IPC.clientId,
-        clientSecret: conf.DISCORD.IPC.clientSecret,
-        scopes: conf.DISCORD.IPC.scopes,
-        redirectUri: conf.DISCORD.IPC.redirectUri,
+        clientId: await DAO.DISCORD.get('clientId'),
+        clientSecret: await DAO.DISCORD.get('clientSecret'),
+        scopes: ['rpc'],
+        redirectUri: 'http://127.0.0.1',
     };
     if (!ForceNewLogin) {
         accessToken = await DAO.DISCORD.get('accessToken');
@@ -86,9 +95,15 @@ async function LoginDCRPC(ForceNewLogin = false) {
         DAO.DISCORD.set('accessToken', null);
     }
     DC_RPC_Client.login(DC_RPC_CONFIG).catch(async (err) => {
+        await BACKEND.Send('app-maxmize-force', '');
         DiscordRPCLogged = false;
         StartDCRPC();
-        console.log(err);
+        $(".bootbox-close-button").click();
+        bootbox.alert({
+            title: getNameTd('.unable_to_connect_to_Discord_text'),
+            message: err.message,
+            callback: function () { }
+        });
         await DAO.DISCORD.set('accessToken', null);
         toaster.danger(getNameTd('.unable_to_connect_to_Discord_text'));
         $("#button-login-discord-rpc")
@@ -141,12 +156,37 @@ function MuteOrUnmuteAudio() {
     }
 }
 
+const tryLoginDiscordRpc = async () => {
+    var clientId = $("#dc-rpc-clientId").val();
+    var clientSecret = $("#dc-rpc-clientSecret").val();
+    $("#dc-rpc-form-alert").hide('slow').html();
+    if (clientId.length == 19 && clientSecret.length == 32) {
+        await DAO.DISCORD.set('clientId', clientId);
+        await DAO.DISCORD.set('clientSecret', clientSecret);
+        await DAO.DISCORD.set('accessToken', null);
+        $("#modal_discord_integration").modal('hide');
+        bootbox.alert(`<h4>${getNameTd('.Please_check_the_discord_application_installed_on_your_machine')}</h4>`);
+        LoginDCRPC(true);
+    }
+    else {
+        $("#dc-rpc-form-alert").show('slow').html(
+            getNameTd('.Please_check_if_the_Client_ID_Application_ID_and_Client_Secret_have_been_entered_correctly')
+        );
+    }
+}
+
 $(document).ready(async () => {
+    $(document).on('click', '.open-url-Discord-Developer-Portal', async () => {
+        exec(`start ${conf.DISCORD.URL_APPS}`);
+    });
     $("#button-login-discord-rpc").click(async () => {
         if (!DiscordRPCLogged) {
-            await LoginDCRPC(true);
+            $("#dc-rpc-clientId").val(await DAO.DISCORD.get('clientId'));
+            $("#dc-rpc-clientSecret").val(await DAO.DISCORD.get('clientSecret'));
+            $("#modal_discord_integration").modal('show');
         }
         else {
+            $("#modal_discord_integration").modal('hide');
             DiscordRPCLogged = false;
             await DAO.DISCORD.set('accessToken', null);
             DC_RPC_Client.destroy();

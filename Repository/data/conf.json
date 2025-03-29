@@ -10,13 +10,6 @@
         "TOKEN": "srgy34bkgon-zl5r.61*-i0twy3l5r-7y6s58605s*kvsjn3zyk+0r4qhr3eqg5x4nwzo76suve43cruqm-sdax*nl0+66kngz7h"
     },
     "DISCORD": {
-        "IPC": {
-            "clientId": "1315309391339327508",
-            "clientSecret": "QK2-XGLqq4P6M7cXLEu7m-c74FNHUmP6",
-            "scopes": [
-                "rpc"
-            ],
-            "redirectUri": "http://localhost:3000"
-        }
+        "URL_APPS": "https://discord.com/developers/applications"
     }
 }

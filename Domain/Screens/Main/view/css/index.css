@@ -791,8 +791,12 @@ hr {
 
 @media (min-width: 1400px) {
   .mh-iconapp {
-    height: 200px;
-    max-height: 200px;
+    height: 270px;
+    max-height: 270px;
+  }
+
+  .col-xl-2 {
+    height: 290px !important;
   }
 }
 

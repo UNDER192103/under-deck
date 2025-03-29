@@ -155,7 +155,7 @@ function appendHtml(item, count) {
         bg_dropdown_menu = "dropdown-menu-black";
     }
     $('.content-files-add').append(`
-        <div class="col-md-4 col-xl-2 transition-all col animate__animated animate__fadeIn col-exe" id="col-exe-id-${count}">
+        <div class="m-0 col-md-4 col-xl-2 transition-all col animate__animated animate__fadeIn col-exe" id="col-exe-id-${count}">
             <div class="card rounded-3 rigth-click-exe hover-exes border border-4 rounded ${bgs}">
                 <div class="d-btn-exe-F m-1 d-flex flex-row-reverse">
                     <span class="dropdown-toggle dropdown-toggle-c fillter-shadow-text hover-icon-edit" data-bs-auto-close="*" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
