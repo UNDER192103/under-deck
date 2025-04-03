@@ -204,6 +204,10 @@ async function selectMenu(id, uC = false) {
         changeAppsHtml();
         _page_selected = `.container-home`;
     }
+    else if (id == 'webunderdeck') {
+        changeAppsHtml();
+        _page_selected = `.container-webunderdeck`;
+    }
     else if (id == 'soundpad') {
         changeAppsHtml();
         _page_selected = `.container-soundpad`;
@@ -624,6 +628,33 @@ async function apressentationSteps() {
             break;
 
         case 3:
+            await selectMenu('webunderdeck');
+            tempBlockSelecMenu = true;
+            elem = $("#local-server-adress-acess-url");
+            elem.prop('disabled', true);
+            elem.popover({
+                html: true,
+                title: `<span class="webdeck_text_icon">${getNameTd('.webdeck_text_icon')}</span>`,
+                placement: 'bottom',
+                content: `
+                    <div class="row m-0">
+                        <div class="m-0 mb-3 p-0 quickguide7">
+                            ${getNameTd('.quickguide7')}
+                        </div>
+                        <div class="m-0 p-0">
+                            <a class="btn btn-secondary btn-xs float-start back_step_paapp back_icon_text" type="button">${getNameTd('.back_icon_text')}</a>
+                            <a class="btn btn-primary btn-xs float-end next_step_paapp next_icon_text" type="button">${getNameTd('.next_icon_text')}</a>
+                        </div>
+                    </div>
+                    `,
+            });
+
+            setTimeout(() => {
+                elem.popover('show');
+            }, 1000);
+            break;
+
+        case 4:
             await selectMenu('keys-macros');
             tempBlockSelecMenu = true;
             elem = $("#button-add-macro");
@@ -649,7 +680,7 @@ async function apressentationSteps() {
             }, 1000);
             break;
 
-        case 4:
+        case 5:
             await selectMenu('web-pages');
             tempBlockSelecMenu = true;
             elem = $("#button-add-webpage");
@@ -675,7 +706,7 @@ async function apressentationSteps() {
             }, 1000);
             break;
 
-        case 5:
+        case 6:
             await selectMenu('appearance');
             tempBlockSelecMenu = true;
             elem = $("#s-themes");
@@ -702,7 +733,7 @@ async function apressentationSteps() {
             }, 1000);
             break;
 
-        case 6:
+        case 7:
             await selectMenu('config');
             tempBlockSelecMenu = true;
             elem = $("#s-languages");
@@ -715,33 +746,6 @@ async function apressentationSteps() {
                 <div class="row m-0">
                     <div class="m-0 mb-3 p-0 quickguide6">
                         ${getNameTd('.quickguide6')}
-                    </div>
-                    <div class="m-0 p-0">
-                        <a class="btn btn-secondary btn-xs float-start back_step_paapp back_icon_text" type="button">${getNameTd('.back_icon_text')}</a>
-                        <a class="btn btn-primary btn-xs float-end next_step_paapp next_icon_text" type="button">${getNameTd('.next_icon_text')}</a>
-                    </div>
-                </div>
-                `,
-            });
-
-            setTimeout(() => {
-                elem.popover('show');
-            }, 1000);
-            break;
-
-        case 7:
-            await selectMenu('config');
-            tempBlockSelecMenu = true;
-            elem = $("#local-server-adress-acess-url");
-            elem.prop('disabled', true);
-            elem.popover({
-                html: true,
-                title: `<span class="settings_text_icon">${getNameTd('.settings_text_icon')}</span>`,
-                placement: 'bottom',
-                content: `
-                <div class="row m-0">
-                    <div class="m-0 mb-3 p-0 quickguide7">
-                        ${getNameTd('.quickguide7')}
                     </div>
                     <div class="m-0 p-0">
                         <a class="btn btn-secondary btn-xs float-start back_step_paapp back_icon_text" type="button">${getNameTd('.back_icon_text')}</a>
@@ -921,6 +925,7 @@ const GetDataListProgramsForLocalHost = async () => {
         app: {
             version: app_un.version,
         },
+        format_view: await DAO.WEBDECK.get('format_view'),
         programs: listPrograms,
     }
     return data;

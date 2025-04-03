@@ -85,6 +85,8 @@
     --bs-table-bg: var(--theme-table-bg);
 }
 
+
+
 .dropdown-menu {
     --bs-dropdown-padding-y: 0rem;
 }

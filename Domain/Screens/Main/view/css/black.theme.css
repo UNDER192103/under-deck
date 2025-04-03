@@ -84,3 +84,8 @@
 .theme-black .bootbox-close-button.close.btn-close {
     background-color: #e30909;
 }
+
+.theme-black .theme-card.USRR {
+    background-color: black;
+    color: white;
+}

@@ -323,6 +323,7 @@ const changeUserInfoData = async (isUpdatePcACC = true) => {
         $(".UND_usericon").attr('src', "");
         $(".UND_usernotloged").show();
         $(".UND_userloged").hide();
+        $(".UND_premium_level").html(`<button class="btn btn-danger btn-sm no_premium_icon_text" type="button">${getNameTd('.no_premium_icon_text')}</button>`);
     }
     else {
         $("#uInput-changeUserAvatar").val('');
@@ -331,6 +332,14 @@ const changeUserInfoData = async (isUpdatePcACC = true) => {
         $(".UND_username").html(DAO.USER.account);
         $(".UND_datecreated").html(new Date(DAO.USER.created_date).toLocaleString());
         $(".ValUND_DisplayUsername").val(DAO.USER.account);
+        if (DAO.USER.premium == true) {
+            $(".UND_premium_level").html(`<button title="${DAO.USER.premiumDateToFinish}" class="btn btn-warning btn-sm has_Premium_icon_text" type="button">${getNameTd('.has_Premium_icon_text')}</button>`);
+            $($(".UND_username").parent()).addClass('text-warning');
+        }
+        else {
+            $(".UND_premium_level").html(`<button class="btn btn-danger btn-sm no_premium_icon_text" type="button">${getNameTd('.no_premium_icon_text')}</button>`);
+            $($(".UND_username").parent()).removeClass('text-warning');
+        }
     }
 
     if (DAO.USER && DAO.USER.icon != null && DAO.USER.icon.length > 6) {

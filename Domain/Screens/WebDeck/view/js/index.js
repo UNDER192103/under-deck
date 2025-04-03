@@ -137,13 +137,18 @@ const update_programs_select = async (list = _all.list_programs) => {
         var icone = location.origin + "/src/img/underbot_logo.png";
         if (item.nameCustom.length > 0)
             name = item.nameCustom;
+
+        let contentText = name;
+        /*if (contentText.length >= 14) {
+            contentText = `<marquee>${name}</marquee>`;
+        }*/
         $('.exe-list').append(`<li id="item-exe-${item._id}" onclick="execut_exe(${item._id})" class="col exe-item xwh-1 set-rotetionS mb-2 ${isRotetionMode}">
             <div class="card full-w-h rounded-3 border border-2 rounded cc-border">
                 <div class="exe-item-content">
                     <div class="exe-item-content-icon">
                         <img id="icon-${item._id}" src="${icone}" class="exe-icon">
                     </div>
-                    <div class="exe-item-content-text text-center">${name}</div>
+                    <div class="exe-item-content-text text-center">${contentText}</div>
                 </div>
             </div>
         </li>`);

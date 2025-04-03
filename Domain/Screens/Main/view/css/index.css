@@ -251,6 +251,10 @@ hr {
   padding: 0.5rem 0.5rem !important;
 }
 
+.card-body.p-0 {
+  padding: 0 !important;
+}
+
 .iframeUpdate {
   resize: vertical;
   min-height: 300px;
@@ -990,4 +994,60 @@ svg.SvgSoundpadColor g path {
 
 .modal-content {
   margin-bottom: 40px;
+}
+
+.card-oracle-cards {
+  display: grid;
+  grid-gap: .5rem;
+  grid-auto-rows: min-content;
+  padding: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(28vh, 1fr));
+}
+
+.card-oracle-cards.m-3x2 {
+  grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
+  grid-template-rows: auto;
+}
+
+.card-oracle-cards.m-3x2 .card-oracle-card {
+  height: 26vh;
+}
+
+.card-oracle-cards.m-5x3 {
+  grid-template-columns: repeat(auto-fit, minmax(18%, 1fr));
+  grid-template-rows: auto;
+}
+
+.card-oracle-cards.m-5x3 .card-oracle-card {
+  height: 17vh;
+}
+
+.card-oracle-cards.m-8x4 {
+  grid-template-columns: repeat(auto-fit, minmax(11%, 1fr));
+  grid-template-rows: auto;
+}
+
+.card-oracle-cards.m-8x4 .card-oracle-card {
+  height: 12vh;
+}
+
+.card-oracle-card {
+  perspective: 300px;
+  width: auto;
+  height: 30vh;
+  margin-bottom: 0.5em;
+}
+
+.card-oracle-card-body {
+  width: 100%;
+  height: 100%;
+  -webkit-transition: transform 1s;
+  transition: transform 1s;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.card-oracle-back {
+  background: #433f3f;
 }

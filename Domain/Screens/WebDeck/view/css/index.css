@@ -54,14 +54,6 @@ main {
     transition: all .2s;
 }
 
-/*.exe-item.xwh-1 {
-    margin: 1vh;
-    width: 21vh;
-    height: 25vh;
-    border-radius: 3vh;
-    transition: all .2s;
-}*/
-
 .exe-item-content {
     background: var(--backgound-exe-item);
     color: var(--color-exe-item);
@@ -92,14 +84,6 @@ main {
     border-radius: 1vh;
 }
 
-/*.img-exe {
-    width: 29vh;
-    height: 29vh;
-    max-height: 29vh;
-    max-width: 29vh;
-    border-radius: 3vh;
-}*/
-
 .exe-item-content-text {
     background-image: linear-gradient(#36363600, #000000);
     border-bottom-right-radius: 5px;
@@ -109,6 +93,17 @@ main {
     font-size: 20px;
     width: 100%;
     bottom: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.exe-item-content-text marquee {
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    padding: 0 0 0.4rem 0 !important;
 }
 
 .horizontalMode {

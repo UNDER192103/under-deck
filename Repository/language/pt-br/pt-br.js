@@ -5,6 +5,56 @@ var pt_br = [
         text: "LOADING",
     },
     {
+        id: ".preview_text",
+        type: "text",
+        text: "Preview",
+    },
+    {
+        id: ".preview_icon_text",
+        type: "html",
+        text: `<i class="bi bi-code-square"></i> Preview`,
+    },
+    {
+        id: ".Is_premium_account",
+        type: "html",
+        text: `Conta Premium`,
+    },
+    {
+        id: ".no_premium_text",
+        type: "html",
+        text: `Não possui Premium`,
+    },
+    {
+        id: ".no_premium_icon_text",
+        type: "html",
+        text: `<i class="bi bi-stars"></i> Não possui Premium`,
+    },
+    {
+        id: ".Premium_icon_text",
+        type: "html",
+        text: `<i class="bi bi-stars"></i> Premium`,
+    },
+    {
+        id: ".has_Premium_icon_text",
+        type: "html",
+        text: `<i class="bi bi-stars"></i> Possui Premium`,
+    },
+    {
+        id: ".Premium_text",
+        type: "html",
+        text: `Premium`,
+    },
+    {
+        id: ".webdeck_text",
+        type: "text",
+        text: "Web Deck",
+    },
+    {
+        id: ".webdeck_text_icon",
+        type: "html",
+        text: `<i class="bi bi-globe"></i> Web Deck`,
+    },
+    {
         id: ".themes_text",
         type: "text",
         text: "Temas",
@@ -1665,9 +1715,9 @@ var pt_br = [
         text: `Selecione um áudio do SoundPad`
     },
     {
-        id: ".Hide_screen_when_minimizing_text",
+        id: ".Hide_screen_when_close_text",
         type: "text",
-        text: `Ocultar a tela ao minimizar`
+        text: `Ocultar a tela ao fechar`
     },
     {
         id: ".size_text",

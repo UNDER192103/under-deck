@@ -67,6 +67,11 @@
                            class="nav-link navs-item-sm active apps_name_icon" aria-current="page">
                         </a>
                      </li>
+                     <li onClick="selectMenu('webunderdeck', true)" class="nav-item">
+                        <a href="javascript:void(0)" id="nav-item-webunderdeck"
+                           class="nav-link navs-item-sm webdeck_text_icon">
+                        </a>
+                     </li>
                      <li onClick="selectMenu('keys-macros', true)" class="nav-item">
                         <a href="javascript:void(0)" id="nav-item-keys-macros"
                            class="nav-link navs-item-sm keys_macro_text_icon">
@@ -437,7 +442,7 @@
 
                                        <div class="">
                                           <input class="form-check-input" type="checkbox" id="isMinimizeToBar">
-                                          <label class="form-check-label Hide_screen_when_minimizing_text"
+                                          <label class="form-check-label Hide_screen_when_close_text"
                                              for="isMinimizeToBar"></label>
                                        </div>
                                     </div>
@@ -455,137 +460,6 @@
                                     </div>
                                  </div>
 
-                              </div>
-                           </div>
-                        </div>
-
-                        <div class="col-md-12 col-xl-12 animate__animated animate__slideInTop">
-                           <div class="card theme-card">
-                              <div class="card-header shadow-text text-center">
-                                 <h5 class="web_stream_deck_text "></h5>
-                              </div>
-
-                              <div class="card-body">
-                                 <div class="forms">
-
-                                    <div class="card none-border bg-secondary text-light">
-                                       <div class="card-header" id="headingAP">
-                                          <h5 class="mb-0">
-                                             <button class="btn btn-secondary btn-sm webdeck_local_version_text full-w"
-                                                data-toggle="collapse" data-target="#collapseUNDVL" aria-expanded="true"
-                                                aria-controls="collapseUNDVL">
-                                             </button>
-                                          </h5>
-                                       </div>
-
-                                       <div id="collapseUNDVL" class="collapse show" aria-labelledby="headingAP"
-                                          data-parent="#accordion">
-                                          <div class="card-body rounded-bottom">
-
-                                             <div class="feature mt-1 mb-2 col">
-                                                <div class="alert alert-por-local-server-modal alert-danger hidden"
-                                                   role="alert"></div>
-                                             </div>
-
-                                             <div class="feature mb-2 col">
-                                                <a class="btn w100 btn-success btn-sm m-0 start_text" type="button"
-                                                   id="button-start-local-server"></a>
-                                             </div>
-
-                                             <div class="m-0 mb-2">
-                                                <label for="port-local-server"
-                                                   class="form-check-label door_text_expc_1"></label>
-                                                <div class="input-group">
-                                                   <input type="number" id="port-local-server"
-                                                      class="form-control input_select_all placeholder-port"
-                                                      placeholder="" aria-label="" aria-describedby="button-addon2">
-                                                   <button class="btn btn-primary save_text" type="button"
-                                                      id="btn-port-local-server"></button>
-                                                </div>
-                                             </div>
-
-                                             <div class="m-0 mb-2">
-                                                <label for="local-server-adress-acess-url"
-                                                   class="form-check-label url_text_expc_1"></label>
-                                                <div class="input-group">
-                                                   <input type="text" id="local-server-adress-acess-url"
-                                                      class="form-control input_select_all desable_texting_input"
-                                                      placeholder="" aria-label="" aria-describedby="button-addon2">
-                                                   <button onclick="openIpUrlWeb()" class="btn btn-primary open_text"
-                                                      type="button"></button>
-                                                   <button onclick="getQrCodeIpUrlWeb()" class="btn btn-primary"
-                                                      type="button">QR Code</button>
-                                                </div>
-                                             </div>
-
-                                             <div class="m-0 text-center">
-                                                <label class="form-check-label customization_text"></label>
-                                             </div>
-
-                                             <div class="m-0 mb-2">
-                                                <label class="form-check-label background_color_text"></label>
-                                                <div class="input-group">
-                                                   <input type="color" id="webdeck_background_color"
-                                                      class="form-control">
-                                                </div>
-                                             </div>
-
-                                             <div class="m-0 mb-2">
-                                                <label class="form-check-label color_text_text"></label>
-                                                <div class="input-group">
-                                                   <input type="color" id="webdeck_color_text" class="form-control">
-                                                </div>
-                                             </div>
-
-                                             <div class="m-0 text-center">
-                                                <button id="reset_to_default_webdeck_colors"
-                                                   class="btn btn-primary btn-sm reset_to_default_text"
-                                                   type="button"></button>
-                                             </div>
-
-                                          </div>
-                                       </div>
-                                    </div>
-
-                                    <hr>
-
-                                    <div class="card none-border bg-secondary text-light">
-                                       <div class="card-header" id="headingAP">
-                                          <h5 class="mb-0">
-                                             <button class="btn btn-secondary btn-sm webdeck_remote_version_text full-w"
-                                                data-toggle="collapse" data-target="#collapseUNDVR" aria-expanded="true"
-                                                aria-controls="collapseUNDVR">
-                                             </button>
-                                          </h5>
-                                       </div>
-
-                                       <div id="collapseUNDVR" class="collapse show" aria-labelledby="headingAP"
-                                          data-parent="#accordion">
-                                          <div class="card-body rounded-bottom">
-
-                                             <div class="m-0 text-center mb-2">
-                                                <label class="form-check-label w100 connection_invitation_text"></label>
-                                                <div class="input-group">
-                                                   <input type="text" value="N/A"
-                                                      class="form-control input_select_all desable_texting_input underdeck_url_invite_remote_version"
-                                                      placeholder="" aria-label="" aria-describedby="button-addon2">
-                                                   <button id="openInvitationUNDRemotVersion"
-                                                      class="btn btn-primary btn-sm open_text" type="button"></button>
-                                                   <button id="openInvitationQRCODEUNDRemotVersion"
-                                                      class="btn btn-primary" type="button">QR Code</button>
-                                                </div>
-                                             </div>
-                                             <div class="m-0 text-center">
-                                                <button id="revoke_all_permissions_UNDRemoteVersion"
-                                                   class="btn btn-primary btn-sm revoke_all_permissions_text"
-                                                   type="button"></button>
-                                             </div>
-
-                                          </div>
-                                       </div>
-                                    </div>
-
-                                 </div>
                               </div>
                            </div>
                         </div>
@@ -889,6 +763,193 @@
                         </div>
                      </div>
                   </div>
+               </div>
+            </div>
+         </div>
+
+         <div
+            class="container container-hide-control container-webunderdeck mt-1 mb-1 animate__animated container-animated-style"
+            style="display: none;">
+            <div class="THCG-CT full-h container rounded px-3 py-3" id="featured-3">
+               <div class="auto-scrool">
+                  <h2 class="pb-2 border-bottom d-flex webdeck_text_icon"></h2>
+
+                  <div class="cards-area aos-init aos-animate" data-aos="fade-down">
+                     <div class="row">
+
+                        <div class="col-md-12 col-xl-12 animate__animated animate__slideInTop">
+                           <div class="card theme-card">
+                              <div class="card-header shadow-text text-center">
+                                 <h5 class="web_stream_deck_text "></h5>
+                              </div>
+
+                              <div class="card-body">
+                                 <div class="forms">
+
+                                    <div class="card none-border bg-secondary text-light">
+                                       <div class="card-header" id="headingAP">
+                                          <h5 class="mb-0">
+                                             <button class="btn btn-secondary btn-sm webdeck_local_version_text full-w"
+                                                data-toggle="collapse" data-target="#collapseUNDVL" aria-expanded="true"
+                                                aria-controls="collapseUNDVL">
+                                             </button>
+                                          </h5>
+                                       </div>
+
+                                       <div id="collapseUNDVL" class="collapse show" aria-labelledby="headingAP"
+                                          data-parent="#accordion">
+                                          <div class="card-body rounded-bottom">
+
+                                             <div class="feature mt-1 mb-2 col">
+                                                <div class="alert alert-por-local-server-modal alert-danger hidden"
+                                                   role="alert"></div>
+                                             </div>
+
+                                             <div class="feature mb-2 col">
+                                                <a class="btn w100 btn-success btn-sm m-0 start_text" type="button"
+                                                   id="button-start-local-server"></a>
+                                             </div>
+
+                                             <div class="m-0 mb-2">
+                                                <label for="port-local-server"
+                                                   class="form-check-label door_text_expc_1"></label>
+                                                <div class="input-group">
+                                                   <input type="number" id="port-local-server"
+                                                      class="form-control input_select_all placeholder-port"
+                                                      placeholder="" aria-label="" aria-describedby="button-addon2">
+                                                   <button class="btn btn-primary save_text" type="button"
+                                                      id="btn-port-local-server"></button>
+                                                </div>
+                                             </div>
+
+                                             <div class="m-0 mb-2">
+                                                <label for="local-server-adress-acess-url"
+                                                   class="form-check-label url_text_expc_1"></label>
+                                                <div class="input-group">
+                                                   <input type="text" id="local-server-adress-acess-url"
+                                                      class="form-control input_select_all desable_texting_input"
+                                                      placeholder="" aria-label="" aria-describedby="button-addon2">
+                                                   <button onclick="openIpUrlWeb()" class="btn btn-primary open_text"
+                                                      type="button"></button>
+                                                   <button onclick="getQrCodeIpUrlWeb()" class="btn btn-primary"
+                                                      type="button">QR Code</button>
+                                                </div>
+                                             </div>
+
+                                             <div class="m-0 text-center">
+                                                <label class="form-check-label customization_text"></label>
+                                             </div>
+
+                                             <div class="m-0 mb-2">
+                                                <label class="form-check-label background_color_text"></label>
+                                                <div class="input-group">
+                                                   <input type="color" id="webdeck_background_color"
+                                                      class="form-control">
+                                                </div>
+                                             </div>
+
+                                             <div class="m-0 mb-2">
+                                                <label class="form-check-label color_text_text"></label>
+                                                <div class="input-group">
+                                                   <input type="color" id="webdeck_color_text" class="form-control">
+                                                </div>
+                                             </div>
+
+                                             <div class="m-0 text-center">
+                                                <button id="reset_to_default_webdeck_colors"
+                                                   class="btn btn-primary btn-sm reset_to_default_text"
+                                                   type="button"></button>
+                                             </div>
+
+                                          </div>
+                                       </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="card none-border bg-secondary text-light">
+                                       <div class="card-header" id="headingAP">
+                                          <h5 class="mb-0">
+                                             <button class="btn btn-secondary btn-sm webdeck_remote_version_text full-w"
+                                                data-toggle="collapse" data-target="#collapseUNDVR" aria-expanded="true"
+                                                aria-controls="collapseUNDVR">
+                                             </button>
+                                          </h5>
+                                       </div>
+
+                                       <div id="collapseUNDVR" class="collapse show" aria-labelledby="headingAP"
+                                          data-parent="#accordion">
+                                          <div class="card-body rounded-bottom">
+
+                                             <div class="m-0 text-center mb-2">
+                                                <label class="form-check-label w100 connection_invitation_text"></label>
+                                                <div class="input-group">
+                                                   <input type="text" value="N/A"
+                                                      class="form-control input_select_all desable_texting_input underdeck_url_invite_remote_version"
+                                                      placeholder="" aria-label="" aria-describedby="button-addon2">
+                                                   <button id="openInvitationUNDRemotVersion"
+                                                      class="btn btn-primary btn-sm open_text" type="button"></button>
+                                                   <button id="openInvitationQRCODEUNDRemotVersion"
+                                                      class="btn btn-primary" type="button">QR Code</button>
+                                                </div>
+                                             </div>
+                                             <div class="m-0 text-center">
+                                                <button id="revoke_all_permissions_UNDRemoteVersion"
+                                                   class="btn btn-primary btn-sm revoke_all_permissions_text"
+                                                   type="button"></button>
+                                             </div>
+
+                                          </div>
+                                       </div>
+                                    </div>
+
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+
+                        <div class="col-md-12 col-xl-8 animate__animated animate__slideInLeft">
+                           <div class="card theme-card">
+                              <div class="card-header shadow-text text-center">
+                                 <h5 class="preview_icon_text"></h5>
+                              </div>
+
+                              <div class="card-body p-0">
+                                 <div class="card-oracle-cards wendeckpreview">
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+
+                        <div class="col-md-12 col-xl-4 animate__animated animate__slideInRight">
+                           <div class="card theme-card">
+                              <div class="card-header shadow-text text-center d-flex">
+                                 <h5 class="settings_text_icon_HVRT d-flex m-auto"></h5>
+                              </div>
+
+                              <div class="card-body">
+
+                                 <div class="forms">
+
+                                    <div class="select mb-3">
+                                       <label class="form-check-label">Modo de exibição</label>
+                                       <select disabled id="change-webdeck-view" class="form-select">
+                                          <option value="default">Padrão</option>
+                                          <option value="3x2">3x2</option>
+                                          <option value="5x3">5x3</option>
+                                          <option value="8x4">8x4</option>
+                                       </select>
+                                    </div>
+
+                                 </div>
+
+                              </div>
+                           </div>
+                        </div>
+
+                     </div>
+                  </div>
+
                </div>
             </div>
          </div>
@@ -1579,9 +1640,9 @@
                   </div>
 
                   <div class="modal-footer" style="border-top: none !important;">
-                     <button type="button" data-bs-toggle="modal" data-bs-target="#modal_discord_integration"
+                     <a type="button" data-bs-toggle="modal" data-bs-target="#modal_discord_integration"
                         class="btn btn-primary back_icon_text" data-bs-dismiss="modal">
-                     </button>
+                     </a>
                   </div>
                </div>
             </div>
@@ -1829,7 +1890,7 @@
                         <div class="row">
 
                            <div class="col-md-12 col-xl-12">
-                              <div class="card theme-card">
+                              <div class="card theme-card USRR border-0">
 
                                  <div class="card-body">
 
@@ -1941,6 +2002,20 @@
                                           <div class="input-group">
                                              <div class="m-auto ms-0 d-flex">
                                                 <div class="ms-2 d-grid">
+                                                   <h5 class="form-check-label Is_premium_account m-0"></h5>
+                                                </div>
+                                             </div>
+                                          </div>
+
+                                          <div class="input-group UND_premium_level">
+
+                                          </div>
+                                       </div>
+
+                                       <div class="d-flex mt-3 mb-3">
+                                          <div class="input-group">
+                                             <div class="m-auto ms-0 d-flex">
+                                                <div class="ms-2 d-grid">
                                                    <h5 class="form-check-label creation_data_text m-0"></h5>
                                                 </div>
                                              </div>
@@ -2033,5 +2108,6 @@
 <script src="./view/js/obs.js"></script>
 <script src="./view/js/keys_macro.js"></script>
 <script src="./view/js/Soundpad.js"></script>
+<script src="./view/js/webdeck.js"></script>
 
 </html>

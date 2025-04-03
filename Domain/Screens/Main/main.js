@@ -203,10 +203,7 @@ class MainScreen {
       this.window.maximize();
     });
     this.handleMessages('app-minimize', async (event, dt) => {
-      if (await DAO.DB.get('isMinimizeToBar') == true)
-        this.window.hide();
-      else
-        this.window.minimize();
+      this.window.minimize();
     });
     this.handleMessages('app-maximize', (event, dt) => {
       if (this.window.isMaximized())
@@ -214,8 +211,11 @@ class MainScreen {
       else
         this.window.maximize();
     });
-    this.handleMessages('app-close', (event, dt) => {
-      this.window.close();
+    this.handleMessages('app-close', async (event, dt) => {
+      if (await DAO.DB.get('isMinimizeToBar') == true)
+        this.window.hide();
+      else
+        this.window.close();
     });
 
     this.handleMessages('get_version', (event, dt) => {
