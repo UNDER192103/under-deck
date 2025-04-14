@@ -260,6 +260,11 @@ var en_us = [
         text: "Open"
     },
     {
+        id: ".open_icon_text",
+        type: "html",
+        text: `<i class="bi bi-send-fill"></i> Open`
+    },
+    {
         id: ".t_a_i_a_r_i_t_l_o_s_text",
         type: "text",
         text: "This application is already registered in the list of shortcuts!"
@@ -355,6 +360,16 @@ var en_us = [
         text: "Apps",
     },
     {
+        id: ".app_name",
+        type: "text",
+        text: "App",
+    },
+    {
+        id: ".app_name_icon",
+        type: "text",
+        text: `<i class="bi bi-google-play"></i> App`,
+    },
+    {
         id: ".apps_name_icon",
         type: "html",
         text: '<i class="bi bi-google-play"></i> Apps',
@@ -445,6 +460,11 @@ var en_us = [
         text: "Close",
     },
     {
+        id: ".close_icon",
+        type: "html",
+        text: `<i class="bi bi-x-lg"></i> Close`,
+    },
+    {
         id: ".save_text",
         type: "text",
         text: "Save",
@@ -478,6 +498,11 @@ var en_us = [
         id: ".edit_text",
         type: "text",
         text: "Edit"
+    },
+    {
+        id: ".edit_icon",
+        type: "html",
+        text: `<i class="bi bi-pen"></i> Edit`
     },
     {
         id: ".delete_text",
@@ -705,9 +730,19 @@ var en_us = [
         text: "Select"
     },
     {
+        id: ".select_app_text",
+        type: "text",
+        text: "Select an App"
+    },
+    {
         id: ".select_path_SoundPad_text",
         type: "text",
         text: "Select SoundPad"
+    },
+    {
+        id: ".selecting_text",
+        type: "text",
+        text: "Select"
     },
     {
         id: ".bnt_select_type_add_text",
@@ -723,6 +758,16 @@ var en_us = [
         id: ".requere_name_add_app",
         type: "text",
         text: "Please provide a name."
+    },
+    {
+        id: ".select_webdeck_page_text",
+        type: "text",
+        text: "Select an page"
+    },
+    {
+        id: ".dywtotpori",
+        type: "text",
+        text: "Do you want to open the page or remove it?"
     },
     {
         id: ".requere_url_add_app",
@@ -843,6 +888,16 @@ var en_us = [
         id: ".web_pages_text",
         type: "text",
         text: "Web Pages",
+    },
+    {
+        id: ".webdeck_pages_text",
+        type: "text",
+        text: 'WebDeck Pages',
+    },
+    {
+        id: ".list_webdeck_pages_text",
+        type: "text",
+        text: 'List WebDeck Pages',
     },
     {
         id: ".web_pages_text_icon",
@@ -1380,6 +1435,11 @@ var en_us = [
         text: "No users found with this email address or username",
     },
     {
+        id: ".no_app_found_text",
+        type: "text",
+        text: "App not found!",
+    },
+    {
         id: ".msg_err_u_up_login_text",
         type: "text",
         text: "Invalid password",
@@ -1530,6 +1590,21 @@ var en_us = [
         text: "Successfully removed",
     },
     {
+        id: ".edit_webdeck_page_text",
+        type: "text",
+        text: 'Edit Page WebDeck',
+    },
+    {
+        id: ".Page_Successfully_removed",
+        type: "text",
+        text: "Page Successfully removed",
+    },
+    {
+        id: ".Page_Successfully_edited",
+        type: "text",
+        text: "Page edited successfully",
+    },
+    {
         id: ".changeUserAvatar_text",
         type: "html",
         text: `<i class="bi bi-person-square"></i> Change Avatar`
@@ -1545,6 +1620,11 @@ var en_us = [
         text: "Customization"
     },
     {
+        id: ".Automatically_list_items",
+        type: "text",
+        text: "Automatically list items"
+    },
+    {
         id: ".background_color_text",
         type: "text",
         text: "Background color"
@@ -1558,6 +1638,26 @@ var en_us = [
         id: ".reset_to_default_text",
         type: "html",
         text: "Reset to default"
+    },
+    {
+        id: ".Display_mode_text",
+        type: "html",
+        text: "Display mode"
+    },
+    {
+        id: ".Display_mode_list_text",
+        type: "html",
+        text: "Listing mode"
+    },
+    {
+        id: ".List_Custom_mode",
+        type: "html",
+        text: "List Custom mode"
+    },
+    {
+        id: ".Custom_text",
+        type: "html",
+        text: "Custom"
     },
     {
         id: ".successfully_reset_text",
@@ -1868,6 +1968,56 @@ var en_us = [
         id: ".HtgyDCC_6_text",
         type: "html",
         text: "If the client secret is not showing, select Reset Secret",
+    },
+    {
+        id: ".Dywtcnposana",
+        type: "html",
+        text: `Do you want to create a new page or select an application?`,
+    },
+    {
+        id: ".DywtcnposanaEX",
+        type: "html",
+        text: `DDo you want to create a new page or select an existing one?`,
+    },
+    {
+        id: ".New_page_text",
+        type: "html",
+        text: `New Page`,
+    },
+    {
+        id: ".New_page_icon",
+        type: "html",
+        text: `<i class="bi bi-plus-lg"></i> New Page`,
+    },
+    {
+        id: ".page_text",
+        type: "html",
+        text: `Page`,
+    },
+    {
+        id: ".page_icon",
+        type: "html",
+        text: `<i class="bi bi-file-earmark-fill"></i> Page`,
+    },
+    {
+        id: ".Select_an_image_text",
+        type: "html",
+        text: `Select an image`,
+    },
+    {
+        id: ".invalid_image_text",
+        type: "html",
+        text: `Invalid image, please select a valid image!`,
+    },
+    {
+        id: ".Change_icon_icon",
+        type: "html",
+        text: `<i class="bi bi-image-fill"></i> Change icon`,
+    },
+    {
+        id: ".Change_name_icon",
+        type: "html",
+        text: `<i class="bi bi-pen-fill"></i> Change name`,
     },
 ]
 

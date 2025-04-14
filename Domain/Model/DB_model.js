@@ -29,4 +29,9 @@ module.exports = {
         name: null,
         username: null,
     },
+    WEBDECKDATA: {
+        formatView: 'default',
+        formatListView: 'default',
+        pages: [],
+    }
 };

@@ -348,6 +348,90 @@ async function selectTheme(id, isPreloadd = false) {
 
     $(`#s-themes option[value="${id}"]`).prop('selected', true);
 }
+
+function uuidv4() {
+    return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c =>
+        (+c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> +c / 4).toString(16)
+    );
+}
+
+function ModalGetImagem(permitNull = false, callback, defaultImage = null) {
+    console.log(defaultImage);
+    if (defaultImage == null) {
+        defaultImage = path.join(MAIN_DIR, "/Domain/src/img/underbot_logo.png");
+    }
+    bootbox.dialog({
+        title: getNameTd('.select_image'),
+        message: `
+            <div class="row">
+             <div class="col-md-12">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label icon_text_expc_1" for="logo">${getNameTd('.icon_text_expc_1')}</label>
+                        <div class="col-md-4">
+                         <img src="${defaultImage}" name="customImgTemplet" class="customImgTemplet" />
+                        </div>
+                        <span class="Select_an_image_text">${getNameTd('.Select_an_image_text')}</span>
+                        <input type="file" class="form-control" id="input_customImgTemplet" aria-label="Upload"
+                         accept=".jpeg, .gif, .png, .gif">
+                   </div>
+                </form>
+             </div>
+            </div>
+        `,
+        buttons: {
+            danger: {
+                label: getNameTd('.cancel_icon_text'),
+                className: "btn btn-danger"
+            },
+            success: {
+                label: getNameTd('.submit_icon'),
+                className: "btn btn-success",
+                callback: function () {
+                    if ($("#input_customImgTemplet")[0].files[0])
+                        callback($("#input_customImgTemplet")[0].files[0]);
+                    else if (permitNull == true) {
+                        callback(null, defaultImage);
+                    }
+                    else {
+                        toaster.danger(getNameTd('.invalid_image_text'));
+                        ModalGetImagem(permitNull, callback, defaultImage);
+                    }
+                }
+            }
+        }
+    });
+}
+
+const save_icon_app_file = async (data_img, name, callback) => {
+    if (data_img) {
+        var dirCopy = path.join(DAO.DB_DIR, 'UN-DATA', 'icons-exe', `${name.replace('.', '-')}-${data_img.name}`);
+        if (fs.existsSync(dirCopy) == false) {
+            fs.copyFile(data_img.path, dirCopy, (err) => {
+                callback(dirCopy);
+            })
+        }
+        else
+            callback(dirCopy);
+    } else {
+        callback(null);
+    }
+};
+
+const save_icon_PageWebDeck_file = async (pathFile, id, callback) => {
+    if (pathFile) {
+        var dirCopy = path.join(DAO.DB_DIR, 'UN-DATA', 'icons-webpages', `${id.replace('.', '-')}-${pathFile.split(/(\\|\/)/g).pop()}`);
+        if (fs.existsSync(dirCopy) == false) {
+            fs.copyFile(pathFile, dirCopy, (err) => {
+                callback(dirCopy);
+            });
+        }
+        else
+            callback(dirCopy);
+    } else {
+        callback(null);
+    }
+};
 ///      Pre load funcions      ///
 
 ///      App ready      //
@@ -384,22 +468,13 @@ $(document).ready(async () => {
         }
     });
 
+    $(document).on('change', '#input_customImgTemplet', (e) => {
+        if ($("#input_customImgTemplet")[0].files[0])
+            $(".customImgTemplet").attr('src', ($("#input_customImgTemplet")[0].files[0].path));
+    });
+
 
     await $('.footable').footable();
-    $(".list_apps").sortable({
-        start: (event) => {
-            getElmByParentsClass(event.originalEvent.target, 'col-exe', (elem) => {
-                elem.removeClass('transition-all');
-            });
-        },
-        stop: (event) => {
-            getElmByParentsClass(event.originalEvent.target, 'col-exe', (elem) => {
-                elem.addClass('transition-all');
-            });
-            change_position_list();
-        },
-    });
-    $(".list_apps").disableSelection();
 
     $('button[data-toggle="collapse"]').click((e) => {
         var id = $(e.target).attr("aria-controls");
@@ -925,7 +1000,11 @@ const GetDataListProgramsForLocalHost = async () => {
         app: {
             version: app_un.version,
         },
-        format_view: await DAO.WEBDECK.get('format_view'),
+        web: {
+            formatView: await DAO.WEBDECK.get('format_view'),
+            formatListView: await DAO.WEBDECK.get('format_list_view'),
+            pages: DAO.WEBDECKDATA.pages,
+        },
         programs: listPrograms,
     }
     return data;
@@ -951,6 +1030,11 @@ const GetDataListProgramsForWebSocket = async () => {
         },
         app: {
             version: app_un.version,
+        },
+        web: {
+            formatView: await DAO.WEBDECK.get('format_view'),
+            formatListView: await DAO.WEBDECK.get('format_list_view'),
+            pages: DAO.WEBDECKDATA.pages,
         },
         programs: await FormatListProgramsToWS(listPrograms),
     }

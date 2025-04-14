@@ -40,6 +40,9 @@ class DBCLASS {
         this.PC = this.DB.get('user_pc');
         let themesLocal = await this.THEMES.get('local');
         let themesRemote = await this.THEMES.get('remote');
+        this.WEBDECKDATA.formatView = await this.WEBDECK.get('format_view');
+        this.WEBDECKDATA.pages = await this.WEBDECK.get('pages');
+        this.WEBDECKDATA.formatListView = await this.WEBDECK.get('format_list_view');
         this.ThemesData.list = themesLocal.concat(themesRemote);
         return this;
     }

@@ -61,6 +61,9 @@ const DB_default_values = async (callback) => {
     if (await DAO.THEMES.get('remote') == null)
         await DAO.THEMES.set('remote', []);
 
+    if (await DAO.WEBDECK.get('pages') == null)
+        await DAO.WEBDECK.set('pages', []);
+
     callback();
 }
 

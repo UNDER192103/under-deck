@@ -87,6 +87,23 @@ async function UpdatePCACC() {
                     pc_name: process.env.COMPUTERNAME,
                     mac: mac,
                     client_id: DAO.USER ? DAO.USER.client_id : 0
+                },
+                pc: {
+                    pc_name: process.env.COMPUTERNAME,
+                    id: DAO.PC ? DAO.PC.id : 0,
+                    mac: mac,
+                    os: {
+                        os: process.platform,
+                        os_version: process.version,
+                        os_arch: process.arch,
+                        os_hostname: process.env.COMPUTERNAME,
+                        os_platform: process.env.OS,
+                        os_type: process.env.PROCESSOR_ARCHITECTURE,
+                        os_cpu: process.env.PROCESSOR_IDENTIFIER,
+                    }
+                },
+                app: {
+                    version: app_un.version,
                 }
             }
         )

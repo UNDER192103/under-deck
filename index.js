@@ -5,6 +5,7 @@ const BasePath = app.getPath('userData');
 const BasePathData = path.join(BasePath, 'UN-DATA');
 const BasePathDataDB = path.join(BasePathData, 'DB');
 const BasePathDataIcons = path.join(BasePathData, 'icons-exe');
+const BasePathDataIconsWebPages = path.join(BasePathData, 'icons-webpages');
 const BasePathDataThemes = path.join(BasePathData, 'themes');
 
 const check_folders_data_UN = async (callback) => {
@@ -15,6 +16,7 @@ const check_folders_data_UN = async (callback) => {
         await fs.mkdirSync(BasePathData);
         await fs.mkdirSync(BasePathDataDB);
         await fs.mkdirSync(BasePathDataIcons);
+        await fs.mkdirSync(BasePathDataIconsWebPages);
         await fs.mkdirSync(BasePathDataThemes);
     }
     else {
@@ -23,6 +25,9 @@ const check_folders_data_UN = async (callback) => {
         }
         if (!await fs.existsSync(BasePathDataIcons)) {
             await fs.mkdirSync(BasePathDataIcons);
+        }
+        if (!await fs.existsSync(BasePathDataIconsWebPages)) {
+            await fs.mkdirSync(BasePathDataIconsWebPages);
         }
         if (!await fs.existsSync(BasePathDataThemes)) {
             await fs.mkdirSync(BasePathDataThemes);

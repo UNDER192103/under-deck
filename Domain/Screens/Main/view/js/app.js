@@ -3,6 +3,21 @@ changeAppsHtml();
 
 $(document).ready(async () => {
 
+    $(".list_apps").sortable({
+        start: (event) => {
+            getElmByParentsClass(event.originalEvent.target, 'col-exe', (elem) => {
+                elem.removeClass('transition-all').css('cursor', 'move');
+            });
+        },
+        stop: (event) => {
+            getElmByParentsClass(event.originalEvent.target, 'col-exe', (elem) => {
+                elem.addClass('transition-all').css('cursor', '');
+            });
+            change_position_list();
+        },
+    });
+    $(".list_apps").disableSelection();
+
     $('#notifications_on_windows').click(function () {
         let isCheck = document.getElementById('notifications_on_windows').checked;
         DAO.DB.set('App_notification_windows', isCheck);
@@ -11,6 +26,20 @@ $(document).ready(async () => {
     $('#isMinimizeToBar').click(function () {
         let isCheck = document.getElementById('isMinimizeToBar').checked;
         DAO.DB.set('isMinimizeToBar', isCheck);
+    });
+
+    $("#icon-custom-add-app").on('change', (e) => {
+        if (e.target.files[0])
+            $("#previwSeletedIconAddApp").attr('src', URL.createObjectURL(e.target.files[0]));
+        else
+            $("#previwSeletedIconAddApp").attr('src', path.join(MAIN_DIR, "/Domain/src/img/underbot_logo.png"));
+    });
+
+    $("#icon-exe-edit").on('change', (e) => {
+        if (e.target.files[0])
+            $("#previwSeletedIconEditApp").attr('src', URL.createObjectURL(e.target.files[0]));
+        else
+            $("#previwSeletedIconEditApp").attr('src', editExeNow.iconCustom);
     });
 
     $('#autoupdateonestart').click(function () {
@@ -42,6 +71,13 @@ $(document).ready(async () => {
                 $("#name-audio-modal-1").val(executable.name.split(".")[0])
             else
                 $("#name-audio-modal-1").val("");
+        }
+    });
+
+
+    $(document).on('mousedown', '.rigth-click-exe', function (e) {
+        if (e.button == 2) {
+            $(e.currentTarget).find('.dropdown-toggle').click();
         }
     });
 
@@ -126,21 +162,6 @@ function compare__id(a, b) {
     return 0;
 }
 
-const save_icon_app_file = async (data_img, name, callback) => {
-    if (data_img) {
-        var dirCopy = path.join(DAO.DB_DIR, 'UN-DATA', 'icons-exe', `${name.replace('.', '-')}-${data_img.name}`);
-        if (fs.existsSync(dirCopy) == false) {
-            fs.copyFile(data_img.path, dirCopy, (err) => {
-                callback(dirCopy);
-            })
-        }
-        else
-            callback(dirCopy);
-    } else {
-        callback(null);
-    }
-};
-
 function appendHtml(item, count) {
     var name = item.name.replace('.exe', '');
     var icone = MAIN_DIR + "/Domain/src/img/underbot_logo-68.png";
@@ -182,7 +203,7 @@ function appendHtml(item, count) {
 
     setTimeout(() => {
         $(".tooltip-script").tooltip();
-    }, 500)
+    }, 500);
 }
 
 async function deleteExe(id) {
@@ -225,6 +246,18 @@ async function deleteExe(id) {
                     else if (item == null) {
                         $(`#col-exe-id-${id}`).remove();
                     }
+                    await Promise.all(DAO.WEBDECKDATA.pages.map(async page => {
+                        page.items = await page.items.map(item => {
+                            if (item.app != null && item.app._id == id) {
+                                item.app = null;
+                                item.type = null;
+                            }
+                            return item;
+                        });
+                        return page;
+                    }));
+                    await DAO.WEBDECK.set('pages', DAO.WEBDECKDATA.pages);
+                    loadPreviwWebDeck();
                     toaster.success(`${getNameTd('.Successfully_removed')}`);
                 }
             }
@@ -268,6 +301,7 @@ async function getNameApp(app) {
 
 function editExe(id) {
     $("#icon-exe-edit").val('');
+    $("#previwSeletedIconEditApp").attr('src', '');
     var list_programs = DAO.ProgramsExe.get('list_programs');
     var item = list_programs.filter(b => b._id == id)[0];
     $(".div-edit-url").addClass("hidden");
@@ -284,7 +318,7 @@ function editExe(id) {
         $(".div-edit-cmd").removeClass("hidden");
         $("#edit-cmd-add-app").val(item.path);
     }
-
+    $("#previwSeletedIconEditApp").attr('src', editExeNow.iconCustom);
     var name = item.name.replace('.exe', '');
     if (item.nameCustom.length > 0)
         name = item.nameCustom;
@@ -467,7 +501,10 @@ async function addExeShotCut(id) {
 }
 
 async function clear_add_app() {
+    $("#previwSeletedIconAddApp").attr('src', path.join(MAIN_DIR, "/Domain/src/img/underbot_logo.png"));
+    $("#icon-custom-add-app").val('');
     $("#inputs-add-exe").addClass("hidden");
+    $("#formselecCustomIcon").addClass("hidden");
     $("#inputs-add-audio-input").addClass("hidden");
     $("#inputs-add-discord-integration").addClass("hidden");
     $("#soundpad-add-app").addClass("hidden");
@@ -485,16 +522,12 @@ async function clear_add_app() {
     $("#url-add-app").val("");
     $("#cmd-add-app").val("");
     $("#input-app-audio").val('');
-    $("#icon-audio-add-app-1").val('');
-    $("#icon-soundpad-add-app-1").val('');
     $("#name-custom-obs-scene").val("");
-    $('#icon-obs-add-app-5').val("");
     $("#select-obs-scene").val('');
     $('#select-audios-inputs').val('');
     $("#select-obs-options").val('')
     $("#name-exe-modal-0").val('');
     $("#select-discord-integration").val('');
-    $('#icon-discord-add-app-0').val('');
     old_sbs_scene_selected = null;
     add_app.type_exec = null;
     _list_installed_software = [];
@@ -508,13 +541,15 @@ async function clear_add_app() {
 }
 
 async function select_type_add_app(type, id, text_type, id_remove_hidden) {
+    $("#previwSeletedIconAddApp").attr('src', path.join(MAIN_DIR, "/Domain/src/img/underbot_logo.png"));
+    $("#icon-custom-add-app").val('');
     $('.alert-add-app').html(``).addClass('hidden');
+    $("#formselecCustomIcon").addClass("hidden");
     $("#inputs-add-audio-input").addClass("hidden");
     $("#inputs-add-discord-integration").addClass("hidden");
     $("#soundpad-add-app").addClass("hidden");
     $("#name-audio-modal-1").val("");
     $("#input-app-audio").val('');
-    $("#icon-audio-add-app-1").val('');
     $("#select-obs-scene").val('');
     $('#select-audios-inputs').val('');
     $("#inputs-add-exe").addClass("hidden");
@@ -530,17 +565,11 @@ async function select_type_add_app(type, id, text_type, id_remove_hidden) {
     $("#cmd-add-app").val("");
     $('#input-app-exec').val("");
     $('#input-app-audio').val("");
-    $('#icon-exe-add-app-1').val("");
-    $('#icon-exe-add-app-2').val("");
-    $('#icon-exe-add-app-3').val("");
-    $("#icon-soundpad-add-app-1").val('');
     $("#name-custom-obs-scene").val("");
     $("#select-obs-options").val('');
     $("#name-exe-modal-0").val('');
     $("#select-discord-integration").val('');
-    $('#icon-discord-add-app-0').val('');
     old_sbs_scene_selected = null;
-    $('#icon-obs-add-app-5').val("");
     if (type == 'obs_wss') {
         if (await BACKEND.Send('Obs_wss_p', { stage: 'is_started' }) != true) {
             $('.alert-add-app').html(`
@@ -552,6 +581,7 @@ async function select_type_add_app(type, id, text_type, id_remove_hidden) {
     }
     add_app.type_exec = type;
     $("#bnt-select-type-add-app").text(getNameTd(text_type));
+    $("#formselecCustomIcon").removeClass("hidden");
     $(id_remove_hidden).removeClass("hidden");
 }
 
@@ -573,14 +603,14 @@ async function add_new_app() {
             $('#select-discord-integration').focus();
             return;
         }
-        icon = $('#icon-discord-add-app-0')[0].files[0];
+        icon = $("#icon-custom-add-app")[0].files[0];
         nameCustom = $("#name-exe-modal-0").val();
         let discord_option = $("#select-discord-integration").val();
         add_app_for_discord(discord_option, icon, nameCustom);
     }
     else if (add_app.type_exec == "audio") {
         var executable = $('#input-app-audio')[0].files[0];
-        icon = $('#icon-audio-add-app-1')[0].files[0];
+        icon = $("#icon-custom-add-app")[0].files[0];
         nameCustom = $("#name-audio-modal-1").val();
         if (executable == null) {
             toaster.warning(getNameTd(".p_s_a_audio_text"));
@@ -610,7 +640,7 @@ async function add_new_app() {
         add_app_for_file(executable, icon, nameCustom);
     }
     else if (add_app.type_exec == "soundpad_audio") {
-        icon = $('#icon-soundpad-add-app-1')[0].files[0];
+        icon = $("#icon-custom-add-app")[0].files[0];
         nameCustom = $("#name-exe-modal-6").val();
         let soundpad_audio = $("#select-soundpad-audio").val();
         if (nameCustom.length == 0) {
@@ -629,7 +659,7 @@ async function add_new_app() {
     }
     else if (add_app.type_exec == "exe") {
         var executable = $('#input-app-exec')[0].files[0];
-        icon = $('#icon-exe-add-app-1')[0].files[0];
+        icon = $("#icon-custom-add-app")[0].files[0];
         nameCustom = $("#name-exe-modal-1").val();
         if (executable == null && radio_select_file_info == null) {
             toaster.warning(getNameTd(".p_s_a_e_text"));
@@ -671,7 +701,7 @@ async function add_new_app() {
             $('#url-add-app').focus();
             return;
         }
-        icon = $('#icon-exe-add-app-2')[0].files[0];
+        icon = $("#icon-custom-add-app")[0].files[0];
         nameCustom = $("#name-exe-modal-2").val();
         let url = $("#url-add-app").val();
         add_app_for_web_page(url, icon, nameCustom)
@@ -689,13 +719,13 @@ async function add_new_app() {
             $('#cmd-add-app').focus();
             return;
         }
-        icon = $('#icon-exe-add-app-3')[0].files[0];
+        icon = $("#icon-custom-add-app")[0].files[0];
         nameCustom = $("#name-exe-modal-3").val();
         let cmd = $("#cmd-add-app").val();
         add_app_for_cmd(cmd, icon, nameCustom);
     }
     else if (add_app.type_exec == 'obs_wss') {
-        icon = $('#icon-obs-add-app-5')[0].files[0];
+        icon = $("#icon-custom-add-app")[0].files[0];
         nameCustom = $("#name-custom-obs-scene").val();
         var id_obs_scene = $('#select-obs-scene').val();
         var id_obs_input_audio = $("#select-audios-inputs").val();

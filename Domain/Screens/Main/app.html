@@ -915,7 +915,12 @@
                               </div>
 
                               <div class="card-body p-0">
+                                 <div class="w100 pt-0_5em d-flex">
+                                    <button id="pvw-wbdc-page-name" class="btn btn-sm btn-light m-auto"
+                                       type="button"></button>
+                                 </div>
                                  <div class="card-oracle-cards wendeckpreview">
+                                    <span class="m-auto"><i class="gg-spinner text-white float-inline-start"></i></span>
                                  </div>
                               </div>
                            </div>
@@ -932,13 +937,26 @@
                                  <div class="forms">
 
                                     <div class="select mb-3">
-                                       <label class="form-check-label">Modo de exibição</label>
-                                       <select disabled id="change-webdeck-view" class="form-select">
-                                          <option value="default">Padrão</option>
+                                       <label class="form-check-label Display_mode_text"></label>
+                                       <select id="change-webdeck-view" class="form-select">
+                                          <option value="default" class="default_text"></option>
                                           <option value="3x2">3x2</option>
                                           <option value="5x3">5x3</option>
                                           <option value="8x4">8x4</option>
                                        </select>
+                                    </div>
+
+                                    <div class="select mb-3">
+                                       <label class="form-check-label Display_mode_list_text"></label>
+                                       <select id="change-webdeck-mode-list-view" class="form-select">
+                                          <option value="default" class="Automatically_list_items"></option>
+                                          <option value="custom" class="Custom_text"></option>
+                                       </select>
+                                    </div>
+
+                                    <div class="select mb-3">
+                                       <button class="btn btn-primary listWebDeckPages list_webdeck_pages_text full-w">
+                                       </button>
                                     </div>
 
                                  </div>
@@ -1154,7 +1172,12 @@
                               id="edit-cmd-add-app">
                         </div>
                         <div class="mb-3">
-                           <label for="icon-exe-edit" class="col-form-label icon_text_expc_1"></label>
+                           <label class="col-md-3 control-label icon_text_expc_1" for="logo"></label>
+                           <div class="col-md-4">
+                              <img src="../../src/img/underbot_logo.png" id="previwSeletedIconEditApp"
+                                 class="PreviwIconApp">
+                           </div>
+                           <label for="icon-exe-edit" class="col-form-label Select_an_image_text"></label>
                            <div class="input-group">
                               <input type="file" class="form-control" id="icon-exe-edit"
                                  aria-describedby="icon-exe-edit" aria-label="Upload" accept=".jpeg, .gif, .png">
@@ -1221,6 +1244,17 @@
                            </div>
                         </div>
 
+                        <div id="formselecCustomIcon" class="form-group mb-3 hidden">
+                           <label class="col-md-3 control-label icon_text_expc_1" for="logo"></label>
+                           <div class="col-md-4">
+                              <img src="../../src/img/underbot_logo.png" id="previwSeletedIconAddApp"
+                                 class="PreviwIconApp">
+                           </div>
+                           <label for="icon-custom-add-app" class="col-form-label Select_an_image_text"></label>
+                           <input type="file" class="form-control" id="icon-custom-add-app" aria-label="Upload"
+                              accept=".jpeg, .gif, .png, .gif">
+                        </div>
+
                         <div id="inputs-add-audio-input" class="mb-3 hidden">
                            <div class="mb-3">
                               <label for="name-audio-modal-1" class="col-form-label name_text_expc_1"></label>
@@ -1230,12 +1264,6 @@
                               <label for="input-app-audio" class="col-form-label audio_text"></label>:
                               <input type="file" class="form-control" id="input-app-audio" aria-label="Upload"
                                  accept="audio/*">
-                           </div>
-                           <div class="mb-3">
-                              <label for="icon-audio-add-app-1" class="col-form-label icon_text_expc_1"></label>
-                              <input type="file" class="form-control" id="icon-audio-add-app-1"
-                                 aria-describedby="icon-audio-add-app-1" aria-label="Upload"
-                                 accept=".jpeg, .gif, .png, .gif">
                            </div>
                         </div>
 
@@ -1255,13 +1283,6 @@
                                     class="discord_toggle_mute_unmute_audio_text"></option>
                               </select>
                            </div>
-
-                           <div class="mb-3">
-                              <label for="icon-discord-add-app-0" class="col-form-label icon_text_expc_1"></label>
-                              <input type="file" class="form-control" id="icon-discord-add-app-0"
-                                 aria-describedby="icon-discord-add-app-0" aria-label="Upload"
-                                 accept=".jpeg, .gif, .png, .gif">
-                           </div>
                         </div>
 
                         <div id="soundpad-add-app" class="mb-3 hidden">
@@ -1275,13 +1296,6 @@
                               <select id="select-soundpad-audio" class="form-select">
                                  <option value="" selected class="select_soundpad_sound"></option>
                               </select>
-                           </div>
-
-                           <div class="mb-3">
-                              <label for="icon-soundpad-add-app-1" class="col-form-label icon_text_expc_1"></label>
-                              <input type="file" class="form-control" id="icon-soundpad-add-app-1"
-                                 aria-describedby="icon-soundpad-add-app-1" aria-label="Upload"
-                                 accept=".jpeg, .gif, .png, .gif">
                            </div>
                         </div>
 
@@ -1300,7 +1314,7 @@
                            </div>
                            <div class="mb-3">
                               <div id="accordion">
-                                 <div class="card">
+                                 <div class="card theme-card">
                                     <div class="card-header">
                                        <h5 class="mb-0">
                                           <button class="btn btn-link btn-link-collapse list_apps_name"
@@ -1326,12 +1340,6 @@
                                  </div>
                               </div>
                            </div>
-                           <div class="mb-3">
-                              <label for="icon-exe-add-app-1" class="col-form-label icon_text_expc_1">Icone:</label>
-                              <input type="file" class="form-control" id="icon-exe-add-app-1"
-                                 aria-describedby="icon-exe-add-app-1" aria-label="Upload"
-                                 accept=".jpeg, .gif, .png, .gif">
-                           </div>
                         </div>
                         <div id="inputs-add-web-page-url" class="mb-3 hidden">
                            <div class="mb-3">
@@ -1342,12 +1350,6 @@
                               <label for="url-add-app" class="col-form-label web_page_text"></label>:
                               <input type="text" placeholder="Ex.: https://www.youtube.com" class="form-control"
                                  id="url-add-app">
-                           </div>
-                           <div class="mb-3">
-                              <label for="icon-exe-add-app-2" class="col-form-label icon_text_expc_1"></label>
-                              <input type="file" class="form-control" id="icon-exe-add-app-2"
-                                 aria-describedby="icon-exe-add-app-2" aria-label="Upload"
-                                 accept=".jpeg, .gif, .png, .gif">
                            </div>
                         </div>
 
@@ -1394,12 +1396,6 @@
                                  </select>
                               </div>
                            </div>
-                           <div class="mb-3">
-                              <label for="icon-obs-add-app-5" class="col-form-label icon_text_expc_1"></label>
-                              <input type="file" class="form-control" id="icon-obs-add-app-5"
-                                 aria-describedby="icon-obs-add-app-5" aria-label="Upload"
-                                 accept=".jpeg, .gif, .png, .gif">
-                           </div>
                         </div>
 
                         <div id="inputs-add-cmd-input" class="mb-3 hidden">
@@ -1410,12 +1406,6 @@
                            <div class="mb-3">
                               <label for="cmd-add-app" class="col-form-label cmd_page_text"></label>:
                               <input type="text" placeholder="Ex.: start chrome" class="form-control" id="cmd-add-app">
-                           </div>
-                           <div class="mb-3">
-                              <label for="icon-exe-add-app-3" class="col-form-label icon_text_expc_1">Icone:</label>
-                              <input type="file" class="form-control" id="icon-exe-add-app-3"
-                                 aria-describedby="icon-exe-add-app-3" aria-label="Upload"
-                                 accept=".jpeg, .gif, .png, .gif">
                            </div>
                         </div>
                      </form>
@@ -1464,6 +1454,41 @@
                      <button type="button" class="btn btn-danger btn-close-key-macro-modal close_text"
                         onclick="clear_modal_macro()" data-bs-dismiss="modal"></button>
                      <button type="button" class="btn btn-primary save_text" onclick="add_new_macro()"></button>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div class="modal fade" id="modal-select-app-pvw-wbdc" tabindex="-1"
+            aria-labelledby="modal-select-app-pvw-wbdc" data-bs-backdrop="static" data-keyboard="false"
+            data-backdrop="static" aria-modal="true" aria-hidden="true">
+            <div class="modal-dialog">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <h1 class="modal-title fs-5 select_app_text"></h1>
+                  </div>
+                  <div class="modal-body">
+                     <div class="alert alert-pvw-wbdc-modal alert-danger hidden" role="alert"></div>
+                     <form>
+                        <div class="mb-3">
+                           <div class="btn-group btn-full-w">
+                              <button type="button"
+                                 class="btn btn-primary dropdown-toggle btn-dropdown-pvw-wbdc apps_name"
+                                 data-bs-toggle="dropdown" aria-expanded="false">
+                              </button>
+                              <ul class="dropdown-menu btn-full-w ul-dropdown-pvw-wbdc dynamic-ul">
+                              </ul>
+                           </div>
+                        </div>
+                     </form>
+                  </div>
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-danger btn-close-pvw-wbdc-modal close_icon"
+                        onclick="clear_modal_pvw_wbdc()" data-bs-dismiss="modal"></button>
+                     <button type="button" class="btn btn-danger btn-remove-pvw-wbdc remove_icon" style="display: none;"
+                        onclick="clear_modal_pvw_wbdc_and_remove()" data-bs-dismiss="modal"></button>
+                     <button type="button" class="btn btn-primary save_icon_text"
+                        onclick="confirm_add_pvw_wbdc()"></button>
                   </div>
                </div>
             </div>

@@ -265,6 +265,11 @@ var pt_br = [
         text: "Abrir"
     },
     {
+        id: ".open_icon_text",
+        type: "html",
+        text: `<i class="bi bi-send-fill"></i> Abrir`
+    },
+    {
         id: ".url_text_expc_1",
         type: "text",
         text: "Url:"
@@ -328,6 +333,16 @@ var pt_br = [
         id: ".apps_name",
         type: "text",
         text: "Aplicativos",
+    },
+    {
+        id: ".app_name",
+        type: "text",
+        text: "Aplicativo",
+    },
+    {
+        id: ".app_name_icon",
+        type: "text",
+        text: `<i class="bi bi-google-play"></i> Aplicativo`,
     },
     {
         id: ".apps_name_icon",
@@ -415,6 +430,11 @@ var pt_br = [
         text: "Fechar",
     },
     {
+        id: ".close_icon",
+        type: "html",
+        text: `<i class="bi bi-x-lg"></i> Fechar`,
+    },
+    {
         id: ".save_text",
         type: "text",
         text: "Salvar",
@@ -473,6 +493,11 @@ var pt_br = [
         id: ".edit_text",
         type: "text",
         text: "Editar"
+    },
+    {
+        id: ".edit_icon",
+        type: "html",
+        text: `<i class="bi bi-pen"></i> Editar`
     },
     {
         id: ".delete_text",
@@ -675,6 +700,11 @@ var pt_br = [
         text: "Enviar"
     },
     {
+        id: ".submit_icon",
+        type: "html",
+        text: `<i class="bi bi-check-lg"></i> Enviar`
+    },
+    {
         id: ".cmd_text",
         type: "text",
         text: "Comando"
@@ -710,9 +740,19 @@ var pt_br = [
         text: "Selecione"
     },
     {
+        id: ".select_app_text",
+        type: "text",
+        text: "Selecione um Aplicativo"
+    },
+    {
         id: ".select_path_SoundPad_text",
         type: "text",
         text: "Selecionar SoundPad"
+    },
+    {
+        id: ".selecting_text",
+        type: "text",
+        text: "Selecionar"
     },
     {
         id: ".bnt_select_type_add_text",
@@ -733,6 +773,16 @@ var pt_br = [
         id: ".requere_name_add_app",
         type: "text",
         text: "Por favor informe um nome."
+    },
+    {
+        id: ".select_webdeck_page_text",
+        type: "text",
+        text: "Selecione uma pagina"
+    },
+    {
+        id: ".dywtotpori",
+        type: "text",
+        text: "Deseja abrir a página ou removê-la?"
     },
     {
         id: ".requere_url_add_app",
@@ -853,6 +903,21 @@ var pt_br = [
         id: ".web_pages_text",
         type: "text",
         text: 'Paginas Webs',
+    },
+    {
+        id: ".webdeck_pages_text",
+        type: "text",
+        text: 'Paginas WebDeck',
+    },
+    {
+        id: ".edit_webdeck_page_text",
+        type: "text",
+        text: 'Editar Pagina WebDeck',
+    },
+    {
+        id: ".list_webdeck_pages_text",
+        type: "text",
+        text: 'Listar Paginas WebDeck',
     },
     {
         id: ".web_pages_text_icon",
@@ -1380,6 +1445,11 @@ var pt_br = [
         text: "Nenhum usuário encontrado com este endereço de e-mail ou nome de usuário",
     },
     {
+        id: ".no_app_found_text",
+        type: "text",
+        text: "Aplicativo não encontrado!",
+    },
+    {
         id: ".msg_err_u_up_login_text",
         type: "text",
         text: "Senha inválida",
@@ -1530,6 +1600,16 @@ var pt_br = [
         text: "Removido com sucesso",
     },
     {
+        id: ".Page_Successfully_removed",
+        type: "text",
+        text: "Pagina removida com sucesso",
+    },
+    {
+        id: ".Page_Successfully_edited",
+        type: "text",
+        text: "Pagina editada com sucesso",
+    },
+    {
         id: ".changeUserAvatar_text",
         type: "html",
         text: `<i class="bi bi-person-square"></i> Mudar Avatar`
@@ -1545,6 +1625,11 @@ var pt_br = [
         text: "Costumização"
     },
     {
+        id: ".Automatically_list_items",
+        type: "text",
+        text: "Listar itens automaticamente"
+    },
+    {
         id: ".background_color_text",
         type: "text",
         text: "Cor de Fundo"
@@ -1558,6 +1643,26 @@ var pt_br = [
         id: ".reset_to_default_text",
         type: "html",
         text: "redefinir para o padrão"
+    },
+    {
+        id: ".Display_mode_text",
+        type: "html",
+        text: "Modo de exibição"
+    },
+    {
+        id: ".Display_mode_list_text",
+        type: "html",
+        text: "Modo de listagem"
+    },
+    {
+        id: ".List_Custom_mode",
+        type: "html",
+        text: "Listar modo personalizado"
+    },
+    {
+        id: ".Custom_text",
+        type: "html",
+        text: "Personalizado"
     },
     {
         id: ".successfully_reset_text",
@@ -1868,6 +1973,56 @@ var pt_br = [
         id: ".HtgyDCC_6_text",
         type: "html",
         text: `Se o segredo do cliente não estiver sendo exibido, click em "Reset Secret".`,
+    },
+    {
+        id: ".Dywtcnposana",
+        type: "html",
+        text: `Deseja criar uma nova página ou selecionar um aplicativo?`,
+    },
+    {
+        id: ".DywtcnposanaEX",
+        type: "html",
+        text: `Deseja criar uma nova página ou selecionar uma existente?`,
+    },
+    {
+        id: ".New_page_text",
+        type: "html",
+        text: `Nova Pagina`,
+    },
+    {
+        id: ".New_page_icon",
+        type: "html",
+        text: `<i class="bi bi-plus-lg"></i> Nova Pagina`,
+    },
+    {
+        id: ".page_text",
+        type: "html",
+        text: `Pagina`,
+    },
+    {
+        id: ".page_icon",
+        type: "html",
+        text: `<i class="bi bi-file-earmark-fill"></i> Pagina`,
+    },
+    {
+        id: ".Select_an_image_text",
+        type: "html",
+        text: `Selecione uma imagem`,
+    },
+    {
+        id: ".invalid_image_text",
+        type: "html",
+        text: `Imagem inválida, por favor selecione uma imagem válida!`,
+    },
+    {
+        id: ".Change_icon_icon",
+        type: "html",
+        text: `<i class="bi bi-image-fill"></i> Alterar ícone`,
+    },
+    {
+        id: ".Change_name_icon",
+        type: "html",
+        text: `<i class="bi bi-pen-fill"></i> Alterar nome`,
     },
 ];
 
