@@ -219,6 +219,31 @@ const callBackDefault = async (data, json) => {
                 }
                 break;
 
+            case "get_icon_page_webdeck_exe":
+                if (data && data.res && data.res.appId) {
+                    let appId = data.res.appId;
+                    const page = DAO.WEBDECKDATA.pages.find(f => f.id == appId);
+                    if (page) {
+                        webSocketClient.send(
+                            webSocketClient.ToJson(
+                                {
+                                    lang: _lang,
+                                    method: 'callback-get_icon_page_webdeck_exe',
+                                    to: data.from.id,
+                                    res: {
+                                        icon: await getBase64ByDir(page.icon),
+                                        id: page.id,
+                                        items: page.items,
+                                        name: page.name,
+                                        type: page.type
+                                    },
+                                }
+                            )
+                        );
+                    }
+                }
+                break;
+
             case "exec_app_in_pc":
                 if (data && data.res && data.res.app) {
                     Comun.exec_program(data.res.app);
