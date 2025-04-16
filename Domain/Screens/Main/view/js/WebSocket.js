@@ -46,8 +46,8 @@ const webSocketClient = {
     }
 }
 
-const startWS = () => {
-    conn = new WebSocket(`${conf.WEBSOCKET.URI}${conf.WEBSOCKET.ROUTE}${conf.WEBSOCKET.TOKEN}`);
+const startWS = async () => {
+    conn = new WebSocket(`${conf.WEBSOCKET.URI}${conf.WEBSOCKET.ROUTE}${conf.WEBSOCKET.TOKEN}&code=${(await macaddress.one()).replaceAll(':', '')}`);
     conn.onmessage = function (e) {
         webSocketClient.receiver(e.data);
     };
@@ -135,6 +135,41 @@ const callBackDefault = async (data, json) => {
                         DAO.USER = data.user;
                         await changeUserInfoData();
                     }
+                }
+                break;
+
+            case "search-for-Friends":
+                if (data.users) {
+                    $(".ROWLISTADDFRIEND").html('');
+                    $(".ROWLUNDFRIENDSFFLOADING").hide();
+                    data.users.forEach(user => {
+                        let isMyFriend = false;
+                        if (DAO.USER.friends.find(f => f.client_id == user.id || f.friend_id == user.id)) isMyFriend = true;
+
+                        $(".ROWLISTADDFRIEND").append(`
+                        <div id="colMd-74eaf75b-f46f-4661-806a-7b2036407076" class="col-md-12">
+                            <div class="card theme-card me-1">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="d-flex justify-content-between">
+                                                <div class="d-flex align-items-center">
+                                                    <img src="${user.avatar}" class="img-thumbnail rounded-circle ${user.classBg}" style="width: 100px; height: 100px;">
+                                                    <h5 class="m-2 ${user.premium == true ? 'text-warning' : ''}">${user.premium == true ? '<i class="bi bi-stars"></i>' : ''} ${user.name}</h5>
+                                                </div>
+                                                <div class="d-flex align-items-center">
+                                                    <button href="#" ${isMyFriend == true ? 'disabled' : ''} class="btn btn-sm btn-success ${isMyFriend == true ? '' : 'ICCADDFRIEND'} Send_Order" data-id="${user.id}">
+                                                        ${getNameTd('.Send_Order')}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        `);
+                    });
                 }
                 break;
 
@@ -250,6 +285,13 @@ const callBackDefault = async (data, json) => {
                 }
                 break;
 
+            case "UND-list-my-friends":
+                if (data && data.friends && data.friends.length > 0) {
+                    let friends = data.friends;
+
+                }
+                break
+
             case "UND-request-remote-permission-acess-this-pc":
                 if (data.res.user_request && data.res.user_request.name) {
                     let dataUserRQ = data.res.user_request;
@@ -356,13 +398,8 @@ async function revokeAllPermissionAcessThisPC() {
 setInterval(() => {
     if (conn && conn.readyState == 1) {
         UpdatePCACC();
-    }
-}, 2000);
-
-setInterval(() => {
-    if (conn && conn.readyState == 1) {
         GetACC();
     }
-}, 10000);
+}, 2000);
 
 startWS();

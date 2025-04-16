@@ -25,7 +25,6 @@ async function start_server(type, callback) {
             });
 
             app.get('/api', (req, res) => {
-                console.log(req.body);
                 res.send('OK');
             });
 

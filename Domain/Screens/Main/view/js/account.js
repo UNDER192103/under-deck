@@ -2,14 +2,200 @@ let isCroppieStarted = false;
 $(document).ready(async () => {
     loadUserData();
 
-    $(document).on('click', '.UND_profileConfig', (r) => {
+    $(document).on('click', '.UND_profileViewFriends', async (r) => {
+        $(".ROWLUNDFRIENDSFF").show('slow');
+        $(".ROWLUNDFRIENDSFP").hide();
+        $(".ROWLUNDFRIENDSFRJ").hide();
+        $(".ROWLUNDFRIENDSFBLOCK").hide();
+        $(".IACCFRIEND").removeClass('btn-primary');
+        $(".IREJFRIEND").removeClass('btn-primary');
+        $(".IBLOCKEDRIEND").removeClass('btn-primary');
+        $(".ILLFRIEND").addClass('btn-primary');
         changeUserInfoData();
-        $("#modal_UND_profileView").modal('show');
+        $("#modal_UND_profileViewFriends").modal('show');
+    });
+
+    $(document).on('click', '.IADDFRIEND', async (r) => {
+        changeUserInfoData();
+        $("#ROWLISTADDFRIEND").html('');
+        $("#modal_UND_searchFriends").modal('show');
+    });
+
+    $(document).on('click', '.ILLFRIEND', async (r) => {
+        changeUserInfoData();
+        $(".IACCFRIEND").removeClass('btn-primary');
+        $(".IREJFRIEND").removeClass('btn-primary');
+        $(".ILLFRIEND").addClass('btn-primary');
+        $(".IBLOCKEDRIEND").removeClass('btn-primary');
+        $(".ROWLUNDFRIENDSFF").show('slow');
+        $(".ROWLUNDFRIENDSFRJ").hide();
+        $(".ROWLUNDFRIENDSFP").hide();
+        $(".ROWLUNDFRIENDSFBLOCK").hide();
+        $("#modal_UND_profileViewFriends").modal('show');
+    });
+
+    $(document).on('click', '.IACCFRIEND', async (r) => {
+        changeUserInfoData();
+        $(".IACCFRIEND").addClass('btn-primary');
+        $(".IREJFRIEND").removeClass('btn-primary');
+        $(".ILLFRIEND").removeClass('btn-primary');
+        $(".IBLOCKEDRIEND").removeClass('btn-primary');
+        $(".ROWLUNDFRIENDSFF").hide();
+        $(".ROWLUNDFRIENDSFBLOCK").hide();
+        $(".ROWLUNDFRIENDSFP").show('slow');
+        $("#modal_UND_profileViewFriends").modal('show');
+    });
+
+    $(document).on('click', '.IREJFRIEND', async (r) => {
+        changeUserInfoData();
+        $(".IREJFRIEND").addClass('btn-primary');
+        $(".IACCFRIEND").removeClass('btn-primary');
+        $(".ILLFRIEND").removeClass('btn-primary');
+        $(".IBLOCKEDRIEND").removeClass('btn-primary');
+        $(".ROWLUNDFRIENDSFF").hide();
+        $(".ROWLUNDFRIENDSFP").hide();
+        $(".ROWLUNDFRIENDSFBLOCK").hide();
+        $(".ROWLUNDFRIENDSFRJ").show('slow');
+        $("#modal_UND_profileViewFriends").modal('show');
+    });
+
+    $(document).on('click', '.IBLOCKEDRIEND', async (r) => {
+        changeUserInfoData();
+        $(".IBLOCKEDRIEND").addClass('btn-primary');
+        $(".IREJFRIEND").removeClass('btn-primary');
+        $(".IACCFRIEND").removeClass('btn-primary');
+        $(".ILLFRIEND").removeClass('btn-primary');
+        $(".ROWLUNDFRIENDSFF").hide();
+        $(".ROWLUNDFRIENDSFP").hide();
+        $(".ROWLUNDFRIENDSFRJ").hide();
+        $(".ROWLUNDFRIENDSFBLOCK").show('slow');
+        $("#modal_UND_profileViewFriends").modal('show');
     });
 
     $(document).on('click', '.UND_profileView', (r) => {
         changeUserInfoData();
         $("#modal_UND_profileView").modal('show');
+    });
+
+    $(document).on('click', '.UnfriendACCT', async (e) => {
+        e.preventDefault();
+        let idP = e.currentTarget.dataset.id;
+        if (await B_are_you_sure()) {
+            API.App.post('', {
+                _lang: _lang,
+                method: "user-unfriend",
+                client_id: DAO.USER.client_id,
+                token: DAO.USER.token,
+                idP: idP,
+            }).then(async (res) => {
+                if (res.data.result == true) {
+                    GetACC();
+                    toaster.success(getNameTd('.You_have_successfully_unfriended_your_friend'));
+                }
+                else {
+                    GetACC();
+                }
+            });
+        }
+        else {
+
+        }
+    });
+
+    $(document).on('click', '.UNDREJCTPFF', async (e) => {
+        e.preventDefault();
+        let idP = e.currentTarget.dataset.id;
+        if (await B_are_you_sure()) {
+            API.App.post('', {
+                _lang: _lang,
+                method: "user-reject-friend-request",
+                client_id: DAO.USER.client_id,
+                token: DAO.USER.token,
+                idP: idP,
+            }).then(async (res) => {
+                if (res.data.result == true) {
+                    GetACC();
+                    toaster.success(getNameTd('.friend_request_rejected'));
+                }
+                else {
+                    GetACC();
+                }
+            });
+        }
+        else {
+
+        }
+    });
+
+    $(document).on('click', '.UNDACCPFF', async (e) => {
+        e.preventDefault();
+        let idP = e.currentTarget.dataset.id;
+        API.App.post('', {
+            _lang: _lang,
+            method: "user-acceppt-friend-request",
+            client_id: DAO.USER.client_id,
+            token: DAO.USER.token,
+            idP: idP,
+        }).then(async (res) => {
+            if (res.data.result == true) {
+                GetACC();
+                toaster.success(getNameTd('.friend_request_accepted'));
+            }
+            else {
+                GetACC();
+            }
+        });
+    });
+
+    $(document).on('click', '.UNDRNOFPFF', async (e) => {
+        e.preventDefault();
+        let idP = e.currentTarget.dataset.id;
+        if (await B_are_you_sure()) {
+            API.App.post('', {
+                _lang: _lang,
+                method: "user-request-new-friend-request-ipF",
+                client_id: DAO.USER.client_id,
+                token: DAO.USER.token,
+                idP: idP,
+            }).then(async (res) => {
+                if (res.data.result == true) {
+                    GetACC();
+                    toaster.success(getNameTd('.Order_sent_successfully'));
+                }
+                else {
+                    GetACC();
+                }
+            });
+        }
+        else {
+
+        }
+    });
+
+    var OOONCl = null;
+    $(document).on('click', '.ICCADDFRIEND', async (e) => {
+        e.preventDefault();
+        let Firend_Client_id = e.currentTarget.dataset.id;
+        clearTimeout(OOONCl);
+        OOONCl = setTimeout(() => {
+            OOONCl = null;
+            API.App.post('', {
+                _lang: _lang,
+                method: "request-friend-to-user",
+                client_id: DAO.USER.client_id,
+                token: DAO.USER.token,
+                Firend_Client_id: Firend_Client_id,
+            }).then(async (res) => {
+                if (res.data.result == true) {
+                    GetACC();
+                    $(e.currentTarget).attr('disabled', true);
+                    toaster.success(getNameTd('.Request_Sent_Successfully'));
+                }
+                else {
+                    GetACC();
+                }
+            });
+        }, 250);
     });
 
     $("#insertUND_DisplayUsername").on('keyup', async () => {
@@ -271,6 +457,35 @@ $(document).ready(async () => {
         });
     });
 
+    var STMNSUAF = null;
+    var oldVB = null;
+    $("#NSUAF").on('keyup', async function (e) {
+        if (oldVB != e.target.value) {
+            oldVB = e.target.value;
+            clearTimeout(STMNSUAF);
+            $(".ROWLUNDFRIENDSFFLOADING").show();
+            $(".ROWLISTADDFRIEND").html('');
+            STMNSUAF = setTimeout(async () => {
+                STMNSUAF = null;
+                await webSocketClient.send(
+                    await webSocketClient.ToJson(
+                        {
+                            lang: _lang,
+                            method: 'search-for-Friends',
+                            user: {
+                                client_id: DAO.USER ? DAO.USER.client_id : 0
+                            },
+                            searchFriend: {
+                                text: $("#NSUAF").val()
+                            }
+                        }
+                    )
+                );
+            }, 1000);
+        }
+
+    });
+
     setInterval(loadUserData, 1800000);
 });
 
@@ -315,6 +530,7 @@ const changeUserInfoData = async (isUpdatePcACC = true) => {
 
     if (DAO.USER == null) {
         await DAO.DB.set('user', DAO.USER);
+        $(".UND_userClietn_id").html("N/A");
         $(".UND_username").html("");
         $(".UND_datecreated").html("");
         $(".ValUND_username").val("");
@@ -328,8 +544,9 @@ const changeUserInfoData = async (isUpdatePcACC = true) => {
     else {
         $("#uInput-changeUserAvatar").val('');
         $(".ValUND_username").val(DAO.USER.username);
+        $(".UND_userClietn_id").html(DAO.USER.client_id);
         $(".ValUND_email").val(DAO.USER.email);
-        $(".UND_username").html(DAO.USER.account);
+        $(".UND_username").html(`${DAO.USER.premium ? '<i class="bi bi-stars"></i>' : ''} ${DAO.USER.account}`);
         $(".UND_datecreated").html(new Date(DAO.USER.created_date).toLocaleString());
         $(".ValUND_DisplayUsername").val(DAO.USER.account);
         if (DAO.USER.premium == true) {
@@ -356,6 +573,7 @@ const changeUserInfoData = async (isUpdatePcACC = true) => {
     if (isUpdatePcACC)
         await UpdatePCACC();
     await changeUrlRemoteUnderDeck();
+    await changeUserFriends();
 }
 
 const loadUserData = async () => {
@@ -599,4 +817,214 @@ function CroppicFile(file) {
     }).catch(function (err) {
         console.log(err);
     });
+}
+
+function GetStatusAccount(account) {
+    switch (account.status) {
+        case '1':
+            return { text: getNameTd('.online_text'), classBg: 'bg-success', class: 'online_text' };
+
+        case '2':
+            return { text: getNameTd('.Absent_text'), classBg: 'bg-warning', class: 'Absent_text' };
+
+        case '3':
+            return { text: getNameTd('.Invisible_text'), classBg: 'bg-secondary', class: 'Invisible_text' };
+
+        case '4':
+            return { text: getNameTd('.Do_not_disturb_text'), classBg: 'bg-danger', class: 'Do_not_disturb_text' };
+
+        case '5':
+        default:
+            return { text: getNameTd('.offline_text'), classBg: 'bg-secondary', class: 'offline_text' };
+    }
+
+}
+
+const changeUserFriends = async () => {
+    $(".ROWLUNDFRIENDSFF").html('');
+    $(".ROWLUNDFRIENDSFP").html('');
+    $(".ROWLUNDFRIENDSFRJ").html('');
+    $(".ROWLUNDFRIENDSFBLOCK").html('');
+
+    if (DAO.USER && DAO.USER.friends) {
+        $(".IACCFRIEND").removeClass('pulse-orange');
+        $(".UND_profileViewFriends").removeClass('pulse-orange');
+        if (DAO.USER.email_verified)
+            $(".UND_usericon.MM").removeClass('pulse-orange');
+        DAO.USER.friends.forEach(friend => {
+            let friendData = friend.user;
+            $(`.ICCADDFRIEND[data-id="${friend.client_id}"]`).attr('disabled', true);
+            $(`.ICCADDFRIEND[data-id="${friend.friend_id}"]`).attr('disabled', true);
+
+            let dataStatus = GetStatusAccount(friendData);
+            if (friend.friends == true && friend.refused == false && friend.blocked == false) {
+                $(".ROWLUNDFRIENDSFF").append(`
+                <div class="col-md-12">
+                    <div class="card theme-card me-1">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="d-flex align-items-center">
+                                            <img src="${friendData.avatar}" class="img-thumbnail rounded-circle ${dataStatus.classBg}" style="width: 100px; height: 100px;">
+                                            <h5 class="m-2 ${friendData.premium == true ? 'text-warning' : ''}">${friendData.premium == true ? '<i class="bi bi-stars"></i>' : ''} ${friendData.name}</h5>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <a href="#" class="btn btn-sm btn-danger UnfriendACCT Unfriend_icon_text" data-id="${friend.idP}">
+                                                ${getNameTd('.Unfriend_icon_text')}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `);
+            }
+            else if (friend.friends == false && friend.refused == false && friend.blocked == false) {
+                if (friend.hidedBy == parseFloat(DAO.USER.client_id)) {
+                    return;
+                }
+                if (friend.requestBy != null) {
+                    $(".IACCFRIEND").addClass('pulse-orange');
+                    $(".UND_profileViewFriends").addClass('pulse-orange');
+                    $(".UND_usericon.MM").addClass('pulse-orange');
+                    $(".ROWLUNDFRIENDSFP").append(`
+                    <div id="colMd-74eaf75b-f46f-4661-806a-7b2036407076" class="col-md-12">
+                        <div class="card theme-card me-1">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex align-items-center">
+                                                <img src="${friendData.avatar}" class="img-thumbnail rounded-circle ${dataStatus.classBg}" style="width: 100px; height: 100px;">
+                                                <h5 class="m-2 ${friendData.premium == true ? 'text-warning' : ''}">${friendData.premium == true ? '<i class="bi bi-stars"></i>' : ''} ${friendData.name}</h5>
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <a href="#" class="btn btn-sm btn-danger UNDREJCTPFF Refusedtfriend_icon_text me-1" data-id="${friend.idP}">
+                                                    ${getNameTd('.Refusedtfriend_icon_text')}
+                                                </a>
+                                                <a href="#" class="btn btn-sm btn-success UNDACCPFF Acceptfriend_icon_text" data-id="${friend.idP}">
+                                                    ${getNameTd('.Acceptfriend_icon_text')}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `);
+                }
+                else {
+                    $(".ROWLUNDFRIENDSFP").append(`
+                    <div id="colMd-74eaf75b-f46f-4661-806a-7b2036407076" class="col-md-12">
+                        <div class="card theme-card me-1">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex align-items-center">
+                                                <img src="${friendData.avatar}" class="img-thumbnail rounded-circle ${dataStatus.classBg}" style="width: 100px; height: 100px;">
+                                                <h5 class="m-2 ${friendData.premium == true ? 'text-warning' : ''}">${friendData.premium == true ? '<i class="bi bi-stars"></i>' : ''} ${friendData.name}</h5>
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <a href="#" class="btn btn-sm btn-danger order_pending_text">
+                                                    ${getNameTd('.order_pending_text')}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `);
+                }
+
+            }
+            else if (friend.friends == false && friend.refused == true && friend.blocked == false) {
+                if (friend.requestBy != null) {
+                    $(".ROWLUNDFRIENDSFRJ").append(`
+                    <div id="colMd-74eaf75b-f46f-4661-806a-7b2036407076" class="col-md-12">
+                        <div class="card theme-card me-1">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex align-items-center">
+                                                <img src="${friendData.avatar}" class="img-thumbnail rounded-circle ${dataStatus.classBg}" style="width: 100px; height: 100px;">
+                                                <h5 class="m-2 ${friendData.premium == true ? 'text-warning' : ''}">${friendData.premium == true ? '<i class="bi bi-stars"></i>' : ''} ${friendData.name}</h5>
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <a href="#" class="btn btn-sm btn-danger order_refused_text">
+                                                    ${getNameTd('.order_refused_text')}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `);
+                } else {
+                    $(".ROWLUNDFRIENDSFRJ").append(`
+                        <div id="colMd-74eaf75b-f46f-4661-806a-7b2036407076" class="col-md-12">
+                            <div class="card theme-card me-1">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="d-flex justify-content-between">
+                                                <div class="d-flex align-items-center">
+                                                    <img src="${friendData.avatar}" class="img-thumbnail rounded-circle ${dataStatus.classBg}" style="width: 100px; height: 100px;">
+                                                    <h5 class="m-2 ${friendData.premium == true ? 'text-warning' : ''}">${friendData.premium == true ? '<i class="bi bi-stars"></i>' : ''} ${friendData.name}</h5>
+                                                </div>
+                                                <div class="d-flex align-items-center">
+                                                    <a href="#" class="btn btn-sm btn-danger order_refused_text me-1">
+                                                        ${getNameTd('.order_refused_text')}
+                                                    </a>
+                                                    <a href="#" class="btn btn-sm btn-success UNDRNOFPFF RequestNewOrderfriend_icon_text" data-id="${friend.idP}">
+                                                        ${getNameTd('.RequestNewOrderfriend_icon_text')}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        `);
+
+                }
+            }
+            else if (friend.friends == false && friend.refused == false && friend.blocked == true) {
+                $(".ROWLUNDFRIENDSFBLOCK").append(`
+                <div id="colMd-74eaf75b-f46f-4661-806a-7b2036407076" class="col-md-12">
+                    <div class="card theme-card me-1">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="d-flex align-items-center">
+                                            <img src="${friendData.avatar}" class="img-thumbnail rounded-circle ${dataStatus.classBg}" style="width: 100px; height: 100px;">
+                                            <h5 class="m-2 ${friendData.premium == true ? 'text-warning' : ''}">${friendData.premium == true ? '<i class="bi bi-stars"></i>' : ''} ${friendData.name}</h5>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <a href="#" class="btn btn-sm btn-danger blocked_text">
+                                                ${getNameTd('.blocked_text')}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `);
+            }
+        });
+    }
+
 }

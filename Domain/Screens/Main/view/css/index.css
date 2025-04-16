@@ -176,9 +176,12 @@ main {
   Cursor: not-allowed !important;
 }
 
-/*.container-animated-style {
-  animation-duration: 2s;
-}*/
+.card_L_UND_friends {
+  min-height: 300px;
+  max-height: 600px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 
 .footable-odd {
   background-color: transparent;
@@ -261,7 +264,7 @@ hr {
 }
 
 .float-right {
-  /*float: right;*/
+  float: right !important;
 }
 
 .float-right-c {
@@ -560,6 +563,10 @@ hr {
   animation: pulse-orange 1.5s infinite;
 }
 
+.bodyLoading {
+  overflow: hidden;
+}
+
 .hover-pulse-grean:hover {
   box-shadow: 0 0 0 0 rgb(0, 255, 0);
   animation: pulse-grean 1.5s infinite;
@@ -784,7 +791,7 @@ hr {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 124px;
+  max-width: 150px;
 }
 
 .u-format-max-text.exeT {

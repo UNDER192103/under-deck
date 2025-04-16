@@ -40,6 +40,11 @@ var pt_br = [
         text: `<i class="bi bi-stars"></i> Possui Premium`,
     },
     {
+        id: ".has_Premium_text",
+        type: "html",
+        text: `Possui Premium`,
+    },
+    {
         id: ".Premium_text",
         type: "html",
         text: `Premium`,
@@ -198,6 +203,71 @@ var pt_br = [
         id: ".remove_icon",
         type: "html",
         text: `<i class="bi bi-trash3"></i> Remover`
+    },
+    {
+        id: ".Unfriend_icon_text",
+        type: "html",
+        text: `<i class="bi bi-person-dash-fill"></i> Desfazer Amizade`
+    },
+    {
+        id: ".Acceptfriend_icon_text",
+        type: "html",
+        text: `<i class="bi bi-person-check-fill"></i> Aceitar`
+    },
+    {
+        id: ".Refusedtfriend_icon_text",
+        type: "html",
+        text: `<i class="bi bi-x-lg"></i> Recursar Pedido`
+    },
+    {
+        id: ".RequestNewOrderfriend_icon_text",
+        type: "html",
+        text: `<i class="bi bi-plus-lg"></i> Pedir Novamente Amizade`
+    },
+    {
+        id: ".Order_sent_successfully",
+        type: "html",
+        text: `Pedido enviado com sucesso`
+    },
+    {
+        id: ".pendings_text",
+        type: "html",
+        text: `Pendentes`
+    },
+    {
+        id: ".refused_text",
+        type: "html",
+        text: `Recusados`
+    },
+    {
+        id: ".You_have_successfully_unfriended_your_friend",
+        type: "html",
+        text: `Você desfez sua amizade com seu amigo com sucesso`
+    },
+    {
+        id: ".blockeds_text",
+        type: "html",
+        text: `Bloaqueados`
+    },
+    {
+        id: ".blocked_text",
+        type: "html",
+        text: `Bloqueado`
+    },
+    {
+        id: ".pending_text",
+        type: "html",
+        text: `Pendente`
+    },
+    {
+        id: ".order_pending_text",
+        type: "html",
+        text: `Pedido Pendente`
+    },
+    {
+        id: ".order_refused_text",
+        type: "html",
+        text: `Pedido Recusado`
     },
     {
         id: ".versions_text",
@@ -363,6 +433,46 @@ var pt_br = [
         id: ".userProfile_text",
         type: "text",
         text: "Perfil do usuário",
+    },
+    {
+        id: ".userProfile_icon_text",
+        type: "html",
+        text: `<i class="bi bi-person-fill"></i> Perfil do usuário`,
+    },
+    {
+        id: ".Friends_text",
+        type: "text",
+        text: `Amigos`,
+    },
+    {
+        id: ".search_friends_text",
+        type: "text",
+        text: `Procupar amigo`,
+    },
+    {
+        id: ".Friends_icon_text",
+        type: "html",
+        text: `<i class="bi bi-person-lines-fill"></i> Amigos`,
+    },
+    {
+        id: ".AddFriend_icon_text",
+        type: "html",
+        text: `<i class="bi bi-person-fill-add"></i> Adicionar Amigo`,
+    },
+    {
+        id: ".Send_Order",
+        type: "html",
+        text: `<i class="bi bi-person-fill-add"></i> Enviar Pedido`,
+    },
+    {
+        id: ".Request_Sent_Successfully",
+        type: "html",
+        text: `Pedido Enviado com sucesso`,
+    },
+    {
+        id: ".userID_text",
+        type: "html",
+        text: `ID do usuário: `,
     },
     {
         id: ".discordProfile_text",
@@ -1360,6 +1470,11 @@ var pt_br = [
         text: "Sair",
     },
     {
+        id: ".acclogout_icon_text",
+        type: "html",
+        text: `<i class="bi bi-box-arrow-right"></i> Sair`,
+    },
+    {
         id: ".password_text",
         type: "text",
         text: "Senha",
@@ -1418,6 +1533,11 @@ var pt_br = [
         id: ".username_text",
         type: "text",
         text: "Nome de usuário",
+    },
+    {
+        id: ".for_username_text",
+        type: "text",
+        text: "Nome do usuário",
     },
     {
         id: ".display_username_text",
@@ -1947,32 +2067,37 @@ var pt_br = [
     {
         id: ".HtgyDCC_1_text",
         type: "html",
-        text: `Faça login no <a class="open-url-Discord-Developer-Portal cursor-pointer a-style">Portal do Desenvolvedor do Discord</a>`,
+        text: `1 - Faça login no <a class="open-url-Discord-Developer-Portal cursor-pointer a-style">Portal do Desenvolvedor do Discord</a>`,
     },
     {
         id: ".HtgyDCC_2_text",
         type: "html",
-        text: "Crie um novo aplicativo em New Application ou acesse um dos seus aplicativos já existentes.",
+        text: "2 - Crie um novo aplicativo em New Application ou acesse um dos seus aplicativos já existentes.",
     },
     {
         id: ".HtgyDCC_3_text",
         type: "html",
-        text: "Nomeie seu aplicativo.",
+        text: "3 - Nomeie seu aplicativo.",
     },
     {
         id: ".HtgyDCC_4_text",
         type: "html",
-        text: "Clique em OAuth2 no menu lateral.",
+        text: "4 - Clique em OAuth2 no menu lateral.",
     },
     {
         id: ".HtgyDCC_5_text",
         type: "html",
-        text: "Em OAuth2 > Geral, copie o Client ID e o Client secret.",
+        text: "5 - Em OAuth2 > Geral, copie o Client ID e o Client secret.",
     },
     {
         id: ".HtgyDCC_6_text",
         type: "html",
-        text: `Se o segredo do cliente não estiver sendo exibido, click em "Reset Secret".`,
+        text: `6 - Se o segredo do cliente não estiver sendo exibido, click em "Reset Secret".`,
+    },
+    {
+        id: ".HtgyDCC_7_text",
+        type: "html",
+        text: `7 - Para finalizar, abaixo de "Client information" em "Redirects" adicionar o seguinte URL: <code>http://127.0.0.1</code>`,
     },
     {
         id: ".Dywtcnposana",
@@ -2023,6 +2148,41 @@ var pt_br = [
         id: ".Change_name_icon",
         type: "html",
         text: `<i class="bi bi-pen-fill"></i> Alterar nome`,
+    },
+    {
+        id: ".online_text",
+        type: "html",
+        text: `Online`,
+    },
+    {
+        id: ".offline_text",
+        type: "html",
+        text: `Off-Line`,
+    },
+    {
+        id: ".Invisible_text",
+        type: "html",
+        text: `Invisível`,
+    },
+    {
+        id: ".Absent_text",
+        type: "html",
+        text: `Ausente`,
+    },
+    {
+        id: ".Do_not_disturb_text",
+        type: "html",
+        text: `Não perturbe`,
+    },
+    {
+        id: ".friend_request_accepted",
+        type: "html",
+        text: `Solicitação de amizade aceita`,
+    },
+    {
+        id: ".friend_request_rejected",
+        type: "html",
+        text: `Solicitação de amizade rejeitada`,
     },
 ];
 

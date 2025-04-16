@@ -40,6 +40,11 @@ var en_us = [
         text: `<i class="bi bi-stars"></i> Has Premium`,
     },
     {
+        id: ".has_Premium_text",
+        type: "html",
+        text: `Has Premium`,
+    },
+    {
         id: ".Premium_text",
         type: "html",
         text: `Premium`,
@@ -198,6 +203,66 @@ var en_us = [
         id: ".remove_icon",
         type: "html",
         text: `<i class="bi bi-trash3"></i> Remove`
+    },
+    {
+        id: ".Unfriend_icon_text",
+        type: "html",
+        text: `<i class="bi bi-person-dash-fill"></i> Unfriend`
+    },
+    {
+        id: ".Acceptfriend_icon_text",
+        type: "html",
+        text: `<i class="bi bi-person-check-fill"></i> Accept`
+    },
+    {
+        id: ".Refusedtfriend_icon_text",
+        type: "html",
+        text: `<i class="bi bi-x-lg"></i> Decline Friend Request`
+    },
+    {
+        id: ".refused_text",
+        type: "html",
+        text: `Refused Orders`
+    },
+    {
+        id: ".blockeds_text",
+        type: "html",
+        text: `Blockeds`
+    },
+    {
+        id: ".You_have_successfully_unfriended_your_friend",
+        type: "html",
+        text: `You have successfully unfriended your friend`
+    },
+    {
+        id: ".RequestNewOrderfriend_icon_text",
+        type: "html",
+        text: `<i class="bi bi-plus-lg"></i> Ask for Friendship Again`
+    },
+    {
+        id: ".Order_sent_successfully",
+        type: "html",
+        text: `Order sent successfully`
+    },
+    {
+        id: ".blocked_text",
+        type: "html",
+        text: `Blocked`
+    },
+    {
+        id: ".pending_text",
+        type: "html",
+        text: `Pending`
+    },
+    {
+        id: ".order_pending_text",
+        type: "html",
+        text: `Order Pending`
+    },
+    {
+        id: ".order_refused_text",
+        type: "html",
+        text: `Refused Order`
     },
     {
         id: ".versions_text",
@@ -393,6 +458,46 @@ var en_us = [
         id: ".userProfile_text",
         type: "text",
         text: "User profile",
+    },
+    {
+        id: ".userProfile_icon_text",
+        type: "html",
+        text: `<i class="bi bi-person-fill"></i> User profile`,
+    },
+    {
+        id: ".Friends_text",
+        type: "text",
+        text: "Friends",
+    },
+    {
+        id: ".search_friends_text",
+        type: "text",
+        text: `Search for friend`,
+    },
+    {
+        id: ".Friends_icon_text",
+        type: "html",
+        text: `<i class="bi bi-person-lines-fill"></i> Friends`,
+    },
+    {
+        id: ".AddFriend_icon_text",
+        type: "html",
+        text: `<i class="bi bi-person-fill-add"></i> Add Friend`,
+    },
+    {
+        id: ".Send_Order",
+        type: "html",
+        text: `<i class="bi bi-person-fill-add"></i> Send Order`,
+    },
+    {
+        id: ".Request_Sent_Successfully",
+        type: "html",
+        text: `Request Sent Successfully`,
+    },
+    {
+        id: ".userID_text",
+        type: "html",
+        text: `User ID: `,
     },
     {
         id: ".discordProfile_text",
@@ -1350,6 +1455,11 @@ var en_us = [
         text: "Logout",
     },
     {
+        id: ".acclogout_icon_text",
+        type: "html",
+        text: `<i class="bi bi-box-arrow-right"></i> Logout`,
+    },
+    {
         id: ".password_text",
         type: "text",
         text: "Password",
@@ -1371,6 +1481,11 @@ var en_us = [
     },
     {
         id: ".username_text",
+        type: "text",
+        text: "Username",
+    },
+    {
+        id: ".for_username_text",
         type: "text",
         text: "Username",
     },
@@ -1942,32 +2057,37 @@ var en_us = [
     {
         id: ".HtgyDCC_1_text",
         type: "html",
-        text: `Log in to the <a class="open-url-Discord-Developer-Portal cursor-pointer a-style">Discord developer portal</a>`,
+        text: `1 - Log in to the <a class="open-url-Discord-Developer-Portal cursor-pointer a-style">Discord developer portal</a>`,
     },
     {
         id: ".HtgyDCC_2_text",
         type: "html",
-        text: "Create a new application or access one of your existing applications",
+        text: "2 - Create a new application or access one of your existing applications",
     },
     {
         id: ".HtgyDCC_3_text",
         type: "html",
-        text: "Name your application",
+        text: "3 - Name your application",
     },
     {
         id: ".HtgyDCC_4_text",
         type: "html",
-        text: "Click OAuth2 in the side menu",
+        text: "4 - Click OAuth2 in the side menu",
     },
     {
         id: ".HtgyDCC_5_text",
         type: "html",
-        text: "In OAuth2 > General, copy the Client ID and Client secret",
+        text: "5 - In OAuth2 > General, copy the Client ID and Client secret",
     },
     {
         id: ".HtgyDCC_6_text",
         type: "html",
-        text: "If the client secret is not showing, select Reset Secret",
+        text: "6 - If the client secret is not showing, select Reset Secret",
+    },
+    {
+        id: ".HtgyDCC_7_text",
+        type: "html",
+        text: `7 - Finally, under "Client information" in "Redirects" add the following URL: <code>http://127.0.0.1</code>`,
     },
     {
         id: ".Dywtcnposana",
@@ -2018,6 +2138,41 @@ var en_us = [
         id: ".Change_name_icon",
         type: "html",
         text: `<i class="bi bi-pen-fill"></i> Change name`,
+    },
+    {
+        id: ".online_text",
+        type: "html",
+        text: `Online`,
+    },
+    {
+        id: ".offline_text",
+        type: "html",
+        text: `Off-Line`,
+    },
+    {
+        id: ".Invisible_text",
+        type: "html",
+        text: `Invisible`,
+    },
+    {
+        id: ".Absent_text",
+        type: "html",
+        text: `Absent`,
+    },
+    {
+        id: ".Do_not_disturb_text",
+        type: "html",
+        text: `Do not disturb`,
+    },
+    {
+        id: ".friend_request_accepted",
+        type: "html",
+        text: `Friend request accepted`,
+    },
+    {
+        id: ".friend_request_rejected",
+        type: "html",
+        text: `Friend request rejected`,
     },
 ]
 

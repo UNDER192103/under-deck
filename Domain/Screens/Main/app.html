@@ -135,23 +135,11 @@
                </div>
 
                <div class="dropdown UND_userloged" style="display: none;">
-                  <a class="d-flex align-items-center text-decoration-none dropdown-toggle cursor-pointer"
-                     data-bs-toggle="dropdown" aria-expanded="false">
+                  <a class="d-flex align-items-center text-decoration-none UND_profileView cursor-pointer">
                      <img src="../../src/img/profile-icon.png" alt="" width="32" height="32"
                         class="UND_usericon MM rounded-circle me-2">
                      <strong class="UND_username u-format-max-text"></strong>
                   </a>
-                  <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                     <li class="UND_profileView cursor-pointer notification-box"><a
-                           class="dropdown-item profile_text"></a></li>
-                     <li class="UND_profileConfig cursor-pointer notification-box"><a
-                           class="dropdown-item settings_text"></a></li>
-                     <li>
-                        <hr class="dropdown-divider">
-                     </li>
-                     <li class="logout_account cursor-pointer"><a class="dropdown-item text-danger"><strong
-                              class="acclogout_text"></strong></a></li>
-                  </ul>
                </div>
          </nav>
 
@@ -1661,6 +1649,7 @@
                         <li class="list-group-item bg-dark bg-gradient text-light HtgyDCC_4_text"></li>
                         <li class="list-group-item bg-dark bg-gradient text-light HtgyDCC_5_text"></li>
                         <li class="list-group-item bg-dark bg-gradient text-light HtgyDCC_6_text"></li>
+                        <li class="list-group-item bg-dark bg-gradient text-light HtgyDCC_7_text"></li>
                      </ul>
                   </div>
 
@@ -1901,11 +1890,11 @@
 
          <div class="modal fade" id="modal_UND_profileView" data-bs-backdrop='static' data-keyboard="false"
             data-backdrop="static">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                <div class="modal-content">
 
                   <div class="modal-header" style="border-bottom: none !important;">
-                     <h4 class="modal-title userProfile_text"></h4>
+                     <h4 class="modal-title userProfile_icon_text"></h4>
                      <button id="btn_close_modal" type="button" class="btn-close" data-bs-dismiss="modal"></button>
                   </div>
 
@@ -1940,7 +1929,7 @@
                                     <div id="info-profile">
                                        <div class="d-flex">
                                           <div class="input-group" style="height: 100px;">
-                                             <div class="m-auto ms-0 d-flex">
+                                             <div class="m-auto ms-0 d-block">
                                                 <div class="ms-2">
                                                    <h5 class="form-check-label avatar_text"></h5>
                                                    <button
@@ -1952,6 +1941,8 @@
                                                       class="btn btn-danger ms-3 btn-sm removeUserAvatar_text btn_remove_account_avatar"
                                                       type="button"></button>
                                                 </div>
+                                                <span class="ms-2"><span class="userID_text"></span><span
+                                                      class="UND_userClietn_id"></span></span>
                                              </div>
                                           </div>
 
@@ -2060,9 +2051,102 @@
                      </div>
                   </div>
 
-                  <div class="modal-footer" style="border-top: none !important;">
-                     <button type="button" class="btn btn-success save_text btn_UpdateUserData"
+                  <div class="modal-footer d-block" style="border-top: none !important;">
+                     <button type="button" data-bs-dismiss="modal"
+                        class="btn btn-primary Friends_icon_text UND_profileViewFriends"></button>
+                     <button type="button" class="btn btn-success save_icon_text btn_UpdateUserData float-right"
                         style="display: none;"></button>
+                     <button type="button" data-bs-dismiss="modal"
+                        class="btn btn-danger logout_account acclogout_icon_text float-right"></button>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div class="modal fade" id="modal_UND_profileViewFriends" data-bs-backdrop='static' data-keyboard="false"
+            data-backdrop="static">
+            <div class="modal-dialog modal-lg">
+               <div class="modal-content">
+
+                  <div class="modal-header" style="border-bottom: none !important;">
+                     <h4 class="modal-title Friends_text"></h4>
+                     <button id="btn_close_modal" type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                  </div>
+
+                  <div class="modal-body" style="border-top: none !important; border-bottom: none !important;">
+                     <div class="modal-footer p-0" style="border-top: none !important;">
+                        <button type="button" class="btn btn-primary ILLFRIEND Friends_text"></button>
+                        <button type="button" class="btn IACCFRIEND pendings_text"></button>
+                        <button type="button" class="btn IREJFRIEND d-flex refused_text"></button>
+                        <button type="button" class="btn IBLOCKEDRIEND text-danger d-flex blockeds_text"></button>
+                     </div>
+
+                     <div class="cards-area card_L_UND_friends aos-init aos-animate" data-aos="fade-down">
+                        <div class="row ROWLUNDFRIENDSFF" style="display: none;">
+
+                        </div>
+                        <div class="row ROWLUNDFRIENDSFP" style="display: none;">
+
+                        </div>
+                        <div class="row ROWLUNDFRIENDSFRJ" style="display: none;">
+
+                        </div>
+                        <div class="row ROWLUNDFRIENDSFBLOCK" style="display: none;">
+
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="modal-footer d-block" style="border-top: none !important;">
+                     <button type="button" data-bs-dismiss="modal"
+                        class="btn btn-primary back_icon_text UND_profileView"></button>
+                     <button type="button" data-bs-dismiss="modal"
+                        class="btn btn-info IADDFRIEND float-right AddFriend_icon_text"></button>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div class="modal fade" id="modal_UND_searchFriends" data-bs-backdrop='static' data-keyboard="false"
+            data-backdrop="static">
+            <div class="modal-dialog modal-lg">
+               <div class="modal-content">
+
+                  <div class="modal-header" style="border-bottom: none !important;">
+                     <h4 class="modal-title search_friends_text"></h4>
+                     <button id="btn_close_modal" type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                  </div>
+
+                  <div class="modal-body" style="border-top: none !important; border-bottom: none !important;">
+                     <div class="mb-3">
+                        <label for="NSUAF" class="col-form-label for_username_text"></label>
+                        <input type="text" class="form-control" id="NSUAF">
+                     </div>
+
+                     <div class="cards-area card_L_UND_friends aos-init aos-animate" data-aos="fade-down">
+                        <div class="bodyLoading ROWLUNDFRIENDSFFLOADING" style="display: none !important;">
+                           <div class="loader-4567 m-auto">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66 66" height="100px" width="100px"
+                                 class="spinner-4567">
+                                 <circle stroke="url(#gradient2)" r="20" cy="33" cx="33" stroke-width="1"
+                                    fill="transparent" class="path-4567">
+                                 </circle>
+                                 <linearGradient id="gradient2">
+                                    <stop stop-opacity="1" stop-color="#fe0000" offset="0%"></stop>
+                                    <stop stop-opacity="0" stop-color="#af3dff" offset="100%"></stop>
+                                 </linearGradient>
+                              </svg>
+                           </div>
+                        </div>
+                        <div class="row ROWLISTADDFRIEND">
+
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="modal-footer d-block" style="border-top: none !important;">
+                     <button type="button" data-bs-dismiss="modal"
+                        class="btn btn-primary back_icon_text UND_profileViewFriends"></button>
                   </div>
                </div>
             </div>

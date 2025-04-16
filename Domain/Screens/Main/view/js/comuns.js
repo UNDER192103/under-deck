@@ -84,18 +84,6 @@ $(document).keyup((res) => {
     }
 });
 
-const checkUserLogin = () => {
-    API.App.post('', {
-        method: 'login',
-    })
-        .then((response) => {
-            console.log(response.data)
-        })
-        .catch(erro => {
-            console.log(erro)
-        });
-}
-
 const b64toBlob = (base64) =>
     fetch(base64).then(res => res.blob());
 
