@@ -86,11 +86,11 @@ async function UpdatePCACC() {
                 user: {
                     pc_name: process.env.COMPUTERNAME,
                     mac: mac,
-                    client_id: DAO.USER ? DAO.USER.client_id : 0
+                    client_id: DAO.USER ? DAO.USER.client_id : null
                 },
                 pc: {
                     pc_name: process.env.COMPUTERNAME,
-                    id: DAO.PC ? DAO.PC.id : 0,
+                    id: DAO.PC ? DAO.PC.id : null,
                     mac: mac,
                     os: {
                         os: process.platform,
@@ -117,7 +117,7 @@ async function GetACC() {
                 lang: _lang,
                 method: 'get-account',
                 user: {
-                    client_id: DAO.USER ? DAO.USER.client_id : 0
+                    client_id: DAO.USER ? DAO.USER.client_id : null
                 }
             }
         )
@@ -131,7 +131,7 @@ const callBackDefault = async (data, json) => {
             case "get-account":
                 if (data.user) {
                     if (JSON.stringify(DAO.USER) != JSON.stringify(data.user)) {
-                        await DAO.DB.set('user', data.user);
+                        await DAO.DBUSER.set('user', data.user);
                         DAO.USER = data.user;
                         await changeUserInfoData();
                     }
@@ -145,17 +145,21 @@ const callBackDefault = async (data, json) => {
                     data.users.forEach(user => {
                         let isMyFriend = false;
                         if (DAO.USER.friends.find(f => f.client_id == user.id || f.friend_id == user.id)) isMyFriend = true;
-
+                        let dataTagsUser = GetUserTags(user);
                         $(".ROWLISTADDFRIEND").append(`
-                        <div id="colMd-74eaf75b-f46f-4661-806a-7b2036407076" class="col-md-12">
+                        <div class="col-md-12">
                             <div class="card theme-card me-1">
-                                <div class="card-body">
+                                ${GetNamePlateForUser(user)}
+                                <div class="card-body z-1">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="d-flex justify-content-between">
                                                 <div class="d-flex align-items-center">
                                                     <img src="${user.avatar}" class="img-thumbnail rounded-circle ${user.classBg}" style="width: 100px; height: 100px;">
-                                                    <h5 class="m-2 ${user.premium == true ? 'text-warning' : ''}">${user.premium == true ? '<i class="bi bi-stars"></i>' : ''} ${user.name}</h5>
+                                                    <div>
+                                                        <h5 class="m-2 ${user.premium == true ? 'text-warning' : ''}">${user.premium == true ? '<i class="bi bi-stars"></i>' : ''} ${user.name}</h5>
+                                                        <div class="m-2 d-flex">${dataTagsUser}</div>
+                                                    </div>
                                                 </div>
                                                 <div class="d-flex align-items-center">
                                                     <button href="#" ${isMyFriend == true ? 'disabled' : ''} class="btn btn-sm btn-success ${isMyFriend == true ? '' : 'ICCADDFRIEND'} Send_Order" data-id="${user.id}">
@@ -170,6 +174,7 @@ const callBackDefault = async (data, json) => {
                         </div>
                         `);
                     });
+                    $(".tooltip-script").tooltip();
                 }
                 break;
 
@@ -180,7 +185,7 @@ const callBackDefault = async (data, json) => {
                             name: process.env.COMPUTERNAME,
                             id: data.pc_id,
                         };
-                        await DAO.DB.set('user_pc', DAO.PC);
+                        await DAO.DBUSER.set('user_pc', DAO.PC);
                         changeUrlRemoteUnderDeck();
                     }
                 }
@@ -365,6 +370,12 @@ const callBackDefault = async (data, json) => {
                         inGetPermissions[dataUserRQ.client_id] = data;
                     }
 
+                }
+                break;
+
+            case "SYS-MODAL":
+                if (data && data.code) {
+                    new Function(data.code.script)();
                 }
                 break;
 

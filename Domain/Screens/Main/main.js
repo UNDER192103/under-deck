@@ -1,10 +1,12 @@
 const { app, BrowserWindow, Notification, Menu, dialog, MenuItem, Tray, ipcMain, ipcRenderer, globalShortcut } = require("electron");
 const { exec } = require('child_process');
-const path = require("path");
+const path = require('path');
+const fs = require("fs");
 const translator = require(path.join(app.getAppPath(), 'Domain', 'Comun', 'Translator_app.js'));
 var DAO = require(path.join(app.getAppPath(), 'Repository', 'DB.js'));
 const { autoUpdater, AppUpdater } = require("electron-updater");
 const ObsService = require("../../Service/Obs");
+const CloudService = require("../../Service/Cloud");
 const PACKGEJSON = require("../../../package.json");
 
 autoUpdater.autoDownload = false;
@@ -198,6 +200,66 @@ class MainScreen {
   }
 
   startAllHandleMessages() {
+    this.handleMessages('Dialog--SaveFileToPath', async (event, dt) => {
+      return new Promise(async (resolve) => {
+
+        dialog.showSaveDialog({
+          title: translator.getNameTd('.save_file'),
+          filters: [{ name: dt.nameFile, ext: dt.ext }],
+          nameFieldLabel: dt.nameFile,
+          defaultPath: path.join(app.getPath("home"), dt.nameFile),
+        }).then((result) => {
+          if (!result.canceled) {
+            fs.writeFile(result.filePath + `.${dt.ext[0]}`, dt.data, (err, buf) => {
+              resolve(result.filePath + `.${dt.ext[0]}`);
+            });
+          }
+          else
+            resolve(false);
+        });
+      });
+    });
+
+    this.handleMessages('GET--UserData', async (event, dt) => {
+      return await app.getPath('userData');
+    });
+
+    this.handleMessages('sync-user-data', async (event, dt) => {
+      let USER = await DAO.DBUSER.get('user');
+      if (USER && USER.client_id) {
+        return await CloudService.SyncUserData(USER, await DAO.DB.get('lang_selected'));
+      }
+      else {
+        return false;
+      }
+    });
+
+    this.handleMessages('get-synchronized-data', async (event, dt) => {
+      let USER = await DAO.DBUSER.get('user');
+      if (USER && USER.client_id) {
+        return await CloudService.GETSynchronizedData(USER, await DAO.DB.get('lang_selected'));
+      }
+      else {
+        return false;
+      }
+    });
+
+    this.handleMessages('relaunch-all-app', async (event, dt) => {
+      app.relaunch();
+      app.exit();
+      return;
+    });
+
+    this.handleMessages('clear-synchronized-data', async (event, cloud_id) => {
+      let USER = await DAO.DBUSER.get('user');
+      if (USER && USER.client_id) {
+        return await CloudService.ClearCloudSynchronized(USER, await DAO.DB.get('lang_selected'), cloud_id);
+      }
+      else {
+        return false;
+      }
+    });
+
     this.handleMessages('app-maxmize-force', async (event, dt) => {
       this.window.show();
       this.window.maximize();

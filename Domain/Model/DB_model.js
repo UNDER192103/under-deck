@@ -4,6 +4,8 @@ module.exports = {
     DB_DIR: null,
     THEME_DIR: null,
     DB: null,
+    USERDB: null,
+    CLOUD: null,
     DISCORD: null,
     WEBDECK: null,
     THEMES: null,
@@ -28,10 +30,14 @@ module.exports = {
         icon: null,
         name: null,
         username: null,
+        namePlate: null,
+        themeProfile: null,
     },
     WEBDECKDATA: {
         formatView: 'default',
         formatListView: 'default',
         pages: [],
-    }
+    },
+    NAMESPLATES: [],
+    PROFILETHEMESBCK: []
 };

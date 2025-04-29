@@ -6,8 +6,8 @@ const path = require('path');
 const Jsoning = require("jsoning");
 const ip = require("ip");
 const fs = require("fs");
+const fsPromises = fs.promises;
 const axios = require('axios');
-const fsPromises = require('fs').promises;
 const { exec } = require('child_process');
 const QRCode = require('qrcode');
 const { getAllInstalledSoftwareSync } = require('fetch-installed-software');
@@ -23,11 +23,11 @@ const toaster = require(MAIN_DIR + "/Domain/src/js/toaster.js");
 var GNDATA = {
     server_port: null,
 }
+
 var API = require(MAIN_DIR + "/Repository/Api.js");
 var DAO = require(MAIN_DIR + "/Repository/DB.js"),
-    keyEvent = require(MAIN_DIR + '/Domain/Service/KeyMacros.js'),
-    localServer = require(MAIN_DIR + '/Domain/Service/Server.js'),
-    localServer = require(MAIN_DIR + '/Domain/Service/Server.js'),
+    keyEvent = require('./Service/KeyMacros.js'),
+    localServer = require('./Service/Server.js'),
     mac = null,
     list_routs = null,
     old_sbs_scene_selected = null,
@@ -59,13 +59,10 @@ var DAO = require(MAIN_DIR + "/Repository/DB.js"),
 loadThemesOptions(true);
 ///      Load theme      ///
 
-DAO.Server_port = DAO.DB.get('server_port');
-DAO.List_programs = DAO.ProgramsExe.get('list_programs');
-DAO.USER = DAO.DB.get('user');
-DAO.PC = DAO.DB.get('user_pc');
 document.getElementById('key-macro').checked = DAO.DB.get('keyEvent');
 document.getElementById('notifications_on_windows').checked = DAO.DB.get('App_notification_windows');
 document.getElementById('isMinimizeToBar').checked = DAO.DB.get('isMinimizeToBar');
+document.getElementById('isEnableCloudIntegrations').checked = DAO.CLOUD.get('isEnbCloudIntegrations');
 document.getElementById('autoupdateonestart').checked = DAO.DB.get('AutoUpdateApp');
 document.getElementById('isNotValidFirstSearchUpdateApp').checked = DAO.DB.get('isNotValidFirstSearchUpdateApp');
 document.getElementById('obs-checkbox-start').checked = DAO.OBS.get('ObsWssStartOnApp');
@@ -443,6 +440,11 @@ $(document).ready(async () => {
         $(this).select();
     });
 
+    $(document).on('click', '.CSALLDPM', function (e) {
+        e.preventDefault();
+        $("body").click();
+    });
+
     $(document).on('click', '.view-password', function (e) {
         e.preventDefault();
         let input = $(getParent(e.currentTarget).find('input')[0]);
@@ -620,7 +622,8 @@ async function apressentationSteps() {
     tempBlockSelecMenu = false;
     await $('.popover').popover('dispose');
     $("#bnt_modal_add_app").prop('disabled', false);
-    $('.modal button[data-bs-dismiss="modal"]').prop('disabled', false).click();
+    $('.modal .button[data-bs-dismiss="modal"]').prop('disabled', false);
+    $('.modal').modal('hide');
     $('.modal *').prop('disabled', false);
     $("#button-add-macro").prop('disabled', false);
     $("#button-add-webpage").prop('disabled', false);
@@ -1079,4 +1082,14 @@ const B_are_you_sure = async () => {
         });
     })
 
+}
+
+function copyText(text) {
+    navigator.clipboard.writeText(text)
+        .then(() => {
+            console.log('Text copied to clipboard');
+        })
+        .catch(err => {
+            console.error('Failed to copy text: ', err);
+        });
 }

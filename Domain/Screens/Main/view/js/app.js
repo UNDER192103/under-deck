@@ -18,16 +18,6 @@ $(document).ready(async () => {
     });
     $(".list_apps").disableSelection();
 
-    $('#notifications_on_windows').click(function () {
-        let isCheck = document.getElementById('notifications_on_windows').checked;
-        DAO.DB.set('App_notification_windows', isCheck);
-    });
-
-    $('#isMinimizeToBar').click(function () {
-        let isCheck = document.getElementById('isMinimizeToBar').checked;
-        DAO.DB.set('isMinimizeToBar', isCheck);
-    });
-
     $("#icon-custom-add-app").on('change', (e) => {
         if (e.target.files[0])
             $("#previwSeletedIconAddApp").attr('src', URL.createObjectURL(e.target.files[0]));

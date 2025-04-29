@@ -157,7 +157,17 @@ var en_us = [
     {
         id: ".update_icon",
         type: "html",
-        text: `<i class="bi bi-arrow-clockwise"></i> Update`
+        text: `<i class="fa-solid fa-arrows-rotate"></i> Update`
+    },
+    {
+        id: ".cloud_icon",
+        type: "html",
+        text: `<i class="bi bi-cloud-fill"></i> Cloud`
+    },
+    {
+        id: ".underdeckcloud_icon",
+        type: "html",
+        text: `<i class="bi bi-cloud-fill"></i> Cloud Under Deck`
     },
     {
         id: ".releaseNotes_text",
@@ -297,7 +307,7 @@ var en_us = [
     {
         id: ".updates_text_icon",
         type: "html",
-        text: '<i class="bi bi-cloud-arrow-down"></i> Updates'
+        text: '<i class="fa-solid fa-arrows-rotate"></i> Updates'
     },
     {
         id: ".ccOBSWsswhenstarting",
@@ -500,6 +510,11 @@ var en_us = [
         text: `User ID: `,
     },
     {
+        id: ".copyUserID_text",
+        type: "html",
+        text: `Copy User ID`,
+    },
+    {
         id: ".discordProfile_text",
         type: "text",
         text: "Discord Profile",
@@ -610,6 +625,11 @@ var en_us = [
         text: `<i class="bi bi-pen"></i> Edit`
     },
     {
+        id: ".edit_profile_icon",
+        type: "html",
+        text: `<i class="bi bi-pencil-fill"></i> Edit Profile`
+    },
+    {
         id: ".delete_text",
         type: "text",
         text: "Delete"
@@ -640,9 +660,19 @@ var en_us = [
         text: "Please configure a shortcut!"
     },
     {
+        id: ".save_file",
+        type: "text",
+        text: "Save File"
+    },
+    {
         id: ".p_s_a_a_text",
         type: "text",
         text: "Please select an app!"
+    },
+    {
+        id: ".select_nameplate",
+        type: "text",
+        text: "Select an Name Plate"
     },
     {
         id: ".p_s_a_e_text",
@@ -1550,6 +1580,11 @@ var en_us = [
         text: "No users found with this email address or username",
     },
     {
+        id: ".none",
+        type: "text",
+        text: "None",
+    },
+    {
         id: ".no_app_found_text",
         type: "text",
         text: "App not found!",
@@ -1745,6 +1780,11 @@ var en_us = [
         text: "Background color"
     },
     {
+        id: ".Profile_Background",
+        type: "text",
+        text: "Profile Background"
+    },
+    {
         id: ".color_text_text",
         type: "text",
         text: "Text color"
@@ -1805,6 +1845,16 @@ var en_us = [
         text: "This feature is only available after you are logged into an account"
     },
     {
+        id: ".This_feature_is_exclusive_to_premium_owners_only",
+        type: "html",
+        text: "This feature is exclusive to premium users only"
+    },
+    {
+        id: ".Tfietpoo_title",
+        type: "attr",
+        text: { title: "This feature is exclusive to premium users only" },
+    },
+    {
         id: ".connection_invitation_text",
         type: "html",
         text: "Connection invitation"
@@ -1818,6 +1868,16 @@ var en_us = [
         id: ".revoke_all_permissions_text",
         type: "html",
         text: "Revoke all permissions"
+    },
+    {
+        id: ".list_all_permissions_text",
+        type: "html",
+        text: "List all permissions"
+    },
+    {
+        id: ".permissions_text",
+        type: "html",
+        text: "Permissions"
     },
     {
         id: ".access_permissions_for_all_users_have_been_revoked",
@@ -2173,6 +2233,121 @@ var en_us = [
         id: ".friend_request_rejected",
         type: "html",
         text: `Friend request rejected`,
+    },
+    {
+        id: ".Sync_to_cloud",
+        type: "html",
+        text: `Sync to Cloud`,
+    },
+    {
+        id: ".Sync_to_cloud_icon",
+        type: "html",
+        text: `<i class="bi bi-cloud-upload-fill"></i> Sync to Cloud`,
+    },
+    {
+        id: ".Sync_from_cloud",
+        type: "html",
+        text: `Sync from Cloud`,
+    },
+    {
+        id: ".Sync_from_cloud_icon",
+        type: "html",
+        text: `<i class="bi bi-cloud-download-fill"></i> Sync from Cloud`,
+    },
+    {
+        id: ".Delete_Cloud_Settings",
+        type: "html",
+        text: `Delete Cloud Settings`,
+    },
+    {
+        id: ".Delete_Cloud_Settings_icon",
+        type: "html",
+        text: `<i class="bi bi-trash3-fill"></i> Delete Cloud Settings`,
+    },
+    {
+        id: ".Import_settings_from_a_local_file_icon",
+        type: "html",
+        text: `<i class="bi bi-upload"></i> Import settings from a local file`,
+    },
+    {
+        id: ".Export_settings_to_a_local_file_icon",
+        type: "html",
+        text: `<i class="bi bi-download"></i> Export settings to a local file`,
+    },
+    {
+        id: ".Please_select_the_file_correctly",
+        type: "html",
+        text: `Please select the file correctly`,
+    },
+    {
+        id: ".Enable_cloud_integrations",
+        type: "html",
+        text: `Enable cloud integrations`,
+    },
+    {
+        id: ".By_enabling_you_agree_to_send_your_data_to_the_cloud",
+        type: "html",
+        text: `By enabling you agree to send your data to the cloud`,
+    },
+    {
+        id: ".Data_deleted_successfully",
+        type: "html",
+        text: `Data deleted successfully`,
+    },
+    {
+        id: ".Data_synchronized_successfully",
+        type: "html",
+        text: `Data synchronized successfully`,
+    },
+    {
+        id: ".You_do_not_have_data_to_sync",
+        type: "html",
+        text: `You do not have data to sync`,
+    },
+    {
+        id: ".Tawri10ststc",
+        type: "html",
+        text: `The application will restart in 10 seconds to finalize the changes.`,
+    },
+    {
+        id: ".Tawri5ststc",
+        type: "html",
+        text: `The application will restart in 5 seconds to finalize the changes.`,
+    },
+    {
+        id: ".File_exported_successfully",
+        type: "html",
+        text: `File exxported successfully`,
+    },
+    {
+        id: ".Error_while_exporting_file",
+        type: "html",
+        text: `Error While Exporting File`,
+    },
+    {
+        id: ".Dywtetititbf",
+        type: "html",
+        text: `Do you want to export the images together in the backup file?`,
+    },
+    {
+        id: ".no_data_found",
+        type: "html",
+        text: `No data found`,
+    },
+    {
+        id: ".no_permission_found",
+        type: "html",
+        text: `No permissions found`,
+    },
+    {
+        id: ".Status",
+        type: "html",
+        text: `Status`,
+    },
+    {
+        id: ".Name_Plate",
+        type: "html",
+        text: `Name Plate`,
     },
 ]
 

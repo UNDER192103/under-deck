@@ -1,6 +1,27 @@
 let isCroppieStarted = false;
 $(document).ready(async () => {
     loadUserData();
+    loadUserThemesOptions();
+
+    $(document).on('click', '.UND_SelectUStatus', async (e) => {
+        e.preventDefault();
+        let id = e.currentTarget.dataset.id;
+        API.App.post('', {
+            _lang: _lang,
+            method: "update-user-status",
+            client_id: DAO.USER.client_id,
+            token: DAO.USER.token,
+            status: id,
+        }).then(async (res) => {
+            DAO.USER.status = id;
+            changeUserInfoData();
+        });
+    });
+
+    $(document).on('click', '.UND_CopyUserId', async (e) => {
+        e.preventDefault();
+        copyText(DAO.USER.client_id);
+    });
 
     $(document).on('click', '.UND_profileViewFriends', async (r) => {
         $(".ROWLUNDFRIENDSFF").show('slow');
@@ -228,7 +249,7 @@ $(document).ready(async () => {
                     let resData = res.data;
                     setTimeout(async () => {
                         if (res.data.success == true && resData.result == true && resData.account) {
-                            await DAO.DB.set('user', resData.account);
+                            await DAO.DBUSER.set('user', resData.account);
                             DAO.USER = resData.account;
                             changeUserInfoData();
                             bootbox.alert(resData.msg);
@@ -267,7 +288,7 @@ $(document).ready(async () => {
                 callback: async (res) => {
                     if (res) {
                         DAO.USER = null;
-                        await DAO.DB.set('user', DAO.USER);
+                        await DAO.DBUSER.set('user', DAO.USER);
                         loadUserData();
                     }
                 }
@@ -306,7 +327,7 @@ $(document).ready(async () => {
                                     let resData = res.data;
                                     $("body").modalLoading('hide');
                                     if (resData.result && resData.result.account) {
-                                        await DAO.DB.set('user', resData.result.account);
+                                        await DAO.DBUSER.set('user', resData.result.account);
                                         DAO.USER = resData.result.account;
                                     }
                                     loadUserData();
@@ -352,6 +373,13 @@ $(document).ready(async () => {
             formData.append('token', DAO.USER.token);
             formData.append('name', DAO.USERDATAUPDATE.name);
             formData.append('username', DAO.USERDATAUPDATE.username);
+            if (DAO.USERDATAUPDATE.namePlate != null)
+                formData.append('namePlate', DAO.USERDATAUPDATE.namePlate);
+            if (DAO.USERDATAUPDATE.themeProfile != null) {
+                formData.append('profileTheme', DAO.USERDATAUPDATE.themeProfile.uri);
+                formData.append('profileThemeColor', DAO.USERDATAUPDATE.themeProfile.color);
+                formData.append('profileThemeBackground', DAO.USERDATAUPDATE.themeProfile.background);
+            }
 
             API.App.post('', formData)
                 .then(async (res) => {
@@ -360,7 +388,7 @@ $(document).ready(async () => {
                         $("body").modalLoading('hide');
                         $("#cancelExportAvatar").click();
                         if (res.data.success == true && resData.result && resData.result.account) {
-                            await DAO.DB.set('user', resData.result.account);
+                            await DAO.DBUSER.set('user', resData.result.account);
                             DAO.USER = resData.result.account;
                             changeUserInfoData();
                             loadUserData();
@@ -428,7 +456,7 @@ $(document).ready(async () => {
                                 $("body").modalLoading('hide');
                                 $("#cancelExportAvatar").click();
                                 if (res.data.success == true && resData.result && resData.result.account) {
-                                    await DAO.DB.set('user', resData.result.account);
+                                    await DAO.DBUSER.set('user', resData.result.account);
                                     DAO.USER = resData.result.account;
                                     changeUserInfoData();
                                     loadUserData();
@@ -486,8 +514,78 @@ $(document).ready(async () => {
 
     });
 
+    $("#select-user-nameplate").change(async () => {
+        let namePlate = DAO.NAMESPLATES.find(f => f.id == $("#select-user-nameplate").val());
+        if (namePlate) {
+            getParent($(".PREVUNDNamePlateMY")).show();
+            $(".PREVUNDNamePlateMY").attr('src', `${namePlate.uri}`).show();
+            $(".PREVUNDNamePlateMY").show().get(0).load();
+            DAO.USERDATAUPDATE.namePlate = namePlate.uri;
+        }
+        else {
+            getParent($(".PREVUNDNamePlateMY")).hide();
+            DAO.USERDATAUPDATE.namePlate = 'null';
+        }
+        await checkUserProfileEnableEditButton();
+    });
+
+    $("#select-user-profilebackground").change(async () => {
+        let theme = DAO.PROFILETHEMESBCK.find(f => f.id == $("#select-user-profilebackground").val());
+        if (theme) {
+            getParent($(".UNDThemeProfileMY")).show();
+            $(".UNDThemeProfileMY").attr('src', `${theme.uri}`).show();
+            $(".UNDThemeProfileMY").show().get(0).load();
+            DAO.USERDATAUPDATE.themeProfile = theme;
+            $('.UNDTPMMSTYL').css({ color: theme.color, 'background-color': theme.background });
+        }
+        else {
+            getParent($(".UNDThemeProfileMY")).hide();
+            $('.UNDTPMMSTYL').css({ color: '', 'background-color': '' });
+            DAO.USERDATAUPDATE.themeProfile = {
+                uri: 'null',
+                color: 'null',
+                background: 'null',
+            };
+        }
+        await checkUserProfileEnableEditButton();
+    });
+
     setInterval(loadUserData, 1800000);
 });
+
+const loadUserThemesOptions = () => {
+    API.App.post('', {
+        _lang: _lang,
+        method: "get-list-user-nameplates-themes",
+    }).then(async (res) => {
+        if (res && res.data && res.data.namesPlates) {
+            DAO.NAMESPLATES = res.data.namesPlates;
+        }
+        else {
+            DAO.NAMESPLATES = [];
+        }
+        $("#select-user-nameplate .RM").remove();
+        DAO.NAMESPLATES.forEach(async (item) => {
+            $("#select-user-nameplate").append(`<option ${item.uri == DAO.USER.profileStyle.namePlate ? 'selected' : ''} value="${item.id}" class="RM">${item.name}</option>`);
+        });
+    });
+
+    API.App.post('', {
+        _lang: _lang,
+        method: "get-list-user-background-themes",
+    }).then(async (res) => {
+        if (res && res.data && res.data.themes) {
+            DAO.PROFILETHEMESBCK = res.data.themes;
+        }
+        else {
+            DAO.PROFILETHEMESBCK = [];
+        }
+        $("#select-user-profilebackground .RM").remove();
+        DAO.PROFILETHEMESBCK.forEach(async (item) => {
+            $("#select-user-profilebackground").append(`<option ${item.uri == DAO.USER.profileStyle.theme.uri ? 'selected' : ''} value="${item.id}" class="RM">${item.name}</option>`);
+        });
+    });
+}
 
 const FileToBase64 = file => new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -497,7 +595,7 @@ const FileToBase64 = file => new Promise((resolve, reject) => {
 });
 
 const checkUserProfileEnableEditButton = async () => {
-    if (DAO.USERDATAUPDATE && DAO.USERDATAUPDATE.icon != null || DAO.USERDATAUPDATE && DAO.USERDATAUPDATE.name != null) {
+    if (DAO.USERDATAUPDATE && DAO.USERDATAUPDATE.icon != null || DAO.USERDATAUPDATE && DAO.USERDATAUPDATE.name != null || DAO.USERDATAUPDATE.namePlate != null || DAO.USERDATAUPDATE.themeProfile != null) {
         $(".btn_UpdateUserData").show('slow');
     }
     else {
@@ -527,9 +625,12 @@ const changeUserInfoData = async (isUpdatePcACC = true) => {
     DAO.USERDATAUPDATE.croppie.base64 = null;
     DAO.USERDATAUPDATE.croppie.file = null;
     DAO.USERDATAUPDATE.username = null;
+    DAO.USERDATAUPDATE.namePlate = null;
+    DAO.USERDATAUPDATE.themeProfile = null;
+    $(".UND_userTags").html("");
 
     if (DAO.USER == null) {
-        await DAO.DB.set('user', DAO.USER);
+        await DAO.DBUSER.set('user', DAO.USER);
         $(".UND_userClietn_id").html("N/A");
         $(".UND_username").html("");
         $(".UND_datecreated").html("");
@@ -539,23 +640,34 @@ const changeUserInfoData = async (isUpdatePcACC = true) => {
         $(".UND_usericon").attr('src', "");
         $(".UND_usernotloged").show();
         $(".UND_userloged").hide();
+        $(".UND_usericon.p-1").removeClass('bg-secondary bg-danger bg-warning bg-success');
+        $(".UND_StatusCC").removeClass('text-secondary text-danger text-warning text-success');
+        $(".UND_Status").html('Status');
         $(".UND_premium_level").html(`<button class="btn btn-danger btn-sm no_premium_icon_text" type="button">${getNameTd('.no_premium_icon_text')}</button>`);
     }
     else {
-        $("#uInput-changeUserAvatar").val('');
+        $(".UND_username").html(DAO.USER.username);
         $(".ValUND_username").val(DAO.USER.username);
         $(".UND_userClietn_id").html(DAO.USER.client_id);
         $(".ValUND_email").val(DAO.USER.email);
-        $(".UND_username").html(`${DAO.USER.premium ? '<i class="bi bi-stars"></i>' : ''} ${DAO.USER.account}`);
+        $(".UND_DisplayUsername").html(`${DAO.USER.premium ? '<i class="bi bi-stars"></i>' : ''} ${DAO.USER.account}`);
         $(".UND_datecreated").html(new Date(DAO.USER.created_date).toLocaleString());
         $(".ValUND_DisplayUsername").val(DAO.USER.account);
+        let dataStatus = GetStatusAccount(DAO.USER);
+        $(".UND_usericon.p-1").removeClass('bg-secondary bg-danger bg-warning bg-success').addClass(dataStatus.classBg);
+        $(".UND_StatusCC").removeClass('text-secondary text-danger text-warning text-success').addClass(dataStatus.classTxt);
+        $(".UND_Status").html(dataStatus.text);
         if (DAO.USER.premium == true) {
+            $("#select-user-nameplate").attr('disabled', false);
+            $("#select-user-profilebackground").attr('disabled', false);
             $(".UND_premium_level").html(`<button title="${DAO.USER.premiumDateToFinish}" class="btn btn-warning btn-sm has_Premium_icon_text" type="button">${getNameTd('.has_Premium_icon_text')}</button>`);
-            $($(".UND_username").parent()).addClass('text-warning');
+            $($(".UND_DisplayUsername").parent()).addClass('text-warning');
         }
         else {
+            $("#select-user-nameplate").attr('disabled', true);
+            $("#select-user-profilebackground").attr('disabled', true);
             $(".UND_premium_level").html(`<button class="btn btn-danger btn-sm no_premium_icon_text" type="button">${getNameTd('.no_premium_icon_text')}</button>`);
-            $($(".UND_username").parent()).removeClass('text-warning');
+            $($(".UND_DisplayUsername").parent()).removeClass('text-warning');
         }
     }
 
@@ -574,6 +686,9 @@ const changeUserInfoData = async (isUpdatePcACC = true) => {
         await UpdatePCACC();
     await changeUrlRemoteUnderDeck();
     await changeUserFriends();
+    await changeUserProfileStyles();
+    await changeUserTags();
+    $(".tooltip-script").tooltip();
 }
 
 const loadUserData = async () => {
@@ -597,7 +712,7 @@ const loadUserData = async () => {
                 else {
 
                     if (JSON.stringify(DAO.USER) != JSON.stringify(res.data.account)) {
-                        await DAO.DB.set('user', res.data.account);
+                        await DAO.DBUSER.set('user', res.data.account);
                         DAO.USER = res.data.account;
                         await changeUserInfoData();
                     }
@@ -625,7 +740,7 @@ const tryLoginUser = () => {
                     $("body").modalLoading('hide');
                     if ((res.data != null && res.data.success != null) && res.data.success == true) {
                         $("#u-form-alert").hide('slow').html();
-                        await DAO.DB.set('user', res.data.result.account);
+                        await DAO.DBUSER.set('user', res.data.result.account);
                         DAO.USER = res.data.result.account;
                         $("#modal_login").modal('hide');
                         toaster.success(getNameTd('.msg_successfully_logged_text'));
@@ -679,7 +794,7 @@ const tryRegisterUser = () => {
                         $("#ur-password").val('');
                         $("#ur-cpassword").val('');
                         $("#u-form-r-alert").hide('slow').html();
-                        await DAO.DB.set('user', resData.result.account);
+                        await DAO.DBUSER.set('user', resData.result.account);
                         DAO.USER = resData.result.account;
                         $("#modal_register").modal('hide');
                         toaster.success(resData.msg);
@@ -822,20 +937,20 @@ function CroppicFile(file) {
 function GetStatusAccount(account) {
     switch (account.status) {
         case '1':
-            return { text: getNameTd('.online_text'), classBg: 'bg-success', class: 'online_text' };
+            return { text: getNameTd('.online_text'), classBg: 'bg-success', classTxt: 'text-success', class: 'online_text' };
 
         case '2':
-            return { text: getNameTd('.Absent_text'), classBg: 'bg-warning', class: 'Absent_text' };
+            return { text: getNameTd('.Absent_text'), classBg: 'bg-warning', classTxt: 'text-warning', class: 'Absent_text' };
 
         case '3':
-            return { text: getNameTd('.Invisible_text'), classBg: 'bg-secondary', class: 'Invisible_text' };
+            return { text: getNameTd('.Invisible_text'), classBg: 'bg-secondary', classTxt: 'text-secondary', class: 'Invisible_text' };
 
         case '4':
-            return { text: getNameTd('.Do_not_disturb_text'), classBg: 'bg-danger', class: 'Do_not_disturb_text' };
+            return { text: getNameTd('.Do_not_disturb_text'), classBg: 'bg-danger', classTxt: 'text-danger', class: 'Do_not_disturb_text' };
 
         case '5':
         default:
-            return { text: getNameTd('.offline_text'), classBg: 'bg-secondary', class: 'offline_text' };
+            return { text: getNameTd('.offline_text'), classBg: 'bg-secondary', classTxt: 'text-secondary', class: 'offline_text' };
     }
 
 }
@@ -857,17 +972,23 @@ const changeUserFriends = async () => {
             $(`.ICCADDFRIEND[data-id="${friend.friend_id}"]`).attr('disabled', true);
 
             let dataStatus = GetStatusAccount(friendData);
+            let dataTagsUser = GetUserTags(friendData);
+            let profileStyle = friendData.profileStyle;
             if (friend.friends == true && friend.refused == false && friend.blocked == false) {
                 $(".ROWLUNDFRIENDSFF").append(`
                 <div class="col-md-12">
                     <div class="card theme-card me-1">
-                        <div class="card-body">
+                        ${GetNamePlateForUser(friendData)}
+                        <div class="card-body z-1">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="d-flex justify-content-between">
                                         <div class="d-flex align-items-center">
                                             <img src="${friendData.avatar}" class="img-thumbnail rounded-circle ${dataStatus.classBg}" style="width: 100px; height: 100px;">
-                                            <h5 class="m-2 ${friendData.premium == true ? 'text-warning' : ''}">${friendData.premium == true ? '<i class="bi bi-stars"></i>' : ''} ${friendData.name}</h5>
+                                            <div>
+                                                <h5 class="m-2 ${friendData.premium == true ? 'text-warning' : ''}">${friendData.premium == true ? '<i class="bi bi-stars"></i>' : ''} ${friendData.name}</h5>
+                                                <div class="m-2 d-flex">${dataTagsUser}</div>
+                                            </div>
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <a href="#" class="btn btn-sm btn-danger UnfriendACCT Unfriend_icon_text" data-id="${friend.idP}">
@@ -891,15 +1012,19 @@ const changeUserFriends = async () => {
                     $(".UND_profileViewFriends").addClass('pulse-orange');
                     $(".UND_usericon.MM").addClass('pulse-orange');
                     $(".ROWLUNDFRIENDSFP").append(`
-                    <div id="colMd-74eaf75b-f46f-4661-806a-7b2036407076" class="col-md-12">
+                    <div class="col-md-12">
                         <div class="card theme-card me-1">
-                            <div class="card-body">
+                            ${GetNamePlateForUser(friendData)}
+                            <div class="card-body z-1">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="d-flex justify-content-between">
                                             <div class="d-flex align-items-center">
                                                 <img src="${friendData.avatar}" class="img-thumbnail rounded-circle ${dataStatus.classBg}" style="width: 100px; height: 100px;">
-                                                <h5 class="m-2 ${friendData.premium == true ? 'text-warning' : ''}">${friendData.premium == true ? '<i class="bi bi-stars"></i>' : ''} ${friendData.name}</h5>
+                                                <div>
+                                                    <h5 class="m-2 ${friendData.premium == true ? 'text-warning' : ''}">${friendData.premium == true ? '<i class="bi bi-stars"></i>' : ''} ${friendData.name}</h5>
+                                                    <div class="m-2 d-flex">${dataTagsUser}</div>
+                                                </div>
                                             </div>
                                             <div class="d-flex align-items-center">
                                                 <a href="#" class="btn btn-sm btn-danger UNDREJCTPFF Refusedtfriend_icon_text me-1" data-id="${friend.idP}">
@@ -919,15 +1044,19 @@ const changeUserFriends = async () => {
                 }
                 else {
                     $(".ROWLUNDFRIENDSFP").append(`
-                    <div id="colMd-74eaf75b-f46f-4661-806a-7b2036407076" class="col-md-12">
+                    <div class="col-md-12">
                         <div class="card theme-card me-1">
-                            <div class="card-body">
+                            ${GetNamePlateForUser(friendData)}
+                            <div class="card-body z-1">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="d-flex justify-content-between">
                                             <div class="d-flex align-items-center">
                                                 <img src="${friendData.avatar}" class="img-thumbnail rounded-circle ${dataStatus.classBg}" style="width: 100px; height: 100px;">
-                                                <h5 class="m-2 ${friendData.premium == true ? 'text-warning' : ''}">${friendData.premium == true ? '<i class="bi bi-stars"></i>' : ''} ${friendData.name}</h5>
+                                                <div>
+                                                    <h5 class="m-2 ${friendData.premium == true ? 'text-warning' : ''}">${friendData.premium == true ? '<i class="bi bi-stars"></i>' : ''} ${friendData.name}</h5>
+                                                    <div class="m-2 d-flex">${dataTagsUser}</div>
+                                                </div>
                                             </div>
                                             <div class="d-flex align-items-center">
                                                 <a href="#" class="btn btn-sm btn-danger order_pending_text">
@@ -947,15 +1076,19 @@ const changeUserFriends = async () => {
             else if (friend.friends == false && friend.refused == true && friend.blocked == false) {
                 if (friend.requestBy != null) {
                     $(".ROWLUNDFRIENDSFRJ").append(`
-                    <div id="colMd-74eaf75b-f46f-4661-806a-7b2036407076" class="col-md-12">
+                    <div class="col-md-12">
                         <div class="card theme-card me-1">
-                            <div class="card-body">
+                            ${GetNamePlateForUser(friendData)}
+                            <div class="card-body z-1">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="d-flex justify-content-between">
                                             <div class="d-flex align-items-center">
                                                 <img src="${friendData.avatar}" class="img-thumbnail rounded-circle ${dataStatus.classBg}" style="width: 100px; height: 100px;">
-                                                <h5 class="m-2 ${friendData.premium == true ? 'text-warning' : ''}">${friendData.premium == true ? '<i class="bi bi-stars"></i>' : ''} ${friendData.name}</h5>
+                                                <div>
+                                                    <h5 class="m-2 ${friendData.premium == true ? 'text-warning' : ''}">${friendData.premium == true ? '<i class="bi bi-stars"></i>' : ''} ${friendData.name}</h5>
+                                                    <div class="m-2 d-flex">${dataTagsUser}</div>
+                                                </div>
                                             </div>
                                             <div class="d-flex align-items-center">
                                                 <a href="#" class="btn btn-sm btn-danger order_refused_text">
@@ -971,15 +1104,19 @@ const changeUserFriends = async () => {
                     `);
                 } else {
                     $(".ROWLUNDFRIENDSFRJ").append(`
-                        <div id="colMd-74eaf75b-f46f-4661-806a-7b2036407076" class="col-md-12">
+                        <div class="col-md-12">
                             <div class="card theme-card me-1">
-                                <div class="card-body">
+                                ${GetNamePlateForUser(friendData)}
+                                <div class="card-body z-1">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="d-flex justify-content-between">
                                                 <div class="d-flex align-items-center">
                                                     <img src="${friendData.avatar}" class="img-thumbnail rounded-circle ${dataStatus.classBg}" style="width: 100px; height: 100px;">
-                                                    <h5 class="m-2 ${friendData.premium == true ? 'text-warning' : ''}">${friendData.premium == true ? '<i class="bi bi-stars"></i>' : ''} ${friendData.name}</h5>
+                                                    <div>
+                                                        <h5 class="m-2 ${friendData.premium == true ? 'text-warning' : ''}">${friendData.premium == true ? '<i class="bi bi-stars"></i>' : ''} ${friendData.name}</h5>
+                                                        <div class="m-2 d-flex">${dataTagsUser}</div>
+                                                    </div>
                                                 </div>
                                                 <div class="d-flex align-items-center">
                                                     <a href="#" class="btn btn-sm btn-danger order_refused_text me-1">
@@ -1001,15 +1138,19 @@ const changeUserFriends = async () => {
             }
             else if (friend.friends == false && friend.refused == false && friend.blocked == true) {
                 $(".ROWLUNDFRIENDSFBLOCK").append(`
-                <div id="colMd-74eaf75b-f46f-4661-806a-7b2036407076" class="col-md-12">
+                <div class="col-md-12">
                     <div class="card theme-card me-1">
+                        ${GetNamePlateForUser(friendData)}
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="d-flex justify-content-between">
                                         <div class="d-flex align-items-center">
                                             <img src="${friendData.avatar}" class="img-thumbnail rounded-circle ${dataStatus.classBg}" style="width: 100px; height: 100px;">
-                                            <h5 class="m-2 ${friendData.premium == true ? 'text-warning' : ''}">${friendData.premium == true ? '<i class="bi bi-stars"></i>' : ''} ${friendData.name}</h5>
+                                            <div>
+                                                <h5 class="m-2 ${friendData.premium == true ? 'text-warning' : ''}">${friendData.premium == true ? '<i class="bi bi-stars"></i>' : ''} ${friendData.name}</h5>
+                                                <div class="m-2 d-flex">${dataTagsUser}</div>
+                                            </div>
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <a href="#" class="btn btn-sm btn-danger blocked_text">
@@ -1027,4 +1168,100 @@ const changeUserFriends = async () => {
         });
     }
 
+    $(".tooltip-script").tooltip();
+}
+
+const changeUserProfileStyles = async () => {
+    let profileStyle = DAO.USER.profileStyle;
+    if (profileStyle) {
+        if (profileStyle.namePlate) {
+            if (DAO.NAMESPLATES.length > 0) {
+                $("#select-user-nameplate .RM").remove();
+                DAO.NAMESPLATES.forEach(async (item) => {
+                    $("#select-user-nameplate").append(`<option ${item.uri == DAO.USER.profileStyle.namePlate ? 'selected' : ''} value="${item.id}" class="RM">${item.name}</option>`);
+                });
+            }
+
+            getParent($(".UNDNamePlateMY")).show();
+            getParent($(".PREVUNDNamePlateMY")).show();
+            if ($(".UNDNamePlateMY").attr('src') != profileStyle.namePlate) {
+                $(".UNDNamePlateMY").attr('src', `${profileStyle.namePlate}`).show();
+                $(".UNDNamePlateMY").show().get(0).load();
+            }
+            if ($(".PREVUNDNamePlateMY").attr('src') != profileStyle.namePlate) {
+                $(".PREVUNDNamePlateMY").attr('src', `${profileStyle.namePlate}`).show();
+                $(".PREVUNDNamePlateMY").show().get(0).load();
+            }
+        }
+        else {
+            getParent($(".UNDNamePlateMY")).hide();
+            getParent($(".PREVUNDNamePlateMY")).hide();
+        }
+
+        if (profileStyle.theme && profileStyle.theme.uri) {
+            if (DAO.PROFILETHEMESBCK.length > 0) {
+                $("#select-user-profilebackground .RM").remove();
+                DAO.PROFILETHEMESBCK.forEach(async (item) => {
+                    $("#select-user-profilebackground").append(`<option ${item.uri == DAO.USER.profileStyle.theme.uri ? 'selected' : ''} value="${item.id}" class="RM">${item.name}</option>`);
+                });
+            }
+            $("#select-user-profilebackground");
+            $(".UNDThemeProfileMY").attr('src', `${profileStyle.theme.uri}`).show();
+            $(".UNDThemeProfileMY").show().get(0).load();
+            $('.UNDTPMMSTYL').css({ color: profileStyle.theme.color, 'background-color': profileStyle.theme.background });
+        }
+        else {
+            $('.UNDTPMMSTYL').css({ color: '', 'background-color': '' });
+            $(".UNDThemeProfileMY").hide();
+        }
+    }
+    else {
+        $('.UNDTPMMSTYL').css({ color: '', 'background-color': '' });
+        $(".UNDThemeProfileMY").hide();
+        getParent($(".UNDNamePlateMY")).hide();
+        getParent($(".PREVUNDNamePlateMY")).hide();
+    }
+}
+
+function GetNamePlateForUser(user) {
+    if (user.premium) {
+        let profileStyle = user.profileStyle;
+        if (profileStyle && profileStyle.namePlate && profileStyle.namePlate != "") {
+            return `
+            <div class="UND_contentNamePlate rounded z-0">
+                <video class="UNDNamePlate rounded rotate-180" style="" autoplay="" loop="" muted="" plays-inline="" src="${profileStyle.namePlate}">
+                  <source src="" type="video/mp4">
+               </video>
+               <video class="UNDNamePlate rounded" style="" autoplay="" loop="" muted="" plays-inline="" src="${profileStyle.namePlate}">
+                  <source src="" type="video/mp4">
+               </video>
+            </div>
+            `;
+        }
+    }
+    return '';
+}
+
+const changeUserTags = () => {
+    $("#uInput-changeUserAvatar").val('');
+    if (DAO.USER && DAO.USER.tags) {
+        DAO.USER.tags.forEach(tag => {
+            $(".UND_userTags").append(`<span class="badge p-1 tooltip-script cursor-pointer" title="${tag.name}">${tag.icon}</span>`);
+        });
+    }
+
+    if (DAO.USER.premium == true) {
+        $(".UND_userTags").append(`<span class="badge p-1 tooltip-script cursor-pointer Premium_text" title="${getNameTd('.Premium_text')}"><i class="bi bi-stars text-warning"></i></span>`);
+    }
+}
+
+function GetUserTags(account) {
+    let html = '';
+    account.tags.forEach(tag => {
+        html += `<span class="badge p-1 tooltip-script cursor-pointer" title="${tag.name}">${tag.icon}</span>`;
+    });
+    if (account.premium == true) {
+        html += `<span class="badge p-1 tooltip-script cursor-pointer Premium_text" title="${getNameTd('.Premium_text')}"><i class="bi bi-stars text-warning"></i></span>`;
+    }
+    return html;
 }

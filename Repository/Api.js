@@ -13,6 +13,14 @@ class Api {
             'Content-Type': 'application/x-www-form-urlencoded'
         }
     });
+
+    Cloud = axios.create({
+        baseURL: `${conf.CLOUD.URL}${conf.CLOUD.ROUTE}`,
+        headers: {
+            'Authorization': `Bearer ${conf.CLOUD.TOKEN}`, 
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    });
 }
 
 module.exports = new Api();

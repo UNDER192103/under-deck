@@ -1,6 +1,6 @@
 const lepikEvents = require('lepikevents');
-const { exec_program } = require("../Comun/Comun.js");
-var DAO = require("../../Repository/DB.js");
+const { exec_program } = require("../../../Comun/Comun.js");
+var DAO = require("../../../../Repository/DB.js");
 
 var starStop = false;
 var keyOptions = [

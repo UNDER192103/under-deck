@@ -1,9 +1,9 @@
 const prvt_MAIN_DIR = __dirname.split('\\Domain')[0];
-var DAO = require("../../Repository/DB.js");
+var DAO = require("../../../../Repository/DB.js");
 const express = require('express');
 const app = express();
 const fs = require("fs");
-const { exec_program } = require("../Comun/Comun.js");
+const { exec_program } = require("../../../Comun/Comun.js");
 var port = null, server = null, isStarted = false;
 var ip = require("ip");
 

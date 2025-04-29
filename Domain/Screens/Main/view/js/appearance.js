@@ -104,6 +104,38 @@ $(document).ready(async () => {
             },
         });
     });
+
+    if (DAO.DB.get('checkThemes') == true) {
+        if (DAO.ThemesData && DAO.ThemesData.list.length > 0) {
+            try {
+                API.App.post('', {
+                    _lang: await DAO.DB.get('lang_selected'),
+                    method: "list-themes",
+                })
+                    .then(async (res) => {
+                        var response = res.data;
+                        if (response && response.result) {
+                            listThemesToDownload = response.result;
+                            DAO.ThemesData.list.forEach((theme, index) => {
+                                if (theme.isLocal) {
+                                    let dirFileCss = path.join(DAO.THEME_DIR, theme.name, 'style.css');
+                                    let dirFileBck = path.join(DAO.THEME_DIR, theme.name, theme.filename);
+                                    if (!fs.existsSync(dirFileCss) || !fs.existsSync(dirFileBck)) {
+                                        setTimeout(() => {
+                                            StartDownloadTheme(theme.tid, true);
+                                        }, (index + 1) * 1000);
+                                    }
+
+                                }
+                            });
+                            await DAO.DB.set('checkThemes', false);
+                        }
+                    })
+                    .catch(error => { });
+            } catch (error) {
+            }
+        }
+    }
 });
 
 async function SetRemoteTheme(id) {
@@ -132,23 +164,28 @@ async function SetRemoteTheme(id) {
     }
 }
 
-async function StartDownloadTheme(id) {
+async function StartDownloadTheme(id, forceDownload = false) {
     let theme = listThemesToDownload.find(x => x.tid == id);
     if (theme) {
         let listNow = await DAO.THEMES.get('local');
-        if (!listNow.find(x => x.tid == theme.tid)) {
+        if (!listNow.find(x => x.tid == theme.tid) || forceDownload == true) {
             toaster.primary(getNameTd('.downloading_theme_text'));
             CreateFolderTheme(theme).then(async (theme) => {
                 DownloadThemeCss(theme).then(async (theme) => {
                     DownloadThemeBackground(theme).then(async (theme) => {
                         theme.isLocal = true;
-                        await DAO.THEMES.push('local', theme);
+                        if (DAO.ThemesData.list.find(x => x.tid == id) == null)
+                            await DAO.THEMES.push('local', theme);
                         toaster.success(getNameTd('.theme_download_completed_text'));
                         $(".btn-uninstall-themeD#" + theme.tid).show();
                         $(".btn-addnew-themeD#" + theme.tid).hide();
                         $(".isLocated_in#" + theme.tid).html(getNameTd('.locally_text'));
                         loadThemesOptions();
                         await GetListThemes();
+
+                        if (forceDownload == true && DAO.DB.get('bd_theme') == id) {
+                            selectTheme(id);
+                        }
                     }).catch(async (err) => {
                         console.log(err);
                         toaster.danger(getNameTd('.error_downloading_theme_text'));

@@ -137,7 +137,17 @@ var pt_br = [
     {
         id: ".update_icon",
         type: "html",
-        text: `<i class="bi bi-arrow-clockwise"></i> Atualizar`
+        text: `<i class="fa-solid fa-arrows-rotate"></i> Atualizar`
+    },
+    {
+        id: ".cloud_icon",
+        type: "html",
+        text: `<i class="bi bi-cloud-fill"></i> Cloud`
+    },
+    {
+        id: ".underdeckcloud_icon",
+        type: "html",
+        text: `<i class="bi bi-cloud-fill"></i> Cloud Under Deck`
     },
     {
         id: ".download_percentage_text",
@@ -302,7 +312,7 @@ var pt_br = [
     {
         id: ".updates_text_icon",
         type: "html",
-        text: '<i class="bi bi-cloud-arrow-down"></i> Updates'
+        text: '<i class="fa-solid fa-arrows-rotate"></i> Updates'
     },
     {
         id: ".ccOBSWsswhenstarting",
@@ -475,6 +485,11 @@ var pt_br = [
         text: `ID do usuário: `,
     },
     {
+        id: ".copyUserID_text",
+        type: "html",
+        text: `Copiar ID do usuário`,
+    },
+    {
         id: ".discordProfile_text",
         type: "text",
         text: "Perfil do Discord",
@@ -610,6 +625,11 @@ var pt_br = [
         text: `<i class="bi bi-pen"></i> Editar`
     },
     {
+        id: ".edit_profile_icon",
+        type: "html",
+        text: `<i class="bi bi-pencil-fill"></i> Editar Perfil`
+    },
+    {
         id: ".delete_text",
         type: "text",
         text: "Excluir"
@@ -640,9 +660,19 @@ var pt_br = [
         text: "Por favor, configure um atalho!"
     },
     {
+        id: ".save_file",
+        type: "text",
+        text: "Salvar Arquivo"
+    },
+    {
         id: ".p_s_a_a_text",
         type: "text",
         text: "Por favor, selecione um aplicativo!"
+    },
+    {
+        id: ".select_nameplate",
+        type: "text",
+        text: "Selecione um Name Plate"
     },
     {
         id: ".p_s_a_e_text",
@@ -1565,6 +1595,11 @@ var pt_br = [
         text: "Nenhum usuário encontrado com este endereço de e-mail ou nome de usuário",
     },
     {
+        id: ".none",
+        type: "text",
+        text: "Nenhum",
+    },
+    {
         id: ".no_app_found_text",
         type: "text",
         text: "Aplicativo não encontrado!",
@@ -1752,7 +1787,12 @@ var pt_br = [
     {
         id: ".background_color_text",
         type: "text",
-        text: "Cor de Fundo"
+        text: "Fundo de perfil"
+    },
+    {
+        id: ".Profile_Background",
+        type: "text",
+        text: "Profile Background"
     },
     {
         id: ".color_text_text",
@@ -1815,6 +1855,16 @@ var pt_br = [
         text: "Este recurso só está disponível apos estar logado a uma conta"
     },
     {
+        id: ".This_feature_is_exclusive_to_premium_owners_only",
+        type: "html",
+        text: "Este recurso é exclusivo para usuários premium"
+    },
+    {
+        id: ".Tfietpoo_title",
+        type: "attr",
+        text: { title: "Este recurso é exclusivo para usuários premium" },
+    },
+    {
         id: ".connection_invitation_text",
         type: "html",
         text: "Convite de conexão"
@@ -1828,6 +1878,16 @@ var pt_br = [
         id: ".revoke_all_permissions_text",
         type: "html",
         text: "Revogar todas as permissões"
+    },
+    {
+        id: ".list_all_permissions_text",
+        type: "html",
+        text: "Listas todas as permissões"
+    },
+    {
+        id: ".permissions_text",
+        type: "html",
+        text: "Permissões"
     },
     {
         id: ".access_permissions_for_all_users_have_been_revoked",
@@ -2183,6 +2243,121 @@ var pt_br = [
         id: ".friend_request_rejected",
         type: "html",
         text: `Solicitação de amizade rejeitada`,
+    },
+    {
+        id: ".Sync_to_cloud",
+        type: "html",
+        text: `Sincronizar com a Nuvem`,
+    },
+    {
+        id: ".Sync_to_cloud_icon",
+        type: "html",
+        text: `<i class="bi bi-cloud-upload-fill"></i> Sincronizar com a Nuvem`,
+    },
+    {
+        id: ".Sync_from_cloud",
+        type: "html",
+        text: `Sincronizar da nuvem`,
+    },
+    {
+        id: ".Sync_from_cloud_icon",
+        type: "html",
+        text: `<i class="bi bi-cloud-download-fill"></i> Sincronizar da nuvem`,
+    },
+    {
+        id: ".Delete_Cloud_Settings",
+        type: "html",
+        text: `Excluir configurações da Nuvem`,
+    },
+    {
+        id: ".Delete_Cloud_Settings_icon",
+        type: "html",
+        text: `<i class="bi bi-trash3-fill"></i> Excluir configurações da Nuvem`,
+    },
+    {
+        id: ".Import_settings_from_a_local_file_icon",
+        type: "html",
+        text: `<i class="bi bi-upload"></i> Importar configurações de um arquivo local (.UNDCF)`,
+    },
+    {
+        id: ".Export_settings_to_a_local_file_icon",
+        type: "html",
+        text: `<i class="bi bi-download"></i> Exportar configurações para um arquivo local`,
+    },
+    {
+        id: ".Please_select_the_file_correctly",
+        type: "html",
+        text: `Selecione o arquivo corretamente`,
+    },
+    {
+        id: ".Enable_cloud_integrations",
+        type: "html",
+        text: `Habilitar integrações com a nuvem`,
+    },
+    {
+        id: ".By_enabling_you_agree_to_send_your_data_to_the_cloud",
+        type: "html",
+        text: `Ao habilitar você concorda em enviar seus dados para a nuvem`,
+    },
+    {
+        id: ".Data_deleted_successfully",
+        type: "html",
+        text: `Dados excluídos com sucesso`,
+    },
+    {
+        id: ".Data_synchronized_successfully",
+        type: "html",
+        text: `Dados sincronizados com sucesso`,
+    },
+    {
+        id: ".You_do_not_have_data_to_sync",
+        type: "html",
+        text: `Você não possui dados para serem sincronizados`,
+    },
+    {
+        id: ".Tawri10ststc",
+        type: "html",
+        text: `O aplicativo será reiniciado em 10 segundos para finalizar as alterações.`,
+    },
+    {
+        id: ".Tawri5ststc",
+        type: "html",
+        text: `O aplicativo será reiniciado em 5 segundos para finalizar as alterações.`,
+    },
+    {
+        id: ".File_exported_successfully",
+        type: "html",
+        text: `Arquivo exportado com sucesso`,
+    },
+    {
+        id: ".Error_while_exporting_file",
+        type: "html",
+        text: `Erro ao exportar arquivo`,
+    },
+    {
+        id: ".Dywtetititbf",
+        type: "html",
+        text: `Você deseja exportar as imagens juntas no arquivo de backup?`,
+    },
+    {
+        id: ".no_data_found",
+        type: "html",
+        text: `Nenhum dado encontrado`,
+    },
+    {
+        id: ".no_permission_found",
+        type: "html",
+        text: `Nenhuma permissão encontrada`,
+    },
+    {
+        id: ".Status",
+        type: "html",
+        text: `Status`,
+    },
+    {
+        id: ".Name_Plate",
+        type: "html",
+        text: `Name Plate`,
     },
 ];
 

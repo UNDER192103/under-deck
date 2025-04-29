@@ -134,12 +134,121 @@
                   </a>
                </div>
 
-               <div class="dropdown UND_userloged" style="display: none;">
-                  <a class="d-flex align-items-center text-decoration-none UND_profileView cursor-pointer">
+               <div class="dropup-center dropup UND_userloged" style="display: none;">
+                  <div class="UND_contentNamePlate rounded z-0">
+                     <video class="UNDNamePlateMY rounded rotate-180" style="display: none;" autoplay loop muted
+                        plays-inline>
+                        <source src="" type="video/mp4">
+                     </video>
+                     <video class="UNDNamePlateMY rounded" style="display: none;" autoplay loop muted plays-inline>
+                        <source src="" type="video/mp4">
+                     </video>
+                  </div>
+
+                  <a class="d-flex align-items-center text-decoration-none cursor-pointer position-inherit z-1 p-1 mh-45"
+                     data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                      <img src="../../src/img/profile-icon.png" alt="" width="32" height="32"
                         class="UND_usericon MM rounded-circle me-2">
-                     <strong class="UND_username u-format-max-text"></strong>
+                     <strong class="UND_DisplayUsername u-format-max-text"></strong>
                   </a>
+
+                  <div class="dropdown-menu DROPUSERMENU bg-black mb-1">
+                     <div class="container p-2">
+
+                        <div class="rounded mb-2 bg-dark">
+                           <a
+                              class="d-flex align-items-center text-decoration-none cursor-pointer position-inherit z-1 p-1 mh-45">
+                              <img src="../../src/img/profile-icon.png" alt="" width="72" height="72"
+                                 class="UND_usericon p-1 rounded-circle UND_profileView me-2">
+                              <strong class="UND_DisplayUsername UND_profileView u-format-max-text"></strong>
+                           </a>
+                        </div>
+
+                        <div class="p-0 mb-2">
+                           <ul class="nav nav-pills animated flex-column mb-auto">
+                              <div class="bg-dark p-1 rounded">
+                                 <a href="javascript:void(0)"
+                                    class="bg-dark nav-link mb-0 m-2 ps-2 p-1 navs-item-sm text-white UND_username"></a>
+                                 <div class="UND_userTags mt-0 m-2 ps-2 pt-0 p-1 d-flex">
+
+                                 </div>
+                              </div>
+                           </ul>
+                        </div>
+
+                        <div class="p-0 mb-2">
+                           <ul class="nav nav-pills animated flex-column mb-auto">
+                              <div class="bg-dark p-1 rounded">
+                                 <a href="javascript:void(0)"
+                                    class="CSALLDPM bg-dark nav-link m-2 ps-2 p-1 UND_profileView navs-item-sm text-white edit_profile_icon"></a>
+                                 <hr class="text-white me-2 ms-2">
+                                 <a href="javascript:void(0)"
+                                    class="CSALLDPM bg-dark nav-link m-2 ps-2 p-1 navs-item-sm text-white Friends_icon_text UND_profileViewFriends"></a>
+                                 <hr class="text-white me-2 ms-2">
+                                 <div class="dropup">
+                                    <a href="javascript:void(0)"
+                                       class="bg-dark nav-link m-2 ps-2 p-1 navs-item-sm dropend d-flex text-white"
+                                       data-bs-toggle="dropdown" aria-expanded="false">
+                                       <i class="bi bi-circle-fill UND_StatusCC me-1"></i>
+                                       <span class="UND_Status"></span>
+                                       <i class="dropdown-toggle ms-auto"></i>
+                                    </a>
+
+                                    <ul class="dropdown-menu position-fixed bg-black">
+                                       <li>
+                                          <a class="dropdown-item text-white UND_SelectUStatus" data-id="1" href="#">
+                                             <i class="bi bi-circle-fill text-success me-1"></i>
+                                             <span class="online_text"></span>
+                                          </a>
+                                       </li>
+                                       <li>
+                                          <a class="dropdown-item text-white UND_SelectUStatus" data-id="2" href="#">
+                                             <i class="bi bi-circle-fill text-warning me-1"></i>
+                                             <span class="Absent_text"></span>
+                                          </a>
+                                       </li>
+                                       <li>
+                                          <a class="dropdown-item text-white UND_SelectUStatus" data-id="4" href="#">
+                                             <i class="bi bi-circle-fill text-danger me-1"></i>
+                                             <span class="Do_not_disturb_text"></span></a>
+                                       </li>
+                                       <li>
+                                          <a class="dropdown-item text-white UND_SelectUStatus" data-id="3" href="#">
+                                             <i class="bi bi-circle-fill text-secondary me-1"></i>
+                                             <span class="Invisible_text"></span></a>
+                                       </li>
+                                    </ul>
+                                 </div>
+                              </div>
+                           </ul>
+                        </div>
+
+                        <div class="p-0">
+                           <ul class="nav nav-pills animated flex-column mb-auto">
+                              <div class="bg-dark p-1 rounded">
+                                 <a href="javascript:void(0)"
+                                    class="CSALLDPM UND_CopyUserId bg-dark nav-link m-1 ps-2 p-1 navs-item-sm text-white">
+                                    <svg aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" width="16"
+                                       height="16" fill="none" viewBox="0 0 24 24">
+                                       <path fill="currentColor"
+                                          d="M15.3 14.48c-.46.45-1.08.67-1.86.67h-1.39V9.2h1.39c.78 0 1.4.22 1.86.67.46.45.68 1.22.68 2.31 0 1.1-.22 1.86-.68 2.31Z"
+                                          class=""></path>
+                                       <path fill="currentColor" fill-rule="evenodd"
+                                          d="M5 2a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V5a3 3 0 0 0-3-3H5Zm1 15h2.04V7.34H6V17Zm4-9.66V17h3.44c1.46 0 2.6-.42 3.38-1.25.8-.83 1.2-2.02 1.2-3.58s-.4-2.75-1.2-3.58c-.79-.83-1.92-1.25-3.38-1.25H10Z"
+                                          clip-rule="evenodd" class=""></path>
+                                    </svg>
+                                    <span class="copyUserID_text"></span>
+                                 </a>
+                                 <hr class="text-white me-2 ms-2">
+                                 <a href="javascript:void(0)"
+                                    class="CSALLDPM text-danger bg-dark nav-link m-1 ps-2 p-1 logout_account navs-item-sm acclogout_icon_text"></a>
+                              </div>
+                           </ul>
+                        </div>
+
+
+                     </div>
+                  </div>
                </div>
          </nav>
 
@@ -417,22 +526,26 @@
                                  <div class="forms">
 
                                     <div class="checks mb-3">
-                                       <div class="">
-                                          <input class="form-check-input" type="checkbox" id="key-macro">
+
+                                       <div class="form-check form-switch">
+                                          <input class="form-check-input" type="checkbox" role="switch" id="key-macro">
                                           <label class="form-check-label keys_macro_text" for="key-macro"></label>
                                        </div>
 
-                                       <div class="">
-                                          <input class="form-check-input" type="checkbox" id="notifications_on_windows">
+                                       <div class="form-check form-switch">
+                                          <input class="form-check-input" type="checkbox" role="switch"
+                                             id="notifications_on_windows">
                                           <label class="form-check-label notifications-on-windows"
                                              for="notifications_on_windows"></label>
                                        </div>
 
-                                       <div class="">
-                                          <input class="form-check-input" type="checkbox" id="isMinimizeToBar">
+                                       <div class="form-check form-switch">
+                                          <input class="form-check-input" type="checkbox" role="switch"
+                                             id="isMinimizeToBar">
                                           <label class="form-check-label Hide_screen_when_close_text"
                                              for="isMinimizeToBar"></label>
                                        </div>
+
                                     </div>
 
                                     <div class="select">
@@ -446,6 +559,64 @@
                                        </div>
 
                                     </div>
+                                 </div>
+
+                              </div>
+                           </div>
+                        </div>
+
+                        <div class="col-md-12 col-xl-12 animate__animated animate__slideInDown">
+                           <div class="card theme-card">
+                              <div class="card-header shadow-text text-center">
+                                 <h5 class="underdeckcloud_icon "></h5>
+                              </div>
+
+                              <div class="card-body">
+
+                                 <div class="forms">
+
+                                    <div class="input m-1 px-0 d-flex justify-content-between form-switch">
+                                       <div class="d-grid">
+                                          <label class="form-check-label Enable_cloud_integrations">Default switch
+                                             checkbox input</label>
+                                          <label
+                                             class="form-check-label By_enabling_you_agree_to_send_your_data_to_the_cloud">Default
+                                             switch checkbox input</label>
+                                       </div>
+                                       <input class="form-check-input xl" type="checkbox" role="switch"
+                                          id="isEnableCloudIntegrations">
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="input p-1 progressBarCloud" style="display: none;">
+                                       <div class="progress">
+                                          <div id="DprogressBarCloud"
+                                             class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                                             role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                          </div>
+                                       </div>
+                                    </div>
+
+                                    <div class="input d-flex w100">
+                                       <button id="BTN_cloud_stc"
+                                          class="btn btn-primary m-1 Sync_to_cloud_icon full-w"></button>
+                                       <button id="BTN_cloud_sfc"
+                                          class="btn btn-danger m-1 Sync_from_cloud_icon full-w"></button>
+                                       <button id="BTN_cloud_dcs"
+                                          class="btn btn-danger m-1 Delete_Cloud_Settings_icon full-w"></button>
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="input w100 p-1">
+                                       <button onclick="$('#UNDCFISFALF').click()"
+                                          class="btn btn-primary Import_settings_from_a_local_file_icon full-w"></button>
+                                       <button id="UNDEXPORTFILECF"
+                                          class="btn btn-success mt-1 Export_settings_to_a_local_file_icon full-w"></button>
+                                       <input type="file" id="UNDCFISFALF" class="form-control hidden" accept=".undcf">
+                                    </div>
+
                                  </div>
 
                               </div>
@@ -884,6 +1055,9 @@
                                              <div class="m-0 text-center">
                                                 <button id="revoke_all_permissions_UNDRemoteVersion"
                                                    class="btn btn-primary btn-sm revoke_all_permissions_text"
+                                                   type="button"></button>
+                                                <button id="list_all_permissions_UNDRemoteVersion"
+                                                   class="btn btn-primary btn-sm ml-1 list_all_permissions_text"
                                                    type="button"></button>
                                              </div>
 
@@ -1891,20 +2065,30 @@
          <div class="modal fade" id="modal_UND_profileView" data-bs-backdrop='static' data-keyboard="false"
             data-backdrop="static">
             <div class="modal-dialog modal-lg">
-               <div class="modal-content">
+               <div class="UND_contentUserProfile rounded z-0">
+                  <video class="UNDThemeProfileMY rounded rotate-180" style="display: none;" autoplay loop muted
+                     plays-inline>
+                     <source src="" type="video/mp4">
+                  </video>
+                  <video class="UNDThemeProfileMY rounded" style="display: none;" autoplay loop muted plays-inline>
+                     <source src="" type="video/mp4">
+                  </video>
+               </div>
 
-                  <div class="modal-header" style="border-bottom: none !important;">
+               <div class="modal-content UNDTPMMSTYL z-1">
+                  <div class="modal-header UNDTPMMSTYL" style="border-bottom: none !important;">
                      <h4 class="modal-title userProfile_icon_text"></h4>
                      <button id="btn_close_modal" type="button" class="btn-close" data-bs-dismiss="modal"></button>
                   </div>
 
-                  <div class="modal-body" style="border-top: none !important; border-bottom: none !important;">
+                  <div class="modal-body UNDTPMMSTYL"
+                     style="border-top: none !important; border-bottom: none !important;">
 
                      <div class="cards-area aos-init aos-animate" data-aos="fade-down">
                         <div class="row">
 
                            <div class="col-md-12 col-xl-12">
-                              <div class="card theme-card USRR border-0">
+                              <div class="card theme-card UNDTPMMSTYL USRR border-0">
 
                                  <div class="card-body">
 
@@ -1948,7 +2132,7 @@
 
                                           <div class="input-group">
                                              <img src="../../src/img/profile-icon.png" alt="" width="100" height="100"
-                                                class="m-auto UND_usericon UND_usericonPrevEdit">
+                                                class="m-auto UND_usericon UND_usericonPrevEdit rounded-circle">
                                           </div>
                                        </div>
 
@@ -2030,6 +2214,57 @@
 
                                        <div class="d-flex mt-3 mb-3">
                                           <div class="input-group">
+                                             <div class="m-auto ms-0 d-block">
+                                                <div class="ms-2 d-grid">
+                                                   <h5 class="form-check-label Name_Plate m-0"></h5>
+                                                </div>
+                                             </div>
+                                             <div class="dropup-center dropup w100 ms-2 me-4">
+                                                <div class="UND_contentNamePlate rounded z-0" style="display: none;">
+                                                   <video class="PREVUNDNamePlateMY rounded rotate-180"
+                                                      style="display: none;" autoplay loop muted plays-inline>
+                                                      <source src="" type="video/mp4">
+                                                   </video>
+                                                   <video class="PREVUNDNamePlateMY rounded" style="display: none;"
+                                                      autoplay loop muted plays-inline>
+                                                      <source src="" type="video/mp4">
+                                                   </video>
+                                                </div>
+
+                                                <a
+                                                   class="d-flex align-items-center text-decoration-none cursor-pointer position-inherit z-1 p-1 mh-45">
+                                                   <img src="../../src/img/profile-icon.png" alt="" width="32"
+                                                      height="32" class="UND_usericon MM rounded-circle me-2">
+                                                   <strong class="UND_DisplayUsername u-format-max-text"></strong>
+                                                </a>
+                                             </div>
+                                          </div>
+
+                                          <div class="input-group">
+                                             <select id="select-user-nameplate" class="form-select mt-auto">
+                                                <option value="" selected="" class="none"></option>
+                                             </select>
+                                          </div>
+                                       </div>
+
+                                       <div class="d-flex mt-3 mb-3">
+                                          <div class="input-group">
+                                             <div class="m-auto ms-0 d-block">
+                                                <div class="ms-2 d-grid">
+                                                   <h5 class="form-check-label background_color_text m-0"></h5>
+                                                </div>
+                                             </div>
+                                          </div>
+
+                                          <div class="input-group">
+                                             <select id="select-user-profilebackground" class="form-select mt-auto">
+                                                <option value="" selected="" class="none"></option>
+                                             </select>
+                                          </div>
+                                       </div>
+
+                                       <div class="d-flex mt-3 mb-3">
+                                          <div class="input-group">
                                              <div class="m-auto ms-0 d-flex">
                                                 <div class="ms-2 d-grid">
                                                    <h5 class="form-check-label creation_data_text m-0"></h5>
@@ -2051,13 +2286,11 @@
                      </div>
                   </div>
 
-                  <div class="modal-footer d-block" style="border-top: none !important;">
+                  <div class="modal-footer d-block UNDTPMMSTYL" style="border-top: none !important;">
                      <button type="button" data-bs-dismiss="modal"
                         class="btn btn-primary Friends_icon_text UND_profileViewFriends"></button>
                      <button type="button" class="btn btn-success save_icon_text btn_UpdateUserData float-right"
                         style="display: none;"></button>
-                     <button type="button" data-bs-dismiss="modal"
-                        class="btn btn-danger logout_account acclogout_icon_text float-right"></button>
                   </div>
                </div>
             </div>
@@ -2074,7 +2307,7 @@
                   </div>
 
                   <div class="modal-body" style="border-top: none !important; border-bottom: none !important;">
-                     <div class="modal-footer p-0" style="border-top: none !important;">
+                     <div class="modal-footer p-0" style="border: none !important;">
                         <button type="button" class="btn btn-primary ILLFRIEND Friends_text"></button>
                         <button type="button" class="btn IACCFRIEND pendings_text"></button>
                         <button type="button" class="btn IREJFRIEND d-flex refused_text"></button>

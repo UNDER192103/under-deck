@@ -59,6 +59,20 @@ async function listAllFoldersInFolder(diretorio, arquivos) {
 
 }
 
+async function ListAllFilesInFolder(dir, files_) {
+    files_ = files_ || [];
+    var files = fs.readdirSync(dir);
+    for (var i in files) {
+        var name = dir + '\\' + files[i];
+        if (fs.statSync(name).isDirectory()) {
+            await ListAllFilesInFolder(name, files_);
+        } else {
+            files_.push(name);
+        }
+    }
+    return files_;
+}
+
 const Get_file_name = async (filePath) => {
     return new Promise(async resolve => {
         const filePaths = filePath => [].concat(filePath);
@@ -176,6 +190,7 @@ const exec_soundpad = async (pathSoundPad, index) => {
 }
 
 module.exports = {
+    ListAllFilesInFolder,
     listAllFilesInFolder,
     listAllFoldersInFolder,
     Get_file_name,

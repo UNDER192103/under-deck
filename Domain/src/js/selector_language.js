@@ -2,7 +2,7 @@
 const langs = require(__dirname.split('Domain')[0] + 'Repository/language/langs.js');
 var DAO = require(__dirname.split('Domain')[0] + "Repository/DB.js");
 var _lang = DAO.DB.get('lang_selected'), isOk = false, loopIntervalUpdate = null;
-selec_lang(_lang);
+selec_lang(_lang, DAO.DB.get('checkLanguage'));
 
 $.each(langs, (lang_id) => {
     let lang = langs[lang_id];
@@ -11,8 +11,8 @@ $.each(langs, (lang_id) => {
 });
 
 async function selec_lang(id_lang, is_update_back = false) {
-    if (id_lang == null)
-        id_lang = langs.en_us.id;
+    if (is_update_back == null) is_update_back = false;
+    if (id_lang == null) id_lang = langs.en_us.id;
     _lang = id_lang;
     await changeLang(langs[id_lang].dt.list_td);
     $(".icone-selected-lang").attr("src", langs[id_lang].icon);
@@ -27,6 +27,7 @@ async function selec_lang(id_lang, is_update_back = false) {
 
     if (is_update_back) {
         await BACKEND.Update_lang(id_lang);
+        await DAO.DB.set('checkLanguage', null);
         loopIntervalUpdate = setInterval(() => {
             if (conn && conn.readyState == 1) {
                 clearInterval(loopIntervalUpdate);

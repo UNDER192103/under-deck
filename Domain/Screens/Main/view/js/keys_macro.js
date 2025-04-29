@@ -5,12 +5,6 @@ var key_sequence_press_edit = [];
 
 $(document).ready(async () => {
 
-    $('#key-macro').click(function () {
-        let isCheck = document.getElementById('key-macro').checked;
-        keyEvent.startStopKeysEvents(isCheck);
-        DAO.DB.set('keyEvent', isCheck);
-    });
-
     $("#button-add-macro").click(async () => {
         addShortCut();
     });

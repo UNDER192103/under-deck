@@ -1,4 +1,4 @@
-var typeOld = "default", pageNow = 0, pvw_page_item_NOW = null, pvw_page_edit_NOW = null;
+var typeOld = "default", pageNow = 0, pvw_page_item_NOW = null, listAllPermissins = [], pvw_page_edit_NOW = null;
 
 $(document).ready(async () => {
     await DAO.GetDataNow();
@@ -313,6 +313,197 @@ $(document).ready(async () => {
             clear_modal_pvw_wbdc();
             loadPreviwWebDeck();
         }
+    });
+
+    $(document).on('change', '#webdeck_background_color', async (e) => {
+        await DAO.WEBDECK.set('exe-background', $("#webdeck_background_color").val());
+    });
+
+    $(document).on('change', '#webdeck_color_text', async (e) => {
+        await DAO.WEBDECK.set('exe-color-text', $("#webdeck_color_text").val());
+    });
+
+    $(document).on('click', '#openInvitationUNDRemotVersion', async (e) => {
+        if (DAO.USER && DAO.PC) {
+            exec(`start ${API.Conf.API.URL}/client/?ng=webdeck/invite/${DAO.PC.id}/`);
+        }
+        else {
+            bootbox.alert(getNameTd('.this_feature_is_only_available_when_logged_into_an_account_text'));
+        }
+    });
+
+    $(document).on('click', '#openInvitationQRCODEUNDRemotVersion', async (e) => {
+        if (DAO.USER && DAO.PC) {
+            let uri = `${API.Conf.API.URL}/client/?ng=webdeck/invite/${DAO.PC.id}/`;
+            QRCode.toDataURL(uri, function (err, url) {
+                if (!err) {
+                    $("#modal-qr-code").modal('show');
+                    $(".url-qr-code-modal").attr("src", url);
+                    $(".url_qr_code_modal_i").val(uri);
+                }
+                else {
+                }
+            });
+        }
+        else {
+            bootbox.alert(getNameTd('.this_feature_is_only_available_when_logged_into_an_account_text'));
+        }
+    });
+
+    $(document).on('click', '#revoke_all_permissions_UNDRemoteVersion', async (e) => {
+        if (DAO.USER && DAO.PC) {
+            bootbox.confirm({
+                message: `<h4 class="are_you_sure_of_that_text">${getNameTd('.are_you_sure_of_that_text')}</h4>`,
+                buttons: {
+                    confirm: {
+                        label: getNameTd('.yes'),
+                        className: 'btn-success yes'
+                    },
+                    cancel: {
+                        label: getNameTd('.no'),
+                        className: 'btn-danger not'
+                    }
+                },
+                callback: async (res) => {
+                    if (res) {
+                        await revokeAllPermissionAcessThisPC();
+                        bootbox.alert(getNameTd('.access_permissions_for_all_users_have_been_revoked'));
+                        toaster.success(getNameTd('.access_permissions_for_all_users_have_been_revoked'));
+                    }
+                }
+            });
+        }
+        else {
+            bootbox.alert(getNameTd('.this_feature_is_only_available_when_logged_into_an_account_text'));
+        }
+    });
+
+    $("#reset_to_default_webdeck_colors").click(async () => {
+        $("#reset_to_default_webdeck_colors").prop('disabled', true);
+        await DAO.WEBDECK.set('exe-background', '#370179');
+        await DAO.WEBDECK.set('exe-color-text', '#ffffff');
+        changeInputColor();
+        $("#reset_to_default_webdeck_colors").prop('disabled', false);
+        toaster.success(getNameTd('.successfully_reset_text'));
+    });
+
+    $(document).on('click', '#list_all_permissions_UNDRemoteVersion', async (e) => {
+        if (DAO.USER && DAO.PC) {
+            $("body").modalLoading('show', false);
+            API.App.post('', {
+                _lang: _lang,
+                method: "list-this-pc-users-permissions",
+                client_id: DAO.USER.client_id,
+                token: DAO.USER.token,
+                pc_id: DAO.PC.id,
+                pc_name: DAO.PC.name,
+            })
+                .then(async (res) => {
+                    $("body").modalLoading('hide', false);
+                    let html = '';
+                    if (res && res.data && res.data.result) {
+                        listAllPermissins = res.data.result;
+                        if (listAllPermissins.length > 0) {
+                            listAllPermissins.forEach(data => {
+                                let user = data.user;
+                                let isMyFriend = false;
+                                if (DAO.USER.friends.find(f => f.client_id == user.id || f.friend_id == user.id)) isMyFriend = true;
+                                html += `
+                                <div id="${user.id}${data.client_id_pc}" class="col-md-12">
+                                    <div class="card theme-card me-1">
+                                        ${GetNamePlateForUser(user)}
+                                        <div class="card-body z-1">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="d-flex align-items-center">
+                                                            <img src="${user.avatar}" class="img-thumbnail rounded-circle ${user.classBg}" style="width: 100px; height: 100px;">
+                                                            <h5 class="m-2 ${user.premium == true ? 'text-warning' : ''}">${user.premium == true ? '<i class="bi bi-stars"></i>' : ''} ${user.name}</h5>
+                                                        </div>
+                                                        <div class="d-flex align-items-center">
+                                                            <button href="#" class="btn btn-sm btn-success me-1 Friends_icon_text ${isMyFriend == true ? '' : 'hidden'}">
+                                                                ${getNameTd('.Friends_icon_text')}
+                                                            </button>
+                                                            <button href="#" class="btn btn-sm btn-danger remove_icon BTN_RMUNDREMOTEPERM" data-id="${user.id}">
+                                                                ${getNameTd('.remove_icon')}
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                `
+                            });
+                        }
+                        else {
+                            html += `<div class="col-md-12">
+                                        <div class="card theme-card me-1">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="d-flex align-items-center">
+                                                                <h5 class="m-2">${getNameTd('.no_permission_found')}</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
+                        }
+                        bootbox.dialog({
+                            title: `<h5>${getNameTd('.permissions_text')}</h5>`,
+                            message: html,
+                            buttons: {
+                                remote: {
+                                    label: getNameTd('.cancel_icon_text'),
+                                    className: 'btn-danger cancel_icon_text',
+                                },
+                            }
+                        });
+                    }
+                    else {
+                        toaster.danger(getNameTd('.no_data_found'));
+                    }
+                })
+        }
+        else {
+            toaster.danger(getNameTd('.this_feature_is_only_available_when_logged_into_an_account_text'));
+        }
+    });
+
+    $(document).on('click', '.BTN_RMUNDREMOTEPERM', (e) => {
+        B_are_you_sure().then(async (result) => {
+            if (result) {
+                console.log(e.target.id, e);
+                let permission = listAllPermissins.find(x => x.user.id == e.target.dataset.id);
+                if (permission) {
+                    $("body").modalLoading('show', false);
+                    API.App.post('', {
+                        _lang: _lang,
+                        method: "remove-this-pc-users-permissions",
+                        client_id: DAO.USER.client_id,
+                        token: DAO.USER.token,
+                        pc_id: DAO.PC.id,
+                        pc_name: DAO.PC.name,
+                        client_id_RM: permission.client_id,
+                    })
+                        .then(async (res) => {
+                            $("body").modalLoading('hide', false);
+                            listAllPermissins = listAllPermissins.filter(x => x.user.id != e.target.dataset.id);
+                            $(`#${permission.user.id}${permission.client_id_pc}`).remove();
+                            toaster.success(getNameTd('.Successfully_removed'));
+                        });
+                }
+                else {
+                    bootbox.alert(getNameTd('.no_data_found'));
+                }
+            }
+        });
     });
 
     ChangeSelectWebdeckView();
