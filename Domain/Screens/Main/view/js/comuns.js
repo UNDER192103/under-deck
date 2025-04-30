@@ -4,7 +4,6 @@ const MAIN_DIR = __dirname.split('\\Domain')[0];
 const _dirname = MAIN_DIR;
 const path = require('path');
 const Jsoning = require("jsoning");
-const ip = require("ip");
 const fs = require("fs");
 const fsPromises = fs.promises;
 const axios = require('axios');
@@ -68,7 +67,7 @@ document.getElementById('isNotValidFirstSearchUpdateApp').checked = DAO.DB.get('
 document.getElementById('obs-checkbox-start').checked = DAO.OBS.get('ObsWssStartOnApp');
 GNDATA.server_port = DAO.DB.get('server_port');
 $('#port-local-server').val(GNDATA.server_port);
-$('#local-server-adress-acess-url').val(`http://${ip.address("public", "ipv4")}:${GNDATA.server_port}`);
+$('#local-server-adress-acess-url').val(`http://${getMyIPAddress()}:${GNDATA.server_port}`);
 
 ///      Pre-load values      ///
 
@@ -122,7 +121,7 @@ function startExe(id) {
 
 function clearEditExe() { editExeNow = null };
 
-async function openIpUrlWeb() { exec(`start http://${ip.address("public", "ipv4")}:${await DAO.DB.get('server_port')}`) };
+async function openIpUrlWeb() { exec(`start http://${getMyIPAddress()}:${await DAO.DB.get('server_port')}`) };
 
 const clear_modal_webpage = () => {
     $("#name_webpage").val("");
@@ -1092,4 +1091,19 @@ function copyText(text) {
         .catch(err => {
             console.error('Failed to copy text: ', err);
         });
+}
+
+function getMyIPAddress() {
+    var interfaces = require('os').networkInterfaces();
+    for (var devName in interfaces) {
+        if (devName.includes('Ethernet') || devName.includes('Wi-Fi') || devName.includes('Wi Fi') || devName.includes('WiFi')) {
+            var iface = interfaces[devName];
+            for (var i = 0; i < iface.length; i++) {
+                var alias = iface[i];
+                if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal)
+                    return alias.address;
+            }
+        }
+    }
+    return '0.0.0.0';
 }

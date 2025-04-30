@@ -5,7 +5,6 @@ const app = express();
 const fs = require("fs");
 const { exec_program } = require("../../../Comun/Comun.js");
 var port = null, server = null, isStarted = false;
-var ip = require("ip");
 
 port = DAO.DB.get('server_port');
 if (port == null) {
@@ -78,7 +77,7 @@ async function start_server(type, callback) {
                     next();
             });
 
-            server = app.listen(port, `${ip.address("public", "ipv4")}` || "localhost", () => {
+            server = app.listen(port, getMyIPAddress() || "localhost", () => {
                 //console.log(`Start Sucess LocalServer in: ${port}`)
                 isStarted = true;
             });

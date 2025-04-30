@@ -69,7 +69,6 @@ var list_dirs = [
     BasePathDataDB + "\\ProgramsExe.json",
 ];
 
-
 check_folders_data_UN(() => {
     check_folder_data_UN_DB(list_dirs, () => {
         const Validations = require('./Domain/Comun/Validations.js');

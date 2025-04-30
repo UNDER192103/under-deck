@@ -120,7 +120,7 @@ const add_im_list_webpages = async (item) => {
 }
 
 const getQrCodeIpUrlWeb = async () => {
-    let uri = `http://${ip.address("public", "ipv4")}:${DAO.DB.get('server_port')}`;
+    let uri = `http://${getMyIPAddress()}:${DAO.DB.get('server_port')}`;
     QRCode.toDataURL(uri, function (err, url) {
         if (!err) {
             $("#modal-qr-code").modal('show');

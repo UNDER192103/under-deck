@@ -189,7 +189,23 @@ const exec_soundpad = async (pathSoundPad, index) => {
         exec(`${pathSoundPad} -rc DoPlaySound(${index})`, (e) => { });
 }
 
+function getMyIPAddress() {
+    var interfaces = require('os').networkInterfaces();
+    for (var devName in interfaces) {
+        if (devName.includes('Ethernet') || devName.includes('Wi-Fi') || devName.includes('Wi Fi') || devName.includes('WiFi')) {
+            var iface = interfaces[devName];
+            for (var i = 0; i < iface.length; i++) {
+                var alias = iface[i];
+                if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal)
+                    return alias.address;
+            }
+        }
+    }
+    return '0.0.0.0';
+}
+
 module.exports = {
+    getMyIPAddress,
     ListAllFilesInFolder,
     listAllFilesInFolder,
     listAllFoldersInFolder,

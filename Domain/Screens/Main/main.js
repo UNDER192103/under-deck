@@ -289,7 +289,11 @@ class MainScreen {
     });
 
     this.handleMessages('check_app_update', async (event, dt) => {
-      await autoUpdater.checkForUpdates();
+      try {
+        await autoUpdater.checkForUpdates();
+      } catch (error) {
+        console.log(error);
+      }
       return app.getVersion();
     });
 
