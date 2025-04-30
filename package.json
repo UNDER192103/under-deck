@@ -1,6 +1,6 @@
 {
   "name": "under-deck",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Under Deck",
   "productName": "Under Deck",
   "main": "index.js",
@@ -62,7 +62,6 @@
     "express": "^4.18.2",
     "fs": "^0.0.1-security",
     "jsoning": "^0.13.23",
-    "lepikevents": "^1.7.7",
     "node-global-key-listener": "^0.1.1",
     "open": "^9.1.0"
   },
@@ -81,6 +80,7 @@
     "googleapis": "^142.0.0",
     "jsoning": "^0.13.23",
     "jwt-decode": "^4.0.0",
+    "lepikevents": "^2.0.5",
     "loudness": "^0.4.2",
     "macaddress": "^0.5.3",
     "node-global-key-listener": "^0.1.1",

@@ -1,3 +1,4 @@
+const CheckAppDependencies = require('./Domain/Comun/AppDependencies.js');
 const { app } = require('electron');
 const path = require('path');
 const fs = require("fs");
@@ -69,11 +70,15 @@ var list_dirs = [
     BasePathDataDB + "\\ProgramsExe.json",
 ];
 
-check_folders_data_UN(() => {
-    check_folder_data_UN_DB(list_dirs, () => {
-        const Validations = require('./Domain/Comun/Validations.js');
-        Validations.CheckIsAppRunning(() => {
-            require("./App/app.js");
-        })
+app.whenReady().then(() => {
+    CheckAppDependencies(() => {
+        check_folders_data_UN(() => {
+            check_folder_data_UN_DB(list_dirs, () => {
+                const Validations = require('./Domain/Comun/Validations.js');
+                Validations.CheckIsAppRunning(() => {
+                    require("./App/app.js");
+                })
+            });
+        });
     });
 });

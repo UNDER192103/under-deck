@@ -423,7 +423,11 @@ const save_icon_PageWebDeck_file = async (pathFile, id, callback) => {
 $(document).ready(async () => {
 
     await BACKEND.Send('Obs_wss_p', { stage: 'Status' });
-    app_un.isMuted = await loudness.getMuted();
+    try {
+        app_un.isMuted = await loudness.getMuted();
+    } catch (error) {
+        console.log(error);
+    }
 
     $('.desable_texting_input').on('keydown', function (event) {
         //event.preventDefault();
