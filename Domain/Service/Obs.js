@@ -11,6 +11,25 @@ const StartStream = async () =>{
 const StopStream = async () =>{
     return Socket.call('StopStream');
 }
+const ToggleStream = async () => {
+    return Socket.call('ToggleStream');
+}
+
+const StartRecord = async () => {
+    return Socket.call('StartRecord');
+}
+const StopRecord = async () => {
+    return Socket.call('StopRecord');
+}
+const ToggleRecordPause = async () => {
+    return Socket.call('ToggleRecordPause');
+}
+const PauseRecord = async () => {
+    return Socket.call('PauseRecord');
+}
+const ResumeRecord = async () => {
+    return Socket.call('ResumeRecord');
+}
 
 const ListAllScenes = async () =>{
     return Socket.call('GetSceneList');
@@ -39,8 +58,14 @@ const Disconnected = async (callback) => {
 module.exports = {
     Socket: Socket,
     Connect: SocketConnect,
+    ToggleStream: ToggleStream,
     StartStream: StartStream,
     StopStream: StopStream,
+    StartRecord: StartRecord,
+    StopRecord: StopRecord,
+    ToggleRecordPause: ToggleRecordPause,
+    PauseRecord: PauseRecord,
+    ResumeRecord: ResumeRecord,
     ListAllScenes: ListAllScenes,
     SelectScene: SelectScene,
     MuteInput: MuteInput,

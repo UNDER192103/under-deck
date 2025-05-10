@@ -734,7 +734,7 @@ async function add_new_app() {
             else if (input_audio != null) {
                 add_app_obs_option_input_audio(input_audio, icon, nameCustom, false);
             }
-            else if ($('#select-obs-options').val() == "StartStream" || $('#select-obs-options').val() == "StopStream") {
+            else if ($('#select-obs-options').val() != '') {
                 add_app_obs_options($('#select-obs-options').val(), icon, nameCustom, true);
             }
             else {
@@ -742,7 +742,7 @@ async function add_new_app() {
                 $('.alert-add-app').text(getNameTd(".pls_select_obs_scene")).removeClass('hidden');
             }
         }
-        else if ($('#select-obs-options').val() == "StartStream" || $('#select-obs-options').val() == "StopStream") {
+        else if ($('#select-obs-options').val() != '') {
             add_app_obs_options($('#select-obs-options').val(), icon, nameCustom, true);
         }
         else {

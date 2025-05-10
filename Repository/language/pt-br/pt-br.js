@@ -320,6 +320,11 @@ var pt_br = [
         text: "Conectar OBS Websocket ao iniciar"
     },
     {
+        id: ".ccOBSAutoConfig",
+        type: "text",
+        text: "Detectar automaticamente as configurações do OBS"
+    },
+    {
         id: ".obs-wss-config-t",
         type: "text",
         text: "Configurações OBS WebSocket"
@@ -1413,6 +1418,26 @@ var pt_br = [
         id: ".StopStream_text",
         type: "text",
         text: "Parar transmissão",
+    },
+    {
+        id: ".StartRecord_text",
+        type: "text",
+        text: "Iniciar gravação",
+    },
+    {
+        id: ".StopRecord_text",
+        type: "text",
+        text: "Para gravação",
+    },
+    {
+        id: ".PauseRecord_text",
+        type: "text",
+        text: "Pausar gravação",
+    },
+    {
+        id: ".ResumeRecord_text",
+        type: "text",
+        text: "Retomar gravação",
     },
     {
         id: ".apply_text",

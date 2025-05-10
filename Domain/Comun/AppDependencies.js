@@ -1,6 +1,6 @@
 const os = require('os');
 const AppDependencies = require('../../Repository/data/dependencies.json');
-const { exec, execFile } = require('child_process');
+const { exec } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 const { app, dialog } = require("electron");

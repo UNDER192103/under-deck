@@ -64,7 +64,6 @@ document.getElementById('isMinimizeToBar').checked = DAO.DB.get('isMinimizeToBar
 document.getElementById('isEnableCloudIntegrations').checked = DAO.CLOUD.get('isEnbCloudIntegrations');
 document.getElementById('autoupdateonestart').checked = DAO.DB.get('AutoUpdateApp');
 document.getElementById('isNotValidFirstSearchUpdateApp').checked = DAO.DB.get('isNotValidFirstSearchUpdateApp');
-document.getElementById('obs-checkbox-start').checked = DAO.OBS.get('ObsWssStartOnApp');
 GNDATA.server_port = DAO.DB.get('server_port');
 $('#port-local-server').val(GNDATA.server_port);
 $('#local-server-adress-acess-url').val(`http://${getMyIPAddress()}:${GNDATA.server_port}`);

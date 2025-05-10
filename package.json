@@ -1,10 +1,10 @@
 {
   "name": "under-deck",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "Under Deck",
   "productName": "Under Deck",
   "main": "index.js",
-  "status": "release",
+  "status": "dev",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
@@ -25,7 +25,7 @@
       "icon": "Domain/src/img/under-icon-256x.ico"
     },
     "nsis": {
-      "oneClick": true,
+      "oneClick": false,
       "installerIcon": "Domain/src/img/under-icon-256x.ico",
       "uninstallerIcon": "Domain/src/img/under-icon-256x.ico",
       "installerHeaderIcon": "Domain/src/img/under-icon-256x.ico",

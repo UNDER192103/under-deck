@@ -315,6 +315,11 @@ var en_us = [
         text: "Connect OBS Websocket when starting"
     },
     {
+        id: ".ccOBSAutoConfig",
+        type: "text",
+        text: "Automatically detect OBS settings"
+    },
+    {
         id: ".obs-wss-config-t",
         type: "text",
         text: "OBS WebSocket Settings"
@@ -1397,7 +1402,27 @@ var en_us = [
     {
         id: ".StopStream_text",
         type: "text",
-        text: "Stop transmission",
+        text: "Stop streaming",
+    },
+    {
+        id: ".StartRecord_text",
+        type: "text",
+        text: "Start record",
+    },
+    {
+        id: ".StopRecord_text",
+        type: "text",
+        text: "Stop record",
+    },
+    {
+        id: ".PauseRecord_text",
+        type: "text",
+        text: "Pause record",
+    },
+    {
+        id: ".ResumeRecord_text",
+        type: "text",
+        text: "Resume record",
     },
     {
         id: ".apply_text",

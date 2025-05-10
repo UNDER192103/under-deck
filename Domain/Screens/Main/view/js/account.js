@@ -373,8 +373,12 @@ $(document).ready(async () => {
             formData.append('token', DAO.USER.token);
             formData.append('name', DAO.USERDATAUPDATE.name);
             formData.append('username', DAO.USERDATAUPDATE.username);
-            if (DAO.USERDATAUPDATE.namePlate != null)
-                formData.append('namePlate', DAO.USERDATAUPDATE.namePlate);
+            if (DAO.USERDATAUPDATE.namePlate != null) {
+                formData.append('namePlate', DAO.USERDATAUPDATE.namePlate.uri);
+                formData.append('namePlateColor', DAO.USERDATAUPDATE.namePlate.color);
+                formData.append('namePlateBackground', DAO.USERDATAUPDATE.namePlate.background);
+                formData.append('isDuplicateNamePlate', DAO.USERDATAUPDATE.namePlate.isDuplicate);
+            }
             if (DAO.USERDATAUPDATE.themeProfile != null) {
                 formData.append('profileTheme', DAO.USERDATAUPDATE.themeProfile.uri);
                 formData.append('profileThemeColor', DAO.USERDATAUPDATE.themeProfile.color);
@@ -520,10 +524,19 @@ $(document).ready(async () => {
             getParent($(".PREVUNDNamePlateMY")).show();
             $(".PREVUNDNamePlateMY").attr('src', `${namePlate.uri}`).show();
             $(".PREVUNDNamePlateMY").show().get(0).load();
-            DAO.USERDATAUPDATE.namePlate = namePlate.uri;
+            if (namePlate.isDuplicate == '1') {
+                $(".PREVUNDNamePlateMY.HINRP").show();
+            }
+            else {
+                $(".PREVUNDNamePlateMY.HINRP").hide();
+            }
+            DAO.USERDATAUPDATE.namePlate = namePlate;
+            getParent($(".PREVUNDNamePlateMY")).css({ color: namePlate.color, 'background-color': namePlate.background });
         }
         else {
+            $(".PREVUNDNamePlateMY.HINRP").show();
             getParent($(".PREVUNDNamePlateMY")).hide();
+            getParent($(".PREVUNDNamePlateMY")).css({ color: '', 'background-color': '' });
             DAO.USERDATAUPDATE.namePlate = 'null';
         }
         await checkUserProfileEnableEditButton();
@@ -1181,21 +1194,44 @@ const changeUserProfileStyles = async () => {
                     $("#select-user-nameplate").append(`<option ${item.uri == DAO.USER.profileStyle.namePlate ? 'selected' : ''} value="${item.id}" class="RM">${item.name}</option>`);
                 });
             }
-
+            if (profileStyle.isDuplicateNamePlate == '1') {
+                $(".UNDNamePlateMY.HINRP").show();
+                $(".PREVUNDNamePlateMY.HINRP").show();
+            }
+            else {
+                $(".UNDNamePlateMY.HINRP").hide();
+                $(".PREVUNDNamePlateMY.HINRP").hide();
+            }
             getParent($(".UNDNamePlateMY")).show();
             getParent($(".PREVUNDNamePlateMY")).show();
+            getParent($(".UNDNamePlateMY")).css({ color: profileStyle.namePlateColor, 'background-color': profileStyle.namePlateBackground });
+            getParent($(".PREVUNDNamePlateMY")).css({ color: profileStyle.namePlateColor, 'background-color': profileStyle.namePlateBackground });
             if ($(".UNDNamePlateMY").attr('src') != profileStyle.namePlate) {
                 $(".UNDNamePlateMY").attr('src', `${profileStyle.namePlate}`).show();
-                $(".UNDNamePlateMY").show().get(0).load();
+                setTimeout(() => {
+                    for (let index = 0; index < $(".UNDNamePlateMY").length; index++) {
+                        const element = $(".UNDNamePlateMY").get(index);
+                        element.load();
+                    }
+                }, 500);
             }
             if ($(".PREVUNDNamePlateMY").attr('src') != profileStyle.namePlate) {
                 $(".PREVUNDNamePlateMY").attr('src', `${profileStyle.namePlate}`).show();
-                $(".PREVUNDNamePlateMY").show().get(0).load();
+                setTimeout(() => {
+                    for (let index = 0; index < $(".PREVUNDNamePlateMY").length; index++) {
+                        const element = $(".PREVUNDNamePlateMY").get(index);
+                        element.load();
+                    }
+                }, 500);
             }
         }
         else {
+            $(".UNDNamePlateMY.HINRP").show();
+            $(".PREVUNDNamePlateMY.HINRP").show();
             getParent($(".UNDNamePlateMY")).hide();
             getParent($(".PREVUNDNamePlateMY")).hide();
+            getParent($(".UNDNamePlateMY")).css({ color: '', 'background-color': '' });
+            getParent($(".PREVUNDNamePlateMY")).css({ color: '', 'background-color': '' });
         }
 
         if (profileStyle.theme && profileStyle.theme.uri) {
@@ -1229,7 +1265,7 @@ function GetNamePlateForUser(user) {
         if (profileStyle && profileStyle.namePlate && profileStyle.namePlate != "") {
             return `
             <div class="UND_contentNamePlate rounded z-0">
-                <video class="UNDNamePlate rounded rotate-180" style="" autoplay="" loop="" muted="" plays-inline="" src="${profileStyle.namePlate}">
+                <video class="UNDNamePlate rounded rotate-180" ${profileStyle.isDuplicateNamePlate == '1' ? 'style=""' : 'style="display:none;"'} autoplay="" loop="" muted="" plays-inline="" src="${profileStyle.namePlate}">
                   <source src="" type="video/mp4">
                </video>
                <video class="UNDNamePlate rounded" style="" autoplay="" loop="" muted="" plays-inline="" src="${profileStyle.namePlate}">

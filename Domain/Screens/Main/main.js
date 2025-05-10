@@ -466,6 +466,198 @@ class MainScreen {
           });
         }
       }
+      else if (dt.stage == 'ToggleStream') {
+        if (this.ObsWebSocketStarted == true) {
+          ObsService.ToggleStream().then(res => {
+            this.sendFrontData('Obs_wss', {
+              is_obs_wss_p: true,
+              stage: dt.stage,
+              notify: dt.notify,
+              connected: this.ObsWebSocketStarted,
+              res: res
+            });
+          })
+            .catch(err => {
+              this.sendFrontData('Obs_wss', {
+                is_obs_wss_p: true,
+                stage: dt.stage,
+                notify: dt.notify,
+                is_erro: true,
+                err: err,
+                code: err.code
+              });
+            })
+        }
+        else {
+          this.sendFrontData('Obs_wss', {
+            is_obs_wss_p: true,
+            stage: dt.stage,
+            notify: dt.notify,
+            connected: this.ObsWebSocketStarted,
+            res: null
+          });
+        }
+      }
+      else if (dt.stage == 'StartRecord') {
+        if (this.ObsWebSocketStarted == true) {
+          ObsService.StartRecord().then(res => {
+            this.sendFrontData('Obs_wss', {
+              is_obs_wss_p: true,
+              stage: dt.stage,
+              notify: dt.notify,
+              connected: this.ObsWebSocketStarted,
+              res: res
+            });
+          })
+            .catch(err => {
+              this.sendFrontData('Obs_wss', {
+                is_obs_wss_p: true,
+                stage: dt.stage,
+                notify: dt.notify,
+                is_erro: true,
+                err: err,
+                code: err.code
+              });
+            })
+        }
+        else {
+          this.sendFrontData('Obs_wss', {
+            is_obs_wss_p: true,
+            stage: dt.stage,
+            notify: dt.notify,
+            connected: this.ObsWebSocketStarted,
+            res: null
+          });
+        }
+      }
+      else if (dt.stage == 'StopRecord') {
+        if (this.ObsWebSocketStarted == true) {
+          ObsService.StopRecord().then(res => {
+            this.sendFrontData('Obs_wss', {
+              is_obs_wss_p: true,
+              stage: dt.stage,
+              notify: dt.notify,
+              connected: this.ObsWebSocketStarted,
+              res: res
+            });
+          })
+            .catch(err => {
+              this.sendFrontData('Obs_wss', {
+                is_obs_wss_p: true,
+                stage: dt.stage,
+                notify: dt.notify,
+                is_erro: true,
+                err: err,
+                code: err.code
+              });
+            })
+        }
+        else {
+          this.sendFrontData('Obs_wss', {
+            is_obs_wss_p: true,
+            stage: dt.stage,
+            notify: dt.notify,
+            connected: this.ObsWebSocketStarted,
+            res: null
+          });
+        }
+      }
+      else if (dt.stage == 'ToggleRecordPause') {
+        if (this.ObsWebSocketStarted == true) {
+          ObsService.ToggleRecordPause().then(res => {
+            this.sendFrontData('Obs_wss', {
+              is_obs_wss_p: true,
+              stage: dt.stage,
+              notify: dt.notify,
+              connected: this.ObsWebSocketStarted,
+              res: res
+            });
+          })
+            .catch(err => {
+              this.sendFrontData('Obs_wss', {
+                is_obs_wss_p: true,
+                stage: dt.stage,
+                notify: dt.notify,
+                is_erro: true,
+                err: err,
+                code: err.code
+              });
+            })
+        }
+        else {
+          this.sendFrontData('Obs_wss', {
+            is_obs_wss_p: true,
+            stage: dt.stage,
+            notify: dt.notify,
+            connected: this.ObsWebSocketStarted,
+            res: null
+          });
+        }
+      }
+      else if (dt.stage == 'PauseRecord') {
+        if (this.ObsWebSocketStarted == true) {
+          ObsService.PauseRecord().then(res => {
+            this.sendFrontData('Obs_wss', {
+              is_obs_wss_p: true,
+              stage: dt.stage,
+              notify: dt.notify,
+              connected: this.ObsWebSocketStarted,
+              res: res
+            });
+          })
+            .catch(err => {
+              this.sendFrontData('Obs_wss', {
+                is_obs_wss_p: true,
+                stage: dt.stage,
+                notify: dt.notify,
+                is_erro: true,
+                err: err,
+                code: err.code
+              });
+            })
+        }
+        else {
+          this.sendFrontData('Obs_wss', {
+            is_obs_wss_p: true,
+            stage: dt.stage,
+            notify: dt.notify,
+            connected: this.ObsWebSocketStarted,
+            res: null
+          });
+        }
+      }
+      else if (dt.stage == 'ResumeRecord') {
+        if (this.ObsWebSocketStarted == true) {
+          ObsService.ResumeRecord().then(res => {
+            this.sendFrontData('Obs_wss', {
+              is_obs_wss_p: true,
+              stage: dt.stage,
+              notify: dt.notify,
+              connected: this.ObsWebSocketStarted,
+              res: res
+            });
+          })
+            .catch(err => {
+              this.sendFrontData('Obs_wss', {
+                is_obs_wss_p: true,
+                stage: dt.stage,
+                notify: dt.notify,
+                is_erro: true,
+                err: err,
+                code: err.code
+              });
+            })
+        }
+        else {
+          this.sendFrontData('Obs_wss', {
+            is_obs_wss_p: true,
+            stage: dt.stage,
+            notify: dt.notify,
+            connected: this.ObsWebSocketStarted,
+            res: null
+          });
+        }
+      }
       else if (dt.stage == 'get_information_obs') {
         return new Promise(async resolve => {
           if (this.ObsWebSocketStarted == true) {
@@ -664,8 +856,9 @@ class MainScreen {
   }
 
   startServices() {
-    if (DAO.OBS.get('ObsWssStartOnApp') == true)
+    if (DAO.OBS.get('ObsWssStartOnApp') == true) {
       Start_obs_wss(this);
+    }
   }
 }
 

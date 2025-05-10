@@ -1,6 +1,9 @@
 ///      App ready      ///
+document.getElementById('obs-checkbox-start').checked = DAO.OBS.get('ObsWssStartOnApp');
+document.getElementById('obs-is-config-manual').checked = DAO.OBS.get('ObsWssConfigManual');
 
 $(document).ready(async () => {
+    changeTypeConfigOBS();
 
     $("#btn-update-list-scenes-obs").click(()=>{
         if(old_sbs_scene_selected == $("#name-custom-obs-scene").val())
@@ -53,11 +56,19 @@ $(document).ready(async () => {
         await DAO.OBS.set('ObsWssStartOnApp', isCheck);
     });
 
-    $('#button-obs-wss-s-s').click(async function(){
-        if(await BACKEND.Send('Obs_wss_p', {stage: 'is_started'}) != true)
-            await BACKEND.Send('Obs_wss_p', {stage: 'Connect'});
-        else
-            await BACKEND.Send('Obs_wss_p', {stage: 'Disconnect'});
+    $('#obs-is-config-manual').click(async function () {
+        let isCheck = document.getElementById('obs-is-config-manual').checked;
+        await DAO.OBS.set('ObsWssConfigManual', isCheck);
+        changeTypeConfigOBS();
+    });
+
+    $(document).on('click', '.button-obs-wss-s-s', async function (e) {
+        if (await BACKEND.Send('Obs_wss_p', { stage: 'is_started' }) == true) {
+            await BACKEND.Send('Obs_wss_p', { stage: 'Disconnect' });
+        }
+        else {
+            await BACKEND.Send('Obs_wss_p', { stage: 'Connect' });
+        }
     });
 
     $('#btn-save-osb-port').click(async function(){
@@ -68,16 +79,6 @@ $(document).ready(async () => {
             await DAO.OBS.set('Port_wss_obs', parseInt(port));
             await DAO.OBS.set('Ip_wss_obs', ip);
             toaster.success(getNameTd('.sucess-save-port-or-ip'));
-            await BACKEND.Send('Obs_wss_p', {stage: 'Disconnect'});
-            $("#btn-save-osb-port").prop("disabled",true);
-            $("#btn-save-osb-password").prop("disabled",true);
-            $('#button-obs-wss-s-s').prop("disabled",true);
-            setTimeout(async ()=>{
-                $('#button-obs-wss-s-s').prop("disabled",false);
-                $("#btn-save-osb-password").prop("disabled",false);
-                $("#btn-save-osb-port").prop("disabled",false);
-                await BACKEND.Send('Obs_wss_p', {stage: 'Connect'});
-            }, 3000);
         }
         else{
             toaster.danger(getNameTd('.invalid-port-or-ip'));
@@ -88,16 +89,6 @@ $(document).ready(async () => {
         var pass = $("#obs-wss-password").val();
         await DAO.OBS.set('Pass_wss_obs', pass);
         toaster.success(getNameTd('.sucess-save-obs-password'));
-        await BACKEND.Send('Obs_wss_p', {stage: 'Disconnect'});
-        $("#btn-save-osb-port").prop("disabled",true);
-        $("#btn-save-osb-password").prop("disabled",true);
-        $('#button-obs-wss-s-s').prop("disabled",true);
-        setTimeout(async ()=>{
-            $('#button-obs-wss-s-s').prop("disabled",false);
-            $("#btn-save-osb-port").prop("disabled",false);
-            $("#btn-save-osb-password").prop("disabled",false);
-            await BACKEND.Send('Obs_wss_p', {stage: 'Connect'});
-        }, 3000);
     });
 
     $("#btn-view-osb-password").click(()=>{
@@ -122,5 +113,51 @@ $(document).ready(async () => {
     }
 
 });
+
+
+const changeTypeConfigOBS = async () => {
+    if (await DAO.OBS.get('ObsWssConfigManual') == true) {
+        $("#obs-wss-port").attr('disabled', true);
+        $("#obs-wss-ip").attr('disabled', true);
+        $("#obs-wss-password").attr('disabled', true);
+        $("#btn-save-osb-port").attr('disabled', true);
+        $("#btn-save-osb-password").attr('disabled', true);
+        AutoGetConfigOBS();
+    }
+    else {
+        $("#obs-wss-port").attr('disabled', false);
+        $("#obs-wss-ip").attr('disabled', false);
+        $("#obs-wss-password").attr('disabled', false);
+        $("#btn-save-osb-port").attr('disabled', false);
+        $("#btn-save-osb-password").attr('disabled', false);
+    }
+}
+
+
+const AutoGetConfigOBS = async () => {
+    try {
+        var pathOBS = path.join(process.env.APPDATA, 'obs-studio');
+        var fileConfigOBSWS = path.join(pathOBS, 'plugin_config', 'obs-websocket', 'config.json');
+        if (fs.existsSync(fileConfigOBSWS)) {
+            var config = JSON.parse(fs.readFileSync(fileConfigOBSWS, 'utf8'));
+            if (config) {
+                await DAO.OBS.set('Port_wss_obs', config.server_port);
+                await DAO.OBS.set('Ip_wss_obs', await getMyIPAddress());
+                await DAO.OBS.set('Pass_wss_obs', config.server_password);
+                $("#obs-wss-port").val(config.server_port);
+                $("#obs-wss-ip").val(await getMyIPAddress());
+                $("#obs-wss-password").val(config.server_password);
+            }
+        }
+    } catch (error) {
+        console.log(error);
+        await DAO.OBS.set('Port_wss_obs', '');
+        await DAO.OBS.set('Ip_wss_obs', await getMyIPAddress());
+        await DAO.OBS.set('Pass_wss_obs', '');
+        $("#obs-wss-port").val('');
+        $("#obs-wss-ip").val(await getMyIPAddress());
+        $("#obs-wss-password").val('');
+    }
+}
 
 ///      App ready      ///

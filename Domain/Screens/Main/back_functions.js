@@ -130,7 +130,7 @@ ipcRenderer.on('Obs_wss', async (events, dt) => {
     console.log(dt)
 
   if (dt.err_connection == true) {
-    $("#button-obs-wss-s-s")
+    $(".button-obs-wss-s-s")
       .removeClass('hover-pulse-red btn-danger')
       .addClass('hover-pulse-grean btn-success')
       .html(getNameTd(".connect-obs"));
@@ -156,7 +156,7 @@ ipcRenderer.on('Obs_wss', async (events, dt) => {
     }
   }
   else if (dt.connected_sucess == true) {
-    $("#button-obs-wss-s-s")
+    $(".button-obs-wss-s-s")
       .removeClass('hover-pulse-grean btn-success')
       .addClass('hover-pulse-red btn-danger')
       .html(getNameTd(".desconnect-obs"));
@@ -164,7 +164,7 @@ ipcRenderer.on('Obs_wss', async (events, dt) => {
   }
 
   if (dt.connected == true && dt.stage != "list_all_scenes" && dt.stage != "list_all_audio_inputs") {
-    $("#button-obs-wss-s-s")
+    $(".button-obs-wss-s-s")
       .removeClass('connect-obs hover-pulse-grean btn-success')
       .addClass('desconnect-obs hover-pulse-red btn-danger')
       .html(getNameTd(".desconnect-obs"));
@@ -172,7 +172,7 @@ ipcRenderer.on('Obs_wss', async (events, dt) => {
       await updateList(dt.notify);
   }
   else if (dt.connected == false || dt.desconnected == true) {
-    $("#button-obs-wss-s-s")
+    $(".button-obs-wss-s-s")
       .removeClass('desconnect-obs hover-pulse-red btn-danger')
       .addClass('connect-obs hover-pulse-grean btn-success')
       .html(getNameTd(".connect-obs"));

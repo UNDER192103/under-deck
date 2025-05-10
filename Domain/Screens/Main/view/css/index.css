@@ -1147,11 +1147,17 @@ svg.SvgSoundpadColor g path {
   opacity: 1;
 }
 
-.UND_contentUserProfile video,
-.UND_contentNamePlate video {
+.UND_contentUserProfile video {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  position: absolute;
+}
+
+.UND_contentNamePlate video {
+  width: 100%;
+  height: 100%;
+  object-fit: unset;
   position: absolute;
 }
 

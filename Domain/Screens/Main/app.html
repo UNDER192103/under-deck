@@ -136,7 +136,7 @@
 
                <div class="dropup-center dropup UND_userloged" style="display: none;">
                   <div class="UND_contentNamePlate rounded z-0">
-                     <video class="UNDNamePlateMY rounded rotate-180" style="display: none;" autoplay loop muted
+                     <video class="UNDNamePlateMY HINRP rounded rotate-180" style="display: none;" autoplay loop muted
                         plays-inline>
                         <source src="" type="video/mp4">
                      </video>
@@ -356,8 +356,8 @@
                               <div class="card-header shadow-text">
                                  <span class="obs-wss-config-t h5"></span>
                                  <button
-                                    class="btn btn-success btn-sm float-end hover-pulse-grean btn-success connect-obs"
-                                    type="button" id="button-obs-wss-s-s"></button>
+                                    class="btn btn-success btn-sm float-end hover-pulse-grean btn-success connect-obs button-obs-wss-s-s"
+                                    type="button"></button>
                               </div>
 
                               <div class="card-body">
@@ -370,6 +370,10 @@
                                           <input class="form-check-input" type="checkbox" id="obs-checkbox-start">
                                           <label class="form-check-label ccOBSWsswhenstarting"
                                              for="obs-checkbox-start"></label>
+                                       </div>
+                                       <div class="">
+                                          <input class="form-check-input" type="checkbox" id="obs-is-config-manual">
+                                          <label class="form-check-label ccOBSAutoConfig" for="obs-is-config-manual"></label>
                                        </div>
                                     </div>
 
@@ -1335,7 +1339,7 @@
                         </div>
                         <div class="mb-3">
                            <label class="col-md-3 control-label icon_text_expc_1" for="logo"></label>
-                           <div class="col-md-4">
+                           <div class="col-md-4 m-auto">
                               <img src="../../src/img/underbot_logo.png" id="previwSeletedIconEditApp"
                                  class="PreviwIconApp">
                            </div>
@@ -1408,7 +1412,7 @@
 
                         <div id="formselecCustomIcon" class="form-group mb-3 hidden">
                            <label class="col-md-3 control-label icon_text_expc_1" for="logo"></label>
-                           <div class="col-md-4">
+                           <div class="col-md-4 m-auto">
                               <img src="../../src/img/underbot_logo.png" id="previwSeletedIconAddApp"
                                  class="PreviwIconApp">
                            </div>
@@ -1516,13 +1520,30 @@
                         </div>
 
                         <div id="obs-add-app-t" class="mb-3 hidden">
-                           <div class="mb-3">
+                           <div class="mb-1">
                               <label for="name-custom-obs-scene" class="col-form-label name_text_expc_1"></label>
                               <input type="text" class="form-control name_custom_placeholder_text"
                                  id="name-custom-obs-scene">
                            </div>
 
-                           <div class="mb-3">
+                           <div class="mb-1">
+                              <label for="select-obs-options" class="col-form-label obs_options_text_sl"></label>
+                              <div class="input-group">
+                                 <select id="select-obs-options" class="form-select">
+                                    <option value="" selected class="select_obs_options_text"></option>
+                                    <option class="StartStream_text" id="sl-StartStream" value="StartStream"></option>
+                                    <option class="StopStream_text" id="sl-StopStream" value="StopStream"></option>
+                                    <option class="StartRecord_text" id="sl-StartRecord" value="StartRecord"></option>
+                                    <option class="StopRecord_text" id="sl-StopRecord" value="StopRecord"></option>
+                                    <option class="PauseRecord_text" id="sl-PauseRecord" value="PauseRecord"></option>
+                                    <option class="ResumeRecord_text" id="sl-ResumeRecord" value="ResumeRecord"></option>
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="mb-0">
+                              <label class="col-form-label or_text"></label>:
+                           </div>
+                           <div class="mb-1">
                               <label for="select-obs-scene" class="col-form-label scenes_text_sl"></label>
                               <div class="input-group">
                                  <select id="select-obs-scene" class="form-select">
@@ -1535,7 +1556,7 @@
                            <div class="mb-0">
                               <label class="col-form-label or_text"></label>:
                            </div>
-                           <div class="mb-3">
+                           <div class="mb-1">
                               <label for="select-audios-inputs" class="col-form-label obsaudio_input_text_sl"></label>
                               <div class="input-group">
                                  <select id="select-audios-inputs" class="form-select">
@@ -1543,19 +1564,6 @@
                                  </select>
                                  <button id="btn-update-list-audio-input-obs" class="btn btn-primary update_text"
                                     type="button"></button>
-                              </div>
-                           </div>
-                           <div class="mb-0">
-                              <label class="col-form-label or_text"></label>:
-                           </div>
-                           <div class="mb-3">
-                              <label for="select-obs-options" class="col-form-label obs_options_text_sl"></label>
-                              <div class="input-group">
-                                 <select id="select-obs-options" class="form-select">
-                                    <option value="" selected class="select_obs_options_text"></option>
-                                    <option class="StartStream_text" id="sl-StartStream" value="StartStream"></option>
-                                    <option class="StopStream_text" id="sl-StopStream" value="StopStream"></option>
-                                 </select>
                               </div>
                            </div>
                         </div>
@@ -2221,7 +2229,7 @@
                                              </div>
                                              <div class="dropup-center dropup w100 ms-2 me-4">
                                                 <div class="UND_contentNamePlate rounded z-0" style="display: none;">
-                                                   <video class="PREVUNDNamePlateMY rounded rotate-180"
+                                                   <video class="PREVUNDNamePlateMY HINRP rounded rotate-180"
                                                       style="display: none;" autoplay loop muted plays-inline>
                                                       <source src="" type="video/mp4">
                                                    </video>
