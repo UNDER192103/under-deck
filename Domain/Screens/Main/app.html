@@ -115,6 +115,10 @@
                         <a href="javascript:void(0)" id="nav-item-help" class="nav-link navs-item-sm help_text_icon">
                         </a>
                      </li>
+                     <li onClick="selectMenu('report', true)" class="nav-item">
+                        <a href="javascript:void(0)" id="nav-item-report" class="nav-link navs-item-sm report_icon">
+                        </a>
+                     </li>
                   </ul>
                </div>
 
@@ -148,7 +152,7 @@
                   <a class="d-flex align-items-center text-decoration-none cursor-pointer position-inherit z-1 p-1 mh-45"
                      data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                      <img src="../../src/img/profile-icon.png" alt="" width="32" height="32"
-                        class="UND_usericon MM rounded-circle me-2">
+                        class="UND_usericon p-01 MM rounded-circle me-2">
                      <strong class="UND_DisplayUsername u-format-max-text"></strong>
                   </a>
 
@@ -688,6 +692,103 @@
                      </div>
                   </div>
 
+               </div>
+            </div>
+         </div>
+
+         <div class="container container-hide-control container-report mt-1 mb-1 animate__animated container-animated-style"
+            style="display: none;">
+            <div class="THCG-CT full-h container rounded px-3 py-3" id="featured-3">
+               <div class="auto-scrool">
+                  <h2 class="pb-2 border-bottom report_icon Svg30px"></h2>
+         
+         
+                  <div class="cards-area aos-init aos-animate mb-3" data-aos="fade-down">
+                     <div class="row">
+         
+                        <div class="col-md-12 col-xl-16 animate__animated">
+                           <div class="card theme-card">
+         
+                              <div class="card-body">
+                                 <div class="alert reportalert alert-danger" style="display: none;" role="alert"></div>
+         
+                                 <div class="forms mb-3">
+                                    <div class="select mb-3">
+                                       <label class="form-check-label ittor"></label>
+                                       <select id="typeReport" class="form-select">
+                                          <option value="Bug">BUG</option>
+                                          <option value="Doubt" class="Doubt"></option>
+                                          <option value="Recommend New Features" class="Recommend_New_Features"></option>
+                                       </select>
+                                    </div>
+         
+                                    <div class="input mb-3">
+                                       <label class="col-form-label p-0 Subject_text"></label>
+                                       <div class="input-group">
+                                          <input type="text" id="subjectReport"
+                                             class="form-control placeholder-subject border border-secondary">
+                                       </div>
+                                    </div>
+         
+         
+                                    <div class="input mb-3">
+                                       <label class="col-form-label p-0 Message_text"></label>
+                                       <div class="input-group">
+                                          <textarea id="messageReport" style="min-height: 200px;"
+                                             class="form-control placeholder-message border border-secondary"></textarea>
+                                       </div>
+                                    </div>
+         
+                                    <div class="input d-flex justify-content-end">
+                                       <button id="submit-report" class="btn btn-success submit_icon"></button>
+                                    </div>
+         
+                                 </div>
+         
+                                 <hr class="mb-3">
+                                 <div class="auto-scrool">
+                                    <div class="input-group mt-2 mb-2">
+                                       <button class="btn btn-secondary" type="button"><span
+                                             class="bi bi-search"></span></button>
+                                       <input type="text" name="lreports_filter" id="lreports_filter"
+                                          class="form-control foo_filter" placeholder="">
+                                    </div>
+                                    <table class="table footable border rounded" data-page-size="15"
+                                       data-filter="#lreports_filter">
+         
+                                       <thead>
+                                          <tr>
+                                             <th>#</th>
+                                             <th class="Status"></th>
+                                             <th class="text_type"></th>
+                                             <th class="Subject_text"></th>
+                                             <th class="responses_text"></th>
+                                             <th class="date_created_text"></th>
+                                             <th class="options_text"></th>
+                                          </tr>
+                                       </thead>
+         
+                                       <tbody id="list-mys-reports">
+                                       </tbody>
+         
+                                       <tfoot>
+                                          <tr>
+                                             <td colspan="6" class="border-0">
+                                                <ul class="pagination">
+                                                </ul>
+                                             </td>
+                                          </tr>
+                                       </tfoot>
+         
+                                    </table>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+         
+                     </div>
+                  </div>
+         
                </div>
             </div>
          </div>
@@ -2242,7 +2343,7 @@
                                                 <a
                                                    class="d-flex align-items-center text-decoration-none cursor-pointer position-inherit z-1 p-1 mh-45">
                                                    <img src="../../src/img/profile-icon.png" alt="" width="32"
-                                                      height="32" class="UND_usericon MM rounded-circle me-2">
+                                                      height="32" class="UND_usericon p-01 MM rounded-circle me-2">
                                                    <strong class="UND_DisplayUsername u-format-max-text"></strong>
                                                 </a>
                                              </div>
@@ -2459,5 +2560,6 @@
 <script src="./view/js/keys_macro.js"></script>
 <script src="./view/js/Soundpad.js"></script>
 <script src="./view/js/webdeck.js"></script>
+<script src="./view/js/report.js"></script>
 
 </html>

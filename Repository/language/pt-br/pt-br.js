@@ -130,6 +130,26 @@ var pt_br = [
         text: "Data de criação"
     },
     {
+        id: ".response_date_text",
+        type: "text",
+        text: "Data da resposta"
+    },
+    {
+        id: ".response_text",
+        type: "text",
+        text: "Resposta"
+    },
+    {
+        id: ".To_respond",
+        type: "text",
+        text: "Responder"
+    },
+    {
+        id: ".responses_text",
+        type: "text",
+        text: "Respostas"
+    },
+    {
         id: ".uupdate_text",
         type: "text",
         text: "Atualização"
@@ -240,6 +260,11 @@ var pt_br = [
         text: `Pedido enviado com sucesso`
     },
     {
+        id: ".sent_successfully",
+        type: "html",
+        text: `Enviado com sucesso`
+    },
+    {
         id: ".pendings_text",
         type: "html",
         text: `Pendentes`
@@ -313,6 +338,11 @@ var pt_br = [
         id: ".updates_text_icon",
         type: "html",
         text: '<i class="fa-solid fa-arrows-rotate"></i> Updates'
+    },
+    {
+        id: ".report_icon",
+        type: "html",
+        text: '<i class="bi bi-bug-fill"></i> Reportar'
     },
     {
         id: ".ccOBSWsswhenstarting",
@@ -2383,6 +2413,102 @@ var pt_br = [
         id: ".Name_Plate",
         type: "html",
         text: `Name Plate`,
+    },
+    {
+        id: ".report_your_bug",
+        type: "html",
+        text: `Relate seu bug aqui`,
+    },
+    {
+        id: ".Subject_text",
+        type: "html",
+        text: `Assunto`,
+    },
+    {
+        id: ".Message_text",
+        type: "html",
+        text: `Mensagem`,
+    },
+    {
+        id: ".Doubt",
+        type: "html",
+        text: `Dúvida`,
+    },
+    {
+        id: ".Recommend_New_Features",
+        type: "html",
+        text: `Recomendar novos recursos`,
+    },
+    {
+        id: ".ittor",
+        type: "html",
+        text: `Tpo do relatório:`,
+    },
+    {
+        id: ".Report_created_successfully",
+        type: "html",
+        text: `Report criado com successo`,
+    },
+    {
+        id: ".Unable_to_create_your_report",
+        type: "html",
+        text: `Não foi possivel criar o seu Report`,
+    },
+    {
+        id: ".Unable_to_send_your_message",
+        type: "html",
+        text: `Não foi possivel enviar sua mensagem`,
+    },
+    {
+        id: ".Please_enter_a_subject_and_message",
+        type: "html",
+        text: `Por favor, insira um assunto e uma mensagem.`,
+    },
+    {
+        id: ".Please_enter_a_message",
+        type: "html",
+        text: `Por favor, insira uma mensagem.`,
+    },
+    {
+        id: ".placeholder-subject",
+        type: "attr",
+        text: { placeholder: "Assunto..." },
+    },
+    {
+        id: ".placeholder-message",
+        type: "attr",
+        text: { placeholder: "Menssagem..." },
+    },
+    {
+        id: ".Bug",
+        type: "html",
+        text: "BUG",
+    },
+
+    {
+        id: ".Pending",
+        type: "html",
+        text: "Pendente",
+    },
+    {
+        id: ".Waiting for Response",
+        type: "html",
+        text: "Aguardando Resposta",
+    },
+    {
+        id: ".Refused",
+        type: "html",
+        text: "Recusado",
+    },
+    {
+        id: ".Completed",
+        type: "html",
+        text: "Concluído",
+    },
+    {
+        id: ".Approved",
+        type: "html",
+        text: "Aprovado",
     },
 ];
 

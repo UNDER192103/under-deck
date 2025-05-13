@@ -217,6 +217,9 @@ async function selectMenu(id, uC = false) {
     else if (id == 'updates') {
         _page_selected = `.container-updates`;
     }
+    else if (id == 'report') {
+        _page_selected = `.container-report`;
+    }
     else if (id == 'help') {
         _page_selected = `.container-helper`;
     }
@@ -1109,4 +1112,8 @@ function getMyIPAddress() {
         }
     }
     return '0.0.0.0';
+}
+
+function truncate(str, len) {
+    return str.replace(new RegExp('(.{' + len + '}).*'), '$1...');
 }

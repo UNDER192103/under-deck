@@ -8,7 +8,7 @@ $(document).ready(async () => {
         let id = e.currentTarget.dataset.id;
         API.App.post('', {
             _lang: _lang,
-            method: "update-user-status",
+            method: "list-mys-reports",
             client_id: DAO.USER.client_id,
             token: DAO.USER.token,
             status: id,
@@ -579,7 +579,7 @@ const loadUserThemesOptions = () => {
         }
         $("#select-user-nameplate .RM").remove();
         DAO.NAMESPLATES.forEach(async (item) => {
-            $("#select-user-nameplate").append(`<option ${item.uri == DAO.USER.profileStyle.namePlate ? 'selected' : ''} value="${item.id}" class="RM">${item.name}</option>`);
+            $("#select-user-nameplate").append(`<option ${item.uri == (DAO.USER ? DAO.USER.profileStyle.namePlate : null) ? 'selected' : ''} value="${item.id}" class="RM">${item.name}</option>`);
         });
     });
 
@@ -595,7 +595,7 @@ const loadUserThemesOptions = () => {
         }
         $("#select-user-profilebackground .RM").remove();
         DAO.PROFILETHEMESBCK.forEach(async (item) => {
-            $("#select-user-profilebackground").append(`<option ${item.uri == DAO.USER.profileStyle.theme.uri ? 'selected' : ''} value="${item.id}" class="RM">${item.name}</option>`);
+            $("#select-user-profilebackground").append(`<option ${item.uri == (DAO.USER ? DAO.USER.profileStyle.theme.uri : null) ? 'selected' : ''} value="${item.id}" class="RM">${item.name}</option>`);
         });
     });
 }
@@ -654,6 +654,7 @@ const changeUserInfoData = async (isUpdatePcACC = true) => {
         $(".UND_usernotloged").show();
         $(".UND_userloged").hide();
         $(".UND_usericon.p-1").removeClass('bg-secondary bg-danger bg-warning bg-success');
+        $(".UND_usericon.p-01").removeClass('bg-secondary bg-danger bg-warning bg-success');
         $(".UND_StatusCC").removeClass('text-secondary text-danger text-warning text-success');
         $(".UND_Status").html('Status');
         $(".UND_premium_level").html(`<button class="btn btn-danger btn-sm no_premium_icon_text" type="button">${getNameTd('.no_premium_icon_text')}</button>`);
@@ -668,6 +669,7 @@ const changeUserInfoData = async (isUpdatePcACC = true) => {
         $(".ValUND_DisplayUsername").val(DAO.USER.account);
         let dataStatus = GetStatusAccount(DAO.USER);
         $(".UND_usericon.p-1").removeClass('bg-secondary bg-danger bg-warning bg-success').addClass(dataStatus.classBg);
+        $(".UND_usericon.p-01").removeClass('bg-secondary bg-danger bg-warning bg-success').addClass(dataStatus.classBg);
         $(".UND_StatusCC").removeClass('text-secondary text-danger text-warning text-success').addClass(dataStatus.classTxt);
         $(".UND_Status").html(dataStatus.text);
         if (DAO.USER.premium == true) {
@@ -1185,7 +1187,7 @@ const changeUserFriends = async () => {
 }
 
 const changeUserProfileStyles = async () => {
-    let profileStyle = DAO.USER.profileStyle;
+    let profileStyle = DAO.USER ? DAO.USER.profileStyle : null;
     if (profileStyle) {
         if (profileStyle.namePlate) {
             if (DAO.NAMESPLATES.length > 0) {
@@ -1238,7 +1240,7 @@ const changeUserProfileStyles = async () => {
             if (DAO.PROFILETHEMESBCK.length > 0) {
                 $("#select-user-profilebackground .RM").remove();
                 DAO.PROFILETHEMESBCK.forEach(async (item) => {
-                    $("#select-user-profilebackground").append(`<option ${item.uri == DAO.USER.profileStyle.theme.uri ? 'selected' : ''} value="${item.id}" class="RM">${item.name}</option>`);
+                    $("#select-user-profilebackground").append(`<option ${item.uri == (DAO.USER ? DAO.USER.profileStyle.theme.uri : null) ? 'selected' : ''} value="${item.id}" class="RM">${item.name}</option>`);
                 });
             }
             $("#select-user-profilebackground");
@@ -1286,7 +1288,7 @@ const changeUserTags = () => {
         });
     }
 
-    if (DAO.USER.premium == true) {
+    if (DAO.USER && DAO.USER.premium == true) {
         $(".UND_userTags").append(`<span class="badge p-1 tooltip-script cursor-pointer Premium_text" title="${getNameTd('.Premium_text')}"><i class="bi bi-stars text-warning"></i></span>`);
     }
 }

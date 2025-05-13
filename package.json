@@ -1,10 +1,10 @@
 {
   "name": "under-deck",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "Under Deck",
   "productName": "Under Deck",
   "main": "index.js",
-  "status": "dev",
+  "status": "release",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
@@ -30,7 +30,7 @@
       "uninstallerIcon": "Domain/src/img/under-icon-256x.ico",
       "installerHeaderIcon": "Domain/src/img/under-icon-256x.ico",
       "license": "LICENSE.md",
-      "allowToChangeInstallationDirectory": false
+      "allowToChangeInstallationDirectory": true
     },
     "directories": {
       "output": "biuld"

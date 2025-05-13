@@ -856,6 +856,9 @@ hr {
   background-color: #000;
 }
 
+.p-01 {
+  padding: 0.1rem !important;
+}
 .gg-spinner {
   transform: scale(var(--ggs, 1))
 }

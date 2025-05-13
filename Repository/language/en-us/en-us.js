@@ -130,6 +130,26 @@ var en_us = [
         text: "Creation date"
     },
     {
+        id: ".response_date_text",
+        type: "text",
+        text: "Response date"
+    },
+    {
+        id: ".response_text",
+        type: "text",
+        text: "Response"
+    },
+    {
+        id: ".To_respond",
+        type: "text",
+        text: "To respond"
+    },
+    {
+        id: ".responses_text",
+        type: "text",
+        text: "Responses"
+    },
+    {
         id: ".download_percentage_text",
         type: "text",
         text: "Download percentage"
@@ -253,6 +273,11 @@ var en_us = [
         id: ".Order_sent_successfully",
         type: "html",
         text: `Order sent successfully`
+    },
+    {
+        id: ".sent_successfully",
+        type: "html",
+        text: `Sent successfully`
     },
     {
         id: ".blocked_text",
@@ -393,6 +418,16 @@ var en_us = [
         id: ".submit_text",
         type: "text",
         text: "Send"
+    },
+    {
+        id: ".submit_icon",
+        type: "html",
+        text: `<i class="bi bi-check-lg"></i> Send`
+    },
+    {
+        id: ".report_icon",
+        type: "html",
+        text: '<i class="bi bi-bug-fill"></i> Report'
     },
     {
         id: ".this_is_audio_already_registered",
@@ -2373,6 +2408,102 @@ var en_us = [
         id: ".Name_Plate",
         type: "html",
         text: `Name Plate`,
+    },
+    {
+        id: ".report_your_bug",
+        type: "html",
+        text: `Report your bug here`,
+    },
+    {
+        id: ".Doubt",
+        type: "html",
+        text: `Doubt`,
+    },
+    {
+        id: ".Recommend_New_Features",
+        type: "html",
+        text: `Recommend new features`,
+    },
+    {
+        id: ".Subject_text",
+        type: "html",
+        text: `Subject`,
+    },
+    {
+        id: ".Message_text",
+        type: "html",
+        text: `Message`,
+    },
+    {
+        id: ".ittor",
+        type: "html",
+        text: `Type of report:`,
+    },
+    {
+        id: ".Report_created_successfully",
+        type: "html",
+        text: `Report created successfully`,
+    },
+    {
+        id: ".Unable_to_create_your_report",
+        type: "html",
+        text: `Unable to create your report`,
+    },
+    {
+        id: ".Unable_to_send_your_message",
+        type: "html",
+        text: `Unable to send your message`,
+    },
+    {
+        id: ".Please_enter_a_subject_and_message",
+        type: "html",
+        text: `Please enter a subject and message.`,
+    },
+    {
+        id: ".Please_enter_a_message",
+        type: "html",
+        text: `Please enter a message.`,
+    },
+    {
+        id: ".placeholder-subject",
+        type: "attr",
+        text: { placeholder: "Subject..." },
+    },
+    {
+        id: ".placeholder-message",
+        type: "attr",
+        text: { placeholder: "Message..." },
+    },
+    {
+        id: ".Bug",
+        type: "html",
+        text: "BUG",
+    },
+
+    {
+        id: ".Pending",
+        type: "html",
+        text: "Pending"
+    },
+    {
+        id: ".Waiting for Response",
+        type: "html",
+        text: "Waiting for Response"
+    },
+    {
+        id: ".Refused",
+        type: "html",
+        text: "Refused"
+    },
+    {
+        id: ".Completed",
+        type: "html",
+        text: "Complete"
+    },
+    {
+        id: ".Approved",
+        type: "html",
+        text: "Approved",
     },
 ]
 
