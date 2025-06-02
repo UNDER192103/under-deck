@@ -1,0 +1,1 @@
+const { Collection } = require('@discordjs/collection');

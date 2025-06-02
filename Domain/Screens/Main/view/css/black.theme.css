@@ -1,0 +1,91 @@
+.theme-black {
+    --theme-color: var(--bs-light);
+    --theme-bg: var(--bs-black);
+    --theme-bg-bg: rgb(33, 37, 41);
+    --theme-side-bar-color: var(--bs-light);
+    --theme-bg-side-bar: var(--bs-black);
+    --theme-card-bg: rgba(33, 37, 41, 1);
+    --theme-card-color: rgba(248, 249, 250, 1);
+}
+
+.theme-black .dropdown-menu {
+    --bs-dropdown-color: #dee2e6;
+    --bs-dropdown-bg: black;
+    --bs-dropdown-border-color: white;
+    --bs-dropdown-box-shadow: ;
+    --bs-dropdown-link-color: #dee2e6;
+    --bs-dropdown-link-hover-color: #fff;
+    --bs-dropdown-divider-bg: var(--bs-border-color-translucent);
+    --bs-dropdown-link-hover-bg: rgba(0, 0, 0, 0.15);
+    --bs-dropdown-link-active-color: #fff;
+    --bs-dropdown-link-active-bg: #0d6efd;
+    --bs-dropdown-link-disabled-color: #adb5bd;
+    --bs-dropdown-header-color: #adb5bd;
+}
+
+.theme-black .dropdown-menu li.btn {
+    color: white !important;
+}
+
+/*
+.theme-black .dropdown-menu li.btn:hover {
+    color: #0d6efd !important;
+}
+*/
+
+/*
+.theme-black .dropdown-menu li>*:hover,
+.theme-black .dropdown-menu li a>*:hover {
+    color: #0d6efd !important;
+}
+*/
+
+.theme-black .dropdown-menu li>*:active,
+.theme-black .dropdown-menu li a>*:active {
+    color: var(--bs-dropdown-link-active-color) !important;
+    text-decoration: none;
+    background-color: var(--bs-dropdown-link-active-bg);
+}
+
+.theme-black .table {
+    --theme-table-color: var(--bs-light);
+}
+
+.theme-black .btn-close {
+    background-color: #dc3545;
+}
+
+.theme-black .dropdown-divider {
+    border-top: 1px solid rgb(255 255 255 / 18%);
+}
+
+.theme-black .tooltip-inner {
+    color: black !important;
+    background-color: white !important;
+}
+
+.theme-black .modal-content>* {
+    background-color: black;
+    color: white;
+}
+
+.theme-black .modal-body,
+.theme-black .modal-header,
+.theme-black .modal-footer,
+.theme-black .modal-header {
+    border: var(--bs-modal-border-width) solid rgb(255 255 255) !important;
+}
+
+.theme-black .modal-body {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.theme-black .bootbox-close-button.close.btn-close {
+    background-color: #e30909;
+}
+
+.theme-black .theme-card.USRR {
+    background-color: black;
+    color: white;
+}

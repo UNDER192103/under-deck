@@ -1,0 +1,488 @@
+{
+    "list": [
+        {
+            "id": "attention_seekers",
+            "name": "Attention Seekers",
+            "list": [
+                {
+                    "id": "bounce",
+                    "name": "Bounce"
+                },
+                {
+                    "id": "flash",
+                    "name": "Flash"
+                },
+                {
+                    "id": "pulse",
+                    "name": "Pulse"
+                },
+                {
+                    "id": "rubberBand",
+                    "name": "RubberBand"
+                },
+                {
+                    "id": "shakeX",
+                    "name": "ShakeX"
+                },
+                {
+                    "id": "shakeY",
+                    "name": "ShakeY"
+                },
+                {
+                    "id": "headShake",
+                    "name": "HeadShake"
+                },
+                {
+                    "id": "swing",
+                    "name": "Swing"
+                },
+                {
+                    "id": "tada",
+                    "name": "Tada"
+                },
+                {
+                    "id": "wobble",
+                    "name": "Wobble"
+                },
+                {
+                    "id": "jello",
+                    "name": "Jello"
+                },
+                {
+                    "id": "heartBeat",
+                    "name": "HeartBeat"
+                }
+            ]
+        },
+        {
+            "id": "back_entrances",
+            "name": "Back Entrances",
+            "list": [
+                {
+                    "id": "backInDown",
+                    "name": "BackInDown"
+                },
+                {
+                    "id": "backInLeft",
+                    "name": "BackInLeft"
+                },
+                {
+                    "id": "backInRight",
+                    "name": "BackInRight"
+                },
+                {
+                    "id": "backInUp",
+                    "name": "BackInUp"
+                }
+            ]
+        },
+        {
+            "id": "back_exits",
+            "name": "Back Exits",
+            "list": [
+                {
+                    "id": "backOutDown",
+                    "name": "BackOutDown"
+                },
+                {
+                    "id": "backOutLeft",
+                    "name": "BackOutLeft"
+                },
+                {
+                    "id": "backOutRight",
+                    "name": "BackOutRight"
+                },
+                {
+                    "id": "backOutUp",
+                    "name": "BackOutUp"
+                }
+            ]
+        },
+        {
+            "id": "bouncing_entrances",
+            "name": "Bouncing Entrances",
+            "list": [
+                {
+                    "id": "bounceIn",
+                    "name": "BounceIn"
+                },
+                {
+                    "id": "bounceInDown",
+                    "name": "BounceInDown"
+                },
+                {
+                    "id": "bounceInLeft",
+                    "name": "BounceInLeft"
+                },
+                {
+                    "id": "bounceInRight",
+                    "name": "BounceInRight"
+                },
+                {
+                    "id": "bounceInUp",
+                    "name": "BounceInUp"
+                }
+            ]
+        },
+        {
+            "id": "bouncing_exits",
+            "name": "Bouncing Exits",
+            "list": [
+                {
+                    "id": "bounceOut",
+                    "name": "BounceOut"
+                },
+                {
+                    "id": "bounceOutDown",
+                    "name": "BounceOutDown"
+                },
+                {
+                    "id": "bounceOutLeft",
+                    "name": "BounceOutLeft"
+                },
+                {
+                    "id": "bounceOutRight",
+                    "name": "BounceOutRight"
+                },
+                {
+                    "id": "bounceOutUp",
+                    "name": "BounceOutUp"
+                }
+            ]
+        },
+        {
+            "id": "fading_entrances",
+            "name": "Fading Entrances",
+            "list": [
+                {
+                    "id": "fadeIn",
+                    "name": "FadeIn"
+                },
+                {
+                    "id": "fadeInDown",
+                    "name": "FadeInDown"
+                },
+                {
+                    "id": "fadeInDownBig",
+                    "name": "FadeInDownBig"
+                },
+                {
+                    "id": "fadeInLeft",
+                    "name": "FadeInLeft"
+                },
+                {
+                    "id": "fadeInLeftBig",
+                    "name": "FadeInLeftBig"
+                },
+                {
+                    "id": "fadeInRight",
+                    "name": "FadeInRight"
+                },
+                {
+                    "id": "fadeInRightBig",
+                    "name": "FadeInRightBig"
+                },
+                {
+                    "id": "fadeInUp",
+                    "name": "FadeInUp"
+                },
+                {
+                    "id": "fadeInUpBig",
+                    "name": "FadeInUpBig"
+                },
+                {
+                    "id": "fadeInTopLeft",
+                    "name": "FadeInTopLeft"
+                },
+                {
+                    "id": "fadeInTopRight",
+                    "name": "FadeInTopRight"
+                },
+                {
+                    "id": "fadeInBottomLeft",
+                    "name": "FadeInBottomLeft"
+                },
+                {
+                    "id": "fadeInBottomRight",
+                    "name": "FadeInBottomRight"
+                }
+            ]
+        },
+        {
+            "id": "fading_exits",
+            "name": "Fading Exits",
+            "list": [
+                {
+                    "id": "fadeOut",
+                    "name": "FadeOut"
+                },
+                {
+                    "id": "fadeOutDown",
+                    "name": "FadeOutDown"
+                },
+                {
+                    "id": "fadeOutDownBig",
+                    "name": "FadeOutDownBig"
+                },
+                {
+                    "id": "fadeOutLeft",
+                    "name": "FadeOutLeft"
+                },
+                {
+                    "id": "fadeOutLeftBig",
+                    "name": "FadeOutLeftBig"
+                },
+                {
+                    "id": "fadeOutRight",
+                    "name": "FadeOutRight"
+                },
+                {
+                    "id": "fadeOutRightBig",
+                    "name": "FadeOutRightBig"
+                },
+                {
+                    "id": "fadeOutUp",
+                    "name": "FadeOutUp"
+                },
+                {
+                    "id": "fadeOutUpBig",
+                    "name": "FadeOutUpBig"
+                },
+                {
+                    "id": "fadeOutTopLeft",
+                    "name": "FadeOutTopLeft"
+                },
+                {
+                    "id": "fadeOutTopRight",
+                    "name": "FadeOutTopRight"
+                },
+                {
+                    "id": "fadeOutBottomRight",
+                    "name": "FadeOutBottomRight"
+                },
+                {
+                    "id": "fadeOutBottomLeft",
+                    "name": "FadeOutBottomLeft"
+                }
+            ]
+        },
+        {
+            "id": "flippers",
+            "name": "Flippers",
+            "list": [
+                {
+                    "id": "flip",
+                    "name": "Flip"
+                },
+                {
+                    "id": "flipInX",
+                    "name": "FlipInX"
+                },
+                {
+                    "id": "flipInY",
+                    "name": "FlipInY"
+                },
+                {
+                    "id": "flipOutX",
+                    "name": "FlipOutX"
+                },
+                {
+                    "id": "flipOutY",
+                    "name": "FlipOutY"
+                }
+            ]
+        },
+        {
+            "id": "lightspeed",
+            "name": "Lightspeed",
+            "list": [
+                {
+                    "id": "lightSpeedInRight",
+                    "name": "LightSpeedInRight"
+                },
+                {
+                    "id": "lightSpeedInLeft",
+                    "name": "LightSpeedInLeft"
+                },
+                {
+                    "id": "lightSpeedOutRight",
+                    "name": "LightSpeedOutRight"
+                },
+                {
+                    "id": "lightSpeedOutLeft",
+                    "name": "LightSpeedOutLeft"
+                }
+            ]
+        },
+        {
+            "id": "rotating_entrances",
+            "name": "Rotating Entrances",
+            "list": [
+                {
+                    "id": "rotateIn",
+                    "name": "RotateIn"
+                },
+                {
+                    "id": "rotateInDownLeft",
+                    "name": "RotateInDownLeft"
+                },
+                {
+                    "id": "rotateInDownRight",
+                    "name": "RotateInDownRight"
+                },
+                {
+                    "id": "rotateInUpLeft",
+                    "name": "RotateInUpLeft"
+                },
+                {
+                    "id": "rotateInUpRight",
+                    "name": "RotateInUpRight"
+                }
+            ]
+        },
+        {
+            "id": "rotating_exits",
+            "name": "Rotating Exits",
+            "list": [
+                {
+                    "id": "rotateOut",
+                    "name": "RotateOut"
+                },
+                {
+                    "id": "rotateOutDownLeft",
+                    "name": "RotateOutDownLeft"
+                },
+                {
+                    "id": "rotateOutDownRight",
+                    "name": "RotateOutDownRight"
+                },
+                {
+                    "id": "rotateOutUpLeft",
+                    "name": "RotateOutUpLeft"
+                },
+                {
+                    "id": "rotateOutUpRight",
+                    "name": "RotateOutUpRight"
+                }
+            ]
+        },
+        {
+            "id": "specials",
+            "name": "Specials",
+            "list": [
+                {
+                    "id": "hinge",
+                    "name": "Hinge"
+                },
+                {
+                    "id": "jackInTheBox",
+                    "name": "JackInTheBox"
+                },
+                {
+                    "id": "rollIn",
+                    "name": "RollIn"
+                },
+                {
+                    "id": "rollOut",
+                    "name": "RollOut"
+                }
+            ]
+        },
+        {
+            "id": "zooming_entrances",
+            "name": "Zooming Entrances",
+            "list": [
+                {
+                    "id": "zoomIn",
+                    "name": "ZoomIn"
+                },
+                {
+                    "id": "zoomInDown",
+                    "name": "ZoomInDown"
+                },
+                {
+                    "id": "zoomInLeft",
+                    "name": "ZoomInLeft"
+                },
+                {
+                    "id": "zoomInRight",
+                    "name": "ZoomInRight"
+                },
+                {
+                    "id": "zoomInUp",
+                    "name": "ZoomInUp"
+                }
+            ]
+        },
+        {
+            "id": "zooming_exits",
+            "name": "Zooming Exits",
+            "list": [
+                {
+                    "id": "zoomOut",
+                    "name": "ZoomOut"
+                },
+                {
+                    "id": "zoomOutDown",
+                    "name": "ZoomOutDown"
+                },
+                {
+                    "id": "zoomOutLeft",
+                    "name": "ZoomOutLeft"
+                },
+                {
+                    "id": "zoomOutRight",
+                    "name": "ZoomOutRight"
+                },
+                {
+                    "id": "zoomOutUp",
+                    "name": "ZoomOutUp"
+                }
+            ]
+        },
+        {
+            "id": "sliding_entrances",
+            "name": "Sliding Entrances",
+            "list": [
+                {
+                    "id": "slideInDown",
+                    "name": "SlideInDown"
+                },
+                {
+                    "id": "slideInLeft",
+                    "name": "SlideInLeft"
+                },
+                {
+                    "id": "slideInRight",
+                    "name": "SlideInRight"
+                },
+                {
+                    "id": "slideInUp",
+                    "name": "SlideInUp"
+                }
+            ]
+        },
+        {
+            "id": "sliding_exits",
+            "name": "Sliding Exits",
+            "list": [
+                {
+                    "id": "slideOutDown",
+                    "name": "SlideOutDown"
+                },
+                {
+                    "id": "slideOutLeft",
+                    "name": "SlideOutLeft"
+                },
+                {
+                    "id": "slideOutRight",
+                    "name": "SlideOutRight"
+                },
+                {
+                    "id": "slideOutUp",
+                    "name": "SlideOutUp"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+.theme-light-sakura {
+    --theme-bg-bg: black;
+    --theme-bg: url('../backgrounds/static/bg-container-sakura.png');
+    --theme-bg-side-bar: var(--theme-bg);
+}
+
+.theme-light-sakura .table {
+    --theme-table-color: var(--bs-black);
+    --theme-table-bg: transparent;
+}
+
+.theme-light-sakura .theme-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+}
+
+.theme-light-sakura .theme-bg-blur {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+}
