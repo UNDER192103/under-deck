@@ -5,6 +5,12 @@ var key_sequence_press_edit = [];
 
 $(document).ready(async () => {
 
+    $('#key-macro').click(async function () {
+        let isCheck = document.getElementById('key-macro').checked;
+        await DAO.DB.set('keyEvent', isCheck);
+        BACKEND.Send('update_data_macros', null);
+    });
+
     $("#button-add-macro").click(async () => {
         addShortCut();
     });
@@ -13,92 +19,24 @@ $(document).ready(async () => {
         key_sequence_press = [];
         $("#key-macro-modal").val(getNameTd(".recording_text"));
         $("#key-macro-modal").addClass("pulse-red");
+        BACKEND.Send('get_combo_keys', null).then((listKeys) => {
+            key_sequence_press = listKeys.map( key => { return { key: key, nameKey: key, keyCode: key, shiftKey: key, ctrlKey: key, altKey: key, metaKey: key, } });
+            $("#key-macro-modal").blur();
+            $("#key-macro-modal").removeClass("pulse-red");
+            $("#key-macro-modal").val(listKeys.join(' + '));
+        });
     });
 
     $("#key-edit-macro-modal").click(() => {
         key_sequence_press_edit = [];
         $("#key-edit-macro-modal").val(getNameTd(".recording_text"));
         $("#key-edit-macro-modal").addClass("pulse-red");
-    });
-
-    $("#key-edit-macro-modal").keyup(() => {
-        $("#key-edit-macro-modal").blur();
-        $("#key-edit-macro-modal").removeClass("pulse-red");
-        let text = "";
-        for (let index = 0; index < key_sequence_press_edit.length; index++) {
-            var item = key_sequence_press_edit[index];
-            if (index >= (key_sequence_press_edit.length - 1))
-                text += item.nameKey;
-            else
-                text += item.nameKey + " + ";
-        }
-        $("#key-edit-macro-modal").val(text);
-    });
-
-    $("#key-edit-macro-modal").keydown((event) => {
-        let objEvent = event.originalEvent;
-        if (objEvent.key != "AltGraph") {
-            let busca = key_sequence_press_edit.filter(f => f.key == objEvent.key.toLowerCase().replace('Meta', 'windows'))[0]
-            if (busca == undefined) {
-                let namekey = objEvent.key.toUpperCase();
-                let key = objEvent.key;
-                key = key.replace('Meta', 'windows');
-                key = key.toLowerCase();
-                namekey = namekey.replace('CONTROL', 'CTRL');
-                namekey = namekey.replace('META', 'WINDOWS');
-                let obj = {
-                    key: key,
-                    nameKey: namekey,
-                    keyCode: objEvent.keyCode,
-                    shiftKey: objEvent.shiftKey,
-                    ctrlKey: objEvent.ctrlKey,
-                    altKey: objEvent.altKey,
-                    metaKey: objEvent.metaKey,
-                }
-                key_sequence_press_edit.push(obj);
-            }
-        }
-    });
-
-    $("#key-macro-modal").keyup(() => {
-        $("#key-macro-modal").blur();
-        $("#key-macro-modal").removeClass("pulse-red");
-        let text = "";
-        if (key_sequence_press.length > 0) {
-            for (let index = 0; index < key_sequence_press.length; index++) {
-                var item = key_sequence_press[index];
-                if (index >= (key_sequence_press.length - 1))
-                    text += item.nameKey;
-                else
-                    text += item.nameKey + " + ";
-            }
-            $("#key-macro-modal").val(text);
-        }
-    });
-
-    $("#key-macro-modal").keydown((event) => {
-        let objEvent = event.originalEvent;
-        if (objEvent.key != "AltGraph") {
-            let busca = key_sequence_press.filter(f => f.key == objEvent.key.toLowerCase().replace('Meta', 'windows'))[0]
-            if (busca == undefined) {
-                let namekey = objEvent.key.toUpperCase();
-                let key = objEvent.key;
-                key = key.replace('Meta', 'windows');
-                key = key.toLowerCase();
-                namekey = namekey.replace('CONTROL', 'CTRL');
-                namekey = namekey.replace('META', 'WINDOWS');
-                let obj = {
-                    key: key,
-                    nameKey: namekey,
-                    keyCode: objEvent.keyCode,
-                    shiftKey: objEvent.shiftKey,
-                    ctrlKey: objEvent.ctrlKey,
-                    altKey: objEvent.altKey,
-                    metaKey: objEvent.metaKey,
-                }
-                key_sequence_press.push(obj);
-            }
-        }
+        BACKEND.Send('get_combo_keys', null).then((listKeys) => {
+            key_sequence_press_edit = listKeys.map( key => { return { key: key, nameKey: key, keyCode: key, shiftKey: key, ctrlKey: key, altKey: key, metaKey: key, } });
+            $("#key-edit-macro-modal").blur();
+            $("#key-edit-macro-modal").removeClass("pulse-red");
+            $("#key-edit-macro-modal").val(listKeys.join(' + '));
+        });
     });
 
 });
@@ -220,6 +158,7 @@ async function delete_macro(id) {
                 let newListMacros = listNowMacro.filter(m => m._id != id);
                 await DAO.List_macros.set('macros', newListMacros);
                 change_list_keys_macros();
+                BACKEND.Send('update_data_macros', null);
                 toaster.success(`${getNameTd('.Successfully_removed')}`);
             }
         }
@@ -273,7 +212,7 @@ async function add_new_macro() {
                     $("#key-macro-modal").blur()
                     $("#key-macro-modal").removeClass("pulse-red")
                     $(`.btn-dropdown-key-macro`).text(getNameTd(".apps_name"));
-                    ;
+                    BACKEND.Send('update_data_macros', null);
                     toaster.success(`${getNameTd('.Added_successfully')}`);
                 }
                 else {
@@ -306,6 +245,7 @@ async function edit_save_macro() {
             await DAO.List_macros.set('macros', listNowMacro);
             await change_list_keys_macros();
             $('.btn-close-edit-key-macro-modal').click();
+            BACKEND.Send('update_data_macros', null);
             toaster.success(`${getNameTd('.Successfully_edited')}`);
         }
         else {

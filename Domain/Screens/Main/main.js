@@ -7,7 +7,9 @@ var DAO = require(path.join(app.getAppPath(), 'Repository', 'DB.js'));
 const { autoUpdater, AppUpdater } = require("electron-updater");
 const ObsService = require("../../Service/Obs");
 const CloudService = require("../../Service/Cloud");
+const ShortcutKeys = require("../../Service/ShortcutKeys");
 const PACKGEJSON = require("../../../package.json");
+const macrosService = new ShortcutKeys();
 
 autoUpdater.autoDownload = false;
 autoUpdater.autoInstallOnAppQuit = false;
@@ -282,6 +284,14 @@ class MainScreen {
 
     this.handleMessages('get_version', (event, dt) => {
       return app.getVersion();
+    });
+
+    this.handleMessages('update_data_macros', async (event, dt) => {
+      return macrosService.updateDataMacros();
+    });
+
+    this.handleMessages('get_combo_keys', async (event, dt) => {
+      return macrosService.getComboKeys();
     });
 
     this.handleMessages('app_update_start_download', async (event, dt) => {
@@ -726,7 +736,7 @@ class MainScreen {
   startAllServices() {
     ///////   Updater   ///////
 
-    autoUpdater.on("update-available", (info) => { ///Has Update
+    autoUpdater.on("update-available", (info) => {
       this.sendFrontData("AutoUpdater", {
         info: info,
         version: app.getVersion(),
@@ -780,6 +790,7 @@ class MainScreen {
         });
 
         setTimeout(() => {
+          macrosService.stop();
           autoUpdater.quitAndInstall(false, true);
         }, 5000);
       }
@@ -803,6 +814,7 @@ class MainScreen {
 
         dialog.showMessageBox(dialogOpts).then((returnValue) => {
           if (returnValue.response == 1) {
+            macrosService.stop();
             autoUpdater.quitAndInstall(false, true);
           }
           else {
@@ -859,6 +871,14 @@ class MainScreen {
     if (DAO.OBS.get('ObsWssStartOnApp') == true) {
       Start_obs_wss(this);
     }
+    macrosService.callBack((data) => {
+      try {
+        this.sendFrontData("ExecMacro", data);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+    macrosService.updateDataMacros();
   }
 }
 
@@ -890,6 +910,7 @@ function Start_obs_wss(screen) {
 }
 
 function killProcessWinpy(callback) {
+  macrosService.stop();
   exec(`taskkill /IM winpy.exe /F`, (err, exit, stErr) => {
     if (callback != null)
       callback();

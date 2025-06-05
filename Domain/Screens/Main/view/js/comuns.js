@@ -25,7 +25,6 @@ var GNDATA = {
 
 var API = require(MAIN_DIR + "/Repository/Api.js");
 var DAO = require(MAIN_DIR + "/Repository/DB.js"),
-    keyEvent = require('./Service/KeyMacros.js'),
     localServer = require('./Service/Server.js'),
     mac = null,
     list_routs = null,

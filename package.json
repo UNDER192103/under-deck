@@ -1,6 +1,6 @@
 {
   "name": "under-deck",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "description": "Under Deck",
   "productName": "Under Deck",
   "main": "index.js",
@@ -83,7 +83,6 @@
     "lepikevents": "^2.0.5",
     "loudness": "^0.4.2",
     "macaddress": "^0.5.3",
-    "node-global-key-listener": "^0.1.1",
     "obs-websocket-js": "^5.0.6",
     "open": "^9.1.0",
     "qrcode": "^1.5.3",

@@ -7,12 +7,6 @@ $(document).ready(async () => {
     $("#BTN_cloud_stc").attr('disabled', DAO.CLOUD.get('isEnbCloudIntegrations') ? false : true);
     $("#BTN_cloud_sfc").attr('disabled', DAO.CLOUD.get('isEnbCloudIntegrations') ? false : true);
 
-    $('#key-macro').click(async function () {
-        let isCheck = document.getElementById('key-macro').checked;
-        keyEvent.startStopKeysEvents(isCheck);
-        await DAO.DB.set('keyEvent', isCheck);
-    });
-
     $('#notifications_on_windows').click(async function () {
         await DAO.DB.set('App_notification_windows', document.getElementById('notifications_on_windows').checked);
     });

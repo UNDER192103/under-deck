@@ -46,7 +46,7 @@ const testDependency = async (dependency) => {
                         resolve(false);
                     }
                 });
-                break;
+            break;
 
             default:
                 resolve(true);

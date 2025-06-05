@@ -1,6 +1,7 @@
 const { ipcRenderer } = require("electron");
 const { text } = require("express");
 const { events } = require("lepikevents");
+const { exec_program } = require("../../Comun/Comun.js");
 
 const BACKEND = {
   Update_lang: async (lang) => {
@@ -25,6 +26,15 @@ $(".MenuBar .MenuButtons .close").click(function () {
 });
 
 //Functions
+
+ipcRenderer.on('ExecMacro', (events, data) => {
+  try {
+    if(data.macro && data.macro.app)
+      exec_program(data.macro.app);
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 ipcRenderer.on('AutoUpdater', (events, data) => {
 
