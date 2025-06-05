@@ -71,6 +71,10 @@ $(document).ready(async () => {
         }
     });
 
+
+    $("#btn_list_installed_software").click(async () => {
+        await list_installed_software();
+    });
 });
 
 const open_webpage = async (id, name, url) => {

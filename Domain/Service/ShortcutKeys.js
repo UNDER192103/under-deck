@@ -32,8 +32,6 @@ class MacroExecutor {
         const pressedKeys = new Set();
         
         this.listener.addListener((e, down) => {
-            if(this.macros.size === 0) return;
-
             if (down) {
                 if(e.state === 'UP'){
                     this.checkMacros(pressedKeys);
@@ -55,12 +53,13 @@ class MacroExecutor {
     }
 
     checkMacros(pressedKeys) {
-        if (pressedKeys.size === 0) return;
         if(this.func_return_combo) {
             this.func_return_combo(Array.from(pressedKeys));
             this.func_return_combo = null;
             return;
         }
+        if(this.macros.size === 0) return;
+        if (pressedKeys.size === 0) return;
         const keyCombo = Array.from(pressedKeys).join('+');
         this.macros.forEach((data, id) => {
             if (keyCombo === data.keyCombo) {
