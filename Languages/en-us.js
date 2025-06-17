@@ -196,6 +196,16 @@ module.exports = {
             text: `<i class="bi bi-cloud-fill"></i> Cloud Under Deck`
         },
         {
+            id: ".overlay",
+            type: "html",
+            text: `Overlay`
+        },
+        {
+            id: ".overlay_icon",
+            type: "html",
+            text: `<i class="bi bi-window-stack"></i> Overlay`
+        },
+        {
             id: ".releaseNotes_text",
             type: "text",
             text: "Update note"

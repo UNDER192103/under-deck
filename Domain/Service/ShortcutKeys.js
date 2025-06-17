@@ -4,6 +4,7 @@ const DAO = require('../../Repository/DB');
 class MacroExecutor {
     exec_program;
     func_return_combo;
+    callOverlay;
     isRecording = false;
     constructor(exec_program = null) {
         this.exec_program = exec_program;
@@ -16,6 +17,10 @@ class MacroExecutor {
 
     setupDefaultMacros() {
 
+    }
+
+    setCallBackOverlay(call) {
+        this.callOverlay = call;
     }
 
     registerNewMacro(macro) {
@@ -61,6 +66,18 @@ class MacroExecutor {
         if(this.macros.size === 0) return;
         if (pressedKeys.size === 0) return;
         const keyCombo = Array.from(pressedKeys).join('+');
+        if(DAO.DB.get('isActivateOverlay')){
+            if(DAO.DB.get('keys-overlay') && this.callOverlay){
+                try {
+                    if(DAO.DB.get('keys-overlay').join('+') === keyCombo){
+                        this.callOverlay();
+                        return;
+                    }   
+                } catch (error) {
+                    console.error('Erro ao verificar chaves de overlay:', error);
+                }
+            }
+        }
         this.macros.forEach((data, id) => {
             if (keyCombo === data.keyCombo) {
                 setTimeout(() => {

@@ -176,6 +176,16 @@ module.exports = {
             text: `<i class="bi bi-cloud-fill"></i> Cloud Under Deck`
         },
         {
+            id: ".overlay",
+            type: "html",
+            text: `Sobreposição`
+        },
+        {
+            id: ".overlay_icon",
+            type: "html",
+            text: `<i class="bi bi-window-stack"></i> Sobreposição`
+        },
+        {
             id: ".download_percentage_text",
             type: "text",
             text: "Porcentagem de download"
@@ -2515,6 +2525,19 @@ module.exports = {
             id: ".Approved",
             type: "html",
             text: "Aprovado",
+        },
+
+        //News
+
+        {
+            id: ".Activate_overlay",
+            type: "html",
+            text: `Ativar Sobreposição`,
+        },
+        {
+            id: ".edit_shortcut_text",
+            type: "html",
+            text: "Editar Atalho"
         },
     ]
 };

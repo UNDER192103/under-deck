@@ -60,7 +60,6 @@ loadThemesOptions(true);
 document.getElementById('key-macro').checked = DAO.DB.get('keyEvent');
 document.getElementById('notifications_on_windows').checked = DAO.DB.get('App_notification_windows');
 document.getElementById('isMinimizeToBar').checked = DAO.DB.get('isMinimizeToBar');
-document.getElementById('isEnableCloudIntegrations').checked = DAO.CLOUD.get('isEnbCloudIntegrations');
 document.getElementById('autoupdateonestart').checked = DAO.DB.get('AutoUpdateApp');
 document.getElementById('isNotValidFirstSearchUpdateApp').checked = DAO.DB.get('isNotValidFirstSearchUpdateApp');
 GNDATA.server_port = DAO.DB.get('server_port');

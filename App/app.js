@@ -43,11 +43,6 @@ function createWindowApp() {
     }
   });
 
-  screen.handleMessages('update_lang', (event, dt) => {
-    screen.setContextMenu(screen);
-    return true;
-  });
-
   screen.handleMessages('new_window', (event, dt) => {
     if (dt != null && dt.name != null) {
       Screens.New(dt);

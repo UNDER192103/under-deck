@@ -2,36 +2,35 @@ const CheckAppDependencies = require('./Domain/Comun/AppDependencies.js');
 const { app } = require('electron');
 const path = require('path');
 const fs = require("fs");
-const BasePath = app.getPath('userData');
-const BasePathData = path.join(BasePath, 'UN-DATA');
-const BasePathDataDB = path.join(BasePathData, 'DB');
-const BasePathDataIcons = path.join(BasePathData, 'icons-exe');
-const BasePathDataIconsWebPages = path.join(BasePathData, 'icons-webpages');
-const BasePathDataThemes = path.join(BasePathData, 'themes');
+const PathAppData = app.getPath('userData');
+const BasePathAppData = path.join(PathAppData, 'UN-DATA');
+
+var LD_appdata = [
+    BasePathAppData,
+    path.join(BasePathAppData, 'DB'),
+    path.join(BasePathAppData, 'icons-exe'),
+    path.join(BasePathAppData, 'icons-webpages'),
+    path.join(BasePathAppData, 'themes'),
+    path.join(BasePathAppData, 'Languages'),
+];
+
+var LD_appdata_db = [
+    path.join(BasePathAppData, 'DB', 'DB.json'),
+    path.join(BasePathAppData, 'DB', 'DBUSER.json'),
+    path.join(BasePathAppData, 'DB', 'OBS.json'),
+    path.join(BasePathAppData, 'DB', 'CLOUD.json'),
+    path.join(BasePathAppData, 'DB', 'DISCORD.json'),
+    path.join(BasePathAppData, 'DB', 'WEBDECK.json'),
+    path.join(BasePathAppData, 'DB', 'THEMES.json'),
+    path.join(BasePathAppData, 'DB', 'Opens_windows.json'),
+    path.join(BasePathAppData, 'DB', 'Macros.json'),
+    path.join(BasePathAppData, 'DB', 'ProgramsExe.json'),
+];
 
 const check_folders_data_UN = async (callback) => {
-    if (!await fs.existsSync(BasePath)) {
-        await fs.mkdirSync(BasePath);
-    }
-    if (!await fs.existsSync(BasePathData)) {
-        await fs.mkdirSync(BasePathData);
-        await fs.mkdirSync(BasePathDataDB);
-        await fs.mkdirSync(BasePathDataIcons);
-        await fs.mkdirSync(BasePathDataIconsWebPages);
-        await fs.mkdirSync(BasePathDataThemes);
-    }
-    else {
-        if (!await fs.existsSync(BasePathDataDB)) {
-            await fs.mkdirSync(BasePathDataDB);
-        }
-        if (!await fs.existsSync(BasePathDataIcons)) {
-            await fs.mkdirSync(BasePathDataIcons);
-        }
-        if (!await fs.existsSync(BasePathDataIconsWebPages)) {
-            await fs.mkdirSync(BasePathDataIconsWebPages);
-        }
-        if (!await fs.existsSync(BasePathDataThemes)) {
-            await fs.mkdirSync(BasePathDataThemes);
+    for (let index = 0; index < LD_appdata.length; index++) {
+        if (!await fs.existsSync(LD_appdata[index])) {
+            await fs.mkdirSync(LD_appdata[index]);
         }
     }
     callback();
@@ -57,23 +56,10 @@ const check_folder_data_UN_DB = async (list, callback, count = 0) => {
     }
 }
 
-var list_dirs = [
-    BasePathDataDB + "\\DB.json",
-    BasePathDataDB + "\\DBUSER.json",
-    BasePathDataDB + "\\OBS.json",
-    BasePathDataDB + "\\CLOUD.json",
-    BasePathDataDB + "\\DISCORD.json",
-    BasePathDataDB + "\\WEBDECK.json",
-    BasePathDataDB + "\\THEMES.json",
-    BasePathDataDB + "\\Opens_windows.json",
-    BasePathDataDB + "\\Macros.json",
-    BasePathDataDB + "\\ProgramsExe.json",
-];
-
 app.whenReady().then(() => {
     CheckAppDependencies(() => {
         check_folders_data_UN(() => {
-            check_folder_data_UN_DB(list_dirs, () => {
+            check_folder_data_UN_DB(LD_appdata_db, () => {
                 const Validations = require('./Domain/Comun/Validations.js');
                 Validations.CheckIsAppRunning(() => {
                     require("./App/app.js");

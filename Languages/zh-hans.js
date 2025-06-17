@@ -176,6 +176,16 @@ module.exports = {
             text: `<i class="bi bi-cloud-fill"></i> Cloud Under Deck`
         },
         {
+            id: ".overlay",
+            type: "html",
+            text: `覆盖`
+        },
+        {
+            id: ".overlay_icon",
+            type: "html",
+            text: `<i class="bi bi-window-stack"></i> 覆盖`
+        },
+        {
             id: ".download_percentage_text",
             type: "text",
             text: "下载百分比"

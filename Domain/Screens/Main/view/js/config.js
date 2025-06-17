@@ -1,4 +1,6 @@
-
+document.getElementById('isEnableCloudIntegrations').checked = DAO.CLOUD.get('isEnbCloudIntegrations');
+document.getElementById('isActivateOverlay').checked = DAO.DB.get('isActivateOverlay');
+$(".key-overlay-r").html(DAO.DB.get('keys-overlay') ? DAO.DB.get('keys-overlay').join(' + ') : "N/A");
 
 $(document).ready(async () => {
     changeInputColor();
@@ -18,7 +20,11 @@ $(document).ready(async () => {
     $('#isEnableCloudIntegrations').click(async function () {
         $("#BTN_cloud_stc").attr('disabled', document.getElementById('isEnableCloudIntegrations').checked ? false : true);
         $("#BTN_cloud_sfc").attr('disabled', document.getElementById('isEnableCloudIntegrations').checked ? false : true);
-        await DAO.CLOUD.set('isEnbCloudIntegrations', document.getElementById('isEnableCloudIntegrations').checked);
+        await DAO.DB.set('isEnbCloudIntegrations', document.getElementById('isEnableCloudIntegrations').checked);
+    });
+
+    $('#isActivateOverlay').click(async function () {
+        await DAO.DB.set('isActivateOverlay', document.getElementById('isActivateOverlay').checked);
     });
 
     //Cloud
@@ -186,6 +192,16 @@ $(document).ready(async () => {
         );
     });
 
+    $("#key-overlay").click(() => {
+        key_sequence_press = [];
+        $("#key-overlay").html(getNameTd(".recording_text")).addClass("pulse-red");
+        BACKEND.Send('get_combo_keys', null).then((listKeys) => {
+            key_sequence_press = listKeys.map( key => { return { key: key, nameKey: key, keyCode: key, shiftKey: key, ctrlKey: key, altKey: key, metaKey: key, } });
+            $("#key-overlay").blur().removeClass("pulse-red").html(getNameTd(".edit_shortcut_text"));
+            $(".key-overlay-r").html(listKeys.join(' + '));
+            DAO.DB.set('keys-overlay', listKeys);
+        });
+    });
 });
 
 async function updateUNDATAjsons(data, callback, count = 0) {

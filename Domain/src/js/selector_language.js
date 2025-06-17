@@ -1,6 +1,10 @@
 var langs = {};
+var PACKAGE = require(__dirname.split('Domain')[0] + "package.json");
 var DAO = require(__dirname.split('Domain')[0] + "Repository/DB.js");
-var _lang = DAO.DB.get('lang_selected'), isOk = false, loopIntervalUpdate = null;
+var _lang = DAO.DB.get('lang_selected'),
+isOk = false,
+loopIntervalUpdate = null,
+pathAppData = path.join(process.env.APPDATA, PACKAGE.productName);
 
 LAllLangs().then((_l) => {
     langs = _l;
@@ -14,7 +18,7 @@ LAllLangs().then((_l) => {
 
 async function selec_lang(id_lang, is_update_back = false) {
     if (is_update_back == null) is_update_back = false;
-    if (id_lang == null) id_lang = langs.en_us.id;
+    if (id_lang == null || !langs[id_lang]) id_lang = langs.en_us.id;
     _lang = id_lang;
     let lang = langs[_lang];
     await changeLang(lang.data);
@@ -74,12 +78,11 @@ function getNameTd(idBusca) {
         return idBusca;
 }
 
-async function LAllLangs( data ) {
-    let dir = __dirname.split('Domain')[0] + 'Languages';
-    data = data || {};
-    var files = require('fs').readdirSync(dir);
+async function ListByFolder(folder) {
+    var data = data || {};
+    var files = require('fs').readdirSync(folder);
     for (var i in files) {
-        var fileDir = dir + '\\' + files[i];
+        var fileDir = folder + '\\' + files[i];
         if (!require('fs').statSync(fileDir).isDirectory()) {
             let _d = require(fileDir);
             if(_d && _d.id && _d.name && _d.flag != null && _d.data && _d.data.length > 250){
@@ -91,4 +94,14 @@ async function LAllLangs( data ) {
         }
     }
     return data;
+}
+
+async function LAllLangs() {
+    let dir1 = __dirname.split('Domain')[0] + 'Languages';
+    let listFApp = await ListByFolder(dir1);
+    let listLAppData = await ListByFolder(path.join(pathAppData, "UN-DATA", "Languages"));
+    Object.keys(listLAppData).forEach(item => {
+        if(!listFApp[item]) listFApp[item] = listLAppData[item];
+    });
+    return listFApp;
 }

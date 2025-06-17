@@ -5,6 +5,7 @@ const fs = require("fs");
 const translator = require(path.join(app.getAppPath(), 'Domain', 'Comun', 'Translator_app.js'));
 var DAO = require(path.join(app.getAppPath(), 'Repository', 'DB.js'));
 const { autoUpdater, AppUpdater } = require("electron-updater");
+const OverlayScreen = require("../Overlay/overlay.js");
 const ObsService = require("../../Service/Obs");
 const CloudService = require("../../Service/Cloud");
 const ShortcutKeys = require("../../Service/ShortcutKeys");
@@ -15,6 +16,7 @@ autoUpdater.autoDownload = false;
 autoUpdater.autoInstallOnAppQuit = false;
 
 class MainScreen {
+  overlayScreen;
   window;
   appIcon;
   contextMenu;
@@ -30,6 +32,7 @@ class MainScreen {
 
   constructor(appIcon) {
     this.appIcon = appIcon;
+    this.overlayScreen = new OverlayScreen(this);
     this.window = new BrowserWindow({
       title: app.getName(),
       frame: false,
@@ -202,6 +205,12 @@ class MainScreen {
   }
 
   startAllHandleMessages() {
+    this.handleMessages('update_lang', async (event, dt) => {
+      await translator.UpdateListLanguages();
+      this.setContextMenu(this);
+      return true;
+    });
+
     this.handleMessages('Dialog--SaveFileToPath', async (event, dt) => {
       return new Promise(async (resolve) => {
 
@@ -877,6 +886,9 @@ class MainScreen {
       } catch (error) {
         console.log(error);
       }
+    });
+    macrosService.setCallBackOverlay(()=>{
+      this.overlayScreen.toggle();
     });
     macrosService.updateDataMacros();
   }

@@ -176,6 +176,16 @@ module.exports = {
           "text": "<i class=\"bi bi-cloud-fill\"></i> Nube Under Deck"
         },
         {
+            "id": ".overlay",
+            "type": "html",
+            "text": `Cubrir`
+        },
+        {
+            "id": ".overlay_icon",
+            "type": "html",
+            "text": `<i class="bi bi-window-stack"></i> Cubrir`
+        },
+        {
           "id": ".download_percentage_text",
           "type": "text",
           "text": "Porcentaje de descarga"

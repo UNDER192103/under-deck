@@ -1,6 +1,4 @@
 const { ipcRenderer } = require("electron");
-const { text } = require("express");
-const { events } = require("lepikevents");
 const { exec_program } = require("../../Comun/Comun.js");
 
 const BACKEND = {

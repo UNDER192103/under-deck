@@ -176,6 +176,16 @@ module.exports = {
           "text": "<i class=\"bi bi-cloud-fill\"></i> Cloud Under Deck"
         },
         {
+            "id": ".overlay",
+            "type": "html",
+            "text": `씌우다`
+        },
+        {
+            "id": ".overlay_icon",
+            "type": "html",
+            "text": `<i class="bi bi-window-stack"></i> 씌우다`
+        },
+        {
           "id": ".download_percentage_text",
           "type": "text",
           "text": "다운로드 비율"
