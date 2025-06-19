@@ -8,11 +8,12 @@ const Toaster = require(MAIN_DIR + "/Domain/src/js/toaster.js");
 ///      Constants      ///
 
 
-
-
 ///      App ready      //
-
 $(document).ready(async () => {
+    $(document).on('click', '.overlay-close .close', async () => {
+        await Electron.ipcRenderer.invoke('hide');
+    });
+    
     setTimeout(async () => {
         $("#preload-overlay").fadeOut(250);
         $("#main-overlay").fadeIn(500);

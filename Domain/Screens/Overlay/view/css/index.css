@@ -1,5 +1,5 @@
 body {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.25);
   width: 100% !important;
   height: 100% !important;
 }
@@ -19,10 +19,59 @@ body {
   display: flex;
 }
 
-.circle {
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 50vh;
+.overlay-header {
+  position: fixed;
+  top: 28px;
+  width: 100%;
+  display: flex;
+}
+
+.overlay-header-content{
     margin: auto;
-    width: 73% !important;
-    height: 97% !important;
+    min-width: 50px;
+    height: 50px;
+    max-height: 50px;
+    background: rgb(54 58 62);
+    border-radius: 1vh;
+    display: flex;
+    padding: 7px;
+    gap: 7px;
+}
+
+.overlay-close {
+  position: fixed;
+  top: 28px;
+  right: 28px;
+}
+
+.MenuButtons .close {
+  transition: all 0.3s;
+  width: 45px;
+  height: 45px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.MenuButtons .close:hover {
+  --color-x-close-app: white;
+  transform: scale(1.1);
+}
+
+.MenuButtons .close:before,
+.MenuButtons .close:after {
+  position: absolute;
+  content: ' ';
+  height: 100%;
+  width: 3.2px;
+  background-color: #ffffff;
+  top: 0%;
+}
+
+.MenuButtons .close:before {
+  transform: rotate(45deg);
+}
+
+.MenuButtons .close:after {
+  transform: rotate(-45deg);
 }

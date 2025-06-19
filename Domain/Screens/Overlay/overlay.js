@@ -57,11 +57,13 @@ class OverlayScreen {
   }
 
   toggle(){
-    if(this.isShowing){
+    if(this.isShowing === true){
       this.isShowing = false;
       this.window.hide();
     }else{
       this.isShowing = true;
+      this.window.maximize();
+      this.window.setFullScreen(true);
       this.window.show();
     }
   }
@@ -91,16 +93,36 @@ class OverlayScreen {
   close() {
     this.window.close();
   }
-
-  hide() {
-    this.window.hide();
-  }
-
+  
   handleMessages(type, callback) {
     ipcMain.handle(type, callback);
   }
 
   startAllHandleMessages() {
+
+    this.handleMessages('get-app-name', () => {
+      return app.getName();
+    });
+
+    this.handleMessages('get-app-version', () => {
+      return app.getVersion();
+    });
+
+    this.handleMessages('get-app-path', () => {
+      return app.getAppPath();
+    });
+
+    this.handleMessages('get-app-icon', () => {
+      return path.join(app.getAppPath(), 'Domain', 'src', 'img', 'under-icon-256x.ico');
+    });
+
+    this.handleMessages('hide', (event, path) => {
+      this.hide();
+    });
+
+    this.handleMessages('close', (event, path) => {
+      this.close();
+    });
    
   }
 
