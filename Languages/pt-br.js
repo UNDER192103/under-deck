@@ -2539,5 +2539,35 @@ module.exports = {
             type: "html",
             text: "Editar Atalho"
         },
+        {
+            id: ".tooltip_apps_text",
+            type: "attr",
+            text: { title: "Aplicativos" },
+        },
+        {
+            id: ".tooltip_keysmacro_text",
+            type: "attr",
+            text: { title: "Teclas de Atalho" },
+        },
+        {
+            id: ".tooltip_discord_text",
+            type: "attr",
+            text: { title: "Discord" },
+        },
+        {
+            id: ".tooltip_soundpad_text",
+            type: "attr",
+            text: { title: "Sound Pad" },
+        },
+        {
+            id: ".tooltip_obsstudio_text",
+            type: "attr",
+            text: { title: "Obs Studio" },
+        },
+        {
+            id: ".tooltip_webpages_text",
+            type: "attr",
+            text: { title: "Paginas Webs" },
+        },
     ]
 };

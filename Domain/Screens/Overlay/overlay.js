@@ -65,12 +65,18 @@ class OverlayScreen {
       this.window.maximize();
       this.window.setFullScreen(true);
       this.window.show();
+      this.window.focus();
     }
   }
 
   show(){
     this.isShowing = true;
     this.window.show();
+    this.window.focus();
+  }
+
+  Reload(){
+    this.window.reload();
   }
 
   hide(){
@@ -124,6 +130,9 @@ class OverlayScreen {
       this.close();
     });
    
+    this.handleMessages('OV-Update-data', (event, type) => {
+      this.sendFrontData('OV-Update-data', type);
+    });
   }
 
   startAllServices() {

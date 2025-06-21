@@ -8,3 +8,16 @@ const BACKEND = {
     return ipcRenderer.invoke(type, data);
   }
 }
+
+ipcRenderer.on('OV-Update-data', (events, data) => {
+  console.log(data);
+  switch (data.type) {
+    case 'soundpad':
+      ListSoundPad = data.data;
+      ChangeListSoundPad();
+    break;
+  
+    default:
+    break;
+  }
+});

@@ -1,5 +1,3 @@
-var convert = require('xml-js');
-var SoundPadPathFileXml = path.join(process.env.APPDATA, 'Leppsoft', 'soundlist.spl');
 var ListSoundPad = [], pathSoundPadExe = DAO.DB.get('pathSoundPad');
 if (pathSoundPadExe != null && pathSoundPadExe != '')
     $("#local-path-soundpad").val(pathSoundPadExe);
@@ -11,6 +9,7 @@ $(document).ready(async () => {
     $(document).on('click', '#bnt_soundpad_get_list', async () => {
         $("body").modalLoading('show', false);
         GetSoundPadListAudios().then((List) => {
+            BACKEND.Send('OV-Update-data', {type: 'soundpad', data: List});
             $("body").modalLoading('hide', false);
             ListSoundPad = List;
             ChangeListSoundPad();
@@ -107,36 +106,8 @@ const ChangeListSoundPad = async () => {
             table.trigger('footable_resize');
         }
     });
-
 }
 
 const GetSoundPadListAudios = async () => {
-    return new Promise(async (resolve) => {
-        try {
-            if (fs.existsSync(SoundPadPathFileXml)) {
-                var xml = await fs.readFileSync(SoundPadPathFileXml, 'utf8');
-                var result = convert.xml2json(xml, { compact: true, spaces: 4 });
-                var json = JSON.parse(result), cont = 0;
-                var soundList = json.Soundlist.Sound.map(sound => {
-                    cont++;
-                    return {
-                        index: cont,
-                        addedOn: sound._attributes.addedOn,
-                        artist: sound._attributes.artist,
-                        name: sound._attributes.title,
-                        duration: sound._attributes.duration,
-                        hash: sound._attributes.hash,
-                        path: sound._attributes.url,
-                    }
-                });
-                resolve(soundList);
-            }
-            else {
-                resolve([]);
-            }
-        } catch (error) {
-            resolve([]);
-        }
-
-    })
+    return BACKEND.Send('get-list-soundpad-audios');
 }

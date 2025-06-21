@@ -1,3 +1,4 @@
+@import url('./themes.css');
 body {
   background-color: rgba(0, 0, 0, 0.25);
   width: 100% !important;
@@ -20,18 +21,21 @@ body {
 }
 
 .overlay-header {
-  position: fixed;
-  top: 28px;
-  width: 100%;
+  z-index: 1060;
+  margin-top: 28px;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
 }
 
 .overlay-header-content{
+    z-index: 1061;
     margin: auto;
     min-width: 50px;
     height: 50px;
     max-height: 50px;
-    background: rgb(54 58 62);
+    background: #363a3e;
     border-radius: 1vh;
     display: flex;
     padding: 7px;
@@ -39,6 +43,7 @@ body {
 }
 
 .overlay-close {
+  z-index: 1060;
   position: fixed;
   top: 28px;
   right: 28px;
@@ -74,4 +79,183 @@ body {
 
 .MenuButtons .close:after {
   transform: rotate(-45deg);
+}
+
+.btn-lighting {
+    display: flex;
+    align-items: center;
+    --bs-btn-color: #d0d3d5;
+    --bs-btn-bg: #000000;
+    --bs-btn-border-color: #c9c9c9;
+    --bs-btn-hover-color: #363a3e;
+    --bs-btn-hover-bg: #ffffff;
+    --bs-btn-hover-border-color: #c9c9c9;
+    --bs-btn-focus-shadow-rgb: 49,132,253;
+    --bs-btn-active-color: #363a3e;
+    --bs-btn-active-bg: #ffffff;
+    --bs-btn-active-border-color: #c9c9c9;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #363a3e;
+    --bs-btn-disabled-bg: #b4b4b4;
+    --bs-btn-disabled-border-color: #c9c9c9;
+    --bs-btn-padding-x: 9px;
+    --bs-btn-padding-y: 0;
+    margin: 1px 0;
+}
+
+.btn-lighting g path {
+    fill: #d0d3d5;
+}
+
+.btn-lighting:hover g path, .btn-lighting.active g path {
+    fill: #363a3e;
+}
+
+#overlay_widgets_content {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  z-index: 1000;
+}
+
+.widgets {
+  position: absolute;
+  width: 400px;
+  height: 300px;
+  min-width: 200px;
+  min-height: 200px;
+  max-width: 100%;
+  max-height: 100%;
+  background: transparent;
+  border-radius: 1vh;
+  left: calc(50% - 200px);
+  top: calc(50% - 325px);
+}
+
+.widget-header{
+  width: 100%;
+  height: 35px;
+  display: flex;
+  border-top-left-radius: 0.89vh;
+  border-top-right-radius: 0.89vh;
+  background-color: #363a3e;
+  color: white;
+  cursor: -webkit-grab;
+}
+.widget-body {
+  width: 100%;
+  border-bottom-left-radius: 0.89vh;
+  border-bottom-right-radius: 0.89vh;
+  background-color: black;
+  height: calc(100% - 35px);
+  max-width: 100%;
+  max-height: calc(100% - 35px);
+}
+
+.overflow-auto {
+  overflow: auto;
+}
+
+.full-widget-body {
+  width: 100%;
+  height: calc(100% - 20px);
+}
+
+.widget-header-title {
+  width: 100%;
+}
+.widget-header-title .widget-title{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 6px 0;
+}
+
+.widget-close {
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.widget-close:hover {
+  color: red;
+  transform: scale(1.1);
+}
+
+::-webkit-scrollbar .auto-scrool {
+  display: none;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  --bs-bg-opacity: 1;
+  background: rgb(33, 37, 41);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--theme-bg-scroll-bar);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--theme-bg-scroll-bar-hover);
+}
+
+.table {
+    --theme-table-color: var(--bs-light);
+}
+
+.footable-page-arrow.disabled>a,
+.footable-page.disabled>a {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.footable-page-arrow.active>a,
+.footable-page.active>a {
+  background-color: black !important;
+}
+
+.footable-page-arrow>a,
+.footable-page>a {
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin-left: 0.15rem;
+  font-size: 1rem;
+  line-height: 1.3;
+  background-color: #6c757d;
+  border-color: #6c757d;
+  color: white;
+  width: 100%;
+  display: block;
+  padding: 4px 10px;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.footable-odd {
+  background-color: transparent;
+}
+
+.footable-page-arrow>a[data-page="first"] {
+  border-top-left-radius: .25rem !important;
+  border-bottom-left-radius: .25rem !important;
+}
+
+.footable-page-arrow>a[data-page="last"] {
+  border-top-right-radius: .25rem !important;
+  border-bottom-right-radius: .25rem !important;
+}
+
+.btn-xs,
+.btn-group-xs>.btn {
+  padding: 1px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
 }

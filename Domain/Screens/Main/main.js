@@ -3,6 +3,7 @@ const { exec } = require('child_process');
 const path = require('path');
 const fs = require("fs");
 const translator = require(path.join(app.getAppPath(), 'Domain', 'Comun', 'Translator_app.js'));
+const Commun = require(path.join(app.getAppPath(), 'Domain', 'Comun', 'Commun.js'));
 var DAO = require(path.join(app.getAppPath(), 'Repository', 'DB.js'));
 const { autoUpdater, AppUpdater } = require("electron-updater");
 const OverlayScreen = require("../Overlay/overlay.js");
@@ -207,8 +208,17 @@ class MainScreen {
   startAllHandleMessages() {
     this.handleMessages('update_lang', async (event, dt) => {
       await translator.UpdateListLanguages();
-      this.setContextMenu(this);
+      await this.setContextMenu(this);
+      this.overlayScreen.Reload();
       return true;
+    });
+
+    this.handleMessages('exec-soundpad-by-index', async (event, index) => {
+      this.sendFrontData('exec-soundpad-by-index', index);
+    });
+
+    this.handleMessages('get-list-soundpad-audios', async () => {
+      return Commun.ListAudiosSoundPad();
     });
 
     this.handleMessages('Dialog--SaveFileToPath', async (event, dt) => {

@@ -34,6 +34,10 @@ ipcRenderer.on('ExecMacro', (events, data) => {
   }
 });
 
+ipcRenderer.on('exec-soundpad-by-index', (events, data) => {
+  Comun.exec_soundpad(pathSoundPadExe, data);
+});
+
 ipcRenderer.on('AutoUpdater', (events, data) => {
 
   switch (data.code) {
