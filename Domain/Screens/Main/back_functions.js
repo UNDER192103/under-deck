@@ -34,15 +34,53 @@ ipcRenderer.on('ExecMacro', (events, data) => {
   }
 });
 
-ipcRenderer.on('exec-apps-_id', async (events, id) => {
-  let listApps = await DAO.ProgramsExe.get('list_programs');
-  if(!listApps) listApps = [];
-  if(listApps.find(f => f._id == id))
-    Comun.exec_program(listApps.find(f => f._id == id));
-});
+ipcRenderer.on('exec-fbt', async (events, data) => {
+  if(data){
+    switch (data.type) {
+      case 'soundpad':
+        Comun.exec_soundpad(pathSoundPadExe, data.data.id);
+      break;
 
-ipcRenderer.on('exec-soundpad-by-index', (events, index) => {
-  Comun.exec_soundpad(pathSoundPadExe, index);
+      case 'webpage':
+          var list_webpages = await DAO.DB.get("web_page_saved");
+          let webpage = list_webpages.find(f => f.id == data.data.id);
+          if(webpage)
+            open_webpage(webpage.id, webpage.name.replaceAll(" ", "_"), webpage.url);
+      break;
+
+      case 'apps':
+        let listApps = await DAO.ProgramsExe.get('list_programs');
+        if(!listApps) listApps = [];
+        let app = listApps.find(f => f._id == data.data.id);
+        if(app) Comun.exec_program(app);
+      break;
+
+      case 'obs-scene':
+        if(data.data){
+          select_scene_obs(data.data.sceneName, data.data.sceneUuid);
+        }
+      break;
+
+      case'obs-audio-mute':
+        mute_or_desmute_input(data.data.inputName, data.data.inputUuid, true);
+      break;
+
+      case'obs-audio-unmute':
+        mute_or_desmute_input(data.data.inputName, data.data.inputUuid, false);
+      break;
+
+      case 'discord-toggle-mic':
+        MuteOrUnmuteMic();
+      break;
+
+      case 'discord-toggle-audio':
+        MuteOrUnmuteAudio();
+      break;
+    
+      default:
+      break;
+    }
+  }
 });
 
 ipcRenderer.on('AutoUpdater', (events, data) => {
@@ -173,6 +211,7 @@ ipcRenderer.on('Obs_wss', async (events, dt) => {
         toaster.danger(getNameTd(".unabletoconnecttoOBSWebsocket"), 5000);
         break;
     }
+    BACKEND.Send('OV-Update-data', {type: 'obsstudio', data: null});
   }
   else if (dt.connected_sucess == true) {
     $(".button-obs-wss-s-s")
@@ -188,7 +227,7 @@ ipcRenderer.on('Obs_wss', async (events, dt) => {
       .addClass('desconnect-obs hover-pulse-red btn-danger')
       .html(getNameTd(".desconnect-obs"));
     if (dt.stage != "MuteInputAudio")
-      await updateList(dt.notify);
+      await updateListObs(dt.notify);
   }
   else if (dt.connected == false || dt.desconnected == true) {
     $(".button-obs-wss-s-s")
@@ -203,6 +242,7 @@ ipcRenderer.on('Obs_wss', async (events, dt) => {
       $(".footable-list-audios-inputs").data('footable').removeRow($(".footable-list-audios-inputs tbody tr"));
     $(".ai-auto-rm").remove();
     OBS_TEMP_DATA.audios = null;
+    BACKEND.Send('OV-Update-data', {type: 'obsstudio', data: null});
   }
 
 
@@ -228,13 +268,13 @@ ipcRenderer.on('Obs_wss', async (events, dt) => {
 
 });
 
-const updateList = async (isNotify = true) => {
+const updateListObs = async (isNotify = true) => {
   if (isNotify) toaster.warning(getNameTd(".searching_for_information_obs"), 2600);
 
   BACKEND.Send('Obs_wss_p', { stage: 'get_information_obs', notify: isNotify }).then(async (DTO) => {
 
     if (DTO.data) {
-
+      BACKEND.Send('OV-Update-data', {type: 'obsstudio', data: DTO.data});
       if (DTO.data.scenes) {
         DTO.data.scenes.scenes.reverse();
 
@@ -305,7 +345,9 @@ const updateList = async (isNotify = true) => {
       }
 
     }
-
+    else{
+      BACKEND.Send('OV-Update-data', {type: 'obsstudio', data: null});
+    }
   });
 }
 

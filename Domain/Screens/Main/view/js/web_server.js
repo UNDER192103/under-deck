@@ -14,7 +14,7 @@ $(document).ready(async () => {
 
     $('#btn-port-local-server').click(async function () {
         let port = $('#port-local-server').val();
-        if (port.length == 4 && !isNaN(port)) {
+        if (!isNaN(port) && port > 80 && port < 65536) {
             $('.alert-por-local-server-modal').addClass('hidden');
             GNDATA.server_port = port;
             await DAO.DB.set('server_port', port);
@@ -51,8 +51,8 @@ $(document).ready(async () => {
     });
 
     $('#port-local-server').keypress(function () {
-        var maxLength = $(this).val().length;
-        if (maxLength >= 4) {
+        var value = $(this).val();
+        if (parseInt(value) <= 80 || parseInt(value) >= 65536) {
             return false;
         }
     });

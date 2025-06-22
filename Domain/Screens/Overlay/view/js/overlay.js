@@ -9,7 +9,7 @@ const Toaster = require(MAIN_DIR + "/Domain/src/js/toaster.js");
 var DAO = require(MAIN_DIR + "/Repository/DB.js");
 ///      Constants      ///
 
-var WidgetsOpens = {}, ListSoundPad = [], ListAllApps = [];
+var WidgetsOpens = {}, ListSoundPad = [], ListAllApps = [], obsTypeNow, dataObs = null;
 
 
 function uuidv4() {
@@ -28,6 +28,9 @@ $(document).ready(async () => {
         $(".tooltip-script").tooltip();
     }, 500);
 
+    $(document).on('click', '.tooltip-script', async (e) => {
+        $(e.currentTarget).tooltip('hide');
+    });
 
     $(document).on('click', '.o_p_apps', async (e) => {
         if(WidgetsOpens['o_p_apps']){
@@ -38,12 +41,49 @@ $(document).ready(async () => {
     });
 
     $(document).on('click', '.soundpoad-ex', async (e) => {
-        BACKEND.Send('exec-soundpad-by-index', e.currentTarget.dataset.id);
+        await BACKEND.Send('exec-fbt', {type: 'soundpad', data: {id: e.currentTarget.dataset.id}});
+    });
+
+    $(document).on('click', '.open-webpage', async (e) => {
+        await BACKEND.Send('exec-fbt', {type: 'webpage', data: {id: e.currentTarget.dataset.id}});
+        await Electron.ipcRenderer.invoke('hide');
     });
 
     $(document).on('click', '.apps-exc', async (e) => {
-        console.log(e.currentTarget.dataset.id);
-        BACKEND.Send('exec-apps-_id', e.currentTarget.dataset.id);
+        await BACKEND.Send('exec-fbt', {type: 'apps', data: {id: e.currentTarget.dataset.id}});
+    });
+
+    $(document).on('click', '.discord-toggle-audio', async (e) => {
+        await BACKEND.Send('exec-fbt', {type: 'discord-toggle-audio', data: null});
+    });
+
+    $(document).on('click', '.discord-toggle-mic', async (e) => {
+        await BACKEND.Send('exec-fbt', {type: 'discord-toggle-mic', data: null});
+    });
+
+    $(document).on('click', '.osb-exc-scene', async (e) => {
+        if(dataObs){
+            $(`.list-content-obsstudio .card-obsstudio-back.active`).removeClass('active')
+            let scene = dataObs.scenes.scenes.find(f => f.sceneUuid == e.currentTarget.dataset.id);
+            $(`.list-content-obsstudio .osb-exc-scene[data-id="${e.currentTarget.dataset.id}"] .card-obsstudio-back`).addClass('active');
+            await BACKEND.Send('exec-fbt', {type: 'obs-scene', data: scene});
+        }
+    });
+
+    $(document).on('click', '.osb-exc-audio-unmute', async (e) => {
+        if(dataObs){
+            $(`.list-content-obsstudio .card-obsstudio-back.active`).removeClass('active')
+            let input = dataObs.audios.inputs.find(f => f.inputUuid == e.currentTarget.dataset.id);
+            $(`.list-content-obsstudio .osb-exc-scene[data-id="${e.currentTarget.dataset.id}"] .card-obsstudio-back`).addClass('active');
+            await BACKEND.Send('exec-fbt', {type: 'obs-audio-unmute', data: input});
+        }
+    });
+
+    $(document).on('click', '.osb-exc-audio-mute', async (e) => {
+        if(dataObs){
+            let input = dataObs.audios.inputs.find(f => f.inputUuid == e.currentTarget.dataset.id);
+            await BACKEND.Send('exec-fbt', {type: 'obs-audio-mute', data: input});
+        }
     });
 
     $(document).on('click', '.o_p_keysmacro', async (e) => {
@@ -86,6 +126,10 @@ $(document).ready(async () => {
         }
     });
 
+    $(document).on('click', '.obsstudio-types button', async (e) => {
+        ChangeListObsStudio(e.currentTarget.id);
+    });
+
     let listToOpen = await DAO.DB.get('open_overlays');
     if(listToOpen && listToOpen[0]){
         listToOpen.forEach(item => {
@@ -125,19 +169,19 @@ const createWidgets = async (type, styles = null) => {
         case 'o_p_discord':
             startWidget(styles == null ? true : false, {id: id, class: "pb-3", type: type, styles: styles, title: getNameTd('.discord_text')}, `
                 <div class="custom-cards overflow-auto pt-3">
-                    <div id="" class="card-custom-cards tooltip-script" title="${getNameTd('.discord_toggle_mute_unmute_mic_text')}">
+                    <div class="discord-toggle-mic card-custom-cards tooltip-script" title="${getNameTd('.discord_toggle_mute_unmute_mic_text')}">
                         <div class="card-custom-cards-back">
                             <span class="card-title">${getNameTd('.discord_toggle_mute_unmute_mic_text')}</span>
                         </div>
                     </div>
-                    <div id="" class="card-custom-cards tooltip-script" title="${getNameTd('.discord_toggle_mute_unmute_audio_text')}">
+                    <div class="discord-toggle-audio card-custom-cards tooltip-script" title="${getNameTd('.discord_toggle_mute_unmute_audio_text')}">
                         <div class="card-custom-cards-back">
                             <span class="card-title">${getNameTd('.discord_toggle_mute_unmute_audio_text')}</span>
                         </div>
                     </div>
                 </div>
             `);
-    $(".tooltip-script").tooltip();
+            $(".tooltip-script").tooltip();
         break;
 
         case 'o_p_soundpad':
@@ -150,14 +194,30 @@ const createWidgets = async (type, styles = null) => {
         break;
 
         case 'o_p_obsstudio':
-            startWidget(styles == null ? true : false, {id: id, type: type, styles: styles, title: getNameTd('.obs_studio_n_text')}, ``);
+            startWidget(styles == null ? true : false, {id: id, class: "pb-3", type: type, styles: styles, title: getNameTd('.obs_studio_n_text')}, `
+                <div class="overflow-auto full-height">
+                    <div class="card-header obsstudio-types">
+                        <button id="scenes" type="button" class="btn btn-secondary d-49">${getNameTd('.scenes_text')}</button>
+                        <button id="audio" type="button" class="btn btn-secondary d-49">${getNameTd('.audio_text')}</button>
+                    </div>
+                    <div class="card-body overflow-auto pt-3">
+                        <div class="list-content-obsstudio">
+                        </div>
+                    </div>
+                </div>
+            `);
+            ChangeListObsStudio();
         break;
 
         case 'o_p_webpages':
-            startWidget(styles == null ? true : false, {id: id, type: type, styles: styles, title: getNameTd('.web_pages_text')}, ``);
+            startWidget(styles == null ? true : false, {id: id, class: "pb-3", type: type, styles: styles, title: getNameTd('.web_pages_text')}, `
+                <div class="list-webpages overflow-auto pt-3">
+
+                </div>
+            `);
+            ChangeListWebPages();
         break;
     }
-
 }
 
 const startWidget = async (isSaveOnStart, options, html) => {
@@ -256,12 +316,11 @@ const getListAllApps = async () => {
 const ChangeListAllApps = async () => {
     ListAllApps = await getListAllApps();
     $(".list-all-apps").html('');
-    console.log(ListAllApps);
     ListAllApps.forEach(app => {
         let nameApp = app.nameCustom ? app.nameCustom : app.name;
         $(".list-all-apps").append(`
             <div data-id="${app._id}" class="apps-exc card-all-apps tooltip-script" title="${nameApp}">
-                <div class="card-all-apps-back ${app.positon_l % 2 == 0 ? 's-3':''}">
+                <div class="card-all-apps-back">
                     <img src="${app.iconCustom}" alt="${nameApp}" class="card-img-full-size">
                     <span class="card-title">${nameApp}</span>
                 </div>
@@ -277,11 +336,72 @@ const ChangeListSoundPad = async () => {
     ListSoundPad.forEach(sound => {
         $(".list-sounds-soundpad").append(`
             <div data-id="${sound.index}" class="soundpoad-ex card-sounds-soundpad tooltip-script" title="${sound.name}">
-                <div class="card-sounds-soundpad-back ${sound.index % 2 == 0 ? 's-3':''}">
+                <div class="card-sounds-soundpad-back">
                     <span class="card-title">${sound.name}</span>
                 </div>
             </div>
         `);
     });
+    $(".tooltip-script").tooltip();
+}
+
+const ChangeListWebPages= async () => {
+    $(".list-webpages").html('');
+    var list_webpages = await DAO.DB.get("web_page_saved");
+    list_webpages.forEach(async item => {
+        $(".list-webpages").append(`
+            <div data-id="${item.id}" class="open-webpage card-webpages tooltip-script" title="${item.name}">
+                <div class="card-webpages-back">
+                    <img class="card-img" src="https://www.google.com/s2/favicons?domain=${item.url}">
+                    <span class="card-title">${item.name}</span>
+                </div>
+            </div>
+        `);
+    });
+    $(".tooltip-script").tooltip();
+}
+
+const ChangeListObsStudio = async (type = null, DTO = null) => {
+    if(!obsTypeNow) obsTypeNow = 'scenes';
+    if(type){
+        obsTypeNow = type;
+    }
+    $(".list-content-obsstudio").html('');
+    $(".obsstudio-types button").removeClass('btn-primary').addClass('btn-secondary');
+    $(`.obsstudio-types button[id="${obsTypeNow}"]`).addClass('btn-primary').removeClass('btn-secondary');
+    if(!DTO) {
+        let dtr = await BACKEND.Send('Obs_wss_p', { stage: 'get_information_obs', notify: false });
+        if(dtr.data) DTO = dtr.data;
+    };
+    if(DTO){
+        dataObs = DTO;
+        if(obsTypeNow == 'scenes'){
+            DTO.scenes.scenes.reverse();
+            DTO.scenes.scenes.forEach(scene => {
+                $(".list-content-obsstudio").append(`
+                    <div data-id="${scene.sceneUuid}" class="osb-exc-scene card-obsstudio tooltip-script" title="${scene.sceneName}">
+                        <div class="card-obsstudio-back ${DTO.scenes.currentProgramSceneUuid == scene.sceneUuid ? 'active':''}">
+                            <span class="card-title">${scene.sceneName}</span>
+                        </div>
+                    </div>
+                `);
+            });
+        }else if(obsTypeNow == 'audio'){
+            DTO.audios.inputs.reverse();
+            DTO.audios.inputs.forEach(input => {
+                $(".list-content-obsstudio").append(`
+                    <div data-id="${input.inputUuid}" class="osb-exc-input card-obsstudio tooltip-script" title="${input.inputName}">
+                        <div class="card-obsstudio-back">
+                            <span class="card-title">${input.inputName}</span>
+                            <div class="card-buttons p-1 d-flex justify-content-between">
+                                <button type="button" data-id="${input.inputUuid}" class="btn osb-exc-audio-unmute btn-sm btn-primary tooltip-script" title="${getNameTd('.unmute_text')}"><i class="bi bi-volume-up-fill"></i></button>
+                                <button type="button" data-id="${input.inputUuid}" class="btn osb-exc-audio-mute btn-sm btn-danger tooltip-script" title="${getNameTd('.mute_text')}"><i class="bi bi-volume-mute-fill"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                `);
+            });
+        }
+    }
     $(".tooltip-script").tooltip();
 }

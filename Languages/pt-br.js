@@ -418,7 +418,7 @@ module.exports = {
         {
             id: ".t_p_m_c_4_n_text",
             type: "text",
-            text: "A porta deve conter apenas 4 numeros, Exemplo: 3000!"
+            text: "A porta deve ser maior que 80 e menor que 65536, Exemplo: 3000!"
         },
         {
             id: ".stop_text",

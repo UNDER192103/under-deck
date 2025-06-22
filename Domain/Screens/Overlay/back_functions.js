@@ -10,7 +10,6 @@ const BACKEND = {
 }
 
 ipcRenderer.on('OV-Update-data', (events, data) => {
-  console.log(data);
   switch (data.type) {
     case 'soundpad':
       ListSoundPad = data.data;
@@ -19,6 +18,15 @@ ipcRenderer.on('OV-Update-data', (events, data) => {
 
     case 'apps':
       ChangeListAllApps();
+    break;
+
+    case 'webpages':
+      ChangeListWebPages();
+    break;
+
+    case 'obsstudio':
+      console.log(data.data);
+      ChangeListObsStudio(null, data.data);
     break;
   
     default:

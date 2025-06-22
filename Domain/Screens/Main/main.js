@@ -22,7 +22,7 @@ class MainScreen {
   appIcon;
   contextMenu;
   ObsWebSocketStarted = false;
-
+  countsObsTryConect = 0;
   position = {
     width: 800,
     height: 600,
@@ -66,6 +66,14 @@ class MainScreen {
       }, 5000);
     });
 
+    this.window.on("close", async (event) => {
+      event.preventDefault();
+      if (await DAO.DB.get('isMinimizeToBar') == true)
+        this.window.hide();
+      else
+        this.CloseAllWindows();
+    });
+
     this.window.maximize();
     this.window.loadFile(path.join(__dirname, "./app.html"));
   }
@@ -103,6 +111,14 @@ class MainScreen {
         if (onClickMenu) onClickMenu(e);
       }).show();
     }
+  }
+
+  async CloseAllWindows() {
+    this.window.close();
+    this.overlayScreen.window.close();
+    ipcMain.removeAllListeners();
+    await app.quit();
+    process.exit();
   }
 
   killProcessWinpy(callback) {
@@ -181,8 +197,7 @@ class MainScreen {
       {
         label: translator.getNameTd('.quit'), type: 'normal', click: async () => {
           killProcessWinpy(async () => {
-            await app.quit();
-            process.exit();
+            this.CloseAllWindows();
           });
         }
       }
@@ -193,8 +208,7 @@ class MainScreen {
   }
 
   close() {
-    this.window.close();
-    ipcMain.removeAllListeners();
+    this.CloseAllWindows();
   }
 
   hide() {
@@ -213,12 +227,8 @@ class MainScreen {
       return true;
     });
 
-    this.handleMessages('exec-apps-_id', async (event, index) => {
-      this.sendFrontData('exec-apps-_id', index);
-    });
-
-    this.handleMessages('exec-soundpad-by-index', async (event, index) => {
-      this.sendFrontData('exec-soundpad-by-index', index);
+    this.handleMessages('exec-fbt', async (event, data) => {
+      this.sendFrontData('exec-fbt', data);
     });
 
     this.handleMessages('get-list-soundpad-audios', async () => {
@@ -302,7 +312,7 @@ class MainScreen {
       if (await DAO.DB.get('isMinimizeToBar') == true)
         this.window.hide();
       else
-        this.window.close();
+        this.CloseAllWindows();
     });
 
     this.handleMessages('get_version', (event, dt) => {
@@ -345,8 +355,10 @@ class MainScreen {
         });
       }
       else if (dt.stage == 'Disconnect') {
-        if (this.ObsWebSocketStarted == true)
+        if (this.ObsWebSocketStarted == true){
+          this.countsObsTryConect = 20;
           ObsService.Disconnect();
+        }
         else {
           this.sendFrontData('Obs_wss', {
             is_obs_wss_p: true,
@@ -359,8 +371,10 @@ class MainScreen {
         }
       }
       else if (dt.stage == 'Connect') {
-        if (this.ObsWebSocketStarted == false)
+        if (this.ObsWebSocketStarted == false){
+          this.countsObsTryConect = 0;
           Start_obs_wss(this);
+        }
         else {
           this.sendFrontData('Obs_wss', {
             is_obs_wss_p: true,
@@ -751,6 +765,12 @@ class MainScreen {
         });
         this.ObsWebSocketStarted = false;
         this.sendFrontData('Obs_wss', { is_obs_wss_p: true, desconnected: true, code: res.code, res: res });
+        if(DAO.OBS.get('ObsWssStartOnApp') == true && this.countsObsTryConect < 10){
+            setTimeout(() => {
+              this.countsObsTryConect++;
+              Start_obs_wss(this);
+            }, 5000);
+          }
       }
     });
 

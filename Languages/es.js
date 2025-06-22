@@ -418,7 +418,7 @@ module.exports = {
         {
           "id": ".t_p_m_c_4_n_text",
           "type": "text",
-          "text": "¡El puerto debe contener solo 4 números, Ejemplo: 3000!"
+          "text": "El puerto debe ser mayor que 80 y menor que 65536, Ejemplo: 3000!"
         },
         {
           "id": ".stop_text",

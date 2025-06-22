@@ -418,7 +418,7 @@ module.exports = {
         {
             id: ".t_p_m_c_4_n_text",
             type: "text",
-            text: "端口必须只包含4个数字，例如：3000！"
+            text: "端口必须大于80小于65536，例如：3000！"
         },
         {
             id: ".stop_text",

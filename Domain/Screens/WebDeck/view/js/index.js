@@ -125,7 +125,6 @@ const CheckIsUpdateList = async (data) => {
         if (_NW.formatView != _all.data_user.web.formatView) resolve(true);
         if (_NW.formatListView != _all.data_user.web.formatListView) resolve(true);
         if (_NW.pages && JSON.stringify(_NW.pages) != JSON.stringify(_all.data_user.web.pages)) resolve(true);
-
         resolve(false);
     });
 }
@@ -176,7 +175,7 @@ const next_webdeck_page = async (id) => {
 
 const LoadAppsInScreen = async (type = _all.data_user.web.formatView) => {
     ClearAppsInScreen();
-
+    _NW = _all.data_user.web;
     switch (type) {
         case '3x2':
         case '5x3':

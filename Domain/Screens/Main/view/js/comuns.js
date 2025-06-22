@@ -340,7 +340,6 @@ function uuidv4() {
 }
 
 function ModalGetImagem(permitNull = false, callback, defaultImage = null) {
-    console.log(defaultImage);
     if (defaultImage == null) {
         defaultImage = path.join(MAIN_DIR, "/Domain/src/img/underbot_logo.png");
     }
@@ -981,8 +980,6 @@ const GetDataListProgramsForLocalHost = async () => {
     await DAO.GetDataNow();
     if (!app_un.version)
         app_un.version = await BACKEND.Send('get_version');
-    var listPrograms = new Array();
-    if (DAO.List_programs != null && DAO.List_programs.length > 0) listPrograms = DAO.List_programs;
     let exe_background = await DAO.WEBDECK.get('exe-background');
     let exe_color_text = await DAO.WEBDECK.get('exe-color-text');
     let data = {
@@ -1001,7 +998,7 @@ const GetDataListProgramsForLocalHost = async () => {
             formatListView: await DAO.WEBDECK.get('format_list_view'),
             pages: DAO.WEBDECKDATA.pages,
         },
-        programs: listPrograms,
+        programs: DAO.List_programs ? DAO.List_programs : [],
     }
     return data;
 }
@@ -1010,10 +1007,6 @@ const GetDataListProgramsForWebSocket = async () => {
     await DAO.GetDataNow();
     if (!app_un.version)
         app_un.version = await BACKEND.Send('get_version');
-    var listPrograms = new Array();
-    if (DAO.List_programs != null && DAO.List_programs.length > 0) {
-        listPrograms = DAO.List_programs;
-    }
     let exe_background = await DAO.WEBDECK.get('exe-background');
     let exe_color_text = await DAO.WEBDECK.get('exe-color-text');
     let data = {
@@ -1032,29 +1025,24 @@ const GetDataListProgramsForWebSocket = async () => {
             formatListView: await DAO.WEBDECK.get('format_list_view'),
             pages: DAO.WEBDECKDATA.pages,
         },
-        programs: await FormatListProgramsToWS(listPrograms),
+        programs: await FormatListProgramsToWS(await DAO.ProgramsExe.get('list_programs')),
     }
     return data;
 }
 
 var FormTListCRT = { list: new Array(), listPrograms: new Array() };
 const FormatListProgramsToWS = async (List) => {
-    let listPrograms = new Array();
+    if(!List) List = [];
     if (JSON.stringify(FormTListCRT.list) != JSON.stringify(List)) {
-        for (let index = 0; index < List.length; index++) {
-            var element = List[index];
+        FormTListCRT.list = DAO.ProgramsExe.get('list_programs');
+        FormTListCRT.listPrograms = await List.map(element => {
             let split = element.iconCustom.split('\\');
             element.iconCustom = split[split.length - 1];
-            listPrograms.push(element);
-        }
-        FormTListCRT.list = DAO.ProgramsExe.get('list_programs');
-        FormTListCRT.listPrograms = listPrograms;
-    }
-    else {
-        listPrograms = FormTListCRT.listPrograms;
+            return element;
+        });
     }
 
-    return listPrograms;
+    return FormTListCRT.listPrograms;
 }
 
 const getBase64ByDir = async (DIR) => {

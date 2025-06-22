@@ -418,7 +418,7 @@ module.exports = {
         {
             id: ".t_p_m_c_4_n_text",
             type: "text",
-            text: "The port must contain only 4 numbers, Example: 3000!"
+            text: "The port must be greater than 80 and less than 65536, Example: 3000!"
         },
         {
             id: ".t_e_i_a_r_text",

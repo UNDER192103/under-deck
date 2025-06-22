@@ -33,8 +33,10 @@
     --bd-purple: #4c0bce;
     --bd-violet: #712cf9;
 
-    --animation-s-delay: 5s;
+    --animation-s-delay: 15s;
     --widget-bg: rgba(0, 0, 0, 0.5);
+    --bg-cards: linear-gradient(132deg, #4b00ff, #000000, #212335);
+    --bg-size-cards: 400% 400%;
 }
 
 .Dpreload-app {

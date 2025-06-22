@@ -63,7 +63,6 @@ class MacroExecutor {
             this.func_return_combo = null;
             return;
         }
-        if(this.macros.size === 0) return;
         if (pressedKeys.size === 0) return;
         const keyCombo = Array.from(pressedKeys).join('+');
         if(DAO.DB.get('isActivateOverlay')){
@@ -78,6 +77,7 @@ class MacroExecutor {
                 }
             }
         }
+        if(this.macros.size === 0) return;
         this.macros.forEach((data, id) => {
             if (keyCombo === data.keyCombo) {
                 setTimeout(() => {

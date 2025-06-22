@@ -16,6 +16,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 async function start_server(type, callback) {
+    port = await DAO.DB.get('server_port');
+    if (port == null) {
+        port = 3000;
+        await DAO.DB.set('server_port', port);
+    }
     if (type == true) {
         if (isStarted == false) {
 

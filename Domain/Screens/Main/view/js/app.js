@@ -100,6 +100,7 @@ const delet_web_page = async (id) => {
                 let new_list = list_webpages.filter(f => f.id != id);
                 await DAO.DB.set("web_page_saved", new_list);
                 $(`.list-web-pages tbody tr[id="wb_page_${id}"]`).remove();
+                BACKEND.Send('OV-Update-data', {type: 'webpages', data: []});
             }
         }
     });
@@ -408,6 +409,7 @@ const add_new_webpage = async () => {
         await add_im_list_webpages(obj);
         $(".btn-close-webpage-modal").click();
         $('.footable').footable().trigger('footable_resize');
+        BACKEND.Send('OV-Update-data', {type: 'webpages', data: []});
     }
     else {
         if (name.length < 1) {
