@@ -213,6 +213,10 @@ class MainScreen {
       return true;
     });
 
+    this.handleMessages('exec-apps-_id', async (event, index) => {
+      this.sendFrontData('exec-apps-_id', index);
+    });
+
     this.handleMessages('exec-soundpad-by-index', async (event, index) => {
       this.sendFrontData('exec-soundpad-by-index', index);
     });

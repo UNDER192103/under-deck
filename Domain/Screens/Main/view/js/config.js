@@ -20,7 +20,7 @@ $(document).ready(async () => {
     $('#isEnableCloudIntegrations').click(async function () {
         $("#BTN_cloud_stc").attr('disabled', document.getElementById('isEnableCloudIntegrations').checked ? false : true);
         $("#BTN_cloud_sfc").attr('disabled', document.getElementById('isEnableCloudIntegrations').checked ? false : true);
-        await DAO.DB.set('isEnbCloudIntegrations', document.getElementById('isEnableCloudIntegrations').checked);
+        await DAO.CLOUD.set('isEnbCloudIntegrations', document.getElementById('isEnableCloudIntegrations').checked);
     });
 
     $('#isActivateOverlay').click(async function () {

@@ -2557,7 +2557,7 @@ module.exports = {
         {
             id: ".tooltip_soundpad_text",
             type: "attr",
-            text: { title: "Sound Pad" },
+            text: { title: "SoundPad" },
         },
         {
             id: ".tooltip_obsstudio_text",

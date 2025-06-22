@@ -253,6 +253,7 @@ async function deleteExe(id) {
                     await DAO.WEBDECK.set('pages', DAO.WEBDECKDATA.pages);
                     loadPreviwWebDeck();
                     toaster.success(`${getNameTd('.Successfully_removed')}`);
+                    BACKEND.Send('OV-Update-data', {type: 'apps', data: []});
                 }
             }
         }
@@ -361,6 +362,7 @@ async function saveEditExe() {
         $('.btn-close-exe-modal').click();
         $("#icon-exe-edit").val('');
         toaster.success(`${getNameTd('.Successfully_edited')}`);
+        BACKEND.Send('OV-Update-data', {type: 'apps', data: []});
     });
 };
 
@@ -477,6 +479,7 @@ const change_position_list = async () => {
                 await new_l.push(e);
                 if (e == listApps[listApps.length - 1]) {
                     await DAO.ProgramsExe.set('list_programs', await new_l.sort(compare_positon_l));
+                    BACKEND.Send('OV-Update-data', {type: 'apps', data: []});
                 }
             })
         }
@@ -532,6 +535,7 @@ async function clear_add_app() {
     $("#list_software").html("");
     $($("#list_installed_software").find('.card-content-spinner')[0]).show('slow');
     $("#list_installed_software").collapse('hide');
+    BACKEND.Send('OV-Update-data', {type: 'apps', data: []});
 }
 
 async function select_type_add_app(type, id, text_type, id_remove_hidden) {

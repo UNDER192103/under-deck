@@ -146,7 +146,7 @@ body {
   width: 100%;
   border-bottom-left-radius: 0.89vh;
   border-bottom-right-radius: 0.89vh;
-  background-color: black;
+  background-color: var(--widget-bg);
   height: calc(100% - 35px);
   max-width: 100%;
   max-height: calc(100% - 35px);
@@ -258,4 +258,129 @@ body {
   font-size: 12px;
   line-height: 1.5;
   border-radius: 3px;
+}
+
+.list-all-apps,
+.custom-cards,
+.list-sounds-soundpad {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  width: 100%;
+  max-height: 100%;
+  justify-content: center;
+  transition: all 1s;
+}
+.card-custom-cards {
+  position: relative;
+  height: 125px;
+  width: 125px;
+  border-radius: 5px;
+  transition: all 1s;
+  cursor: pointer;
+}
+.card-sounds-soundpad {
+  position: relative;
+  height: 80px;
+  width: 80px;
+  border-radius: 5px;
+  transition: all 1s;
+  cursor: pointer;
+}
+.card-all-apps {
+  position: relative;
+  height: 125px;
+  width: 125px;
+  border-radius: 5px;
+  transition: all 1s;
+  cursor: pointer;
+}
+
+.card-all-apps-back.s-3,
+.card-custom-cards-back.s-3,
+.card-sounds-soundpad-back.s-3{
+  --animation-s-delay: 3s;
+}
+.card-custom-cards-back,
+.card-sounds-soundpad-back {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    padding: 2px;
+    border-radius: 5px;
+    color: white;
+    background-size: 200% 200% !important;
+    background: linear-gradient(300deg, #20009e, #712cf9, #4c0bce);
+    -webkit-animation: gradient-animation var(--animation-s-delay) ease infinite;
+    -moz-animation: gradient-animation var(--animation-s-delay) ease infinite;
+    animation: gradient-animation var(--animation-s-delay) ease infinite;
+}
+.card-all-apps-back {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    border-radius: 5px;
+    color: white;
+}
+.card-all-apps-back:hover,
+.card-custom-cards-back:hover,
+.card-sounds-soundpad-back:hover{
+    border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color)!important;
+}
+
+.card-all-apps .card-title {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    user-select: none;
+    position: absolute;
+    background-image: linear-gradient(#36363600, #000000);
+}
+.card-custom-cards .card-title{
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    user-select: none;
+}
+.card-sounds-soundpad .card-title{
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    user-select: none;
+}
+.card-all-apps .card-img-full-size{
+  border-radius: 5px;
+}
+.card-all-apps .card-img-full-size,
+.card-sounds-soundpad .card-img-full-size{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }

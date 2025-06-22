@@ -9,7 +9,7 @@ const Toaster = require(MAIN_DIR + "/Domain/src/js/toaster.js");
 var DAO = require(MAIN_DIR + "/Repository/DB.js");
 ///      Constants      ///
 
-var WidgetsOpens = {}, ListSoundPad = [];
+var WidgetsOpens = {}, ListSoundPad = [], ListAllApps = [];
 
 
 function uuidv4() {
@@ -37,8 +37,13 @@ $(document).ready(async () => {
         }
     });
 
-    $(document).on('click', '.btn_play-soundpad', async (e) => {
-        BACKEND.Send('exec-soundpad-by-index', e.currentTarget.id);
+    $(document).on('click', '.soundpoad-ex', async (e) => {
+        BACKEND.Send('exec-soundpad-by-index', e.currentTarget.dataset.id);
+    });
+
+    $(document).on('click', '.apps-exc', async (e) => {
+        console.log(e.currentTarget.dataset.id);
+        BACKEND.Send('exec-apps-_id', e.currentTarget.dataset.id);
     });
 
     $(document).on('click', '.o_p_keysmacro', async (e) => {
@@ -109,55 +114,47 @@ const createWidgets = async (type, styles = null) => {
     $(`.${type}`).addClass('active').tooltip('hide');
     switch (type) {
         case 'o_p_apps':
-            startWidget(styles == null ? true : false, {id: id, type: type, styles: styles, title: 'Aplicativos'}, ``);
-        break;
+            startWidget(styles == null ? true : false, {id: id, class: "pb-3", type: type, styles: styles, title: getNameTd('.apps_name')}, `
+                <div class="list-all-apps overflow-auto pt-3">
 
-        case 'o_p_keysmacro':
-            startWidget(styles == null ? true : false, {id: id, type: type, styles: styles, title: 'Teclas de Atalho'}, ``);
+                </div>
+            `);
+            ChangeListAllApps();
         break;
 
         case 'o_p_discord':
-            startWidget(styles == null ? true : false, {id: id, type: type, styles: styles, title: 'Discord'}, ``);
+            startWidget(styles == null ? true : false, {id: id, class: "pb-3", type: type, styles: styles, title: getNameTd('.discord_text')}, `
+                <div class="custom-cards overflow-auto pt-3">
+                    <div id="" class="card-custom-cards tooltip-script" title="${getNameTd('.discord_toggle_mute_unmute_mic_text')}">
+                        <div class="card-custom-cards-back">
+                            <span class="card-title">${getNameTd('.discord_toggle_mute_unmute_mic_text')}</span>
+                        </div>
+                    </div>
+                    <div id="" class="card-custom-cards tooltip-script" title="${getNameTd('.discord_toggle_mute_unmute_audio_text')}">
+                        <div class="card-custom-cards-back">
+                            <span class="card-title">${getNameTd('.discord_toggle_mute_unmute_audio_text')}</span>
+                        </div>
+                    </div>
+                </div>
+            `);
+    $(".tooltip-script").tooltip();
         break;
 
         case 'o_p_soundpad':
-            startWidget(styles == null ? true : false, {id: id, type: type, styles: styles == null ? { height: "400px", width: "325px", left: 'calc(50% - 163px)' } : styles, title: 'Sound Pad'}, `
-                <div class="full-widget-body overflow-auto pe-2">
-                    <div class="input-group mb-2">
-                       <button class="btn btn-secondary" type="button"><span class="bi bi-search"></span></button>
-                       <input type="text" name="LKMSPfoo_filter" id="LKMSPfoo_filter"
-                          class="form-control foo_filter" placeholder="Procurar...">
-                    </div>
-                   <table class="table footable border rounded" data-page-size="15" data-filter="#LKMSPfoo_filter">
-                      <thead>
-                         <tr>
-                            <th>#</th>
-                            <th class="name_text">${getNameTd('.name_text')}</th>
-                            <th class="options_text">${getNameTd('.options_text')}</th>
-                         </tr>
-                      </thead>
-                      <tbody id="list-sounds-soundpad">
-                      </tbody>
-                      <tfoot>
-                         <tr>
-                            <td colspan="6" class="border-0">
-                               <ul class="pagination">
-                               </ul>
-                            </td>
-                         </tr>
-                      </tfoot>
-                   </table>
+            startWidget(styles == null ? true : false, {id: id, class: "pb-3", type: type, styles: styles == null ? { height: "400px", width: "325px", left: 'calc(50% - 163px)' } : styles, title: getNameTd('.soundpad')}, `
+                <div class="list-sounds-soundpad overflow-auto pt-3">
+
                 </div>
             `);
             ChangeListSoundPad();
         break;
 
         case 'o_p_obsstudio':
-            startWidget(styles == null ? true : false, {id: id, type: type, styles: styles, title: 'Obs Studio'}, ``);
+            startWidget(styles == null ? true : false, {id: id, type: type, styles: styles, title: getNameTd('.obs_studio_n_text')}, ``);
         break;
 
         case 'o_p_webpages':
-            startWidget(styles == null ? true : false, {id: id, type: type, styles: styles, title: 'Paginas Web'}, ``);
+            startWidget(styles == null ? true : false, {id: id, type: type, styles: styles, title: getNameTd('.web_pages_text')}, ``);
         break;
     }
 
@@ -176,7 +173,7 @@ const startWidget = async (isSaveOnStart, options, html) => {
                     </h5>
                 </div>
             </div>
-            <div class="widget-body child-div-to-disable p-2">
+            <div class="widget-body child-div-to-disable ${options.class ? options.class : ""}">
                 ${html}
             </div>
         </div>
@@ -250,26 +247,41 @@ const getListSoundPad = async () => {
     return ListSoundPad;
 }
 
+const getListAllApps = async () => {
+    let listApps = await DAO.ProgramsExe.get('list_programs');
+    if(!listApps) listApps = [];
+    return listApps;
+}
+
+const ChangeListAllApps = async () => {
+    ListAllApps = await getListAllApps();
+    $(".list-all-apps").html('');
+    console.log(ListAllApps);
+    ListAllApps.forEach(app => {
+        let nameApp = app.nameCustom ? app.nameCustom : app.name;
+        $(".list-all-apps").append(`
+            <div data-id="${app._id}" class="apps-exc card-all-apps tooltip-script" title="${nameApp}">
+                <div class="card-all-apps-back ${app.positon_l % 2 == 0 ? 's-3':''}">
+                    <img src="${app.iconCustom}" alt="${nameApp}" class="card-img-full-size">
+                    <span class="card-title">${nameApp}</span>
+                </div>
+            </div>
+        `);
+    });
+    $(".tooltip-script").tooltip();
+}
+
 const ChangeListSoundPad = async () => {
     ListSoundPad = await getListSoundPad();
-    $("#list-sounds-soundpad").html('');
-    $("#select-soundpad-audio .ssa").remove();
+    $(".list-sounds-soundpad").html('');
     ListSoundPad.forEach(sound => {
-        $("#list-sounds-soundpad").append(`
-            <tr>
-                <td>${sound.index}</td>
-                <td>${sound.name}</td>
-                <td>
-                    <a id="${sound.index}" class="btn btn-light btn-xs btn_play-soundpad Play_icon_text">${getNameTd('.Play_icon_text')}</a>
-                </td>
-            </tr>
+        $(".list-sounds-soundpad").append(`
+            <div data-id="${sound.index}" class="soundpoad-ex card-sounds-soundpad tooltip-script" title="${sound.name}">
+                <div class="card-sounds-soundpad-back ${sound.index % 2 == 0 ? 's-3':''}">
+                    <span class="card-title">${sound.name}</span>
+                </div>
+            </div>
         `);
-        $("#select-soundpad-audio").append(`
-            <option class="ssa" value="${sound.hash}">${sound.name}</option>
-        `)
-        if (sound == ListSoundPad[ListSoundPad.length - 1]) {
-            var table = $('.footable').footable();
-            table.trigger('footable_resize');
-        }
     });
+    $(".tooltip-script").tooltip();
 }

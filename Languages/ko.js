@@ -2558,6 +2558,58 @@ module.exports = {
           "id": ".Approved",
           "type": "html",
           "text": "승인됨"
+        },
+        {
+          "id": ".Activate_overlay",
+          "type": "html",
+          "text": "오버레이 활성화"
+        },
+        {
+          "id": ".edit_shortcut_text",
+          "type": "html",
+          "text": "바로가기 편집"
+        },
+        {
+          "id": ".tooltip_apps_text",
+          "type": "attr",
+          "text": {
+            "title": "애플리케이션"
+          }
+        },
+        {
+          "id": ".tooltip_keysmacro_text",
+          "type": "attr",
+          "text": {
+            "title": "단축키"
+          }
+        },
+        {
+          "id": ".tooltip_discord_text",
+          "type": "attr",
+          "text": {
+            "title": "디스코드"
+          }
+        },
+        {
+          "id": ".tooltip_soundpad_text",
+          "type": "attr",
+          "text": {
+            "title": "사운드패드"
+          }
+        },
+        {
+          "id": ".tooltip_obsstudio_text",
+          "type": "attr",
+          "text": {
+            "title": "OBS 스튜디오"
+          }
+        },
+        {
+          "id": ".tooltip_webpages_text",
+          "type": "attr",
+          "text": {
+            "title": "웹 페이지"
+          }
         }
     ]
 };

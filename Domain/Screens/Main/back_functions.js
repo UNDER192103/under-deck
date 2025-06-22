@@ -34,8 +34,15 @@ ipcRenderer.on('ExecMacro', (events, data) => {
   }
 });
 
-ipcRenderer.on('exec-soundpad-by-index', (events, data) => {
-  Comun.exec_soundpad(pathSoundPadExe, data);
+ipcRenderer.on('exec-apps-_id', async (events, id) => {
+  let listApps = await DAO.ProgramsExe.get('list_programs');
+  if(!listApps) listApps = [];
+  if(listApps.find(f => f._id == id))
+    Comun.exec_program(listApps.find(f => f._id == id));
+});
+
+ipcRenderer.on('exec-soundpad-by-index', (events, index) => {
+  Comun.exec_soundpad(pathSoundPadExe, index);
 });
 
 ipcRenderer.on('AutoUpdater', (events, data) => {

@@ -2542,6 +2542,58 @@ module.exports = {
             "id": ".Approved",
             "type": "html",
             "text": "已批准"
+        },
+        {
+          "id": ".Activate_overlay",
+          "type": "html",
+          "text": "激活叠加层"
+        },
+        {
+          "id": ".edit_shortcut_text",
+          "type": "html",
+          "text": "编辑快捷方式"
+        },
+        {
+          "id": ".tooltip_apps_text",
+          "type": "attr",
+          "text": {
+            "title": "应用程序"
+          }
+        },
+        {
+          "id": ".tooltip_keysmacro_text",
+          "type": "attr",
+          "text": {
+            "title": "快捷键"
+          }
+        },
+        {
+          "id": ".tooltip_discord_text",
+          "type": "attr",
+          "text": {
+            "title": "Discord"
+          }
+        },
+        {
+          "id": ".tooltip_soundpad_text",
+          "type": "attr",
+          "text": {
+            "title": "SoundPad"
+          }
+        },
+        {
+          "id": ".tooltip_obsstudio_text",
+          "type": "attr",
+          "text": {
+            "title": "Obs Studio"
+          }
+        },
+        {
+          "id": ".tooltip_webpages_text",
+          "type": "attr",
+          "text": {
+            "title": "网页"
+          }
         }
     ]
 };

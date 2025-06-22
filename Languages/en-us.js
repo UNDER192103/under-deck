@@ -2521,5 +2521,57 @@ module.exports = {
             type: "html",
             text: "Approved",
         },
+        {
+          "id": ".Activate_overlay",
+          "type": "html",
+          "text": "Activate Overlay"
+        },
+        {
+          "id": ".edit_shortcut_text",
+          "type": "html",
+          "text": "Edit Shortcut"
+        },
+        {
+          "id": ".tooltip_apps_text",
+          "type": "attr",
+          "text": {
+            "title": "Applications"
+          }
+        },
+        {
+          "id": ".tooltip_keysmacro_text",
+          "type": "attr",
+          "text": {
+            "title": "Hotkeys"
+          }
+        },
+        {
+          "id": ".tooltip_discord_text",
+          "type": "attr",
+          "text": {
+            "title": "Discord"
+          }
+        },
+        {
+          "id": ".tooltip_soundpad_text",
+          "type": "attr",
+          "text": {
+            "title": "SoundPad"
+          }
+        },
+        {
+          "id": ".tooltip_obsstudio_text",
+          "type": "attr",
+          "text": {
+            "title": "OBS Studio"
+          }
+        },
+        {
+          "id": ".tooltip_webpages_text",
+          "type": "attr",
+          "text": {
+            "title": "Webpages"
+          }
+        }
     ]
 };

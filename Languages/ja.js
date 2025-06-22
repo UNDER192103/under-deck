@@ -2554,6 +2554,58 @@ module.exports = {
           "id": ".Approved",
           "type": "html",
           "text": "承認済み"
+        },
+        {
+          "id": ".Activate_overlay",
+          "type": "html",
+          "text": "オーバーレイをアクティブ化"
+        },
+        {
+          "id": ".edit_shortcut_text",
+          "type": "html",
+          "text": "ショートカットを編集"
+        },
+        {
+          "id": ".tooltip_apps_text",
+          "type": "attr",
+          "text": {
+            "title": "アプリケーション"
+          }
+        },
+        {
+          "id": ".tooltip_keysmacro_text",
+          "type": "attr",
+          "text": {
+            "title": "ホットキー"
+          }
+        },
+        {
+          "id": ".tooltip_discord_text",
+          "type": "attr",
+          "text": {
+            "title": "Discord"
+          }
+        },
+        {
+          "id": ".tooltip_soundpad_text",
+          "type": "attr",
+          "text": {
+            "title": "SoundPad"
+          }
+        },
+        {
+          "id": ".tooltip_obsstudio_text",
+          "type": "attr",
+          "text": {
+            "title": "OBS Studio"
+          }
+        },
+        {
+          "id": ".tooltip_webpages_text",
+          "type": "attr",
+          "text": {
+            "title": "ウェブページ"
+          }
         }
     ]
 };

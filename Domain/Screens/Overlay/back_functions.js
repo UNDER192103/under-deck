@@ -16,6 +16,10 @@ ipcRenderer.on('OV-Update-data', (events, data) => {
       ListSoundPad = data.data;
       ChangeListSoundPad();
     break;
+
+    case 'apps':
+      ChangeListAllApps();
+    break;
   
     default:
     break;

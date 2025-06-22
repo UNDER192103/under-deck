@@ -2558,6 +2558,58 @@ module.exports = {
           "id": ".Approved",
           "type": "html",
           "text": "Aprobado"
+        },
+        {
+          "id": ".Activate_overlay",
+          "type": "html",
+          "text": "Activar Superposición"
+        },
+        {
+          "id": ".edit_shortcut_text",
+          "type": "html",
+          "text": "Editar Atajo"
+        },
+        {
+          "id": ".tooltip_apps_text",
+          "type": "attr",
+          "text": {
+            "title": "Aplicaciones"
+          }
+        },
+        {
+          "id": ".tooltip_keysmacro_text",
+          "type": "attr",
+          "text": {
+            "title": "Teclas de Acceso Rápido"
+          }
+        },
+        {
+          "id": ".tooltip_discord_text",
+          "type": "attr",
+          "text": {
+            "title": "Discord"
+          }
+        },
+        {
+          "id": ".tooltip_soundpad_text",
+          "type": "attr",
+          "text": {
+            "title": "SoundPad"
+          }
+        },
+        {
+          "id": ".tooltip_obsstudio_text",
+          "type": "attr",
+          "text": {
+            "title": "Obs Studio"
+          }
+        },
+        {
+          "id": ".tooltip_webpages_text",
+          "type": "attr",
+          "text": {
+            "title": "Páginas Web"
+          }
         }
     ]
 };
