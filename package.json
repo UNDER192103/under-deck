@@ -4,7 +4,7 @@
   "description": "Under Deck",
   "productName": "Under Deck",
   "main": "index.js",
-  "status": "dev",
+  "status": "release",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
@@ -86,6 +86,7 @@
     "obs-websocket-js": "^5.0.6",
     "open": "^9.1.0",
     "qrcode": "^1.5.3",
+    "robotjs": "^0.6.0",
     "serialport": "^12.0.0",
     "socket.io": "^4.7.5",
     "superagent": "^10.2.0",
