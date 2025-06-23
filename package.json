@@ -19,6 +19,10 @@
     "releaseType": "release"
   },
   "build": {
+    "electronVersion": "24.8.8",
+    "nodeGypRebuild": true,
+    "buildDependenciesFromSource": true,
+    "npmRebuild": true,
     "asar": false,
     "appId": "com.UNDER192103.underdeck",
     "productName": "Under Deck",
