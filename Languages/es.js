@@ -2610,6 +2610,51 @@ module.exports = {
           "text": {
             "title": "Páginas Web"
           }
+        },
+        {
+            "id": ".Options_for_the_Operating_System",
+            "type": "html",
+            "text": "Opciones para el sistema operativo",
+        },
+        {
+            "id": ".audio_play_text",
+            "type": "html",
+            "text": "Reproducir/Pausar medio"
+        },
+        {
+            "id": ".audio_next_text",
+            "type": "html",
+            "text": "Siguiente medio"
+        },
+        {
+            "id": ".audio_prev_text",
+            "type": "html",
+            "text": "Medio anterior"
+        },
+        {
+            "id": ".audio_stop_text",
+            "type": "html",
+            "text": "Detener medio"
+        },
+        {
+            "id": ".audio_vol_up_text",
+            "type": "html",
+            "text": "Subir volumen"
+        },
+        {
+            "id": ".audio_vol_down_text",
+            "type": "html",
+            "text": "Bajar volumen"
+        },
+        {
+            "id": ".audio_mute_text",
+            "type": "html",
+            "text": "Silenciar/Quitar silencio"
+        },
+        {
+            "id": ".There_is_already_a_record_of_this_action_for_the_operating_system",
+            "type": "text",
+            "text": "Ya existe un registro de esta acción para el sistema operativo."
         }
     ]
 };

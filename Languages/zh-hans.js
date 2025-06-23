@@ -2594,6 +2594,51 @@ module.exports = {
           "text": {
             "title": "网页"
           }
+        },
+        {
+            "id": ".Options_for_the_Operating_System",
+            "type": "html",
+            "text": "操作系统选项",
+        },
+        {
+            "id": ".audio_play_text",
+            "type": "html",
+            "text": "媒体播放/暂停"
+        },
+        {
+            "id": ".audio_next_text",
+            "type": "html",
+            "text": "下一媒体"
+        },
+        {
+            "id": ".audio_prev_text",
+            "type": "html",
+            "text": "上一媒体"
+        },
+        {
+            "id": ".audio_stop_text",
+            "type": "html",
+            "text": "暂停媒体"
+        },
+        {
+            "id": ".audio_vol_up_text",
+            "type": "html",
+            "text": "增大音量"
+        },
+        {
+            "id": ".audio_vol_down_text",
+            "type": "html",
+            "text": "减小音量"
+        },
+        {
+            "id": ".audio_mute_text",
+            "type": "html",
+            "text": "静音/取消静音"
+        },
+        {
+            "id": ".There_is_already_a_record_of_this_action_for_the_operating_system",
+            "type": "text",
+            "text": "操作系统已存在此操作的记录。"
         }
     ]
 };

@@ -2574,9 +2574,6 @@ module.exports = {
             type: "html",
             text: "Opções para o Sistema operacional",
         },
-
-
-
         {
             id: ".audio_play_text",
             type: "html",

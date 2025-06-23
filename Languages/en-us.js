@@ -2572,6 +2572,51 @@ module.exports = {
           "text": {
             "title": "Webpages"
           }
+        },
+        {
+            id: ".Options_for_the_Operating_System",
+            type: "html",
+            text: "Options for the Operating System",
+        },
+        {
+            "id": ".audio_play_text",
+            "type": "html",
+            "text": "Media Play/Pause"
+        },
+        {
+            "id": ".audio_next_text",
+            "type": "html",
+            "text": "Next Media"
+        },
+        {
+            "id": ".audio_prev_text",
+            "type": "html",
+            "text": "Previous Media"
+        },
+        {
+            "id": ".audio_stop_text",
+            "type": "html",
+            "text": "Stop Media"
+        },
+        {
+            "id": ".audio_vol_up_text",
+            "type": "html",
+            "text": "Increase Volume"
+        },
+        {
+            "id": ".audio_vol_down_text",
+            "type": "html",
+            "text": "Decrease Volume"
+        },
+        {
+            "id": ".audio_mute_text",
+            "type": "html",
+            "text": "Mute/Unmute"
+        },
+        {
+            "id": ".There_is_already_a_record_of_this_action_for_the_operating_system",
+            "type": "text",
+            "text": "There is already a record of this action for the operating system."
         }
     ]
 };
