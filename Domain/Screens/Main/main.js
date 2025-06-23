@@ -12,6 +12,12 @@ const CloudService = require("../../Service/Cloud");
 const ShortcutKeys = require("../../Service/ShortcutKeys");
 const PACKGEJSON = require("../../../package.json");
 const macrosService = new ShortcutKeys();
+var robotjs;
+try {
+  robotjs = require('robotjs');
+} catch (error) {
+  console.log(error);
+}
 
 autoUpdater.autoDownload = false;
 autoUpdater.autoInstallOnAppQuit = false;
@@ -299,15 +305,18 @@ class MainScreen {
       this.window.show();
       this.window.maximize();
     });
+
     this.handleMessages('app-minimize', async (event, dt) => {
       this.window.minimize();
     });
+
     this.handleMessages('app-maximize', (event, dt) => {
       if (this.window.isMaximized())
         this.window.unmaximize();
       else
         this.window.maximize();
     });
+
     this.handleMessages('app-close', async (event, dt) => {
       if (await DAO.DB.get('isMinimizeToBar') == true)
         this.window.hide();
@@ -753,6 +762,18 @@ class MainScreen {
             });
           }
         });
+      }
+    });
+
+    this.handleMessages('Robotjs_keyTap', (event, data) => {
+      try {
+        if(data.key){
+          if(data.modifier) return robotjs.keyTap(data.key, data.modifier);
+          return robotjs.keyTap(data.key);
+        }
+        return false;
+      } catch (error) {
+        return false;
       }
     });
 

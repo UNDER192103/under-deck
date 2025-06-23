@@ -175,6 +175,10 @@ const exec_program = async (data, type = null) => {
                 }
 
             }
+            else if(type == "options_os"){
+                console.log({key: data.path})
+                await BACKEND.Send('Robotjs_keyTap', {key: data.path}).the(console.log);
+            }
             else {
 
             }

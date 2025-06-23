@@ -44,23 +44,23 @@ $(document).ready(async () => {
 
     $('#input-app-exec').change(async () => {
         $('.alert-add-app').text("").addClass('hidden');
-        if ($("#name-exe-modal-1").val().length == 0) {
+        if ($("#name-c-to-app").val().length == 0) {
             var executable = $('#input-app-exec')[0].files[0];
             if (executable != null)
-                $("#name-exe-modal-1").val(executable.name.split(".")[0])
+                $("#name-c-to-app").val(executable.name.split(".")[0])
             else
-                $("#name-exe-modal-1").val("");
+                $("#name-c-to-app").val("");
         }
     });
 
     $('#input-app-audio').change(async () => {
         $('.alert-add-app').text("").addClass('hidden');
-        if ($("#name-exe-modal-1").val().length == 0) {
+        if ($("#name-c-to-app").val().length == 0) {
             var executable = $('#input-app-audio')[0].files[0];
             if (executable != null)
-                $("#name-audio-modal-1").val(executable.name.split(".")[0])
+                $("#name-c-to-app").val(executable.name.split(".")[0])
             else
-                $("#name-audio-modal-1").val("");
+                $("#name-c-to-app").val("");
         }
     });
 
@@ -424,8 +424,8 @@ const add_new_webpage = async () => {
 const installed_software_select = async (id) => {
     var item = _list_installed_software.filter(f => f.id_for_select == id)[0];
     if (item) {
-        if ($("#name-exe-modal-1").val() == '' || $("#name-exe-modal-1").val() == radio_select_name_file) {
-            $("#name-exe-modal-1").val(item.DisplayName)
+        if ($("#name-c-to-app").val() == '' || $("#name-c-to-app").val() == radio_select_name_file) {
+            $("#name-c-to-app").val(item.DisplayName)
             radio_select_name_file = item.DisplayName;
         }
         radio_select_file_dir = item.DisplayIcon;
@@ -504,20 +504,18 @@ async function clear_add_app() {
     $("#icon-custom-add-app").val('');
     $("#inputs-add-exe").addClass("hidden");
     $("#formselecCustomIcon").addClass("hidden");
+    $("#formselecCustomName").addClass("hidden");
     $("#inputs-add-audio-input").addClass("hidden");
     $("#inputs-add-discord-integration").addClass("hidden");
+    $("#inputs-add-options-os-integration").addClass("hidden");
     $("#soundpad-add-app").addClass("hidden");
     $("#inputs-add-web-page-url").addClass("hidden");
     $("#inputs-add-cmd-input").addClass("hidden");
     $("#obs-add-app-t").addClass("hidden");
     $('#bnt-select-type-add-app').text(getNameTd(".select_text"));
     $('.alert-add-app').text("").addClass('hidden');
-    $("#name-exe-modal-1").val("");
-    $("#name-exe-modal-2").val("");
-    $("#name-exe-modal-3").val("");
-    $("#name-exe-modal-6").val("");
+    $("#name-c-to-app").val("");
     $("#select-soundpad-audio").val("");
-    $("#name-audio-modal-1").val("");
     $("#url-add-app").val("");
     $("#cmd-add-app").val("");
     $("#input-app-audio").val('');
@@ -525,7 +523,6 @@ async function clear_add_app() {
     $("#select-obs-scene").val('');
     $('#select-audios-inputs').val('');
     $("#select-obs-options").val('')
-    $("#name-exe-modal-0").val('');
     $("#select-discord-integration").val('');
     old_sbs_scene_selected = null;
     add_app.type_exec = null;
@@ -545,10 +542,11 @@ async function select_type_add_app(type, id, text_type, id_remove_hidden) {
     $("#icon-custom-add-app").val('');
     $('.alert-add-app').html(``).addClass('hidden');
     $("#formselecCustomIcon").addClass("hidden");
+    $("#formselecCustomName").addClass("hidden");
     $("#inputs-add-audio-input").addClass("hidden");
     $("#inputs-add-discord-integration").addClass("hidden");
+    $("#inputs-add-options-os-integration").addClass("hidden");
     $("#soundpad-add-app").addClass("hidden");
-    $("#name-audio-modal-1").val("");
     $("#input-app-audio").val('');
     $("#select-obs-scene").val('');
     $('#select-audios-inputs').val('');
@@ -556,10 +554,7 @@ async function select_type_add_app(type, id, text_type, id_remove_hidden) {
     $("#inputs-add-web-page-url").addClass("hidden");
     $("#inputs-add-cmd-input").addClass("hidden");
     $("#obs-add-app-t").addClass("hidden");
-    $("#name-exe-modal-1").val("");
-    $("#name-exe-modal-2").val("");
-    $("#name-exe-modal-3").val("");
-    $("#name-exe-modal-6").val("");
+    $("#name-c-to-app").val("");
     $("#select-soundpad-audio").val("");
     $("#url-add-app").val("");
     $("#cmd-add-app").val("");
@@ -567,7 +562,6 @@ async function select_type_add_app(type, id, text_type, id_remove_hidden) {
     $('#input-app-audio').val("");
     $("#name-custom-obs-scene").val("");
     $("#select-obs-options").val('');
-    $("#name-exe-modal-0").val('');
     $("#select-discord-integration").val('');
     old_sbs_scene_selected = null;
     if (type == 'obs_wss') {
@@ -582,6 +576,7 @@ async function select_type_add_app(type, id, text_type, id_remove_hidden) {
     add_app.type_exec = type;
     $("#bnt-select-type-add-app").text(getNameTd(text_type));
     $("#formselecCustomIcon").removeClass("hidden");
+    $("#formselecCustomName").removeClass("hidden");
     $(id_remove_hidden).removeClass("hidden");
 }
 
@@ -590,11 +585,29 @@ async function add_new_app() {
     var icon = null;
     var nameCustom = "";
 
-    if (add_app.type_exec == "discord") {
-        if ($("#name-exe-modal-0").val().length == 0) {
+    if(add_app.type_exec === "options_os"){
+        if ($("#name-c-to-app").val().length == 0) {
             toaster.warning(getNameTd(".requere_name_add_app"));
             $('.alert-add-app').text(getNameTd(".requere_name_add_app")).removeClass('hidden');
-            $('#name-exe-modal-0').focus();
+            $('#name-c-to-app').focus();
+            return;
+        }
+        if ($("#select-options-os-integration").val().length == 0) {
+            toaster.warning(getNameTd(".requere_cmd_add_app"));
+            $('.alert-add-app').text(getNameTd(".requere_cmd_add_app")).removeClass('hidden');
+            $('#select-options-os-integration').focus();
+            return;
+        }
+        icon = $("#icon-custom-add-app")[0].files[0];
+        nameCustom = $("#name-c-to-app").val();
+        let option = $("#select-options-os-integration").val();
+        add_app_for_os_option(option, icon, nameCustom);
+    }
+    else if (add_app.type_exec == "discord") {
+        if ($("#name-c-to-app").val().length == 0) {
+            toaster.warning(getNameTd(".requere_name_add_app"));
+            $('.alert-add-app').text(getNameTd(".requere_name_add_app")).removeClass('hidden');
+            $('#name-c-to-app').focus();
             return;
         }
         if ($("#select-discord-integration").val().length == 0) {
@@ -604,14 +617,14 @@ async function add_new_app() {
             return;
         }
         icon = $("#icon-custom-add-app")[0].files[0];
-        nameCustom = $("#name-exe-modal-0").val();
+        nameCustom = $("#name-c-to-app").val();
         let discord_option = $("#select-discord-integration").val();
         add_app_for_discord(discord_option, icon, nameCustom);
     }
     else if (add_app.type_exec == "audio") {
         var executable = $('#input-app-audio')[0].files[0];
         icon = $("#icon-custom-add-app")[0].files[0];
-        nameCustom = $("#name-audio-modal-1").val();
+        nameCustom = $("#name-c-to-app").val();
         if (executable == null) {
             toaster.warning(getNameTd(".p_s_a_audio_text"));
             $('.alert-add-app').text(getNameTd(".p_s_a_audio_text")).removeClass('hidden');
@@ -632,7 +645,7 @@ async function add_new_app() {
         else if (!executable.type.includes('audio/')) {
             toaster.warning(getNameTd(".file_not_accepted"));
             $('.alert-add-app').text(getNameTd(".file_not_accepted")).removeClass('hidden');
-            $("#name-audio-modal-1").val('');
+            $("#name-c-to-app").val('');
             $('#input-app-audio').val('');
             $('#input-app-audio').focus();
             return;
@@ -641,12 +654,12 @@ async function add_new_app() {
     }
     else if (add_app.type_exec == "soundpad_audio") {
         icon = $("#icon-custom-add-app")[0].files[0];
-        nameCustom = $("#name-exe-modal-6").val();
+        nameCustom = $("#name-c-to-app").val();
         let soundpad_audio = $("#select-soundpad-audio").val();
         if (nameCustom.length == 0) {
             toaster.warning(getNameTd(".requere_name_add_app"));
             $('.alert-add-app').text(getNameTd(".requere_name_add_app")).removeClass('hidden');
-            $("#name-exe-modal-6").focus();
+            $("#name-c-to-app").focus();
             return;
         }
         if (soundpad_audio == '') {
@@ -660,7 +673,7 @@ async function add_new_app() {
     else if (add_app.type_exec == "exe") {
         var executable = $('#input-app-exec')[0].files[0];
         icon = $("#icon-custom-add-app")[0].files[0];
-        nameCustom = $("#name-exe-modal-1").val();
+        nameCustom = $("#name-c-to-app").val();
         if (executable == null && radio_select_file_info == null) {
             toaster.warning(getNameTd(".p_s_a_e_text"));
             $('.alert-add-app').text(getNameTd(".p_s_a_e_text")).removeClass('hidden');
@@ -681,7 +694,7 @@ async function add_new_app() {
         else if (!executable.type.includes('application/')) {
             toaster.warning(getNameTd(".file_not_accepted"));
             $('.alert-add-app').text(getNameTd(".file_not_accepted")).removeClass('hidden');
-            $("#name-exe-modal-1").val('');
+            $("#name-c-to-app").val('');
             $('#input-app-exec').val('');
             $('#input-app-exec').focus();
             return;
@@ -689,10 +702,10 @@ async function add_new_app() {
         add_app_for_file(executable, icon, nameCustom);
     }
     else if (add_app.type_exec == "web_page") {
-        if ($("#name-exe-modal-2").val().length == 0) {
+        if ($("#name-c-to-app").val().length == 0) {
             toaster.warning(getNameTd(".requere_name_add_app"));
             $('.alert-add-app').text(getNameTd(".requere_name_add_app")).removeClass('hidden');
-            $('#name-exe-modal-2').focus();
+            $('#name-c-to-app').focus();
             return;
         }
         if ($("#url-add-app").val().length == 0) {
@@ -702,15 +715,15 @@ async function add_new_app() {
             return;
         }
         icon = $("#icon-custom-add-app")[0].files[0];
-        nameCustom = $("#name-exe-modal-2").val();
+        nameCustom = $("#name-c-to-app").val();
         let url = $("#url-add-app").val();
         add_app_for_web_page(url, icon, nameCustom)
     }
     else if (add_app.type_exec == "cmd") {
-        if ($("#name-exe-modal-3").val().length == 0) {
+        if ($("#name-c-to-app").val().length == 0) {
             toaster.warning(getNameTd(".requere_name_add_app"));
             $('.alert-add-app').text(getNameTd(".requere_name_add_app")).removeClass('hidden');
-            $('#name-exe-modal-3').focus();
+            $('#name-c-to-app').focus();
             return;
         }
         if ($("#cmd-add-app").val().length == 0) {
@@ -720,7 +733,7 @@ async function add_new_app() {
             return;
         }
         icon = $("#icon-custom-add-app")[0].files[0];
-        nameCustom = $("#name-exe-modal-3").val();
+        nameCustom = $("#name-c-to-app").val();
         let cmd = $("#cmd-add-app").val();
         add_app_for_cmd(cmd, icon, nameCustom);
     }
@@ -732,7 +745,7 @@ async function add_new_app() {
         if (nameCustom.length == 0) {
             toaster.warning(getNameTd(".requere_name_add_app"));
             $('.alert-add-app').text(getNameTd(".requere_name_add_app")).removeClass('hidden');
-            $('#name-exe-modal-3').focus();
+            $('#name-c-to-app').focus();
             return;
         }
         if (OBS_TEMP_DATA != null && OBS_TEMP_DATA.scenes.scenes.length > 0) {
@@ -945,6 +958,49 @@ const add_app_for_soundpad_audio = async (soundpadHash, icon, nameCustom) => {
     else {
         toaster.warning(getNameTd(".this_is_soundpad_already_registered"));
         $('.alert-add-app').text(getNameTd(".this_is_soundpad_already_registered")).removeClass('hidden');
+    }
+}
+
+const add_app_for_os_option = async (action, icon, nameCustom) => {
+    var filesSaved = await DAO.ProgramsExe.get('list_programs'), isFileSaved = false;
+    if (filesSaved != null) {
+        await filesSaved.forEach(item => {
+            if (item.name == nameCustom)
+                isFileSaved = true;
+            else if (item.path == action)
+                isFileSaved = true;
+        });
+    }
+    if (!isFileSaved) {
+        var _idItem = null;
+        var positon_rl = 1;
+        if (filesSaved != null && filesSaved.length > 0) {
+            if (filesSaved.length > 1) {
+                var iret = filesSaved.sort(compare__id).pop();
+                _idItem = iret._id + 1;
+            }
+            else
+                _idItem = filesSaved[0]._id + 1;
+
+            var lra = await filesSaved.sort(compare_positon_l);
+            positon_rl = lra[lra.length - 1].positon_l + 1;
+        }
+        else
+            _idItem = 1;
+        save_icon_app_file(icon, nameCustom, async (dir_icon) => {
+            if (dir_icon == null) dir_icon = path.join(MAIN_DIR, "/Domain/src/img/underbot_logo.png");
+            var item = { _id: _idItem, positon_l: positon_rl, type_exec: add_app.type_exec, lastModified: "", lastModifiedDate: "", name: nameCustom, nameCustom: nameCustom, path: action, scene: null, obsOption: null, type: "", size: "", iconCustom: dir_icon }
+            await DAO.ProgramsExe.push("list_programs", item);
+            appendHtml(item, _idItem);
+            DAO.List_programs = await DAO.ProgramsExe.get('list_programs');
+            $('.bnt-close-modal-add-app').click();
+            clear_add_app();
+            toaster.success(`${getNameTd('.Added_successfully')}`);
+        })
+    }
+    else {
+        toaster.warning(getNameTd(".There_is_already_a_record_of_this_action_for_the_operating_system"));
+        $('.alert-add-app').text(getNameTd(".There_is_already_a_record_of_this_action_for_the_operating_system")).removeClass('hidden');
     }
 }
 

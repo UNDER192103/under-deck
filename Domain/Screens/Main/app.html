@@ -1544,6 +1544,10 @@
                                     onclick="select_type_add_app('web_page', 'type_add_app_2', '.web_page_text', '#inputs-add-web-page-url')">
                                     <a id="type_add_app_2" class="dropdown-item web_page_text" href="#"></a>
                                  </li>
+                                 <li
+                                    onclick="select_type_add_app('options_os', 'type_add_app_7', '.Options_for_the_Operating_System', '#inputs-add-options-os-integration')">
+                                    <a id="type_add_app_7" class="dropdown-item Options_for_the_Operating_System" href="#"></a>
+                                 </li>
                               </ul>
                            </div>
                         </div>
@@ -1559,11 +1563,12 @@
                               accept=".jpeg, .gif, .png, .gif">
                         </div>
 
+                        <div id="formselecCustomName" class="mb-3">
+                              <label for="name-c-to-app" class="col-form-label name_text_expc_1"></label>
+                              <input type="text" class="form-control" id="name-c-to-app">
+                        </div>
+
                         <div id="inputs-add-audio-input" class="mb-3 hidden">
-                           <div class="mb-3">
-                              <label for="name-audio-modal-1" class="col-form-label name_text_expc_1"></label>
-                              <input type="text" class="form-control" id="name-audio-modal-1">
-                           </div>
                            <div class="mb-3">
                               <label for="input-app-audio" class="col-form-label audio_text"></label>:
                               <input type="file" class="form-control" id="input-app-audio" aria-label="Upload"
@@ -1572,11 +1577,6 @@
                         </div>
 
                         <div id="inputs-add-discord-integration" class="mb-3 hidden">
-                           <div class="mb-3">
-                              <label for="name-exe-modal-0" class="col-form-label name_text_expc_1"></label>
-                              <input type="text" class="form-control" id="name-exe-modal-0">
-                           </div>
-
                            <div class="mb-3">
                               <label for="select-discord-integration" class="col-form-label discord_text"></label>:
                               <select id="select-discord-integration" class="form-select">
@@ -1589,12 +1589,23 @@
                            </div>
                         </div>
 
-                        <div id="soundpad-add-app" class="mb-3 hidden">
+                        <div id="inputs-add-options-os-integration" class="mb-3 hidden">
                            <div class="mb-3">
-                              <label for="name-exe-modal-6" class="col-form-label name_text_expc_1"></label>
-                              <input type="text" class="form-control" id="name-exe-modal-6">
+                              <label for="select-options-os-integration" class="col-form-label options_text"></label>:
+                              <select id="select-options-os-integration" class="form-select">
+                                 <option value="" selected class="Select_the_type_of_action_text"></option>
+                                 <option value="audio_play" class="audio_play_text"></option>
+                                 <option value="audio_next" class="audio_next_text"></option>
+                                 <option value="audio_prev" class="audio_prev_text"></option>
+                                 <option value="audio_stop" class="audio_stop_text"></option>
+                                 <option value="audio_vol_up" class="audio_vol_up_text"></option>
+                                 <option value="audio_vol_down" class="audio_vol_down_text"></option>
+                                 <option value="audio_mute" class="audio_mute_text"></option>
+                              </select>
                            </div>
+                        </div>
 
+                        <div id="soundpad-add-app" class="mb-3 hidden">
                            <div class="mb-3">
                               <label for="select-soundpad-audio" class="col-form-label soundpad"></label>:
                               <select id="select-soundpad-audio" class="form-select">
@@ -1604,10 +1615,6 @@
                         </div>
 
                         <div id="inputs-add-exe" class="mb-3 hidden">
-                           <div class="mb-3">
-                              <label for="name-exe-modal-1" class="col-form-label name_text_expc_1"></label>
-                              <input type="text" class="form-control" id="name-exe-modal-1">
-                           </div>
                            <div class="mb-3">
                               <label for="input-app-exec" class="col-form-label app_text"></label>:
                               <input type="file" class="form-control" id="input-app-exec" aria-label="Upload"
@@ -1646,10 +1653,6 @@
                            </div>
                         </div>
                         <div id="inputs-add-web-page-url" class="mb-3 hidden">
-                           <div class="mb-3">
-                              <label for="name-exe-modal-2" class="col-form-label name_text_expc_1"></label>
-                              <input type="text" class="form-control" id="name-exe-modal-2">
-                           </div>
                            <div class="mb-3">
                               <label for="url-add-app" class="col-form-label web_page_text"></label>:
                               <input type="text" placeholder="Ex.: https://www.youtube.com" class="form-control"
@@ -1707,10 +1710,6 @@
                         </div>
 
                         <div id="inputs-add-cmd-input" class="mb-3 hidden">
-                           <div class="mb-3">
-                              <label for="name-exe-modal-3" class="col-form-label name_text_expc_1"></label>
-                              <input type="text" class="form-control" id="name-exe-modal-3">
-                           </div>
                            <div class="mb-3">
                               <label for="cmd-add-app" class="col-form-label cmd_page_text"></label>:
                               <input type="text" placeholder="Ex.: start chrome" class="form-control" id="cmd-add-app">
