@@ -8,7 +8,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "build": "electron-builder"
+    "build": "electron-builder",
+    "build:win": "electron-builder --win",
+    "rebuild": "electron-rebuild",
+    "postinstall": "electron-rebuild"
   },
   "repository": "https://github.com/UNDER192103/under-deck",
   "publish": {
@@ -16,6 +19,10 @@
     "releaseType": "release"
   },
   "build": {
+    "electronVersion": "24.8.8",
+    "nodeGypRebuild": true,
+    "buildDependenciesFromSource": true,
+    "npmRebuild": true,
     "asar": false,
     "appId": "com.UNDER192103.underdeck",
     "productName": "Under Deck",
@@ -33,7 +40,7 @@
       "allowToChangeInstallationDirectory": true
     },
     "directories": {
-      "output": "biuld"
+      "output": "build"
     }
   },
   "homepage": "https://github.com/UNDER192103/under-deck",
@@ -59,6 +66,7 @@
     "@popperjs/core": "^2.11.7",
     "electron": "^24.8.8",
     "electron-builder": "^24.13.3",
+    "electron-rebuild": "^3.2.9",
     "express": "^4.18.2",
     "fs": "^0.0.1-security",
     "jsoning": "^0.13.23",
@@ -82,12 +90,14 @@
     "lepikevents": "^2.0.5",
     "loudness": "^0.4.2",
     "macaddress": "^0.5.3",
+    "node-abi": "^4.9.0",
     "node-global-key-listener": "^0.1.1",
+    "node-gyp": "^11.2.0",
     "obs-websocket-js": "^5.0.6",
     "open": "^9.1.0",
+    "prebuild-install": "^7.1.3",
     "qrcode": "^1.5.3",
     "robotjs": "^0.6.0",
-    "serialport": "^12.0.0",
     "socket.io": "^4.7.5",
     "superagent": "^10.2.0",
     "toastify-js": "^1.12.0",
