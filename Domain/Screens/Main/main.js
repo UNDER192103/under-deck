@@ -856,6 +856,7 @@ class MainScreen {
         setTimeout(() => {
           macrosService.stop();
           autoUpdater.quitAndInstall(false, true);
+          this.CloseAllWindows();
         }, 5000);
       }
       else {
@@ -880,6 +881,7 @@ class MainScreen {
           if (returnValue.response == 1) {
             macrosService.stop();
             autoUpdater.quitAndInstall(false, true);
+            this.CloseAllWindows();
           }
           else {
             this.sendFrontData("AutoUpdater", {
