@@ -1,72 +1,69 @@
 const path = require('path');
 const { app, BrowserWindow, Tray } = require('electron');
-const Validations = require("../Domain/Comun/Validations.js");
-const Screen_main = require("../Domain/Screens/Main/main.js");
-const Screens = require("../Domain/Screens/Screen.js");
-
-var screen = null, appIcon = null;
-
-app.whenReady().then(() => {
-  Object.defineProperty(app, 'isPackaged', {
-    get() {
-      return true;
-    }
-  });
-  appIcon = new Tray(path.join(app.getAppPath(), '/Domain/src/img/under-icon-256x.ico'));
-  app.setAppUserModelId(app.getName());
-
-  Validations.killProcessWinpy(() => {
-
-    Validations.DB_default_values(() => {
-      createWindowApp();
-
-      app.on("activate", function () {
-        if (BrowserWindow.getAllWindows().length == 0) createWindowApp();
-      });
-    });
-
-  });
-
+const Validations = require('../Domain/Communs/Validations.js');
+const Screen_App = require("../Domain/Views/App/app.js");
+Validations.CheckIsAppRunning().then(async () => {
+    await Validations.SetDBDefaultValues();
+    if (BrowserWindow.getAllWindows().length == 0) createWindowApp();
 });
 
+
 function createWindowApp() {
-  if (screen != null) return;
+    if (APP_SCREN != null) return;
 
-  screen = new Screen_main(appIcon);
+    APP_HANDLEMESSAGES('APP_PATH', () => {
+      return app.getAppPath();
+    });
 
-  screen.appIcon.on('double-click', function (e) {
-    if (screen.window.isVisible()) {
-      screen.window.hide();
-    } else {
-      screen.window.show();
-      screen.window.maximize();
-    }
-  });
+    APP_HANDLEMESSAGES('LANG_GET', (event, index) => {
+      return TRANSLATOR.Get(index);
+    });
 
-  screen.handleMessages('new_window', (event, dt) => {
-    if (dt != null && dt.name != null) {
-      Screens.New(dt);
-      return true;
-    }
-    return false;
-  });
+    APP_HANDLEMESSAGES('LANG_LIST', () => {
+      return TRANSLATOR.GetLang();
+    });
 
-  screen.handleMessages('close_window', (event, dt) => {
-    if (dt != null && dt.name != null) {
-      Screens.Close(dt.name);
-      return true;
-    }
-    return false;
-  });
+    APP_HANDLEMESSAGES('LIST_LANGS', () => {
+      return TRANSLATOR.GetListLanguages();
+    });
 
-  screen.setContextMenu(screen);
+    APP_HANDLEMESSAGES('new_window', (event, dt) => {
+      if (dt != null && dt.name != null) {
+        SCREENSCONTRUCTOR.New(dt);
+        return true;
+      }
+      return false;
+    });
+    
+    APP_HANDLEMESSAGES('close_window', (event, dt) => {
+      if (dt != null && dt.name != null) {
+        SCREENSCONTRUCTOR.Close(dt.name);
+        return true;
+      }
+      return false;
+    });
+
+    APP_SCREN = new Screen_App();
+    APP_ICON.on('double-click', function (e) {
+      if (APP_SCREN.window.isVisible()) {
+        APP_SCREN.window.hide();
+      } else {
+        APP_SCREN.window.show();
+        APP_SCREN.window.maximize();
+      }
+    });
+
+    APP_HANDLEMESSAGES('SELECT_LANG', async (event, id_lang) => {
+      return await APP_SCREN.SelectLanguage(id_lang);
+    });
+    
+    APP_SCREN.setContextMenu();
 }
 
 app.on('window-all-closed', async function () {
   if (process.platform !== 'darwin') {
-    Validations.killProcessWinpy(async () => {
-      await app.quit();
-      process.exit();
-    });
+    await Validations.killProcessWinpy();
+    app.quit();
+    process.exit();
   }
 });

@@ -2613,6 +2613,11 @@ module.exports = {
             "text": "オペレーティングシステムのオプション",
         },
         {
+            "id": ".trad_ty_options_os",
+            "type": "html",
+            "text": "オペレーティングシステムのオプション",
+        },
+        {
             "id": ".audio_play_text",
             "type": "html",
             "text": "メディア再生/一時停止"

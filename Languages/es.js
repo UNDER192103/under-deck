@@ -2617,6 +2617,11 @@ module.exports = {
             "text": "Opciones para el sistema operativo",
         },
         {
+            "id": ".trad_ty_options_os",
+            "type": "html",
+            "text": "Opciones para el sistema operativo",
+        },
+        {
             "id": ".audio_play_text",
             "type": "html",
             "text": "Reproducir/Pausar medio"

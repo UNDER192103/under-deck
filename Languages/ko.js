@@ -2617,6 +2617,11 @@ module.exports = {
             "text": "운영 체제에 대한 옵션",
         },
         {
+            "id": ".trad_ty_options_os",
+            "type": "html",
+            "text": "운영 체제에 대한 옵션",
+        },
+        {
             "id": ".audio_play_text",
             "type": "html",
             "text": "미디어 재생/일시정지"

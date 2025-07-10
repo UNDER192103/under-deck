@@ -1,23 +1,21 @@
-const conf = require('./data/conf.json');
 const axios = require('axios');
 
 class Api {
     Axios = axios;
-    Conf = conf;
     Token = "";
 
     App = axios.create({
-        baseURL: `${conf.API.URL}${conf.API.ROUTE}`,
+        baseURL: `${process.env.API_URL}${process.env.API_ROUTE}`,
         headers: {
-            'Authorization': `Bearer ${conf.API.TOKEN}`, 
+            'Authorization': `Bearer ${process.env.API_TOKEN}`, 
             'Content-Type': 'application/x-www-form-urlencoded'
         }
     });
 
     Cloud = axios.create({
-        baseURL: `${conf.CLOUD.URL}${conf.CLOUD.ROUTE}`,
+        baseURL: `${process.env.CLOUD_URL}${process.env.CLOUD_ROUTE}`,
         headers: {
-            'Authorization': `Bearer ${conf.CLOUD.TOKEN}`, 
+            'Authorization': `Bearer ${process.env.CLOUD_TOKEN}`, 
             'Content-Type': 'application/x-www-form-urlencoded'
         }
     });

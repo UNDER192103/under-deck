@@ -2601,6 +2601,11 @@ module.exports = {
             "text": "操作系统选项",
         },
         {
+            "id": ".trad_ty_options_os",
+            "type": "html",
+            "text": "操作系统选项",
+        },
+        {
             "id": ".audio_play_text",
             "type": "html",
             "text": "媒体播放/暂停"

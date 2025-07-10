@@ -2579,6 +2579,11 @@ module.exports = {
             text: "Options for the Operating System",
         },
         {
+            id: ".trad_ty_options_os",
+            type: "html",
+            text: "Options for the Operating System",
+        },
+        {
             "id": ".audio_play_text",
             "type": "html",
             "text": "Media Play/Pause"

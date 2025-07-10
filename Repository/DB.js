@@ -1,9 +1,8 @@
 const path = require('path');
-const _MAIN_DIR = __dirname.split('Repository')[0];
-const packageJson = require(_MAIN_DIR + "\\package.json");
+const packageJson = require('../package.json');
 const Jsoning = require("jsoning");
-const dir_appdata_un_data = path.join(path.join(process.env.APPDATA, packageJson.productName), 'UN-DATA');
-var _all = require(_MAIN_DIR + 'Domain\\Model\\DB_model.js');
+const DIRAPPDATUNDB = path.join(path.join(process.env.APPDATA, packageJson.productName), 'UN-DATA');
+var _all = require('../Domain/Models/DB.js');
 
 class DBCLASS {
     constructor() {
@@ -11,32 +10,32 @@ class DBCLASS {
             this[key] = _all[key];
         });
 
-        this.DB = new Jsoning(dir_appdata_un_data + "\\DB\\DB.json");
-        this.DBUSER = new Jsoning(dir_appdata_un_data + "\\DB\\DBUSER.json");
-        this.CLOUD = new Jsoning(dir_appdata_un_data + "\\DB\\CLOUD.json");
-        this.DISCORD = new Jsoning(dir_appdata_un_data + "\\DB\\DISCORD.json");
-        this.OBS = new Jsoning(dir_appdata_un_data + "\\DB\\OBS.json");
-        this.WEBDECK = new Jsoning(dir_appdata_un_data + "\\DB\\WEBDECK.json");
-        this.THEMES = new Jsoning(dir_appdata_un_data + "\\DB\\THEMES.json");
-        this.Opens_windows = new Jsoning(dir_appdata_un_data + "\\DB\\Opens_windows.json");
-        this.List_macros = new Jsoning(dir_appdata_un_data + "\\DB\\Macros.json");
-        this.ProgramsExe = new Jsoning(dir_appdata_un_data + "\\DB\\ProgramsExe.json");
+        this.DB = new Jsoning(path.join(DIRAPPDATUNDB, "DB", "DB.json"));
+        this.DBUSER = new Jsoning(path.join(DIRAPPDATUNDB, "DB", "DBUSER.json"));
+        this.CLOUD = new Jsoning(path.join(DIRAPPDATUNDB, "DB", "CLOUD.json"));
+        this.DISCORD = new Jsoning(path.join(DIRAPPDATUNDB, "DB", "DISCORD.json"));
+        this.OBS = new Jsoning(path.join(DIRAPPDATUNDB, "DB", "OBS.json"));
+        this.WEBDECK = new Jsoning(path.join(DIRAPPDATUNDB, "DB", "WEBDECK.json"));
+        this.THEMES = new Jsoning(path.join(DIRAPPDATUNDB, "DB", "THEMES.json"));
+        this.Opens_windows = new Jsoning(path.join(DIRAPPDATUNDB, "DB", "Opens_windows.json"));
+        this.List_macros = new Jsoning(path.join(DIRAPPDATUNDB, "DB", "Macros.json"));
+        this.ProgramsExe = new Jsoning(path.join(DIRAPPDATUNDB, "DB", "ProgramsExe.json"));
         this.DB_DIR = path.join(process.env.APPDATA, packageJson.productName);
         this.THEME_DIR = path.join(process.env.APPDATA, packageJson.productName, 'UN-DATA', 'themes');
         this.GetData();
     }
 
     async GetDataNow() {
-        this.DB = new Jsoning(dir_appdata_un_data + "\\DB\\DB.json");
-        this.DBUSER = new Jsoning(dir_appdata_un_data + "\\DB\\DBUSER.json");
-        this.CLOUD = new Jsoning(dir_appdata_un_data + "\\DB\\CLOUD.json");
-        this.DISCORD = new Jsoning(dir_appdata_un_data + "\\DB\\DISCORD.json");
-        this.OBS = new Jsoning(dir_appdata_un_data + "\\DB\\OBS.json");
-        this.WEBDECK = new Jsoning(dir_appdata_un_data + "\\DB\\WEBDECK.json");
-        this.THEMES = new Jsoning(dir_appdata_un_data + "\\DB\\THEMES.json");
-        this.Opens_windows = new Jsoning(dir_appdata_un_data + "\\DB\\Opens_windows.json");
-        this.List_macros = new Jsoning(dir_appdata_un_data + "\\DB\\Macros.json");
-        this.ProgramsExe = new Jsoning(dir_appdata_un_data + "\\DB\\ProgramsExe.json");
+        this.DB = new Jsoning(path.join(DIRAPPDATUNDB, "DB", "DB.json"));
+        this.DBUSER = new Jsoning(path.join(DIRAPPDATUNDB, "DB", "DBUSER.json"));
+        this.CLOUD = new Jsoning(path.join(DIRAPPDATUNDB, "DB", "CLOUD.json"));
+        this.DISCORD = new Jsoning(path.join(DIRAPPDATUNDB, "DB", "DISCORD.json"));
+        this.OBS = new Jsoning(path.join(DIRAPPDATUNDB, "DB", "OBS.json"));
+        this.WEBDECK = new Jsoning(path.join(DIRAPPDATUNDB, "DB", "WEBDECK.json"));
+        this.THEMES = new Jsoning(path.join(DIRAPPDATUNDB, "DB", "THEMES.json"));
+        this.Opens_windows = new Jsoning(path.join(DIRAPPDATUNDB, "DB", "Opens_windows.json"));
+        this.List_macros = new Jsoning(path.join(DIRAPPDATUNDB, "DB", "Macros.json"));
+        this.ProgramsExe = new Jsoning(path.join(DIRAPPDATUNDB, "DB", "ProgramsExe.json"));
         return this;
     }
 

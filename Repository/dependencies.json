@@ -1,0 +1,11 @@
+{
+    "windows": [
+        {
+            "name": "Microsoft Visual C++ 2015-2022 Redistributable (x86)",
+            "path": "Domain\\Dependencys\\vc_redist_x86.exe",
+            "fileName": "vc_redist_x86.exe",
+            "version": "14.34.31931.0",
+            "testerBy": "loudness"
+        }
+    ]
+}
