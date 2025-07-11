@@ -263,16 +263,30 @@ $(document).ready(async () => {
                                             }
                                         }
                                         let uuid = uuidv4();
-                                        save_icon_PageWebDeck_file(file != null ? file.path : default_image, uuid, async (dir_icon) => {
-                                            await DAO.WEBDECKDATA.pages.push({
-                                                id: uuid,
-                                                name: name,
-                                                icon: dir_icon,
-                                                type: 'page',
-                                                items: list,
+                                        if(typeof file === 'object' && file.name) {
+                                            save_icon_PageWebDeckNF(file, uuid, async (dir_icon) => {
+                                                await DAO.WEBDECKDATA.pages.push({
+                                                    id: uuid,
+                                                    name: name,
+                                                    icon: dir_icon,
+                                                    type: 'page',
+                                                    items: list,
+                                                });
+                                                confirm_add_pvw_wbdc();
                                             });
-                                            confirm_add_pvw_wbdc();
-                                        });
+                                        }
+                                        else {
+                                            save_copy_default_icon_PageWebDeck_file(default_image, uuid, async (dir_icon) => {
+                                                await DAO.WEBDECKDATA.pages.push({
+                                                    id: uuid,
+                                                    name: name,
+                                                    icon: dir_icon,
+                                                    type: 'page',
+                                                    items: list,
+                                                });
+                                                confirm_add_pvw_wbdc();
+                                            });
+                                        }
                                     })
                                 });
                             }
@@ -542,27 +556,47 @@ function WebDeckCreateNewPage(event) {
 
             }
             let uuid = uuidv4();
-            save_icon_PageWebDeck_file(file != null ? file.path : default_image, uuid, async (dir_icon) => {
-                await DAO.WEBDECKDATA.pages.push({
-                    id: uuid,
-                    name: name,
-                    icon: dir_icon,
-                    type: 'page',
-                    items: list,
-                });
+            if(typeof file === 'object' && file.name) {
+                save_icon_PageWebDeckNF(file, uuid, async (dir_icon) => {
+                    await DAO.WEBDECKDATA.pages.push({
+                        id: uuid,
+                        name: name,
+                        icon: dir_icon,
+                        type: 'page',
+                        items: list,
+                    });
 
-                let page = DAO.WEBDECKDATA.pages[pageNow];
-                pvw_page_item_NOW = page.items.find(f => f.id == $(event.currentTarget).attr('id').replace("pvw-", ""));
-                pvw_page_item_NOW.type = 'page';
-                pvw_page_item_NOW.app = { _id: uuid };
-                await DAO.WEBDECK.set('pages', DAO.WEBDECKDATA.pages);
-                confirm_add_pvw_wbdc();
-            });
+                    let page = DAO.WEBDECKDATA.pages[pageNow];
+                    pvw_page_item_NOW = page.items.find(f => f.id == $(event.currentTarget).attr('id').replace("pvw-", ""));
+                    pvw_page_item_NOW.type = 'page';
+                    pvw_page_item_NOW.app = { _id: uuid };
+                    await DAO.WEBDECK.set('pages', DAO.WEBDECKDATA.pages);
+                    confirm_add_pvw_wbdc();
+                });
+            }
+            else {
+                save_copy_default_icon_PageWebDeck_file(default_image, uuid, async (dir_icon) => {
+                    await DAO.WEBDECKDATA.pages.push({
+                        id: uuid,
+                        name: name,
+                        icon: dir_icon,
+                        type: 'page',
+                        items: list,
+                    });
+
+                    let page = DAO.WEBDECKDATA.pages[pageNow];
+                    pvw_page_item_NOW = page.items.find(f => f.id == $(event.currentTarget).attr('id').replace("pvw-", ""));
+                    pvw_page_item_NOW.type = 'page';
+                    pvw_page_item_NOW.app = { _id: uuid };
+                    await DAO.WEBDECK.set('pages', DAO.WEBDECKDATA.pages);
+                    confirm_add_pvw_wbdc();
+                });
+            }
         })
     });
 }
 
-function EditPageWebDeck(pageId) {
+async function EditPageWebDeck(pageId) {
     let page = DAO.WEBDECKDATA.pages.find(f => f.id == pageId);
     if (page) {
         $(".bootbox-close-button").click();
@@ -576,7 +610,7 @@ function EditPageWebDeck(pageId) {
                                 <div class="col-md-12">
                                     <div class="d-flex justify-content-between">
                                         <div class="d-flex align-items-center">
-                                            <img src="${page.icon}" class="img-thumbnail rounded" style="width: 75px; height: 75px;">
+                                            <img src="${typeof page.icon === 'object' && page.icon.size ? await convertImageToBase64(page.icon) : page.icon}" class="img-thumbnail rounded" style="width: 75px; height: 75px;">
                                             <h5 class="m-2">${page.name}</h5>
                                         </div>
                                     </div>
@@ -604,10 +638,10 @@ function EditPageWebDeck(pageId) {
                     callback: async function () {
                         ModalGetImagem(true, async (file, default_image) => {
                             $("body").modalLoading('show');
-                            let NewIcon = file != null ? file.path : default_image;
+                            let NewIcon = file != null ? file : default_image;
                             await Promise.all(DAO.WEBDECKDATA.pages.map(async page => {
                                 if (page.id == pageId) {
-                                    page.OldIcon = page.icon;
+                                    if(!page.OldIcon || page.OldIcon == '') page.OldIcon = page.icon;
                                     page.icon = NewIcon;
                                 }
                                 return page;
@@ -650,19 +684,28 @@ function EditPageWebDeck(pageId) {
                                 });
                                 delete page.OldIcon;
                             }
-                            save_icon_PageWebDeck_file(page.icon, pageId, async (dir_icon) => {
-                                await Promise.all(DAO.WEBDECKDATA.pages.map(async page => {
-                                    if (page.id == pageId) {
-                                        page.icon = dir_icon ? dir_icon : page.icon;
-                                    }
-                                    return page;
-                                }));
+                            if(typeof page.icon === 'object' && page.icon.size) {
+                                save_icon_PageWebDeckBF(page, async (fileDirIcon) => {
+                                    await Promise.all(DAO.WEBDECKDATA.pages.map(async page => {
+                                        if (page.id == pageId) {
+                                            page.icon = fileDirIcon ? fileDirIcon : '';
+                                        }
+                                        return page;
+                                    }));
+                                    await DAO.WEBDECK.set('pages', DAO.WEBDECKDATA.pages);
+                                    toaster.success(`${getNameTd('.Page_Successfully_edited')}`);
+                                    clear_modal_pvw_wbdc();
+                                    loadPreviwWebDeck();
+                                    $("body").modalLoading('hide');
+                                });
+                            }
+                            else{
                                 await DAO.WEBDECK.set('pages', DAO.WEBDECKDATA.pages);
                                 toaster.success(`${getNameTd('.Page_Successfully_edited')}`);
                                 clear_modal_pvw_wbdc();
                                 loadPreviwWebDeck();
                                 $("body").modalLoading('hide');
-                            });
+                            }
                         }
                         else {
                             await DAO.WEBDECK.set('pages', DAO.WEBDECKDATA.pages);

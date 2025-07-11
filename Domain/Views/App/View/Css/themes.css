@@ -36,6 +36,7 @@
 }
 
 .Dpreload-app {
+    z-index: 2090;
     background: var(--bs-black);
 }
 

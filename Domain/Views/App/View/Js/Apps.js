@@ -379,7 +379,8 @@ async function saveIconFile(fileInput, callback) {
     if (fileInput) {
         var dirCopy = path.join(DAO.DB_DIR, 'UN-DATA', 'icons-exe', `${editExeNow.name.replace('.', '-').replaceAll('/', '-').replaceAll('\\', '-')}-${fileInput.name}`);
         const oldFile = editExeNow.iconCustom;
-        fs.copyFile(fileInput.path, dirCopy, (err) => {
+        const buffer = Buffer.from(await fileInput.arrayBuffer());
+        fs.writeFile(dirCopy, buffer, (err) => {
             if (err) throw err;
             editExeNow['iconCustom'] = dirCopy;
             callback(oldFile);

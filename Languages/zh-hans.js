@@ -2644,6 +2644,11 @@ module.exports = {
             "id": ".There_is_already_a_record_of_this_action_for_the_operating_system",
             "type": "text",
             "text": "操作系统已存在此操作的记录。"
-        }
+        },
+        {
+            id: ".select_image",
+            type: "html",
+            text: "选择图像",
+        },
     ]
 };

@@ -2656,6 +2656,11 @@ module.exports = {
             "id": ".There_is_already_a_record_of_this_action_for_the_operating_system",
             "type": "text",
             "text": "この操作の記録はすでにオペレーティングシステムに存在します。"
-        }
+        },
+        {
+            id: ".select_image",
+            type: "html",
+            text: "画像を選択してください",
+        },
     ]
 };

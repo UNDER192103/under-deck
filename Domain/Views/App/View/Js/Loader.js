@@ -89,9 +89,8 @@ $(document).ready(async () => {
         }
     });
 
-    $(document).on('change', '#input_customImgTemplet', (e) => {
-        if ($("#input_customImgTemplet")[0].files[0])
-            $(".customImgTemplet").attr('src', ($("#input_customImgTemplet")[0].files[0].path));
+    $(document).on('change', '#input_customImgTemplet', async (e) => {
+        if ($("#input_customImgTemplet")[0].files[0]) $(".customImgTemplet").attr('src', await convertImageToBase64($("#input_customImgTemplet")[0].files[0]));
     });
 
 

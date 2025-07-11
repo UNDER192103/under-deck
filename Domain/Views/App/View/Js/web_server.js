@@ -51,7 +51,8 @@ $(document).ready(async () => {
 
     $('#port-local-server').keypress(function () {
         var value = $(this).val();
-        if (parseInt(value) <= 80 || parseInt(value) >= 65536) {
+        if (parseInt(value) >= 65536) {
+            $('#port-local-server').val(65536);
             return false;
         }
     });

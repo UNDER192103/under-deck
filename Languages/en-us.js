@@ -2622,6 +2622,11 @@ module.exports = {
             "id": ".There_is_already_a_record_of_this_action_for_the_operating_system",
             "type": "text",
             "text": "There is already a record of this action for the operating system."
-        }
+        },
+        {
+            id: ".select_image",
+            type: "html",
+            text: "Select an image",
+        },
     ]
 };

@@ -2660,6 +2660,11 @@ module.exports = {
             "id": ".There_is_already_a_record_of_this_action_for_the_operating_system",
             "type": "text",
             "text": "Ya existe un registro de esta acción para el sistema operativo."
-        }
+        },
+        {
+            id: ".select_image",
+            type: "html",
+            text: "Seleccione una imagen",
+        },
     ]
 };

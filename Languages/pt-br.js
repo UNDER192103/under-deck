@@ -2619,5 +2619,10 @@ module.exports = {
             type: "text",
             text: "Já existe um registro desta ação para o sistema operacional.",
         },
+        {
+            id: ".select_image",
+            type: "html",
+            text: "Selecione uma imagem",
+        },
     ]
 };

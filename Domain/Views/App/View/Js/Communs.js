@@ -1,3 +1,5 @@
+const { buffer } = require('stream/consumers');
+
 function shuffleArray(o) {
     for (var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
     return o;
@@ -735,7 +737,7 @@ function uuidv4() {
     );
 }
 
-function ModalGetImagem(permitNull = false, callback, defaultImage = null) {
+async function ModalGetImagem(permitNull = false, callback, defaultImage = null) {
     if (defaultImage == null) {
         defaultImage = path.join(APP_PATH, "/Domain/src/img/underbot_logo.png");
     }
@@ -748,7 +750,7 @@ function ModalGetImagem(permitNull = false, callback, defaultImage = null) {
                     <div class="form-group">
                         <label class="col-md-3 control-label icon_text_expc_1" for="logo">${getNameTd('.icon_text_expc_1')}</label>
                         <div class="col-md-4">
-                         <img src="${defaultImage}" name="customImgTemplet" class="customImgTemplet" />
+                         <img src="${typeof defaultImage === 'object' && defaultImage.size ? await convertImageToBase64(defaultImage) : defaultImage}" name="customImgTemplet" class="customImgTemplet" />
                         </div>
                         <span class="Select_an_image_text">${getNameTd('.Select_an_image_text')}</span>
                         <input type="file" class="form-control" id="input_customImgTemplet" aria-label="Upload"
@@ -767,8 +769,10 @@ function ModalGetImagem(permitNull = false, callback, defaultImage = null) {
                 label: getNameTd('.submit_icon'),
                 className: "btn btn-success",
                 callback: function () {
-                    if ($("#input_customImgTemplet")[0].files[0])
-                        callback($("#input_customImgTemplet")[0].files[0]);
+                    if ($("#input_customImgTemplet")[0].files[0]){
+                        let file = $("#input_customImgTemplet")[0].files[0];
+                        callback(file);
+                    }
                     else if (permitNull == true) {
                         callback(null, defaultImage);
                     }
@@ -786,7 +790,8 @@ const save_icon_app_file = async (data_img, name, callback) => {
     if (data_img) {
         var dirCopy = path.join(DAO.DB_DIR, 'UN-DATA', 'icons-exe', `${name.replace('.', '-')}-${data_img.name}`);
         if (fs.existsSync(dirCopy) == false) {
-            fs.copyFile(data_img.path, dirCopy, (err) => {
+            const buffer = Buffer.from(await data_img.arrayBuffer());
+            fs.writeFile(dirCopy, buffer, (err) => {
                 callback(dirCopy);
             })
         }
@@ -797,16 +802,46 @@ const save_icon_app_file = async (data_img, name, callback) => {
     }
 };
 
-const save_icon_PageWebDeck_file = async (pathFile, id, callback) => {
-    if (pathFile) {
-        var dirCopy = path.join(DAO.DB_DIR, 'UN-DATA', 'icons-webpages', `${id.replace('.', '-')}-${pathFile.split(/(\\|\/)/g).pop()}`);
-        if (fs.existsSync(dirCopy) == false) {
-            fs.copyFile(pathFile, dirCopy, (err) => {
-                callback(dirCopy);
+const save_copy_default_icon_PageWebDeck_file = async (dir, id, callback) => {
+    if (dir) {
+        var dirToCopy = path.join(DAO.DB_DIR, 'UN-DATA', 'icons-webpages', `${id.replace('.', '-')}-${dir.split(/(\\|\/)/g).pop()}`);
+        fs.copyFile(dir, dirToCopy, (err) => {
+            callback(dirToCopy);
+        });
+    } else {
+        callback(null);
+    }
+};
+
+const save_icon_PageWebDeckNF = async (file, id, callback) => {
+    if (file) {
+        if(file && file.name){
+            var dirSave = path.join(DAO.DB_DIR, 'UN-DATA', 'icons-webpages', `${id.replace('.', '-')}-${file.name}`);
+            const buffer = Buffer.from(await file.arrayBuffer());
+            fs.writeFile(dirSave, buffer, (err) => {
+                callback(dirSave);
             });
         }
-        else
-            callback(dirCopy);
+        else{
+            callback(null);
+        }
+    } else {
+        callback(null);
+    }
+};
+
+const save_icon_PageWebDeckBF = async (page, callback) => {
+    if (page.icon) {
+        if(page.icon && page.icon.name){
+            var dirSave = path.join(DAO.DB_DIR, 'UN-DATA', 'icons-webpages', `${page.id.replace('.', '-')}-${page.icon.name}`);
+            const buffer = Buffer.from(await page.icon.arrayBuffer());
+            fs.writeFile(dirSave, buffer, (err) => {
+                callback(dirSave);
+            });
+        }
+        else{
+            callback(null);
+        }
     } else {
         callback(null);
     }
@@ -989,6 +1024,15 @@ const exec_program = async (data, type = null) => {
     } catch (error) {
 
     }
+}
+
+function convertImageToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+    reader.readAsDataURL(file); // This reads the file as a data URL (Base64 encoded)
+  });
 }
 
 const exec_soundpad = async (pathSoundPad, index) => {

@@ -2660,6 +2660,11 @@ module.exports = {
             "id": ".There_is_already_a_record_of_this_action_for_the_operating_system",
             "type": "text",
             "text": "이 작업에 대한 기록이 운영 체제에 이미 있습니다."
-        }
+        },
+        {
+            id: ".select_image",
+            type: "html",
+            text: "이미지를 선택하세요",
+        },
     ]
 };
