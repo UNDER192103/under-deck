@@ -1,4 +1,4 @@
-var LangData = null, _lang = null, loopIntervalUpdate = null;
+var LangData = null, _lang = null, loopIntervalUpdate = null, langs = [];
 
 configLang();
 
@@ -14,6 +14,7 @@ function configLang() {
     }); 
 
     BACKEND.Send('LIST_LANGS').then((Langs) => {
+        langs = Langs;
         $.each(Langs, (lang_id) => {
             let lang = Langs[lang_id];
             $(".s-languages").append(`<option value="${lang.id}" ${lang.id === _lang ? 'selected': ''}>${lang.name}</option>`);

@@ -176,10 +176,14 @@ ipcRenderer.on('Obs_wss', async (events, dt) => {
       .removeClass('hover-pulse-red btn-danger')
       .addClass('hover-pulse-grean btn-success')
       .html(getNameTd(".connect-obs"));
-    $(".footable-list-scenes").data('footable').removeRow($(".footable-list-scenes tbody tr"));
+    try {
+      $(".footable-list-scenes").data('footable').removeRow($(".footable-list-scenes tbody tr"));
+      $(".footable-list-audios-inputs").data('footable').removeRow($(".footable-list-audios-inputs tbody tr"));
+    } catch (error) {
+      console.log(error);
+    }
     $(".sl-auto-rm").remove();
     OBS_TEMP_DATA.scenes = null;
-    $(".footable-list-audios-inputs").data('footable').removeRow($(".footable-list-audios-inputs tbody tr"));
     $(".ai-auto-rm").remove();
     OBS_TEMP_DATA.audios = null;
 

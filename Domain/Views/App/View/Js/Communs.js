@@ -61,12 +61,12 @@ async function checkPreferredLanguage(callback) {
                 <label class="form-check-label select_language_text">${getNameTd('.select_language_text')}:</label>
                 <div class="input-group">
                     <div class="input-group-text p-1">
-                       <img class="icone-selected-lang m-1" src="${langs[_lang].icon}">
+                       <img class="icone-selected-lang m-1" src="${LangData.icon}">
                     </div>
                     <select class="form-select s-languages">
                        ${
                         Object.keys(langs).map(e => {
-                            return `<option ${_lang == langs[e].id ? 'selected' : ''} value="${langs[e].id}">${langs[e].name}</option>`;
+                            return `<option ${LangData.id == langs[e].id ? 'selected' : ''} value="${langs[e].id}">${langs[e].name}</option>`;
                         }).join('')
                        }
                     </select>
@@ -154,7 +154,7 @@ async function apressentationSteps() {
     $("#local-server-adress-acess-url").prop('disabled', false);
     $("#s-themes").prop('disabled', false);
     $("#button-search-updates").prop('disabled', false);
-    $("#nav-item-help").prop('disabled', false);
+    $(`.nav li[data-id="help"]`).prop('disabled', false);
     $("#local-path-soundpad").prop('disabled', false);
 
     let elem;
@@ -456,7 +456,7 @@ async function apressentationSteps() {
         case 12:
             await selectMenu('help');
             tempBlockSelecMenu = true;
-            elem = $("#nav-item-help");
+            elem = $(`.nav li[data-id="help"]`);
             elem.prop('disabled', true);
             elem.popover({
                 html: true,
@@ -689,7 +689,6 @@ async function loadThemesOptions(isPreloadd = false) {
     }
     DAO.ThemesData.list = themesLocal.concat(themesRemote);
     $(".s-themes option.RDM").remove();
-    $(".s-themes").append(``);
     if (DAO.ThemesData.list.length > 0) {
         let themeNow = await DAO.DB.get('bd_theme');
         DAO.ThemesData.list.forEach(item => {

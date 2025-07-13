@@ -108,9 +108,9 @@ $(document).ready(async () => {
         }
     });
 
-    $(document).on('change', '.s-languages', function (e) {
+    $(document).on('change', '.s-themes', function (e) {
         e.preventDefault();
-        selec_lang($(this).val(), true);
+        selectTheme($(this).val());
     });
 
     $(document).on('click', '.back_step_paapp', function (e) {

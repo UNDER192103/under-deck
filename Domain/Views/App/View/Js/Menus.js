@@ -14,6 +14,7 @@ $(document).on('click', '#MenuSideMenus li.nav-item', async function (e) {
 
 
 async function selectMenu(id, uC = false) {
+    if(!id || id === '') return;
     if (tempBlockSelecMenu == true) return;
     $(`.navs-item-sm`).removeClass('active');
     $(`.nav-item[data-id="${id}"] a`).addClass('active');
