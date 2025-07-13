@@ -113,6 +113,11 @@ $(document).ready(async () => {
         selectTheme($(this).val());
     });
 
+    $(document).on('change', '.s-languages', function (e) {
+        e.preventDefault();
+        selec_lang($(this).val());
+    });
+
     $(document).on('click', '.back_step_paapp', function (e) {
         step_paApp--;
         apressentationSteps();
