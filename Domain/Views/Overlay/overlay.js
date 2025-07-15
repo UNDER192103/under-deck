@@ -32,7 +32,7 @@ class OverlayScreen {
       height: this.position.height,
       minWidth: this.position.minWidth,
       minHeight: this.position.minHeight,
-      icon: path.join(app.getAppPath(), 'Domain', 'src', 'img', 'under-icon-256x.ico'),
+      icon: path.join(app.getAppPath(), 'Domain', 'src', 'img', 'UDIx256.ico'),
       webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,
@@ -87,7 +87,7 @@ class OverlayScreen {
       new Notification({
         title: title,
         body: body,
-        icon: path.join(app.getAppPath(), 'Domain', 'src', 'img', 'under-icon-256x.ico'),
+        icon: path.join(app.getAppPath(), 'Domain', 'src', 'img', 'UDIx256.ico'),
       }).on('click', (e) => {
         if (onClickMenu) onClickMenu(e);
       }).show();
@@ -117,7 +117,7 @@ class OverlayScreen {
     });
 
     this.handleMessages('get-app-icon', () => {
-      return path.join(app.getAppPath(), 'Domain', 'src', 'img', 'under-icon-256x.ico');
+      return path.join(app.getAppPath(), 'Domain', 'src', 'img', 'UDIx256.ico');
     });
 
     this.handleMessages('hide', (event, path) => {

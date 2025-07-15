@@ -55,11 +55,27 @@ ipcRenderer.on('exec-fbt', async (events, data) => {
       break;
 
       case 'discord-toggle-mic':
-        MuteOrUnmuteMic();
+        DiscordControler.ToggleMute();
       break;
 
       case 'discord-toggle-audio':
-        MuteOrUnmuteAudio();
+        DiscordControler.ToggleDeafen();
+      break;
+
+      case 'discord-mute-mic':
+          DiscordControler.Mute();
+      break;
+
+      case 'discord-unmute-mic':
+          DiscordControler.UnMute();
+      break;
+
+      case 'discord-mute-audio':
+          DiscordControler.Deafen();
+      break;
+
+      case 'discord-unmute-audio':
+          DiscordControler.UnDeafen();
       break;
     
       default:

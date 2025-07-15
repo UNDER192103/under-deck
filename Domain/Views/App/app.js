@@ -45,7 +45,7 @@ class MainScreen {
       minWidth: this.position.minWidth,
       minHeight: this.position.minHeight,
       autoHideMenuBar: true,
-      icon: path.join(app.getAppPath(), 'Domain', 'src', 'img', 'under-icon-256x.ico'),
+      icon: path.join(app.getAppPath(), 'Domain', 'src', 'img', 'UDIx256.ico'),
       webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,
@@ -107,7 +107,7 @@ class MainScreen {
       new Notification({
         title: title,
         body: body,
-        icon: path.join(app.getAppPath(), 'Domain', 'src', 'img', 'under-icon-256x.ico'),
+        icon: path.join(app.getAppPath(), 'Domain', 'src', 'img', 'UDIx256.ico'),
       }).on('click', (e) => {
         if (onClickMenu) onClickMenu(e);
       }).show();

@@ -1,10 +1,10 @@
 {
   "name": "under-deck",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Under Deck",
   "productName": "Under Deck",
   "main": "index.js",
-  "status": "release",
+  "status": "dev",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
@@ -29,15 +29,14 @@
     "win": {
       "target": "nsis",
       "requestedExecutionLevel": "highestAvailable",
-      "icon": "Domain/src/img/under-icon-256x.ico"
+      "icon": "Domain/src/img/UDIx256.ico"
     },
     "nsis": {
-      "oneClick": false,
-      "installerIcon": "Domain/src/img/under-icon-256x.ico",
-      "uninstallerIcon": "Domain/src/img/under-icon-256x.ico",
-      "installerHeaderIcon": "Domain/src/img/under-icon-256x.ico",
-      "license": "LICENSE.md",
-      "allowToChangeInstallationDirectory": true
+      "oneClick": true,
+      "installerIcon": "Domain/src/img/UDIx256.ico",
+      "uninstallerIcon": "Domain/src/img/UDIx256.ico",
+      "installerHeaderIcon": "Domain/src/img/UDIx256.ico",
+      "allowToChangeInstallationDirectory": false
     },
     "directories": {
       "output": "build"

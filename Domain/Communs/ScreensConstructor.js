@@ -10,7 +10,7 @@ const New = async (data) =>{
       width: 800,
       height: 600,
       autoHideMenuBar: true,
-      icon: path.join(app.getAppPath(), 'Domain', 'src', 'img', 'under-icon-256x.ico'),
+      icon: path.join(app.getAppPath(), 'Domain', 'src', 'img', 'UDIx256.ico'),
       webPreferences: {
         nodeIntegration: false,
         contextIsolation: false,

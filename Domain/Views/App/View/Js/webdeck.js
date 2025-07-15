@@ -263,7 +263,7 @@ $(document).ready(async () => {
                                             }
                                         }
                                         let uuid = uuidv4();
-                                        if(typeof file === 'object' && file.name) {
+                                        if(file != null && typeof file === 'object' && file.name) {
                                             save_icon_PageWebDeckNF(file, uuid, async (dir_icon) => {
                                                 await DAO.WEBDECKDATA.pages.push({
                                                     id: uuid,
@@ -556,7 +556,7 @@ function WebDeckCreateNewPage(event) {
 
             }
             let uuid = uuidv4();
-            if(typeof file === 'object' && file.name) {
+            if(file != null && typeof file === 'object' && file.name) {
                 save_icon_PageWebDeckNF(file, uuid, async (dir_icon) => {
                     await DAO.WEBDECKDATA.pages.push({
                         id: uuid,

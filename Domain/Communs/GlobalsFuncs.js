@@ -44,7 +44,7 @@ Object.defineProperty(global, 'APP_HANDLEMESSAGES', {
 
 //Defaults
 Object.defineProperty(global, 'APP_ICON', {
-  value: new Tray(path.join(app.getAppPath(), 'Domain', 'Src', 'img', 'under-icon-256x.ico')),
+  value: new Tray(path.join(app.getAppPath(), 'Domain', 'Src', 'img', 'UDIx256.ico')),
   writable: true,
   configurable: true,
 });

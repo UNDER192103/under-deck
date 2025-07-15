@@ -52,12 +52,26 @@ $(document).ready(async () => {
         await BACKEND.Send('exec-fbt', {type: 'apps', data: {id: e.currentTarget.dataset.id}});
     });
 
+    $(document).on('click', '.discord-toggle-mic', async (e) => {
+        await BACKEND.Send('exec-fbt', {type: 'discord-toggle-mic', data: null});
+    });
+
     $(document).on('click', '.discord-toggle-audio', async (e) => {
         await BACKEND.Send('exec-fbt', {type: 'discord-toggle-audio', data: null});
     });
 
-    $(document).on('click', '.discord-toggle-mic', async (e) => {
-        await BACKEND.Send('exec-fbt', {type: 'discord-toggle-mic', data: null});
+    $(document).on('click', '.discord-mute-mic', async (e) => {
+        await BACKEND.Send('exec-fbt', {type: 'discord-mute-mic', data: null});
+    });
+    $(document).on('click', '.discord-unmute-mic', async (e) => {
+        await BACKEND.Send('exec-fbt', {type: 'discord-unmute-mic', data: null});
+    });
+
+    $(document).on('click', '.discord-mute-audio', async (e) => {
+        await BACKEND.Send('exec-fbt', {type: 'discord-mute-audio', data: null});
+    });
+    $(document).on('click', '.discord-unmute-audio', async (e) => {
+        await BACKEND.Send('exec-fbt', {type: 'discord-unmute-audio', data: null});
     });
 
     $(document).on('click', '.osb-exc-scene', async (e) => {
@@ -166,8 +180,30 @@ const createWidgets = async (type, styles = null) => {
         break;
 
         case 'o_p_discord':
-            startWidget(styles == null ? true : false, {id: id, class: "pb-3", type: type, styles: styles, title: getNameTd('.discord_text')}, `
+            startWidget(styles == null ? true : false, {id: id, class: "pb-3", type: type, styles: styles != null ? styles : { height: "340px", width: "415px" }, title: getNameTd('.discord_text')}, `
                 <div class="custom-cards overflow-auto pt-3">
+                    <div class="discord-mute-mic card-custom-cards tooltip-script" title="${getNameTd('.discord_mute_mic_text')}">
+                        <div class="card-custom-cards-back">
+                            <span class="card-title">${getNameTd('.discord_mute_mic_text')}</span>
+                        </div>
+                    </div>
+                    <div class="discord-unmute-mic card-custom-cards tooltip-script" title="${getNameTd('.discord_unmute_mic_text')}">
+                        <div class="card-custom-cards-back">
+                            <span class="card-title">${getNameTd('.discord_unmute_mic_text')}</span>
+                        </div>
+                    </div>
+
+                    <div class="discord-mute-audio card-custom-cards tooltip-script" title="${getNameTd('.discord_mute_audio_text')}">
+                        <div class="card-custom-cards-back">
+                            <span class="card-title">${getNameTd('.discord_mute_audio_text')}</span>
+                        </div>
+                    </div>
+                    <div class="discord-unmute-audio card-custom-cards tooltip-script" title="${getNameTd('.discord_unmute_audio_text')}">
+                        <div class="card-custom-cards-back">
+                            <span class="card-title">${getNameTd('.discord_unmute_audio_text')}</span>
+                        </div>
+                    </div>
+
                     <div class="discord-toggle-mic card-custom-cards tooltip-script" title="${getNameTd('.discord_toggle_mute_unmute_mic_text')}">
                         <div class="card-custom-cards-back">
                             <span class="card-title">${getNameTd('.discord_toggle_mute_unmute_mic_text')}</span>

@@ -945,12 +945,27 @@ const exec_program = async (data, type = null) => {
                 name = data.nameCustom;
 
             if (type == "discord") {
-                if (DiscordRPCLogged) {
+                if (DiscordControler.isConnected) {
                     if (data.path == "toggle-mute-unmute-mic") {
-                        MuteOrUnmuteMic();
+                        DiscordControler.ToggleMute();
                     }
                     else if (data.path == "toggle-mute-unmute-audio") {
-                        MuteOrUnmuteAudio();
+                        DiscordControler.ToggleDeafen();
+                    }
+                    else if (data.path == "mute-mic") {
+                        DiscordControler.Mute();
+                    }
+                    else if (data.path == "unmute-mic") {
+                        DiscordControler.UnMute();
+                    }
+                    else if (data.path == "mute-audio") {
+                        DiscordControler.Deafen();
+                    }
+                    else if (data.path == "unmute-audio") {
+                        DiscordControler.UnDeafen();
+                    }
+                    else {
+                        console.log(data.path);
                     }
                 }
                 else {
