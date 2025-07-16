@@ -2653,5 +2653,10 @@ module.exports = {
             "type": "html",
             "text": "Undeafen",
         },
+        {
+            id: ".Other",
+            type: "html",
+            text: "Other",
+        },
     ]
 };

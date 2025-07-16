@@ -167,6 +167,39 @@
   stroke-linecap: round;
 }
 
+.modal-backdrop-loading.show {
+  z-index: 1090;
+}
+
+.modal-backdrop-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+}
+
+.modal-backdrop-loading .bck {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+  background-color: #000;
+}
+
+.spinner-ml {
+  position: relative;
+  animation: rotation 0.75s linear infinite;
+  border-radius: 100em;
+}
+
+.path-ml {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 20;
+  stroke-linecap: round;
+}
+
 @keyframes rotation {
   to {
     transform: rotate(360deg);

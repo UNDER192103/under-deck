@@ -2691,5 +2691,10 @@ module.exports = {
             "type": "html",
             "text": "Activar audio",
         },
+        {
+            id: ".Other",
+            type: "html",
+            text: "Otro",
+        },
     ]
 };

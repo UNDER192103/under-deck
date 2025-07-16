@@ -2649,5 +2649,10 @@ module.exports = {
             type: "html",
             text: "Desmutar Áudio",
         },
+        {
+            id: ".Other",
+            type: "html",
+            text: "Outros",
+        },
     ]
 };

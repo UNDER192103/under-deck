@@ -2691,5 +2691,10 @@ module.exports = {
             type: "html",
             text: "헤드셋 음소거 해제",
         },
+        {
+            id: ".Other",
+            type: "html",
+            text: "다른",
+        },
     ]
 };

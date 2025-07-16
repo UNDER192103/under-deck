@@ -2675,5 +2675,10 @@ module.exports = {
             type: "html",
             text: "取消音频静音",
         },
+        {
+            id: ".Other",
+            type: "html",
+            text: "其他",
+        },
     ]
 };

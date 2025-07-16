@@ -841,21 +841,6 @@ hr {
   transition: all 1s;
 }
 
-.modal-backdrop-loading.show {
-  z-index: 1090;
-  opacity: .8;
-}
-
-.modal-backdrop-loading {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  width: 100vw;
-  height: 100vh;
-  background-color: #000;
-}
-
 .p-01 {
   padding: 0.1rem !important;
 }

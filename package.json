@@ -1,6 +1,6 @@
 {
   "name": "under-deck",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Under Deck",
   "productName": "Under Deck",
   "main": "index.js",
@@ -32,11 +32,12 @@
       "icon": "Domain/src/img/UDIx256.ico"
     },
     "nsis": {
-      "oneClick": true,
+      "oneClick": false,
       "installerIcon": "Domain/src/img/UDIx256.ico",
       "uninstallerIcon": "Domain/src/img/UDIx256.ico",
       "installerHeaderIcon": "Domain/src/img/UDIx256.ico",
-      "allowToChangeInstallationDirectory": false
+      "license": "LICENSE.md",
+      "allowToChangeInstallationDirectory": true
     },
     "directories": {
       "output": "build"
@@ -79,6 +80,7 @@
     "decompress": "^4.2.1",
     "discord-rpc": "^4.0.1",
     "dotenv": "^17.0.0",
+    "electron-cookies": "^1.1.0",
     "electron-updater": "^6.3.2",
     "express": "^4.18.2",
     "fetch-installed-software": "^0.0.7",

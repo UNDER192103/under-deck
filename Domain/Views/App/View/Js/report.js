@@ -80,7 +80,6 @@ $(document).ready(async () => {
     });
 
     listMysReports();
-    setInterval(listMysReports, 10000);
 });
 
 const listMysReports = async () => {

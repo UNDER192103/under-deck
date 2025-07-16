@@ -2687,5 +2687,10 @@ module.exports = {
             type: "html",
             text: "スピーカーミュート解除",
         },
+        {
+            id: ".Other",
+            type: "html",
+            text: "他の",
+        },
     ]
 };
