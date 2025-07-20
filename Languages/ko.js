@@ -2692,9 +2692,14 @@ module.exports = {
             text: "헤드셋 음소거 해제",
         },
         {
-            id: ".Other",
+            id: ".other",
             type: "html",
             text: "다른",
+        },
+        {
+            id: ".percentage",
+            type: "html",
+            text: "백분율:",
         },
     ]
 };

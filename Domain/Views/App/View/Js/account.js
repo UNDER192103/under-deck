@@ -8,7 +8,7 @@ $(document).ready(async () => {
         let id = e.currentTarget.dataset.id;
         API.App.post('', {
             _lang: _lang,
-            method: "list-mys-reports",
+            method: "update-user-status",
             client_id: DAO.USER.client_id,
             token: DAO.USER.token,
             status: id,
@@ -110,11 +110,11 @@ $(document).ready(async () => {
                 idP: idP,
             }).then(async (res) => {
                 if (res.data.result == true) {
-                    GetACC();
+                    UpdateARR();
                     toaster.success(getNameTd('.You_have_successfully_unfriended_your_friend'));
                 }
                 else {
-                    GetACC();
+                    UpdateARR();
                 }
             });
         }
@@ -135,11 +135,11 @@ $(document).ready(async () => {
                 idP: idP,
             }).then(async (res) => {
                 if (res.data.result == true) {
-                    GetACC();
+                    UpdateARR();
                     toaster.success(getNameTd('.friend_request_rejected'));
                 }
                 else {
-                    GetACC();
+                    UpdateARR();
                 }
             });
         }
@@ -159,11 +159,11 @@ $(document).ready(async () => {
             idP: idP,
         }).then(async (res) => {
             if (res.data.result == true) {
-                GetACC();
+                UpdateARR();
                 toaster.success(getNameTd('.friend_request_accepted'));
             }
             else {
-                GetACC();
+                UpdateARR();
             }
         });
     });
@@ -180,11 +180,11 @@ $(document).ready(async () => {
                 idP: idP,
             }).then(async (res) => {
                 if (res.data.result == true) {
-                    GetACC();
+                    UpdateARR();
                     toaster.success(getNameTd('.Order_sent_successfully'));
                 }
                 else {
-                    GetACC();
+                    UpdateARR();
                 }
             });
         }
@@ -208,12 +208,12 @@ $(document).ready(async () => {
                 Firend_Client_id: Firend_Client_id,
             }).then(async (res) => {
                 if (res.data.result == true) {
-                    GetACC();
+                    UpdateARR();
                     $(e.currentTarget).attr('disabled', true);
                     toaster.success(getNameTd('.Request_Sent_Successfully'));
                 }
                 else {
-                    GetACC();
+                    UpdateARR();
                 }
             });
         }, 250);
@@ -632,7 +632,7 @@ const checkUserNotifys = async () => {
 
 }
 
-const changeUserInfoData = async (isUpdatePcACC = true) => {
+const changeUserInfoData = async () => {
     DAO.USERDATAUPDATE.icon = null;
     DAO.USERDATAUPDATE.name = null;
     DAO.USERDATAUPDATE.croppie.base64 = null;
@@ -697,8 +697,6 @@ const changeUserInfoData = async (isUpdatePcACC = true) => {
 
     await checkUserProfileEnableEditButton();
     await checkUserNotifys();
-    if (isUpdatePcACC)
-        await UpdatePCACC();
     await changeUrlRemoteUnderDeck();
     await changeUserFriends();
     await changeUserProfileStyles();

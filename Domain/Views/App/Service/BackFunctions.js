@@ -184,8 +184,7 @@ ipcRenderer.on('selectMenu', (events, dt) => {
 });
 
 ipcRenderer.on('Obs_wss', async (events, dt) => {
-  if (dt.err)
-    console.log(dt)
+  //if (dt.err) console.log(dt)
 
   if (dt.err_connection == true) {
     $(".button-obs-wss-s-s")
@@ -271,6 +270,13 @@ ipcRenderer.on('Obs_wss', async (events, dt) => {
     }
   }
 
+});
+
+ipcRenderer.on('sync-user-data-percent', (events, dt) => {
+  if(dt.percent){
+    $("#DVIL_percentage_cloud").removeClass('hidden');
+    $(".l_percentage_cloud").html(`${dt.percent}%`);
+  }
 });
 
 const updateListObs = async (isNotify = true) => {

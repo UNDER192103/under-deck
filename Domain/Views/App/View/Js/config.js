@@ -34,6 +34,7 @@ $(document).ready(async () => {
             if (await B_are_you_sure()) {
                 $("body").modalLoading('show', false);
                 BACKEND.Send('sync-user-data').then((response) => {
+                    $("#DVIL_percentage_cloud").addClass('hidden');
                     $("body").modalLoading('hide', false);
                     toaster.success(getNameTd('.Data_synchronized_successfully'));
                 });
@@ -211,6 +212,7 @@ async function updateUNDATAjsons(data, callback, count = 0) {
             var ___DTRR = JSON.parse(itemNow.value);
             var ___PATHDB = path.join(DAO.DB_DIR, 'UN-DATA');
             var ___PATHDBFILE = path.join(___PATHDB, itemNow.path, itemNow.key);
+            /*
             fs.writeFile(___PATHDBFILE, itemNow.value, function (err) {
                 setTimeout(() => {
                     $("#DprogressBarCloud").css('width', `${(count / data.dataSynchronized.length) * 100}%`).html(`${parseInt((count / data.dataSynchronized.length) * 100)}%`);
@@ -218,6 +220,7 @@ async function updateUNDATAjsons(data, callback, count = 0) {
                     updateUNDATAjsons(data, callback, count);
                 }, 250);
             });
+            */
         } catch (error) {
             $("#DprogressBarCloud").css('width', `${(count / data.dataSynchronized.length) * 100}%`).html(`${parseInt((count / data.dataSynchronized.length) * 100)}%`);
             count++;

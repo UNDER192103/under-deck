@@ -2650,9 +2650,14 @@ module.exports = {
             text: "Desmutar Áudio",
         },
         {
-            id: ".Other",
+            id: ".other",
             type: "html",
             text: "Outros",
+        },
+        {
+            id: ".percentage",
+            type: "html",
+            text: "Porcentagem:",
         },
     ]
 };

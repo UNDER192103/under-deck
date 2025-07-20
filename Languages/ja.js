@@ -2688,9 +2688,14 @@ module.exports = {
             text: "スピーカーミュート解除",
         },
         {
-            id: ".Other",
+            id: ".other",
             type: "html",
             text: "他の",
+        },
+        {
+            id: ".percentage",
+            type: "html",
+            text: "割合:",
         },
     ]
 };

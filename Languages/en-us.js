@@ -2654,9 +2654,14 @@ module.exports = {
             "text": "Undeafen",
         },
         {
-            id: ".Other",
+            id: ".other",
             type: "html",
             text: "Other",
+        },
+        {
+            id: ".percentage",
+            type: "html",
+            text: "Percentage:",
         },
     ]
 };

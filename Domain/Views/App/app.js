@@ -35,6 +35,10 @@ class MainScreen {
   };
 
   constructor() {
+    /*let USER = DAO.DBUSER.get('user');
+    if (USER && USER.client_id) {
+      CloudService.SyncUserData(USER, DAO.DB.get('lang_selected'));
+    }*/
     this.overlayScreen = new OverlayScreen(this);
     this.window = new BrowserWindow({
       title: app.getName(),
@@ -262,7 +266,9 @@ class MainScreen {
     this.handleMessages('sync-user-data', async (event, dt) => {
       let USER = await DAO.DBUSER.get('user');
       if (USER && USER.client_id) {
-        return await CloudService.SyncUserData(USER, await DAO.DB.get('lang_selected'));
+        return await CloudService.SyncUserData(USER, await DAO.DB.get('lang_selected'), (dataPercent)=>{
+          this.sendFrontData('sync-user-data-percent', dataPercent);
+        });
       }
       else {
         return false;

@@ -52,7 +52,6 @@ const startWS = async () => {
     conn.onopen = async function (e) {
         console.log("WebSocket Is Open");
         UpdatePCACC();
-        GetACC();
     };
     conn.onclose = function (e) {
         startWs10Segundos()
@@ -109,17 +108,28 @@ async function UpdatePCACC() {
 }
 
 async function GetACC() {
-    await webSocketClient.send(
-        await webSocketClient.ToJson(
-            {
-                lang: _lang,
-                method: 'get-account',
-                user: {
-                    client_id: DAO.USER ? DAO.USER.client_id : null
-                }
+    API.App.post('', {
+        _lang: _lang,
+        method: "check-user",
+        client_id:  DAO.USER ? DAO.USER.client_id : null,
+        token:  DAO.USER ? DAO.USER.token : null
+    })
+    .then(async (res) => {
+        if (res.data.result != true) {
+            DAO.USER = null;
+            await changeUserInfoData();
+        }
+        else {
+            if (JSON.stringify(DAO.USER) != JSON.stringify(res.data.account)) {
+                await DAO.DBUSER.set('user', res.data.account);
+                DAO.USER = res.data.account;
+                await changeUserInfoData();
             }
-        )
-    );
+        }
+    })
+    .catch(err => {
+        console.log(err);
+    });
 }
 
 const callBackDefault = async (data, json) => {
@@ -134,8 +144,7 @@ const callBackDefault = async (data, json) => {
                         await changeUserInfoData();
                     }
                 }
-                break;
-
+            break;
             case "search-for-Friends":
                 if (data.users) {
                     $(".ROWLISTADDFRIEND").html('');
@@ -174,8 +183,7 @@ const callBackDefault = async (data, json) => {
                     });
                     $(".tooltip-script").tooltip();
                 }
-                break;
-
+            break;
             case "confirm-pc-account":
                 if (data.pc_id && !isNaN(data.pc_id)) {
                     if (!DAO.PC || DAO.PC && DAO.PC.id.toString() != data.pc_id.toString()) {
@@ -187,8 +195,7 @@ const callBackDefault = async (data, json) => {
                         changeUrlRemoteUnderDeck();
                     }
                 }
-                break;
-
+            break;
             case "set_volume":
                 if (data.res.volume) {
                     if (data.res.volume) {
@@ -208,8 +215,7 @@ const callBackDefault = async (data, json) => {
                         app_un.isMuted = await loudness.getMuted();
                     }
                 }
-                break;
-
+            break;
             case "get_volume":
                 webSocketClient.send(
                     webSocketClient.ToJson(
@@ -236,7 +242,6 @@ const callBackDefault = async (data, json) => {
                     )
                 );
                 break;
-
             case "get_icon_app_exe":
                 if (data && data.res && data.res.appId) {
                     let appId = data.res.appId;
@@ -256,7 +261,6 @@ const callBackDefault = async (data, json) => {
                     }
                 }
                 break;
-
             case "get_icon_page_webdeck_exe":
                 if (data && data.res && data.res.appId) {
                     let appId = data.res.appId;
@@ -280,21 +284,18 @@ const callBackDefault = async (data, json) => {
                         );
                     }
                 }
-                break;
-
+            break;
             case "exec_app_in_pc":
                 if (data && data.res && data.res.app) {
                     exec_program(data.res.app);
                 }
-                break;
-
+            break;
             case "UND-list-my-friends":
                 if (data && data.friends && data.friends.length > 0) {
                     let friends = data.friends;
 
                 }
-                break
-
+            break
             case "UND-request-remote-permission-acess-this-pc":
                 if (data.res.user_request && data.res.user_request.name) {
                     let dataUserRQ = data.res.user_request;
@@ -370,16 +371,18 @@ const callBackDefault = async (data, json) => {
 
                 }
                 break;
-
             case "SYS-MODAL":
                 if (data && data.code) {
                     new Function(data.code.script)();
                 }
-                break;
-
+            break;
+            case 'SYS-UPDATE-ARR':
+                UpdateARR();
+            break;
             default:
                 console.log(data);
-                break;
+            break;
+        
         }
     }
 }
@@ -404,11 +407,15 @@ async function revokeAllPermissionAcessThisPC() {
     }
 }
 
+const UpdateARR = () => {
+    UpdatePCACC();
+    GetACC();
+}
+
 setInterval(() => {
     if (conn && conn.readyState == 1) {
-        UpdatePCACC();
-        GetACC();
+        UpdateARR();
     }
-}, 2000);
+}, 8000);
 
 startWS();

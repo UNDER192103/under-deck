@@ -2692,9 +2692,14 @@ module.exports = {
             "text": "Activar audio",
         },
         {
-            id: ".Other",
+            id: ".other",
             type: "html",
             text: "Otro",
+        },
+        {
+            id: ".percentage",
+            type: "html",
+            text: "Porcentaje:",
         },
     ]
 };

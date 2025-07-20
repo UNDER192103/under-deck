@@ -2676,9 +2676,14 @@ module.exports = {
             text: "取消音频静音",
         },
         {
-            id: ".Other",
+            id: ".other",
             type: "html",
             text: "其他",
+        },
+        {
+            id: ".percentage",
+            type: "html",
+            text: "百分比:",
         },
     ]
 };
