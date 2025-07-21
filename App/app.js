@@ -1,9 +1,29 @@
-const path = require('path');
-const { app, BrowserWindow, Tray } = require('electron');
+const { app, BrowserWindow, session } = require('electron');
 const Validations = require('../Domain/Communs/Validations.js');
 const Screen_App = require("../Domain/Views/App/app.js");
+
+app.commandLine.appendSwitch('disable-features', 'SameSiteByDefaultCookies,CookiesWithoutSameSiteMustBeSecure');
+app.commandLine.appendSwitch('disable-site-isolation-trials');
+app.commandLine.appendSwitch('disable-web-security');
+app.commandLine.appendSwitch('enable-features', 'SameSiteDefaultChecksMethodRigorously');
+
 Validations.CheckIsAppRunning().then(async () => {
     await Validations.SetDBDefaultValues();
+    session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+      if (details.responseHeaders && details.responseHeaders['set-cookie']) {
+        details.responseHeaders['set-cookie'] = details.responseHeaders['set-cookie'].map(cookie => {
+          let modifiedCookie = cookie.replace(/;\s*SameSite=\w+/gi, '');
+          if (!modifiedCookie.includes('SameSite=')) {
+            modifiedCookie += '; SameSite=None';
+          }
+          if (!modifiedCookie.includes('Secure')) {
+            modifiedCookie += '; Secure';
+          }
+          return modifiedCookie;
+        });
+      }
+      callback({ responseHeaders: details.responseHeaders });
+    });
     if (BrowserWindow.getAllWindows().length == 0) createWindowApp();
 });
 

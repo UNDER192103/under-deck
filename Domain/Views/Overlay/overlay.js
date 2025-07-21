@@ -36,7 +36,7 @@ class OverlayScreen {
       webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,
-        devTools: PACKGEJSON.status == 'dev' ? true : false,
+        devTools: DAO.DB.get('devTools') === true ? true : false,
       },
     });
     this.startAllHandleMessages();

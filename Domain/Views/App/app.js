@@ -35,10 +35,6 @@ class MainScreen {
   };
 
   constructor() {
-    /*let USER = DAO.DBUSER.get('user');
-    if (USER && USER.client_id) {
-      CloudService.SyncUserData(USER, DAO.DB.get('lang_selected'));
-    }*/
     this.overlayScreen = new OverlayScreen(this);
     this.window = new BrowserWindow({
       title: app.getName(),
@@ -53,7 +49,7 @@ class MainScreen {
       webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,
-        devTools: PACKGEJSON.status == 'dev' ? true : false,
+        devTools: DAO.DB.get('devTools') === true ? true : false,
       },
     });
 
@@ -816,7 +812,7 @@ class MainScreen {
     });
 
     let onNotifyWinDownloadUpdate = true;
-    autoUpdater.on('download-progress', (info) => { ///Donloading Update
+    autoUpdater.on('download-progress', (info) => {
 
       this.sendFrontData("AutoUpdater", {
         info: info,
@@ -836,7 +832,7 @@ class MainScreen {
 
     });
 
-    autoUpdater.on("update-downloaded", (event, releaseNotes, releaseName) => { ///Has ben downloaded Update
+    autoUpdater.on("update-downloaded", (event, releaseNotes, releaseName) => {
 
       if (DAO.DB.get('AutoUpdateApp') == true) {
         this.Notification(

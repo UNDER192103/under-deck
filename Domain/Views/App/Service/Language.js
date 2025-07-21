@@ -29,19 +29,38 @@ async function selec_lang(id_lang) {
         $("body").modalLoading('hide', false);
         await configLang();
         await DAO.DB.set('checkLanguage', null);
-        loopIntervalUpdate = setInterval(() => {
-            if (conn && conn.readyState == 1) {
-                clearInterval(loopIntervalUpdate);
-                webSocketClient.send(
-                    webSocketClient.ToJson(
-                        {
-                            method: 'config-lang',
-                            lang: id_lang
-                        }
-                    )
-                );
-            }
-        }, 1000);
+        API.App.post('', {
+            _lang: id_lang,
+            method: "config-lang",
+        })
+        .then(async (res) => { }).catch(err => {
+            console.log(err);
+        });
+        if (conn && conn.readyState == 1) {
+            webSocketClient.send(
+                webSocketClient.ToJson(
+                    {
+                        method: 'config-lang',
+                        lang: id_lang
+                    }
+                )
+            );
+        }
+        else{
+            loopIntervalUpdate = setInterval(() => {
+                if (conn && conn.readyState == 1) {
+                    clearInterval(loopIntervalUpdate);
+                    webSocketClient.send(
+                        webSocketClient.ToJson(
+                            {
+                                method: 'config-lang',
+                                lang: id_lang
+                            }
+                        )
+                    );
+                }
+            }, 1000);
+        }
     });
 }
 
