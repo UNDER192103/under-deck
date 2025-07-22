@@ -2702,5 +2702,10 @@ module.exports = {
             type: "html",
             text: "同期の割合: ",
         },
+        {
+            id: ".Start_with_windows_text",
+            type: "html",
+            text: "Windows から始める",
+        },
     ]
 };

@@ -2706,5 +2706,10 @@ module.exports = {
             type: "html",
             text: "동기화 비율: ",
         },
+        {
+            id: ".Start_with_windows_text",
+            type: "html",
+            text: "윈도우로 시작하기",
+        },
     ]
 };

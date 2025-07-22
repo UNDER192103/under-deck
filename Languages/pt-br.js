@@ -2664,5 +2664,10 @@ module.exports = {
             type: "html",
             text: "Porcentagem de sincronização: ",
         },
+        {
+            id: ".Start_with_windows_text",
+            type: "html",
+            text: "Iniciar com windows",
+        },
     ]
 };

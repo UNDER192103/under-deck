@@ -1,5 +1,11 @@
 document.getElementById('isEnableCloudIntegrations').checked = DAO.CLOUD.get('isEnbCloudIntegrations');
 document.getElementById('isActivateOverlay').checked = DAO.DB.get('isActivateOverlay');
+document.getElementById('start-with-system').checked = DAO.DB.get('startWithSystem');
+document.getElementById('key-macro').checked = DAO.DB.get('keyEvent');
+document.getElementById('notifications_on_windows').checked = DAO.DB.get('App_notification_windows');
+document.getElementById('isMinimizeToBar').checked = DAO.DB.get('isMinimizeToBar');
+document.getElementById('autoupdateonestart').checked = DAO.DB.get('AutoUpdateApp');
+document.getElementById('isNotValidFirstSearchUpdateApp').checked = DAO.DB.get('isNotValidFirstSearchUpdateApp');
 $(".key-overlay-r").html(DAO.DB.get('keys-overlay') ? DAO.DB.get('keys-overlay').join(' + ') : "N/A");
 
 $(document).ready(async () => {
@@ -15,6 +21,11 @@ $(document).ready(async () => {
 
     $('#isMinimizeToBar').click(async function () {
         await DAO.DB.set('isMinimizeToBar', document.getElementById('isMinimizeToBar').checked);
+    });
+
+    $('#start-with-system').click(async function () {
+        //await DAO.DB.set('startWithSystem', document.getElementById('start-with-system').checked);
+        await BACKEND.Send('SetStartWithSystem', document.getElementById('start-with-system').checked);
     });
 
     $('#isEnableCloudIntegrations').click(async function () {

@@ -2668,5 +2668,10 @@ module.exports = {
             type: "html",
             text: "Sync percentage: ",
         },
+        {
+            id: ".Start_with_windows_text",
+            type: "html",
+            text: "Start with windows",
+        },
     ]
 };

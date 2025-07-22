@@ -2690,5 +2690,10 @@ module.exports = {
             type: "html",
             text: "同步百分比: ",
         },
+        {
+            id: ".Start_with_windows_text",
+            type: "html",
+            text: "从 Windows 开始",
+        },
     ]
 };

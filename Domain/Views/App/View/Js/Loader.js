@@ -53,11 +53,6 @@ $(document).keyup((res) => {
 });
 
 loadThemesOptions(true);
-document.getElementById('key-macro').checked = DAO.DB.get('keyEvent');
-document.getElementById('notifications_on_windows').checked = DAO.DB.get('App_notification_windows');
-document.getElementById('isMinimizeToBar').checked = DAO.DB.get('isMinimizeToBar');
-document.getElementById('autoupdateonestart').checked = DAO.DB.get('AutoUpdateApp');
-document.getElementById('isNotValidFirstSearchUpdateApp').checked = DAO.DB.get('isNotValidFirstSearchUpdateApp');
 $('#port-local-server').val(DAO.DB.get('server_port'));
 $('#local-server-adress-acess-url').val(`http://${getMyIPAddress()}:${DAO.DB.get('server_port')}`);
 

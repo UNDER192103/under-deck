@@ -3,30 +3,37 @@ const AutoLaunch = require('auto-launch');
 const Validations = require('../Domain/Communs/Validations.js');
 const Screen_App = require("../Domain/Views/App/app.js");
 var autoLaunch = new AutoLaunch({ name: app.getName(), path: app.getPath('exe') });
-autoLaunch.enable();
+autoLaunch.isEnabled().then(isEnabled => {
+    if (!isEnabled) {
+      if(DAO.DB.get('startWithSystem') != false) autoLaunch.enable(); else autoLaunch.disable();
+    }
+    else {
+      if(DAO.DB.get('startWithSystem')) autoLaunch.enable();
+    }
+});
 
 app.commandLine.appendSwitch('disable-features', 'SameSiteByDefaultCookies,CookiesWithoutSameSiteMustBeSecure');
 app.commandLine.appendSwitch('disable-site-isolation-trials');
 app.commandLine.appendSwitch('disable-web-security');
 app.commandLine.appendSwitch('enable-features', 'SameSiteDefaultChecksMethodRigorously');
+session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+  if (details.responseHeaders && details.responseHeaders['set-cookie']) {
+    details.responseHeaders['set-cookie'] = details.responseHeaders['set-cookie'].map(cookie => {
+      let modifiedCookie = cookie.replace(/;\s*SameSite=\w+/gi, '');
+      if (!modifiedCookie.includes('SameSite=')) {
+        modifiedCookie += '; SameSite=None';
+      }
+      if (!modifiedCookie.includes('Secure')) {
+        modifiedCookie += '; Secure';
+      }
+      return modifiedCookie;
+    });
+  }
+  callback({ responseHeaders: details.responseHeaders });
+});
 
 Validations.CheckIsAppRunning().then(async () => {
     await Validations.SetDBDefaultValues();
-    session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
-      if (details.responseHeaders && details.responseHeaders['set-cookie']) {
-        details.responseHeaders['set-cookie'] = details.responseHeaders['set-cookie'].map(cookie => {
-          let modifiedCookie = cookie.replace(/;\s*SameSite=\w+/gi, '');
-          if (!modifiedCookie.includes('SameSite=')) {
-            modifiedCookie += '; SameSite=None';
-          }
-          if (!modifiedCookie.includes('Secure')) {
-            modifiedCookie += '; Secure';
-          }
-          return modifiedCookie;
-        });
-      }
-      callback({ responseHeaders: details.responseHeaders });
-    });
     if (BrowserWindow.getAllWindows().length == 0) createWindowApp();
 });
 
@@ -56,6 +63,12 @@ function createWindowApp() {
         return true;
       }
       return false;
+    });
+
+    APP_HANDLEMESSAGES('SetStartWithSystem', async (event, data) => {
+      let isEnable = data === true ? true : false;
+      if(isEnable === true) autoLaunch.enable(); else autoLaunch.disable();
+      return await DAO.DB.set('startWithSystem', isEnable);
     });
     
     APP_HANDLEMESSAGES('close_window', (event, dt) => {
