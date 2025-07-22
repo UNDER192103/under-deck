@@ -2701,5 +2701,10 @@ module.exports = {
             type: "html",
             text: "백분율:",
         },
+        {
+            id: ".sync-percentage",
+            type: "html",
+            text: "동기화 비율: ",
+        },
     ]
 };

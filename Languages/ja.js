@@ -2697,5 +2697,10 @@ module.exports = {
             type: "html",
             text: "割合:",
         },
+        {
+            id: ".sync-percentage",
+            type: "html",
+            text: "同期の割合: ",
+        },
     ]
 };

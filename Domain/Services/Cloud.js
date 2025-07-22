@@ -91,18 +91,22 @@ const UploadFiles = async (USER, FilesToUpload, callBackpercent = null) => {
                             if(storage_id){
                                 formData.append('storage_id', storage_id);
                             }
-                            var result = await API.Cloud.post('', formData, {
-                                headers: {
-                                    ...formData.getHeaders(),
-                                },
-                                maxBodyLength: Infinity,
-                                maxContentLength: Infinity,
-                            });
-                            
-                            if(result.data && result.data.url){
-                                if(result.data.storage_id) storage_id = result.data.storage_id;
-                                filesUploadeds[DataItem.dirFile] = result.data.url;
-                                Item.files[index2].url = result.data.url;
+                            try {
+                                var result = await API.Cloud.post('', formData, {
+                                    headers: {
+                                        ...formData.getHeaders(),
+                                    },
+                                    maxBodyLength: Infinity,
+                                    maxContentLength: Infinity,
+                                });
+
+                                if(result.data && result.data.url){
+                                    if(result.data.storage_id) storage_id = result.data.storage_id;
+                                    filesUploadeds[DataItem.dirFile] = result.data.url;
+                                    Item.files[index2].url = result.data.url;
+                                }   
+                            } catch (error) {
+                                delete FilesToUpload[index1];
                             }
                         }
                         else{

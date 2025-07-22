@@ -272,10 +272,14 @@ ipcRenderer.on('Obs_wss', async (events, dt) => {
 
 });
 
+var IsFirstPercentSUDP = true;
 ipcRenderer.on('sync-user-data-percent', (events, dt) => {
   if(dt.percent){
+    if(IsFirstPercentSUDP){ $("body").modalLoading('hide', false); IsFirstPercentSUDP = false; }
     $("#DVIL_percentage_cloud").removeClass('hidden');
-    $(".l_percentage_cloud").html(`${dt.percent}%`);
+    $(".l_percentage_cloud").html(`<span class="ms-1">${dt.percent}%.</span>`);
+    $(".progressBarCloud").show();
+    $("#DprogressBarCloud").css('width', `${dt.percent}%`).html(`${dt.percent}%`);
   }
 });
 

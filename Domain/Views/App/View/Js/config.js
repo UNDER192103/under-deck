@@ -32,8 +32,18 @@ $(document).ready(async () => {
     $("#BTN_cloud_stc").click(async () => {
         if (DAO.USER) {
             if (await B_are_you_sure()) {
+                IsFirstPercentSUDP = true;
                 $("body").modalLoading('show', false);
+                $("#BTN_cloud_stc").prop('disabled', true);
+                $("#BTN_cloud_dcs").prop('disabled', true);
+                $("#BTN_cloud_sfc").prop('disabled', true);
+                $("#isEnableCloudIntegrations").prop('disabled', true);
                 BACKEND.Send('sync-user-data').then((response) => {
+                    $("#BTN_cloud_stc").prop('disabled', false);
+                    $("#BTN_cloud_dcs").prop('disabled', false);
+                    $("#BTN_cloud_sfc").prop('disabled', false);
+                    $("#isEnableCloudIntegrations").prop('disabled', false);
+                    $(".progressBarCloud").hide('slow');
                     $("#DVIL_percentage_cloud").addClass('hidden');
                     $("body").modalLoading('hide', false);
                     toaster.success(getNameTd('.Data_synchronized_successfully'));
@@ -54,9 +64,11 @@ $(document).ready(async () => {
                     if (response.dataSynchronized && response.dataSynchronized.length > 0) {
                         $("body").modalLoading('hide', false);
                         $(".progressBarCloud").show('slow');
+                        $("#DVIL_percentage_cloud").removeClass('hidden');
                         toaster.warning(getNameTd('.please_wait'));
                         const USERDATAJSONBCKP = JSON.stringify(await DAO.DBUSER.get('user'));
                         updateUNDATAjsons(response, async () => {
+                            $("#DVIL_percentage_cloud").addClass('hidden');
                             toaster.success(getNameTd('.Data_synchronized_successfully'));
                             let countTRR = 4;
                             let srtr = null;
@@ -206,29 +218,132 @@ $(document).ready(async () => {
 });
 
 async function updateUNDATAjsons(data, callback, count = 0) {
-    let itemNow = data.dataSynchronized[count];
+    let itemNow = data.dataSynchronized[count], percent;
     if (itemNow) {
         try {
             var ___DTRR = JSON.parse(itemNow.value);
             var ___PATHDB = path.join(DAO.DB_DIR, 'UN-DATA');
             var ___PATHDBFILE = path.join(___PATHDB, itemNow.path, itemNow.key);
-            /*
-            fs.writeFile(___PATHDBFILE, itemNow.value, function (err) {
-                setTimeout(() => {
-                    $("#DprogressBarCloud").css('width', `${(count / data.dataSynchronized.length) * 100}%`).html(`${parseInt((count / data.dataSynchronized.length) * 100)}%`);
-                    count++;
-                    updateUNDATAjsons(data, callback, count);
-                }, 250);
-            });
-            */
+            const writeFileData = (dataWrite) =>{
+                fs.writeFile(___PATHDBFILE, dataWrite, function (err) {
+                    setTimeout(() => {
+                        percent = (count / data.dataSynchronized.length) * 100;
+                        $(".l_percentage_cloud").html(`<span class="ms-1">${percent}%.</span>`);
+                        $("#DprogressBarCloud").css('width', `${percent}%`).html(`${percent}%`);
+                        count++;
+                        updateUNDATAjsons(data, callback, count);
+                    }, 250);
+                })
+            }
+            if(itemNow.json_files_cloud){
+                try {
+                    if(itemNow.key.includes('WEBDECK.json') || itemNow.key.includes('ProgramsExe.json')){
+                        let files = JSON.parse(itemNow.json_files_cloud);
+                        let convertedValue = JSON.parse(itemNow.value);
+                        for (let index = 0; index < files.length; index++) {
+                            const dtoF = files[index];
+                            if(dtoF.type === "APPSUD" || dtoF.type === "IWUD"){
+                                for (let index = 0; index < dtoF.files.length; index++) {
+                                    const fileDtata = dtoF.files[index];
+                                    const ext = fileDtata.fileName.split('.').pop();
+                                    var downloadFile = false, dirFIle = null;
+                                    
+                                    if(dtoF.type === "APPSUD" && itemNow.key.includes('ProgramsExe.json')){
+                                        if(convertedValue.list_programs && Array.isArray(convertedValue.list_programs)){
+                                            if(!fileDtata.dirFile.includes(APP_PATH)){
+                                                dirFIle = path.join(DAO.DB_DIR, 'UN-DATA', 'icons-exe', `${fileDtata.fileName}`);
+                                                downloadFile = true;
+                                            }
+                                            else{
+                                                dirFIle = path.join(APP_PATH, "/Domain/src/img/underbot_logo.png");
+                                                downloadFile = false;
+                                            }
+                                            convertedValue.list_programs = convertedValue.list_programs.map(item =>{
+                                                if(item._id === fileDtata._id){
+                                                    item.iconCustom = dirFIle;
+                                                }
+                                                return item;
+                                            });
+                                        }
+                                    }
+                                    else if(dtoF.type === "IWUD" && itemNow.key.includes('WEBDECK.json')){
+                                        if(convertedValue.pages && Array.isArray(convertedValue.pages)){
+                                             if(!fileDtata.dirFile.includes(APP_PATH)){
+                                                dirFIle = path.join(DAO.DB_DIR, 'UN-DATA', 'icons-webpages', `${fileDtata.fileName}`);
+                                                downloadFile = true;
+                                            }
+                                            else{
+                                                dirFIle = path.join(APP_PATH, "/Domain/src/img/underbot_logo.png");
+                                                downloadFile = false;
+                                            }
+                                            convertedValue.pages = convertedValue.pages.map(item =>{
+                                                if(item.id === fileDtata.id){
+                                                    item.icon = dirFIle;
+                                                }
+                                                return item;
+                                            });
+                                        }
+                                    }
+
+                                    if(downloadFile && dirFIle){
+                                        try {
+                                            var response = await axios.get(fileDtata.url, { responseType: 'blob' });
+                                            if(response.status === 200){
+                                                let blobFile = await new Blob([response.data], { type: response.data.type });
+                                                let buffer = await Buffer.from(await blobFile.arrayBuffer());
+                                                await fs.writeFileSync(dirFIle, buffer);
+                                            }   
+                                        } catch (error) {
+                                            if(dtoF.type === "APPSUD" && itemNow.key.includes('ProgramsExe.json')){
+                                                if(convertedValue.list_programs && Array.isArray(convertedValue.list_programs)){
+                                                    dirFIle = path.join(APP_PATH, "/Domain/src/img/underbot_logo.png");
+                                                    convertedValue.list_programs = convertedValue.list_programs.map(item =>{
+                                                        if(item._id === fileDtata._id){
+                                                            item.iconCustom = dirFIle;
+                                                        }
+                                                        return item;
+                                                    });
+                                                }
+                                            }
+                                            else if(dtoF.type === "IWUD" && itemNow.key.includes('WEBDECK.json')){
+                                                if(convertedValue.pages && Array.isArray(convertedValue.pages)){
+                                                    dirFIle = path.join(APP_PATH, "/Domain/src/img/underbot_logo.png");
+                                                    convertedValue.pages = convertedValue.pages.map(item =>{
+                                                        if(item.id === fileDtata.id){
+                                                            item.icon = dirFIle;
+                                                        }
+                                                        return item;
+                                                    });
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        itemNow.value = JSON.stringify(convertedValue);
+                    }
+                    writeFileData(itemNow.value);
+                } catch (error) {
+                    console.log(error);
+                    writeFileData(itemNow.value);
+                }
+            }
+            else{
+                writeFileData(itemNow.value);
+            }
         } catch (error) {
-            $("#DprogressBarCloud").css('width', `${(count / data.dataSynchronized.length) * 100}%`).html(`${parseInt((count / data.dataSynchronized.length) * 100)}%`);
+            percent = (count / data.dataSynchronized.length) * 100;
+            $(".l_percentage_cloud").html(`<span class="ms-1">${percent}%.</span>`);
+            $("#DprogressBarCloud").css('width', `${percent}%`).html(`${percent}%`);
             count++;
             updateUNDATAjsons(data, callback, count);
         }
     }
     else {
-        $("#DprogressBarCloud").css('width', `${(count / data.dataSynchronized.length) * 100}%`).html(`${parseInt((count / data.dataSynchronized.length) * 100)}%`);
+        percent = (count / data.dataSynchronized.length) * 100;
+        $(".l_percentage_cloud").html(`<span class="ms-1">${percent}%.</span>`);
+        $("#DprogressBarCloud").css('width', `${percent}%`).html(`${percent}%`);
         callback();
     }
 }

@@ -815,7 +815,8 @@ const save_copy_default_icon_PageWebDeck_file = async (dir, id, callback) => {
 const save_icon_PageWebDeckNF = async (file, id, callback) => {
     if (file) {
         if(file && file.name){
-            var dirSave = path.join(DAO.DB_DIR, 'UN-DATA', 'icons-webpages', `${id.replace('.', '-')}-${file.name}`);
+            let ext = file.name.split('.').pop();
+            var dirSave = path.join(DAO.DB_DIR, 'UN-DATA', 'icons-webpages', `${id.replace('.', '-')}-${uuidv4()}.${ext}`);
             const buffer = Buffer.from(await file.arrayBuffer());
             fs.writeFile(dirSave, buffer, (err) => {
                 callback(dirSave);
@@ -832,7 +833,8 @@ const save_icon_PageWebDeckNF = async (file, id, callback) => {
 const save_icon_PageWebDeckBF = async (page, callback) => {
     if (page.icon) {
         if(page.icon && page.icon.name){
-            var dirSave = path.join(DAO.DB_DIR, 'UN-DATA', 'icons-webpages', `${page.id.replace('.', '-')}-${page.icon.name}`);
+            let ext = page.icon.name.split('.').pop();
+            var dirSave = path.join(DAO.DB_DIR, 'UN-DATA', 'icons-webpages', `${page.id.replace('.', '-')}-${uuidv4()}.${ext}`);
             const buffer = Buffer.from(await page.icon.arrayBuffer());
             fs.writeFile(dirSave, buffer, (err) => {
                 callback(dirSave);

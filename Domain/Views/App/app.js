@@ -8,7 +8,6 @@ const OverlayScreen = require("../Overlay/overlay.js");
 const ObsService = require("../../Services/Obs.js");
 const CloudService = require("../../Services/Cloud");
 const ShortcutKeys = require("../../Services/ShortcutKeys");
-const PACKGEJSON = require("../../../package.json");
 const macrosService = new ShortcutKeys();
 var robotjs;
 try {

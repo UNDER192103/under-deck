@@ -2685,5 +2685,10 @@ module.exports = {
             type: "html",
             text: "百分比:",
         },
+        {
+            id: ".sync-percentage",
+            type: "html",
+            text: "同步百分比: ",
+        },
     ]
 };

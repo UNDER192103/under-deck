@@ -2663,5 +2663,10 @@ module.exports = {
             type: "html",
             text: "Percentage:",
         },
+        {
+            id: ".sync-percentage",
+            type: "html",
+            text: "Sync percentage: ",
+        },
     ]
 };

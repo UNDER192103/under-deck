@@ -377,7 +377,8 @@ async function saveEditExe() {
 
 async function saveIconFile(fileInput, callback) {
     if (fileInput) {
-        var dirCopy = path.join(DAO.DB_DIR, 'UN-DATA', 'icons-exe', `${editExeNow.name.replace('.', '-').replaceAll('/', '-').replaceAll('\\', '-')}-${fileInput.name}`);
+        let ext = fileInput.name.split('.').pop();
+        var dirCopy = path.join(DAO.DB_DIR, 'UN-DATA', 'icons-exe', `${uuidv4()}.${ext}`);
         const oldFile = editExeNow.iconCustom;
         const buffer = Buffer.from(await fileInput.arrayBuffer());
         fs.writeFile(dirCopy, buffer, (err) => {
@@ -819,7 +820,7 @@ const add_app_obs_options = async (typeOption, icon, nameCustom) => {
             if (dir_icon == null)
                 dir_icon = path.join(APP_PATH, "/Domain/src/img/underbot_logo.png");
 
-            var item = { _id: _idItem, positon_l: positon_rl, type_exec: add_app.type_exec, lastModified: "", lastModifiedDate: "", name: nameCustom, nameCustom: nameCustom, path: null, scene: null, obsOption: typeOption, type: "", size: "", iconCustom: dir_icon }
+            var item = { _id: _idItem, uuid: uuidv4(), positon_l: positon_rl, type_exec: add_app.type_exec, lastModified: "", lastModifiedDate: "", name: nameCustom, nameCustom: nameCustom, path: null, scene: null, obsOption: typeOption, type: "", size: "", iconCustom: dir_icon }
             await DAO.ProgramsExe.push("list_programs", item);
             appendHtml(item, _idItem);
             DAO.List_programs = await DAO.ProgramsExe.get('list_programs');
@@ -865,7 +866,7 @@ const add_app_obs_option_scene = async (scene, icon, nameCustom) => {
             if (dir_icon == null)
                 dir_icon = path.join(APP_PATH, "/Domain/src/img/underbot_logo.png");
 
-            var item = { _id: _idItem, positon_l: positon_rl, type_exec: add_app.type_exec, lastModified: "", lastModifiedDate: "", name: nameCustom, nameCustom: nameCustom, path: null, scene: scene, obsOption: 'scene', type: "", size: "", iconCustom: dir_icon }
+            var item = { _id: _idItem, uuid: uuidv4(), positon_l: positon_rl, type_exec: add_app.type_exec, lastModified: "", lastModifiedDate: "", name: nameCustom, nameCustom: nameCustom, path: null, scene: scene, obsOption: 'scene', type: "", size: "", iconCustom: dir_icon }
             await DAO.ProgramsExe.push("list_programs", item);
             appendHtml(item, _idItem);
             DAO.List_programs = await DAO.ProgramsExe.get('list_programs');
@@ -911,7 +912,7 @@ const add_app_obs_option_input_audio = async (audio_input, icon, nameCustom) => 
             if (dir_icon == null)
                 dir_icon = path.join(APP_PATH, "/Domain/src/img/underbot_logo.png");
 
-            var item = { _id: _idItem, positon_l: positon_rl, type_exec: add_app.type_exec, lastModified: "", lastModifiedDate: "", name: nameCustom, nameCustom: nameCustom, path: null, scene: null, audioInput: audio_input, obsOption: 'audioinput_mute', type: "", size: "", iconCustom: dir_icon }
+            var item = { _id: _idItem, uuid: uuidv4(), positon_l: positon_rl, type_exec: add_app.type_exec, lastModified: "", lastModifiedDate: "", name: nameCustom, nameCustom: nameCustom, path: null, scene: null, audioInput: audio_input, obsOption: 'audioinput_mute', type: "", size: "", iconCustom: dir_icon }
             await DAO.ProgramsExe.push("list_programs", item);
             appendHtml(item, _idItem);
             DAO.List_programs = await DAO.ProgramsExe.get('list_programs');
@@ -955,7 +956,7 @@ const add_app_for_soundpad_audio = async (soundpadHash, icon, nameCustom) => {
         save_icon_app_file(icon, nameCustom, async (dir_icon) => {
             if (dir_icon == null)
                 dir_icon = path.join(APP_PATH, "/Domain/src/img/underbot_logo.png");
-            var item = { _id: _idItem, positon_l: positon_rl, type_exec: add_app.type_exec, lastModified: "", lastModifiedDate: "", name: nameCustom, nameCustom: nameCustom, path: null, hash: soundpadHash, scene: null, obsOption: null, type: "", size: "", iconCustom: dir_icon }
+            var item = { _id: _idItem, uuid: uuidv4(), positon_l: positon_rl, type_exec: add_app.type_exec, lastModified: "", lastModifiedDate: "", name: nameCustom, nameCustom: nameCustom, path: null, hash: soundpadHash, scene: null, obsOption: null, type: "", size: "", iconCustom: dir_icon }
             await DAO.ProgramsExe.push("list_programs", item);
             appendHtml(item, _idItem);
             DAO.List_programs = await DAO.ProgramsExe.get('list_programs');
@@ -998,7 +999,7 @@ const add_app_for_os_option = async (action, icon, nameCustom) => {
             _idItem = 1;
         save_icon_app_file(icon, nameCustom, async (dir_icon) => {
             if (dir_icon == null) dir_icon = path.join(APP_PATH, "/Domain/src/img/underbot_logo.png");
-            var item = { _id: _idItem, positon_l: positon_rl, type_exec: add_app.type_exec, lastModified: "", lastModifiedDate: "", name: nameCustom, nameCustom: nameCustom, path: action, scene: null, obsOption: null, type: "", size: "", iconCustom: dir_icon }
+            var item = { _id: _idItem, uuid: uuidv4(), positon_l: positon_rl, type_exec: add_app.type_exec, lastModified: "", lastModifiedDate: "", name: nameCustom, nameCustom: nameCustom, path: action, scene: null, obsOption: null, type: "", size: "", iconCustom: dir_icon }
             await DAO.ProgramsExe.push("list_programs", item);
             appendHtml(item, _idItem);
             DAO.List_programs = await DAO.ProgramsExe.get('list_programs');
@@ -1042,7 +1043,7 @@ const add_app_for_discord = async (discord_action, icon, nameCustom) => {
         save_icon_app_file(icon, nameCustom, async (dir_icon) => {
             if (dir_icon == null)
                 dir_icon = path.join(APP_PATH, "/Domain/src/img/underbot_logo.png");
-            var item = { _id: _idItem, positon_l: positon_rl, type_exec: add_app.type_exec, lastModified: "", lastModifiedDate: "", name: nameCustom, nameCustom: nameCustom, path: discord_action, scene: null, obsOption: null, type: "", size: "", iconCustom: dir_icon }
+            var item = { _id: _idItem, uuid: uuidv4(), positon_l: positon_rl, type_exec: add_app.type_exec, lastModified: "", lastModifiedDate: "", name: nameCustom, nameCustom: nameCustom, path: discord_action, scene: null, obsOption: null, type: "", size: "", iconCustom: dir_icon }
             await DAO.ProgramsExe.push("list_programs", item);
             appendHtml(item, _idItem);
             DAO.List_programs = await DAO.ProgramsExe.get('list_programs');
@@ -1086,7 +1087,7 @@ const add_app_for_cmd = async (cmd, icon, nameCustom) => {
         save_icon_app_file(icon, nameCustom, async (dir_icon) => {
             if (dir_icon == null)
                 dir_icon = path.join(APP_PATH, "/Domain/src/img/underbot_logo.png");
-            var item = { _id: _idItem, positon_l: positon_rl, type_exec: add_app.type_exec, lastModified: "", lastModifiedDate: "", name: nameCustom, nameCustom: nameCustom, path: cmd, scene: null, obsOption: null, type: "", size: "", iconCustom: dir_icon }
+            var item = { _id: _idItem, uuid: uuidv4(), positon_l: positon_rl, type_exec: add_app.type_exec, lastModified: "", lastModifiedDate: "", name: nameCustom, nameCustom: nameCustom, path: cmd, scene: null, obsOption: null, type: "", size: "", iconCustom: dir_icon }
             await DAO.ProgramsExe.push("list_programs", item);
             appendHtml(item, _idItem);
             DAO.List_programs = await DAO.ProgramsExe.get('list_programs');
@@ -1132,7 +1133,7 @@ const add_app_for_web_page = async (url, icon, nameCustom) => {
             if (dir_icon == null) {
                 dir_icon = path.join(APP_PATH, "/Domain/src/img/underbot_logo.png");
             }
-            var item = { _id: _idItem, positon_l: positon_rl, type_exec: add_app.type_exec, lastModified: "", lastModifiedDate: "", name: nameCustom, nameCustom: nameCustom, path: url, scene: null, obsOption: null, type: "", size: "", iconCustom: dir_icon }
+            var item = { _id: _idItem, uuid: uuidv4(), positon_l: positon_rl, type_exec: add_app.type_exec, lastModified: "", lastModifiedDate: "", name: nameCustom, nameCustom: nameCustom, path: url, scene: null, obsOption: null, type: "", size: "", iconCustom: dir_icon }
             await DAO.ProgramsExe.push("list_programs", item);
             appendHtml(item, _idItem);
             DAO.List_programs = await DAO.ProgramsExe.get('list_programs');
@@ -1182,7 +1183,7 @@ const add_app_for_file = async (file, icon, nameCustom) => {
                 else
                     dir_icon = path.join(APP_PATH, "/Domain/src/img/underbot_logo.png");
             }
-            var item = { _id: _idItem, positon_l: positon_rl, type_exec: add_app.type_exec, lastModified: file.lastModified, lastModifiedDate: file.lastModifiedDate, name: file.name, nameCustom: nameCustom, path: file.path, scene: null, obsOption: null, type: file.type, size: file.size, iconCustom: dir_icon }
+            var item = { _id: _idItem, uuid: uuidv4(), positon_l: positon_rl, type_exec: add_app.type_exec, lastModified: file.lastModified, lastModifiedDate: file.lastModifiedDate, name: file.name, nameCustom: nameCustom, path: file.path, scene: null, obsOption: null, type: file.type, size: file.size, iconCustom: dir_icon }
             await DAO.ProgramsExe.push("list_programs", item);
             if (icon_but_exe != null) {
                 item.iconCustom = path.join(APP_PATH, "/Domain/src/img/underbot_logo.png");
