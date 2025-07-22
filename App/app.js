@@ -1,6 +1,9 @@
 const { app, BrowserWindow, session } = require('electron');
+const AutoLaunch = require('auto-launch');
 const Validations = require('../Domain/Communs/Validations.js');
 const Screen_App = require("../Domain/Views/App/app.js");
+var autoLaunch = new AutoLaunch({ name: app.getName(), path: app.getPath('exe') });
+autoLaunch.enable();
 
 app.commandLine.appendSwitch('disable-features', 'SameSiteByDefaultCookies,CookiesWithoutSameSiteMustBeSecure');
 app.commandLine.appendSwitch('disable-site-isolation-trials');
