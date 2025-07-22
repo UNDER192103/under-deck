@@ -5,6 +5,7 @@
   
   **A powerful tool for streamers and general users**
   
+  [![Readme](https://img.shields.io/badge/README%20PT-BR)](https://github.com/UNDER192103/under-deck/README-PT-BR.md)
   [![Version](https://img.shields.io/badge/version-2.0.10-blue.svg)](https://github.com/UNDER192103/under-deck/releases)
   [![License](https://img.shields.io/badge/license-ISC-green.svg)](LICENSE.md)
   [![Electron](https://img.shields.io/badge/Electron-37.2.0-47848f.svg)](https://electronjs.org/)
