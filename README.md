@@ -1,41 +1,150 @@
-[ENGLISH]
-Meet UNDER DECK
+# Under Deck
 
-The Under Deck app was created primarily to help streamers, but it can also be useful for regular use. Below are some of its features aimed at streamers and the general public.
+<div align="center">
+  <img src="Domain/src/img/UDIx256.ico" alt="Under Deck Logo" width="128" height="128">
+  
+  **Uma ferramenta poderosa para streamers e usuários em geral**
+  
+  [![Version](https://img.shields.io/badge/version-2.0.10-blue.svg)](https://github.com/UNDER192103/under-deck/releases)
+  [![License](https://img.shields.io/badge/license-ISC-green.svg)](LICENSE.md)
+  [![Electron](https://img.shields.io/badge/Electron-37.2.0-47848f.svg)](https://electronjs.org/)
+</div>
 
-1- Applications On the home screen, you can register application executables, add a website URL, add audio files, or, if you prefer, add the command itself to be executed in the Windows CMD. For example, you can open a browser or even restart or shut down the operating system. When registering an application, audio, website, or CMD command, you can edit the display name and the icon that will be shown later in the Web Under Deck.
+## 📋 Sobre o Projeto
 
-2- Web Under Deck (Note: Only for local networks like Wi-Fi or wired network) With Web Under Deck enabled and properly configured in Settings, by accessing the URL provided in Settings or using the QR Code to access it from mobile devices, if you have applications, audios, websites, and CMD commands registered on the home screen, you will be able to view all registered applications through Web Under Deck. By clicking on one of the applications, it will be executed on your computer. For example, if the Discord application is registered, by accessing the URL or QR Code of Web Under Deck, you will see the list with Discord included. By clicking on Discord through Web Under Deck, it will be executed on your computer.
+O Under Deck é um aplicativo desktop desenvolvido em Electron que foi criado principalmente para ajudar streamers, mas também é útil para uso geral. Ele oferece uma interface intuitiva para gerenciar aplicações, criar atalhos personalizados e controlar seu computador remotamente através de uma interface web.
 
-3- Shortcut Keys With some of your applications, audios, URLs, and CMD commands, you can add keyboard shortcuts exclusive to each type of application saved in Under Deck. For example, if the Discord executable is saved on the applications screen, on the Shortcut Keys screen, you can add a key shortcut (e.g., CTRL + D). When executed, Under Deck will open the application, in this case, Discord, but it can also execute audios or open a new tab in the browser.
+## ✨ Principais Funcionalidades
 
-4- Web Pages On the Web Pages screen, you can add a URL, for example, YouTube. With this URL saved, you can open the site within Under Deck without the need to use Google Chrome or any other browser, allowing you to access a site with the browser closed.
+### 🚀 **Gerenciamento de Aplicações**
+- Registre executáveis de aplicativos
+- Adicione URLs de websites
+- Inclua arquivos de áudio
+- Execute comandos CMD personalizados
+- Personalize nomes e ícones de exibição
 
-5- Settings On the Settings screen, you can allow shortcut keys to work and execute applications according to the registered shortcut. You can also configure Web Under Deck, defining the access port and whether it will be available for access via URL.
+### 🌐 **Web Under Deck**
+- Interface web para controle remoto (apenas redes locais)
+- Acesso via URL ou QR Code
+- Execute aplicações do seu computador remotamente
+- Ideal para streamers controlarem setup à distância
 
-Some of these features are still under development and will undergo changes soon.
+### ⌨️ **Teclas de Atalho**
+- Crie atalhos de teclado personalizados
+- Suporte para aplicações, áudios, URLs e comandos CMD
+- Execução rápida e eficiente
+- Exemplo: CTRL + D para abrir Discord
 
-If you have any questions, contact us via GitHub: https://github.com/UNDER192103/under-deck or Discord: under_nouzen
+### 📱 **Páginas Web Integradas**
+- Abra websites dentro do Under Deck
+- Navegação sem necessidade de browser externo
+- Acesso rápido a sites frequentemente utilizados
 
-I hope this helps! If you need anything else, just let me know. 😊
+### ⚙️ **Configurações Avançadas**
+- Habilitação/desabilitação de atalhos
+- Configuração de porta para Web Under Deck
+- Personalização de interface
+- Configurações de rede local
 
-[PT-BR]
-Conheça o UNDER DECK
+## 🛠️ Tecnologias Utilizadas
 
-O aplicativo Under Deck foi criado com o objetivo de ajudar principalmente os streamers, mas também pode ser útil em usos normais. Abaixo estão algumas de suas funcionalidades voltadas para streamers e para o público em geral.
+- **Electron** 37.2.0 - Framework principal
+- **Node.js** - Runtime JavaScript
+- **Express** - Servidor web interno
+- **Socket.io** - Comunicação em tempo real
+- **Discord RPC** - Integração com Discord
+- **RobotJS** - Automação de sistema
+- **OBS WebSocket** - Integração com OBS Studio
 
-1- Aplicativos Na tela inicial, você poderá registrar executáveis de aplicativos, adicionar uma URL de um   site, adicionar arquivos de áudio ou, se preferir, adicionar o próprio comando para ser executado no CMD do   Windows. Por exemplo, você pode abrir um navegador ou até mesmo reiniciar ou desligar o sistema operacional.  Ao cadastrar um aplicativo, áudio, site ou comando CMD, você poderá editar o nome de exibição e o ícone que  será exibido posteriormente no Web Under Deck.
+## 📦 Instalação
 
-2- Web Under Deck (OBS: Apenas para redes locais como Wi-Fi ou rede cabeada) Com o Web Under Deck habilitado e devidamente configurado em Configurações, ao acessar a URL informada em Configurações ou utilizando o QR Code para acessar por dispositivos móveis, caso tenha aplicativos, áudios, sites e comandos CMD cadastrados na tela inicial, você conseguirá visualizar pelo Web Under Deck todos os aplicativos cadastrados. Ao clicar em um dos aplicativos, ele será executado em seu computador. Por exemplo, se o aplicativo do Discord estiver cadastrado, ao acessar a URL ou QR Code do Web Under Deck, você verá a lista com o Discord incluso. Ao clicar no Discord pelo Web Under Deck, ele será executado em seu computador.
+### Pré-requisitos
+- Node.js (versão 16 ou superior)
+- npm ou yarn
 
-3- Teclas de Atalho Com alguns de seus aplicativos, áudios, URLs e comandos para o CMD, você poderá adicionar atalhos no teclado exclusivos para cada tipo de aplicação salva no Under Deck. Por exemplo, se o executável do Discord estiver salvo na tela de aplicativos, na tela de Teclas de Atalho, você poderá adicionar um atalho de teclas (Ex: CTRL + D). Quando executado, o Under Deck irá abrir o aplicativo, neste caso o Discord, mas também poderá executar áudios ou abrir uma nova aba no navegador.
+### Instalação via Release
+1. Acesse a página de [Releases](https://github.com/UNDER192103/under-deck/releases)
+2. Baixe a versão mais recente para Windows
+3. Execute o instalador e siga as instruções
 
-4- Páginas Web Na tela de Páginas Web, você pode adicionar uma URL, por exemplo, do YouTube. Com esta URL salva, você poderá abrir o site dentro do Under Deck sem a necessidade de usar o Google Chrome ou qualquer outro navegador, permitindo que você acesse um site com o navegador fechado.
+### Desenvolvimento Local
+```bash
+# Clone o repositório
+git clone https://github.com/UNDER192103/under-deck.git
 
-5- Configurações Na tela de Configurações, você poderá permitir que as teclas de atalho funcionem e executem os aplicativos de acordo com o atalho cadastrado. Também poderá configurar o Web Under Deck, definindo a porta de acesso e se estará disponível para acesso pela URL.
+# Entre no diretório
+cd under-deck
 
-Algumas destas funcionalidades ainda estão em desenvolvimento e passarão por mudanças em breve.
+# Instale as dependências
+npm install
 
-Qualquer dúvida, entre em contato pelo GitHub: https://github.com/UNDER192103/under-deck ou pelo Discord: under_nouzen
+# Execute o aplicativo
+npm start
+```
 
-Espero que isso ajude! Se precisar de mais alguma coisa, é só avisar. 😊
+## 🔧 Scripts Disponíveis
+
+```bash
+# Iniciar aplicação
+npm start
+
+# Build para produção
+npm run build
+
+# Build específico para Windows
+npm run build:win
+
+# Rebuild de módulos nativos
+npm run rebuild
+```
+
+## 🎯 Casos de Uso
+
+### Para Streamers
+- **Controle Remoto**: Use seu celular para controlar aplicações durante stream
+- **Atalhos Rápidos**: Acesse rapidamente Discord, OBS, jogos, etc.
+- **Organização**: Mantenha todas as ferramentas organizadas em um só lugar
+- **Automação**: Execute comandos e scripts personalizados
+
+### Para Usuários Gerais
+- **Produtividade**: Acesso rápido a aplicações frequentes
+- **Automação**: Execute tarefas repetitivas com atalhos
+- **Organização**: Centralize o acesso a websites e aplicações
+- **Controle Remoto**: Controle seu PC de outros dispositivos na rede
+
+## 🔒 Segurança
+
+- ✅ Funciona apenas em redes locais (Wi-Fi/Ethernet)
+- ✅ Sem exposição à internet externa
+- ✅ Controle total sobre permissões de acesso
+- ✅ Interface web protegida por rede local
+
+## 🤝 Contribuindo
+
+Contribuições são sempre bem-vindas! Para contribuir:
+
+1. Faça um Fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
+
+## 📞 Suporte
+
+- **GitHub**: [Issues](https://github.com/UNDER192103/under-deck/issues)
+- **Discord**: under_nouzen
+- **Email**: undernouzen@gmail.com
+
+## 📄 Licença
+
+Este projeto está sob a licença ISC. Veja o arquivo [LICENSE.md](LICENSE.md) para mais detalhes.
+
+## 🚧 Status do Desenvolvimento
+
+Algumas funcionalidades ainda estão em desenvolvimento e passarão por mudanças em breve. Acompanhe as releases para novidades!
+
+---
+
+<div align="center">
+  Desenvolvido com ❤️ por <a href="https://github.com/UNDER192103">UNDER</a>
+</div>
