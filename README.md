@@ -1,4 +1,4 @@
-# Under Deck
+
 <div align="center" class="text-center">
   <img src="Domain/src/img/UDIx256.ico" alt="Under Deck Logo" width="128" height="128">
   <h1>UNDER-DECK</h1>
