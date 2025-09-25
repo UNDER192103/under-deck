@@ -2695,5 +2695,20 @@ module.exports = {
             type: "html",
             text: "从 Windows 开始",
         },
+        {
+            id: ".plugins_text_icon",
+            type: "html",
+            text: `<i class="bi bi-plugin"></i> 插件`,
+        },
+        {
+            id: ".actives_plugins_text",
+            type: "html",
+            text: `<i class="bi bi-check-square-fill"></i> 活动插件`,
+        },
+        {
+            id: ".library_plugins_text",
+            type: "html",
+            text: `<i class="bi bi-collection-fill"></i> 插件库`,
+        },
     ]
 };

@@ -2707,5 +2707,20 @@ module.exports = {
             type: "html",
             text: "Windows から始める",
         },
+        {
+            id: ".plugins_text_icon",
+            type: "html",
+            text: `<i class="bi bi-plugin"></i> プラグイン`,
+        },
+        {
+            id: ".actives_plugins_text",
+            type: "html",
+            text: `<i class="bi bi-check-square-fill"></i> アクティブなプラグイン`,
+        },
+        {
+            id: ".library_plugins_text",
+            type: "html",
+            text: `<i class="bi bi-collection-fill"></i> プラグインライブラリ`,
+        },
     ]
 };

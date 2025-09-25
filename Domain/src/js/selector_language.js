@@ -3,7 +3,6 @@ var PACKAGE = require(__dirname.split('Domain')[0] + "package.json");
 var DAO = require(__dirname.split('Domain')[0] + "Repository/DB.js");
 var _lang = DAO.DB.get('lang_selected'),
 isOk = false,
-loopIntervalUpdate = null,
 pathAppData = path.join(process.env.APPDATA, PACKAGE.productName);
 
 LAllLangs().then((_l) => {
@@ -34,19 +33,6 @@ async function selec_lang(id_lang, is_update_back = false) {
     if (is_update_back) {
         await BACKEND.Update_lang(id_lang);
         await DAO.DB.set('checkLanguage', null);
-        loopIntervalUpdate = setInterval(() => {
-            if (conn && conn.readyState == 1) {
-                clearInterval(loopIntervalUpdate);
-                webSocketClient.send(
-                    webSocketClient.ToJson(
-                        {
-                            method: 'config-lang',
-                            lang: id_lang
-                        }
-                    )
-                );
-            }
-        }, 1000);
     }
 
     $(`.s-languages option[value="${id_lang}"]`).prop('selected', true);

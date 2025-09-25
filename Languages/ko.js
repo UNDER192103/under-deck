@@ -2711,5 +2711,20 @@ module.exports = {
             type: "html",
             text: "윈도우로 시작하기",
         },
+        {
+            id: ".plugins_text_icon",
+            type: "html",
+            text: `<i class="bi bi-plugin"></i> 플러그인`,
+        },
+        {
+            id: ".actives_plugins_text",
+            type: "html",
+            text: `<i class="bi bi-check-square-fill"></i> 활성 플러그인`,
+        },
+        {
+            id: ".library_plugins_text",
+            type: "html",
+            text: `<i class="bi bi-collection-fill"></i> 플러그인 라이브러리`,
+        },
     ]
 };

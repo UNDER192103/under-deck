@@ -85,6 +85,12 @@
                         <a href="javascript:void(0)"class="nav-link navs-item-sm settings_text_icon_HVRT d-flex">
                         </a>
                      </li>
+                     <!--
+                     <li data-id="plugins" data-did=".container-plugins" class="nav-item">
+                        <a href="javascript:void(0)"class="nav-link navs-item-sm plugins_text_icon">
+                        </a>
+                     </li>
+                     -->
                      <li data-id="discord" data-did=".container-discord" class="nav-item">
                         <a href="javascript:void(0)"class="nav-link navs-item-sm discord_icon_text d-flex">
                         </a>
@@ -103,10 +109,6 @@
                      </li>
                      <li data-id="help" data-did=".container-helper" class="nav-item">
                         <a href="javascript:void(0)"class="nav-link navs-item-sm help_text_icon">
-                        </a>
-                     </li>
-                     <li data-id="report" data-did=".container-report" class="nav-item">
-                        <a href="javascript:void(0)"class="nav-link navs-item-sm report_icon">
                         </a>
                      </li>
                      <li class="nav-item ai_open_modal">
@@ -674,6 +676,90 @@
             </div>
          </div>
 
+         <div class="container container-hide-control container-plugins mt-1 mb-1 animate__animated container-animated-style" style="display: none;">
+            <div class="THCG-CT full-h container rounded px-3 py-3" id="featured-3">
+               <div class="auto-scrool">
+                  <h2 class="pb-2 border-bottom d-flex plugins_text_icon"></h2>
+
+                  <div class="cards-area aos-init aos-animate" data-aos="fade-down">
+                     <div class="row">
+
+                        <div class="col-md-12 col-xl-6 animate__animated animate__slideInDown">
+                           <div class="card theme-card">
+                              <div class="card-header shadow-text text-center">
+                                 <h5 class="library_plugins_text "></h5>
+                              </div>
+
+                              <div class="card-body pl-l1">
+
+                                 <div class="forms">
+
+                                    <div class="feature col">
+                                       <div class="table-responsive text-nowrap"></div>
+                                       <div class="input-group mb-2">
+                                          <button class="btn btn-secondary" type="button"><span class="bi bi-search"></span></button>
+                                          <input type="text" name="Lplfoo_filter" id="Lplfoo_filter" class="form-control foo_filter" placeholder="Procurar...">
+                                       </div>
+                                       <div class="theme-bg-blur">
+                                          <table class="table list-plugins-downlaod footable border rounded" data-page-size="15" data-filter="#Lplfoo_filter">
+                                          
+                                             <thead>
+                                                <tr>
+                                                   <th class="icon_text"></th>
+                                                   <th class="name_text"></th>
+                                                   <th class="uupdate_text"></th>
+                                                   <th class="version_cuttent_text"></th>
+                                                   <th class="options_text"></th>
+                                                </tr>
+                                             </thead>
+                                          
+                                             <tbody>
+                                                <tr></tr>
+                                             </tbody>
+                                          
+                                             <tfoot>
+                                                <tr>
+                                                   <td colspan="6" class="border-0">
+                                                      <ul class="pagination">
+                                                      </ul>
+                                                   </td>
+                                                </tr>
+                                             </tfoot>
+                                          
+                                          </table>
+                                       </div>
+                                    </div>
+                                    
+                                 </div>
+
+                              </div>
+                           </div>
+                        </div>
+
+                        <div class="col-md-12 col-xl-6 animate__animated animate__slideInDown">
+                           <div class="card theme-card">
+                              <div class="card-header shadow-text text-center">
+                                 <h5 class="plugins_text_icon "></h5>
+                              </div>
+
+                              <div class="card-body pl-l2">
+
+                                 <div class="forms">
+
+                                    
+                                 </div>
+
+                              </div>
+                           </div>
+                        </div>
+
+                     </div>
+                  </div>
+
+               </div>
+            </div>
+         </div>
+
          <div
             class="container container-hide-control container-discord mt-1 mb-1 animate__animated container-animated-style"
             style="display: none;">
@@ -728,104 +814,6 @@
                      </div>
                   </div>
 
-               </div>
-            </div>
-         </div>
-
-         <div class="container container-hide-control container-report mt-1 mb-1 animate__animated container-animated-style"
-            style="display: none;">
-            <div class="THCG-CT full-h container rounded px-3 py-3" id="featured-3">
-               <div class="auto-scrool">
-                  <h2 class="pb-2 border-bottom report_icon Svg30px"></h2>
-         
-         
-                  <div class="cards-area aos-init aos-animate mb-3" data-aos="fade-down">
-                     <div class="row">
-         
-                        <div class="col-md-12 col-xl-16 animate__animated">
-                           <div class="card theme-card">
-         
-                              <div class="card-body">
-                                 <div class="alert reportalert alert-danger" style="display: none;" role="alert"></div>
-         
-                                 <div class="forms mb-3">
-                                    <div class="select mb-3">
-                                       <label class="form-check-label ittor"></label>
-                                       <select id="typeReport" class="form-select">
-                                          <option value="Bug">BUG</option>
-                                          <option value="Doubt" class="Doubt"></option>
-                                          <option value="Recommend New Features" class="Recommend_New_Features"></option>
-                                          <option value="Other" class="Other"></option>
-                                       </select>
-                                    </div>
-         
-                                    <div class="input mb-3">
-                                       <label class="col-form-label p-0 Subject_text"></label>
-                                       <div class="input-group">
-                                          <input type="text" id="subjectReport"
-                                             class="form-control placeholder-subject border border-secondary">
-                                       </div>
-                                    </div>
-         
-         
-                                    <div class="input mb-3">
-                                       <label class="col-form-label p-0 Message_text"></label>
-                                       <div class="input-group">
-                                          <textarea id="messageReport" style="min-height: 200px;"
-                                             class="form-control placeholder-message border border-secondary"></textarea>
-                                       </div>
-                                    </div>
-         
-                                    <div class="input d-flex justify-content-end">
-                                       <button id="submit-report" class="btn btn-success submit_icon"></button>
-                                    </div>
-         
-                                 </div>
-         
-                                 <hr class="mb-3">
-                                 <div class="auto-scrool">
-                                    <div class="input-group mt-2 mb-2">
-                                       <button class="btn btn-secondary" type="button"><span
-                                             class="bi bi-search"></span></button>
-                                       <input type="text" name="lreports_filter" id="lreports_filter"
-                                          class="form-control foo_filter" placeholder="">
-                                    </div>
-                                    <table class="table footable border rounded" data-page-size="15"
-                                       data-filter="#lreports_filter">
-         
-                                       <thead>
-                                          <tr>
-                                             <th>#</th>
-                                             <th class="Status"></th>
-                                             <th class="text_type"></th>
-                                             <th class="Subject_text"></th>
-                                             <th class="responses_text"></th>
-                                             <th class="date_created_text"></th>
-                                             <th class="options_text"></th>
-                                          </tr>
-                                       </thead>
-         
-                                       <tbody id="list-mys-reports">
-                                       </tbody>
-         
-                                       <tfoot>
-                                          <tr>
-                                             <td colspan="6" class="border-0">
-                                                <ul class="pagination">
-                                                </ul>
-                                             </td>
-                                          </tr>
-                                       </tfoot>
-         
-                                    </table>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-         
-                     </div>
-                  </div>
-         
                </div>
             </div>
          </div>
@@ -1996,7 +1984,7 @@
          <div class="modal fade" id="modal_login" data-bs-backdrop='static' data-keyboard="false"
             data-backdrop="static">
             <div class="modal-dialog">
-               <form class="rounded modal-content" onSubmit="tryLoginUser(); return false;">
+               <form class="rounded modal-content" id="FormUserLogin">
 
                   <div class="modal-header text-center" style="border-bottom: none !important;">
                      <h4 class="modal-title w-100 UND_userLogin_text"></h4>
@@ -2013,10 +2001,9 @@
                      <div class="mb-3">
                         <label for="u-password" class="form-label password_text"></label>
                         <div class="input-group">
-                           <a class="btn btn-light border border-secondary view-password" type="button"><i
-                                 class="bi bi-eye-fill"></i></a>
                            <input required type="password" class="form-control" id="u-password"
                               placeholder="************">
+                           <a class="btn btn-light border border-secondary view-password" type="button"><i class="bi bi-eye-fill"></i></a>
                         </div>
                      </div>
 
@@ -2075,20 +2062,19 @@
                      <div class="mb-3">
                         <label for="ur-password" class="form-label password_text"></label>
                         <div class="input-group">
-                           <a class="btn btn-light border border-secondary view-password" type="button"><i
-                                 class="bi bi-eye-fill"></i></a>
                            <input required type="password" class="form-control" id="ur-password"
                               placeholder="************">
+                           <a class="btn btn-light border border-secondary view-password" type="button"><i
+                              class="bi bi-eye-fill"></i></a>
                         </div>
                      </div>
 
                      <div class="mb-3">
                         <label for="ur-cpassword" class="form-label confirm_password_text"></label>
                         <div class="input-group">
-                           <a class="btn btn-light border border-secondary view-password" type="button"><i
-                                 class="bi bi-eye-fill"></i></a>
                            <input required type="password" class="form-control" id="ur-cpassword"
                               placeholder="************">
+                           <a class="btn btn-light border border-secondary view-password" type="button"><i class="bi bi-eye-fill"></i></a>
                         </div>
                      </div>
 
@@ -2169,7 +2155,7 @@
                      <div style="display: none;" id="srp-form-alert" class="alert alert-danger" role="alert"></div>
 
                      <div class="mb-3">
-                        <input type="text" class="form-control hidden" id="trpemail">
+                        <input type="text" class="form-control hidden" id="trpclientid">
                      </div>
 
                      <div class="mb-3">
@@ -2180,20 +2166,20 @@
                      <div class="mb-3">
                         <label for="srp-password" class="form-label password_text"></label>
                         <div class="input-group">
-                           <a class="btn btn-light border border-secondary view-password" type="button"><i
-                                 class="bi bi-eye-fill"></i></a>
                            <input required type="password" class="form-control placeholder-password-text"
                               id="srp-password" placeholder="************">
+                           <a class="btn btn-light border border-secondary view-password" type="button"><i
+                              class="bi bi-eye-fill"></i></a>
                         </div>
                      </div>
 
                      <div class="mb-3">
                         <label for="srp-cpassword" class="form-label confirm_password_text"></label>
                         <div class="input-group">
-                           <a class="btn btn-light border border-secondary view-password" type="button"><i
-                                 class="bi bi-eye-fill"></i></a>
                            <input required type="password" class="form-control placeholder-password-text"
                               id="srp-cpassword" placeholder="************">
+                           <a class="btn btn-light border border-secondary view-password" type="button"><i
+                              class="bi bi-eye-fill"></i></a>
                         </div>
                      </div>
 
@@ -2376,7 +2362,7 @@
                                                    <h5 class="form-check-label Name_Plate m-0"></h5>
                                                 </div>
                                              </div>
-                                             <div class="dropup-center dropup w100 ms-2 me-4">
+                                             <div class="dropup-center dropup w100 ms-2 me-4 mt-1">
                                                 <div class="UND_contentNamePlate rounded z-0" style="display: none;">
                                                    <video class="PREVUNDNamePlateMY HINRP rounded rotate-180"
                                                       style="display: none;" autoplay loop muted plays-inline>
@@ -2600,7 +2586,6 @@
 <script src="./View/Js/Menus.js"></script>
 <script src="./View/Js/Loader.js"></script>
 <script src="./View/Js/Apps.js"></script>
-<script src="./view/js/WebSocket.js"></script>
 <script src="./view/js/Discord.js"></script>
 <script src="./view/js/appearance.js"></script>
 <script src="./view/js/updates.js"></script>
@@ -2611,6 +2596,6 @@
 <script src="./view/js/keys_macro.js"></script>
 <script src="./view/js/Soundpad.js"></script>
 <script src="./view/js/webdeck.js"></script>
-<script src="./view/js/report.js"></script>
 <script type="module" src="./view/js/ai.js"></script>
+<script src="./view/js/Plugins.js"></script>
 </html>

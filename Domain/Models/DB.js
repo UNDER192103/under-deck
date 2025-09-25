@@ -20,17 +20,6 @@ module.exports = {
     Selected_port_com: null,
     USER: null,
     PC: null,
-    USERDATAUPDATE: {
-        croppie: {
-            file: null,
-            base64: null,
-        },
-        icon: null,
-        name: null,
-        username: null,
-        namePlate: null,
-        themeProfile: null,
-    },
     WEBDECKDATA: {
         formatView: 'default',
         formatListView: 'default',

@@ -11,7 +11,6 @@ const { title, contextIsolated } = require('process');
 const loudness = require("loudness");
 const { version } = require('os');
 const APP_PATH = __dirname.split('\\Domain')[0];
-var API = require(APP_PATH + "/Repository/Api.js");
 var DAO = require(APP_PATH + "/Repository/DB.js");
 var localServer = require('./Service/Server.js');
 var DiscordControler = require('./Service/DiscordControler.js');

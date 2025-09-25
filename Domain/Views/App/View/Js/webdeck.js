@@ -343,8 +343,10 @@ $(document).ready(async () => {
     });
 
     $(document).on('click', '#openInvitationUNDRemotVersion', async (e) => {
-        if (DAO.USER && DAO.PC) {
-            exec(`start ${process.env.API_URL}/client/?ng=webdeck/invite/${DAO.PC.id}/`);
+        var User = await BACKEND.Send('GetAccount');
+        var Pc = await BACKEND.Send('GetPC');
+        if ( User && User.id  && Pc && Pc.id) {
+            exec(`start ${process.env.API_URL}/client/?ng=webdeck/invite/${Pc.id}/`);
         }
         else {
             bootbox.alert(getNameTd('.this_feature_is_only_available_when_logged_into_an_account_text'));
@@ -352,8 +354,10 @@ $(document).ready(async () => {
     });
 
     $(document).on('click', '#openInvitationQRCODEUNDRemotVersion', async (e) => {
-        if (DAO.USER && DAO.PC) {
-            let uri = `${process.env.API_URL}/client/?ng=webdeck/invite/${DAO.PC.id}/`;
+        var User = await BACKEND.Send('GetAccount');
+        var Pc = await BACKEND.Send('GetPC');
+        if ( User && User.id  && Pc && Pc.id) {
+            let uri = `${process.env.API_URL}/client/?ng=webdeck/invite/${Pc.id}/`;
             QRCode.toDataURL(uri, function (err, url) {
                 if (!err) {
                     $("#modal-qr-code").modal('show');
@@ -370,7 +374,9 @@ $(document).ready(async () => {
     });
 
     $(document).on('click', '#revoke_all_permissions_UNDRemoteVersion', async (e) => {
-        if (DAO.USER && DAO.PC) {
+        var User = await BACKEND.Send('GetAccount');
+        var Pc = await BACKEND.Send('GetPC');
+        if ( User && User.id  && Pc && Pc.id) {
             bootbox.confirm({
                 message: `<h4 class="are_you_sure_of_that_text">${getNameTd('.are_you_sure_of_that_text')}</h4>`,
                 buttons: {
@@ -385,7 +391,7 @@ $(document).ready(async () => {
                 },
                 callback: async (res) => {
                     if (res) {
-                        await revokeAllPermissionAcessThisPC();
+                        await BACKEND.Send('RevoceAllUsersPermThisPc');
                         bootbox.alert(getNameTd('.access_permissions_for_all_users_have_been_revoked'));
                         toaster.success(getNameTd('.access_permissions_for_all_users_have_been_revoked'));
                     }
@@ -407,45 +413,57 @@ $(document).ready(async () => {
     });
 
     $(document).on('click', '#list_all_permissions_UNDRemoteVersion', async (e) => {
-        if (DAO.USER && DAO.PC) {
+        var User = await BACKEND.Send('GetAccount');
+        var Pc = await BACKEND.Send('GetPC');
+        if ( User && User.id  && Pc && Pc.id) {
             $("body").modalLoading('show', false);
-            API.App.post('', {
-                _lang: _lang,
-                method: "list-this-pc-users-permissions",
-                client_id: DAO.USER.client_id,
-                token: DAO.USER.token,
-                pc_id: DAO.PC.id,
-                pc_name: DAO.PC.name,
-            })
-                .then(async (res) => {
-                    $("body").modalLoading('hide', false);
-                    let html = '';
-                    if (res && res.data && res.data.result) {
-                        listAllPermissins = res.data.result;
-                        if (listAllPermissins.length > 0) {
-                            listAllPermissins.forEach(data => {
-                                let user = data.user;
-                                let isMyFriend = false;
-                                if (DAO.USER.friends.find(f => f.client_id == user.id || f.friend_id == user.id)) isMyFriend = true;
-                                html += `
-                                <div id="${user.id}${data.client_id_pc}" class="col-md-12">
+            BACKEND.Send('ListAllUsersThisPCPermissions').then(list => {
+                $("body").modalLoading('hide', false);
+                let html = '';
+                listAllPermissins = list;
+                if (listAllPermissins) {
+                    if (listAllPermissins.size > 0) {
+                        listAllPermissins.forEach(data => {
+                            let isMyFriend = false;
+                            if (User.friends.get(data.user.id)) isMyFriend = true;
+                            html += `
+                            <div id="UPMR_${data.user.id}" class="col-md-12">
+                                <div class="card theme-card me-1">
+                                    ${GetNamePlateForUser(data.user)}
+                                    <div class="card-body z-1">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="${data.user.avatar}" class="img-thumbnail rounded-circle ${GetStatusAccount(data.user).classBg}" style="width: 100px; height: 100px;">
+                                                        <h5 class="m-2 ${data.user.premium == true ? 'text-warning' : ''}">${data.user.premium == true ? '<i class="bi bi-stars"></i>' : ''} ${data.user.name}</h5>
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <button href="#" class="btn btn-sm btn-success me-1 Friends_icon_text ${isMyFriend == true ? '' : 'hidden'}">
+                                                            ${getNameTd('.Friends_icon_text')}
+                                                        </button>
+                                                        <button href="#" class="btn btn-sm btn-danger remove_icon BTN_RMUNDREMOTEPERM" data-id="${data.user.id}">
+                                                            ${getNameTd('.remove_icon')}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            `;
+                        });
+                    }
+                    else {
+                        html += `<div class="col-md-12">
                                     <div class="card theme-card me-1">
-                                        ${GetNamePlateForUser(user)}
-                                        <div class="card-body z-1">
+                                        <div class="card-body">
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="d-flex justify-content-between">
                                                         <div class="d-flex align-items-center">
-                                                            <img src="${user.avatar}" class="img-thumbnail rounded-circle ${user.classBg}" style="width: 100px; height: 100px;">
-                                                            <h5 class="m-2 ${user.premium == true ? 'text-warning' : ''}">${user.premium == true ? '<i class="bi bi-stars"></i>' : ''} ${user.name}</h5>
-                                                        </div>
-                                                        <div class="d-flex align-items-center">
-                                                            <button href="#" class="btn btn-sm btn-success me-1 Friends_icon_text ${isMyFriend == true ? '' : 'hidden'}">
-                                                                ${getNameTd('.Friends_icon_text')}
-                                                            </button>
-                                                            <button href="#" class="btn btn-sm btn-danger remove_icon BTN_RMUNDREMOTEPERM" data-id="${user.id}">
-                                                                ${getNameTd('.remove_icon')}
-                                                            </button>
+                                                            <h5 class="m-2">${getNameTd('.no_permission_found')}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -453,74 +471,43 @@ $(document).ready(async () => {
                                         </div>
                                     </div>
                                 </div>
-                                `
-                            });
-                        }
-                        else {
-                            html += `<div class="col-md-12">
-                                        <div class="card theme-card me-1">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="d-flex justify-content-between">
-                                                            <div class="d-flex align-items-center">
-                                                                <h5 class="m-2">${getNameTd('.no_permission_found')}</h5>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>`;
-                        }
-                        bootbox.dialog({
-                            title: `<h5>${getNameTd('.permissions_text')}</h5>`,
-                            message: html,
-                            buttons: {
-                                remote: {
-                                    label: getNameTd('.cancel_icon_text'),
-                                    className: 'btn-danger cancel_icon_text',
-                                },
-                            }
-                        });
+                            </div>`;
                     }
-                    else {
-                        toaster.danger(getNameTd('.no_data_found'));
-                    }
-                })
+                    bootbox.dialog({
+                        title: `<h5>${getNameTd('.permissions_text')}</h5>`,
+                        message: html,
+                        buttons: {
+                            remote: {
+                                label: getNameTd('.cancel_icon_text'),
+                                className: 'btn-danger cancel_icon_text',
+                            },
+                        }
+                    });
+                }
+                else {
+                    toaster.danger(getNameTd('.no_data_found'));
+                }
+            });
         }
         else {
             toaster.danger(getNameTd('.this_feature_is_only_available_when_logged_into_an_account_text'));
         }
     });
 
-    $(document).on('click', '.BTN_RMUNDREMOTEPERM', (e) => {
+    $(document).on('click', '.BTN_RMUNDREMOTEPERM', function (e) {
         B_are_you_sure().then(async (result) => {
             if (result) {
-                console.log(e.target.id, e);
-                let permission = listAllPermissins.find(x => x.user.id == e.target.dataset.id);
-                if (permission) {
-                    $("body").modalLoading('show', false);
-                    API.App.post('', {
-                        _lang: _lang,
-                        method: "remove-this-pc-users-permissions",
-                        client_id: DAO.USER.client_id,
-                        token: DAO.USER.token,
-                        pc_id: DAO.PC.id,
-                        pc_name: DAO.PC.name,
-                        client_id_RM: permission.client_id,
-                    })
-                        .then(async (res) => {
-                            $("body").modalLoading('hide', false);
-                            listAllPermissins = listAllPermissins.filter(x => x.user.id != e.target.dataset.id);
-                            $(`#${permission.user.id}${permission.client_id_pc}`).remove();
-                            toaster.success(getNameTd('.Successfully_removed'));
-                        });
-                }
-                else {
-                    bootbox.alert(getNameTd('.no_data_found'));
-                }
+                listAllPermissins.forEach(async permission => {
+                    if(permission.user.id == this.dataset.id){
+                        await BACKEND.Send("RevockUserPermisionThisPc", {userId: permission.user.id});
+                        listAllPermissins.delete(permission.pcId);
+                        $(`#UPMR_${permission.user.id}`).remove();
+                        toaster.success(getNameTd('.Successfully_removed'));
+                    }
+                });
+            }
+            else{
+                bootbox.alert(getNameTd('.no_data_found'));
             }
         });
     });

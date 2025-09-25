@@ -97,30 +97,23 @@ $(document).ready(async () => {
     if (DAO.DB.get('checkThemes') == true) {
         if (DAO.ThemesData && DAO.ThemesData.list.length > 0) {
             try {
-                API.App.post('', {
-                    _lang: await DAO.DB.get('lang_selected'),
-                    method: "list-themes",
-                })
-                    .then(async (res) => {
-                        var response = res.data;
-                        if (response && response.result) {
-                            listThemesToDownload = response.result;
-                            DAO.ThemesData.list.forEach((theme, index) => {
-                                if (theme.isLocal) {
-                                    let dirFileCss = path.join(DAO.THEME_DIR, theme.name, 'style.css');
-                                    let dirFileBck = path.join(DAO.THEME_DIR, theme.name, theme.filename);
-                                    if (!fs.existsSync(dirFileCss) || !fs.existsSync(dirFileBck)) {
-                                        setTimeout(() => {
-                                            StartDownloadTheme(theme.tid, true);
-                                        }, (index + 1) * 1000);
-                                    }
-
+                await BACKEND.Send('GetThemes').then(async (data) => {
+                    if (data && data.appThemes) {
+                        listThemesToDownload = data.appThemes;
+                        DAO.ThemesData.list.forEach((theme, index) => {
+                            if (theme.isLocal) {
+                                let dirFileCss = path.join(DAO.THEME_DIR, theme.name, 'style.css');
+                                let dirFileBck = path.join(DAO.THEME_DIR, theme.name, theme.filename);
+                                if (!fs.existsSync(dirFileCss) || !fs.existsSync(dirFileBck)) {
+                                    setTimeout(() => {
+                                        StartDownloadTheme(theme.tid, true);
+                                    }, (index + 1) * 1000);
                                 }
-                            });
-                            await DAO.DB.set('checkThemes', false);
-                        }
-                    })
-                    .catch(error => { });
+                            }
+                        });
+                        await DAO.DB.set('checkThemes', false);
+                    }
+                });
             } catch (error) {
             }
         }
@@ -332,58 +325,50 @@ async function selectAnimation(type) {
 
 async function GetListThemes() {
     try {
-        API.App.post('', {
-            _lang: await DAO.DB.get('lang_selected'),
-            method: "list-themes",
+        await BACKEND.Send('GetThemes').then((data) => {
+            if (data && data.appThemes) {
+                listThemesToDownload = data.appThemes;
+                $("#list-themes-to-download").html('');
+                listThemesToDownload.forEach(async Item => {
+                    let is_installed = await DAO.ThemesData.list.find(x => x.tid == Item.tid);
+                    let isLocatedPc = 'N/A';
+                    if (is_installed) {
+                        if (is_installed.isLocal == true) {
+                            isLocatedPc = getNameTd('.locally_text');
+                        }
+                        else {
+                            isLocatedPc = getNameTd('.remoted_text');
+                        }
+                    }
+                    $("#list-themes-to-download").append(`
+                        <tr class="hover-color-primary animate__animated animate__headShake footable-even" style="">
+                            <td>${Item.name}</td>
+                            <td>${Item.size} MB</td>
+                            <td class="isLocated_in" id="${Item.tid}">${isLocatedPc}</td>
+                            <td>
+                        ${is_installed ?
+                            `<button id="${Item.tid}" type="button" class="btn btn-xs btn-success isDownloaded btn-apply-themeD apply_icon_text">${getNameTd('.apply_icon_text')}</button>` :
+                            `<button style="display: none;" id="${Item.tid}" type="button" class="btn btn-xs btn-success btn-apply-themeD apply_icon_text">${getNameTd('.apply_icon_text')}</button>`
+                        }
+                        ${is_installed ?
+                            `<button id="${Item.tid}" type="button" class="btn btn-xs btn-danger btn-uninstall-themeD remove_icon">${getNameTd('.remove_icon')}</button>` :
+                            `<button style="display: none;" id="${Item.tid}" type="button" class="btn btn-xs btn-danger btn-uninstall-themeD remove_icon">${getNameTd('.remove_icon')}</button>`
+                        }
+                        ${!is_installed ?
+                            `<button id="${Item.tid}" type="button" class="btn btn-xs btn-success btn-addnew-themeD add_text_icon">${getNameTd('.add_text_icon')}</button>` :
+                            `<button style="display: none;" id="${Item.tid}" type="button" class="btn btn-xs btn-success btn-addnew-themeD add_text_icon">${getNameTd('.add_text_icon')}</button>`
+                        }
+                            </td>
+                        </tr>
+                    `);
+                    if (Item == listThemesToDownload[listThemesToDownload.length - 1]) {
+                        setTimeout(() => {
+                            $("#list-themes-to-download").footable().trigger('footable_resize');
+                        }, 200);
+                    }
+                });
+            }
         })
-            .then(async (res) => {
-                var response = res.data;
-                if (response && response.result) {
-                    listThemesToDownload = response.result;
-                    $("#list-themes-to-download").html('');
-                    listThemesToDownload.forEach(async Item => {
-                        let is_installed = await DAO.ThemesData.list.find(x => x.tid == Item.tid);
-                        let isLocatedPc = 'N/A';
-                        if (is_installed) {
-                            if (is_installed.isLocal == true) {
-                                isLocatedPc = getNameTd('.locally_text');
-                            }
-                            else {
-                                isLocatedPc = getNameTd('.remoted_text');
-                            }
-                        }
-                        $("#list-themes-to-download").append(`
-                            <tr class="hover-color-primary animate__animated animate__headShake footable-even" style="">
-                                <td>${Item.name}</td>
-                                <td>${Item.size} MB</td>
-                                <td class="isLocated_in" id="${Item.tid}">${isLocatedPc}</td>
-                                <td>
-                            ${is_installed ?
-                                `<button id="${Item.tid}" type="button" class="btn btn-xs btn-success isDownloaded btn-apply-themeD apply_icon_text">${getNameTd('.apply_icon_text')}</button>` :
-                                `<button style="display: none;" id="${Item.tid}" type="button" class="btn btn-xs btn-success btn-apply-themeD apply_icon_text">${getNameTd('.apply_icon_text')}</button>`
-                            }
-                            ${is_installed ?
-                                `<button id="${Item.tid}" type="button" class="btn btn-xs btn-danger btn-uninstall-themeD remove_icon">${getNameTd('.remove_icon')}</button>` :
-                                `<button style="display: none;" id="${Item.tid}" type="button" class="btn btn-xs btn-danger btn-uninstall-themeD remove_icon">${getNameTd('.remove_icon')}</button>`
-                            }
-                            ${!is_installed ?
-                                `<button id="${Item.tid}" type="button" class="btn btn-xs btn-success btn-addnew-themeD add_text_icon">${getNameTd('.add_text_icon')}</button>` :
-                                `<button style="display: none;" id="${Item.tid}" type="button" class="btn btn-xs btn-success btn-addnew-themeD add_text_icon">${getNameTd('.add_text_icon')}</button>`
-                            }
-                                </td>
-                            </tr>
-                        `);
-                        if (Item == listThemesToDownload[listThemesToDownload.length - 1]) {
-                            setTimeout(() => {
-                                $("#list-themes-to-download").footable().trigger('footable_resize');
-                            }, 200);
-                        }
-                    });
-                }
-            })
-            .catch(error => {
-                console.log(error);
-            });
     } catch (error) {
     }
 

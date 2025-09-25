@@ -1,13 +1,15 @@
 const { app, BrowserWindow, Notification, Menu, dialog, ipcMain } = require("electron");
+const { UnderDeck } = require('underdecklib');
 const { exec } = require('child_process');
 const path = require('path');
 const fs = require("fs");
-const Commun = require(path.join(app.getAppPath(), 'Domain', 'Communs', 'Commun.js'));
-const { autoUpdater, AppUpdater } = require("electron-updater");
+const Commun = require("../../Communs/Commun.js");
+const CommunUnderDeck = require("../../Communs/UnderDeck.js");
+const { autoUpdater } = require("electron-updater");
 const OverlayScreen = require("../Overlay/overlay.js");
 const ObsService = require("../../Services/Obs.js");
-const CloudService = require("../../Services/Cloud");
-const ShortcutKeys = require("../../Services/ShortcutKeys");
+const CloudService = require("../../Services/Cloud.js");
+const ShortcutKeys = require("../../Services/ShortcutKeys.js");
 const macrosService = new ShortcutKeys();
 var robotjs;
 try {
@@ -19,7 +21,11 @@ try {
 autoUpdater.autoDownload = false;
 autoUpdater.autoInstallOnAppQuit = false;
 
+const ClientUnderDeck = new UnderDeck();
+ClientUnderDeck.LanguageId = DAO.DB.get('lang_selected');
+
 class MainScreen {
+  ClientUnderDeck = ClientUnderDeck;
   overlayScreen;
   window;
   contextMenu;
@@ -76,6 +82,8 @@ class MainScreen {
 
     this.window.maximize();
     this.window.loadFile(path.join(__dirname, "./app.html"));
+
+    if(DAO.DBUSER.get('UserToken')) this.ClientUnderDeck.Auth(DAO.DBUSER.get('UserToken'));
   }
 
   sendFrontData(type, message) {
@@ -222,10 +230,226 @@ class MainScreen {
   async SelectLanguage(lang) {
     await TRANSLATOR.SetLanguage(lang);
     this.overlayScreen.Reload();
+    this.ClientUnderDeck.LanguageId = lang;
     this.setContextMenu();
   }
 
   startAllHandleMessages() {
+    this.ClientUnderDeck.on('Ready', async () => {
+      DAO.DBUSER.set('UserToken', this.ClientUnderDeck.User.token);
+    });
+
+    this.ClientUnderDeck.on('Logout', async () => {
+      DAO.DBUSER.delete('UserToken');
+    });
+
+    this.ClientUnderDeck.on('SocketReady', async (Message) => {
+      this.sendFrontData('UpdateUserData', true);
+    });
+
+    this.ClientUnderDeck.on('ClientUpdated', async () => {
+      this.sendFrontData('ClientUpdated', true);
+    });
+
+    this.ClientUnderDeck.on('SocketMessage', async (Message) => {
+      try {
+        if(Message.object){
+          switch (Message.object.Method) {
+            case 'RequestConnectionPermission':
+              this.sendFrontData('UserRequestConnectionPermission', Message.object);
+            break;
+
+            case 'GetWebDeckData':
+              Message.reply(await CommunUnderDeck.ListProgramsForRemote(), Message.object.Method);
+            break;
+
+            case 'GetAppIconByUuid':
+              Message.reply(await CommunUnderDeck.GetAppIconByUuid(Message.object.Data.uuid), Message.object.Method);
+            break;
+
+            case 'GetPageIconById':
+              Message.reply(await CommunUnderDeck.GetPageIconById(Message.object.Data.id), Message.object.Method);
+            break;
+
+            case 'ExecAppByUuid':
+              this.sendFrontData('ExecAppByUuid', Message.object.Data.uuid);
+            break;
+
+            case 'GetAppVolume':
+              try {
+                Message.reply({ volume: await CommunUnderDeck.GetWindowsVolume() }, Message.object.Method);
+              } catch (error) {
+                console.log('error', error);
+              }
+            break;
+
+            case 'SetAppVolume':
+              try {
+                if(Message.object.Data && Message.object.Data.volume){
+                  CommunUnderDeck.SetWindowsVolume(Message.object.Data.volume);
+                }
+              } catch (error) {
+                console.log('error', error);
+              }
+            break;
+            
+            default:
+              console.log(Message.object)
+            break;
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    });
+
+    this.handleMessages('RequestCodeChangePassword', async (event, data) => {
+      return await this.ClientUnderDeck.RequestCodeChangePassword(data.username);
+    });
+
+    this.handleMessages('ChangePassword', async (event, data) => {
+      return await this.ClientUnderDeck.ChangePassword(data.clientId, data.code, data.Password, data.CPassword);
+    });
+
+    this.handleMessages('AcceptRequestConnection', async (event, data) => {
+      this.ClientUnderDeck.SendSocketMessage({ to: data.From }, 'AcceptedRequestConnectionPermission');
+    });
+
+    this.handleMessages('RejectedRequestConnection', async (event, data) => {
+      this.ClientUnderDeck.SendSocketMessage({ to: data.From }, 'RejectRequestConnectionPermission');
+    });
+
+    this.handleMessages('SendMsgConfirmEmail', async (event, data) => {
+      return await this.ClientUnderDeck.SendMsgConfirmEmail();
+    });
+
+    this.handleMessages('UserRegister', async (event, data) => {
+      return await this.ClientUnderDeck.UserRegister(data);
+    });
+
+    this.handleMessages('LogoutAccount', async (event, data) => {
+      return await this.ClientUnderDeck.Logout();
+    });
+
+    this.handleMessages('UserLogin', async (event, data) => {
+      let resLogin = await this.ClientUnderDeck.Login(data.username, data.password);
+      if(resLogin && this.ClientUnderDeck.User){
+        return this.ClientUnderDeck.User;
+      }
+      return false;
+    });
+
+    this.handleMessages('RGetAccount', async (event, data) => {
+      return await this.ClientUnderDeck.GetAccount();
+    });
+
+    this.handleMessages('GetPlugins', async (event, data) => {
+      return await this.ClientUnderDeck.GetPlugins();
+    });
+
+    this.handleMessages('GetThemes', async (event, data) => {
+      return await this.ClientUnderDeck.GetThemes();
+    });
+
+    this.handleMessages('UpdateUserStatus', async (event, data) => {
+      if(data && data.id){
+        return await this.ClientUnderDeck.UpdateUser({status: data.id});
+      }
+      else return null;
+    });
+
+    this.handleMessages('RevockUserPermisionThisPc', async (event, data) => {
+      if(data && data.userId){
+        return await this.ClientUnderDeck.RevockUserPermisionThisPc(data.userId);
+      }
+      else return null;
+    });
+
+    this.handleMessages('DefineMyTheme', async (event, data) => {
+      return await this.ClientUnderDeck.DefineMyTheme(data.namePlateId || null, data.backgroundId || null);
+    });
+
+    this.handleMessages('UpdateUser', async (event, data) => {
+      if(typeof data == 'object'){
+        return await this.ClientUnderDeck.UpdateUser(data);
+      }
+      else return null;
+    });
+
+    this.handleMessages('RemoveUserVatar', async (event, data) => {
+      return await this.ClientUnderDeck.UpdateUser({removeAvatar: true});
+    });
+
+    this.handleMessages('UpdateUserAvatar', async (event, data) => {
+      return new Promise(async resolve => {
+        if( data && data.base64 ){
+          const base64Content = data.base64 .split(';base64,').pop();
+          const buffer = Buffer.from(base64Content, 'base64');
+          const blob = new Blob([buffer]);
+          resolve( await this.ClientUnderDeck.ChangeAvatar(new File([blob], data.name), data.width, data.height, data.left, data.top) );
+        }
+        else resolve(null);
+      });
+    });
+
+    this.handleMessages('GetAccount', async (event, data) => {
+      return this.ClientUnderDeck.User;
+    });
+
+    this.handleMessages('GetPC', async (event, data) => {
+      return this.ClientUnderDeck.Pc;
+    });
+
+    this.handleMessages('ListAllUsersThisPCPermissions', async (event, data) => {
+      return this.ClientUnderDeck.ListAllUsersThisPCPermissions();
+    });
+
+    this.handleMessages('RevoceAllUsersPermThisPc', async (event, data) => {
+      return this.ClientUnderDeck.RevokeAllPermissionForPC();
+    });
+
+    this.handleMessages('RequestFriend', async (event, data) => {
+      if(data && data.userId){
+        return this.ClientUnderDeck.SendFriendRequest(data.userId);
+      }
+      else return null;
+    });
+
+    this.handleMessages('ResendFriendRequest', async (event, data) => {
+      if(data && data.requestId){
+        return this.ClientUnderDeck.ResendFriendRequest(data.requestId);
+      }
+      else return null;
+    });
+
+    this.handleMessages('AcceptFriendRequest', async (event, data) => {
+      if(data && data.requestId){
+        return this.ClientUnderDeck.AcceptFriendRequest(data.requestId);
+      }
+      else return null;
+    });
+
+    this.handleMessages('RejectFriendRequest', async (event, data) => {
+      if(data && data.requestId){
+        return this.ClientUnderDeck.RejectFriendRequest(data.requestId);
+      }
+      else return null;
+    });
+
+    this.handleMessages('FindUserByName', async (event, data) => {
+      if(data && data.name){
+        return this.ClientUnderDeck.FindUserByName(data.name);
+      }
+      else return null;
+    });
+
+    this.handleMessages('UnFriend', async (event, data) => {
+      if(data && data.requestId){
+        return this.ClientUnderDeck.RequestUnFriend(data.requestId);
+      }
+      else return null;
+    });
+
     this.handleMessages('exec-fbt', async (event, data) => {
       this.sendFrontData('exec-fbt', data);
     });
@@ -259,9 +483,8 @@ class MainScreen {
     });
 
     this.handleMessages('sync-user-data', async (event, dt) => {
-      let USER = await DAO.DBUSER.get('user');
-      if (USER && USER.client_id) {
-        return await CloudService.SyncUserData(USER, await DAO.DB.get('lang_selected'), (dataPercent)=>{
+      if (this.ClientUnderDeck.User && this.ClientUnderDeck.User.id) {
+        return await this.ClientUnderDeck.CloudUploadData(await CloudService.GetDataToUpload(), (dataPercent) => {
           this.sendFrontData('sync-user-data-percent', dataPercent);
         });
       }
@@ -271,9 +494,8 @@ class MainScreen {
     });
 
     this.handleMessages('get-synchronized-data', async (event, dt) => {
-      let USER = await DAO.DBUSER.get('user');
-      if (USER && USER.client_id) {
-        return await CloudService.GETSynchronizedData(USER, await DAO.DB.get('lang_selected'));
+      if (this.ClientUnderDeck.User && this.ClientUnderDeck.User.id) {
+        return await this.ClientUnderDeck.GetSynchronizedData();
       }
       else {
         return false;
@@ -287,9 +509,8 @@ class MainScreen {
     });
 
     this.handleMessages('clear-synchronized-data', async (event, cloud_id) => {
-      let USER = await DAO.DBUSER.get('user');
-      if (USER && USER.client_id) {
-        return await CloudService.ClearCloudSynchronized(USER, await DAO.DB.get('lang_selected'), cloud_id);
+      if (this.ClientUnderDeck.User && this.ClientUnderDeck.User.id) {
+        return await this.ClientUnderDeck.ClearSynchronizedData();
       }
       else {
         return false;

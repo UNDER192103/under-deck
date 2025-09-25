@@ -1,4 +1,4 @@
-var LangData = null, _lang = null, loopIntervalUpdate = null;
+var LangData = null, _lang = null;
 
 configLang();
 
@@ -28,19 +28,6 @@ async function selec_lang(id_lang) {
         $("body").modalLoading('hide', false);
         await configLang();
         await DAO.DB.set('checkLanguage', null);
-        loopIntervalUpdate = setInterval(() => {
-            if (conn && conn.readyState == 1) {
-                clearInterval(loopIntervalUpdate);
-                webSocketClient.send(
-                    webSocketClient.ToJson(
-                        {
-                            method: 'config-lang',
-                            lang: id_lang
-                        }
-                    )
-                );
-            }
-        }, 1000);
     });
 }
 

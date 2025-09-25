@@ -2669,5 +2669,20 @@ module.exports = {
             type: "html",
             text: "Iniciar com windows",
         },
+        {
+            id: ".plugins_text_icon",
+            type: "html",
+            text: `<i class="bi bi-plugin"></i> Plugins`,
+        },
+        {
+            id: ".actives_plugins_text",
+            type: "html",
+            text: `<i class="bi bi-check-square-fill"></i> Plugins Ativos`,
+        },
+        {
+            id: ".library_plugins_text",
+            type: "html",
+            text: `<i class="bi bi-collection-fill"></i> Biblioteca De Plugins`,
+        },
     ]
 };

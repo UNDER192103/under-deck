@@ -9,7 +9,7 @@ Object.defineProperty(app, 'isPackaged', {
 });
 
 //DataBase
-var _DAO = require(path.join(app.getAppPath(), 'Repository', 'DB.js'));
+var _DAO = require("../../Repository/DB.js");
 Object.defineProperty(global, 'DAO', {
   value: _DAO,
   writable: true, // Prevents reassignment
@@ -41,8 +41,7 @@ Object.defineProperty(global, 'APP_HANDLEMESSAGES', {
   configurable: true,
 });
 
-
-//Defaults
+//Defaults 
 Object.defineProperty(global, 'APP_ICON', {
   value: new Tray(path.join(app.getAppPath(), 'Domain', 'Src', 'img', 'UDIx256.ico')),
   writable: true,

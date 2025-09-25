@@ -1,7 +1,5 @@
-const { app, BrowserWindow, Notification, Menu, dialog, MenuItem, Tray, ipcMain, ipcRenderer, globalShortcut } = require("electron");
+const { app, BrowserWindow, Notification, ipcMain } = require("electron");
 const path = require('path');
-const fs = require("fs");
-const PACKGEJSON = require("../../../package.json");
 
 class OverlayScreen {
   isShowing = false;

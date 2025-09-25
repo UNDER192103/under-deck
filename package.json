@@ -1,6 +1,6 @@
 {
   "name": "under-deck",
-  "version": "2.0.10",
+  "version": "2.0.11",
   "description": "Under Deck",
   "productName": "Under Deck",
   "main": "index.js",
@@ -103,7 +103,9 @@
     "robotjs": "^0.6.0",
     "socket.io": "^4.7.5",
     "superagent": "^10.2.0",
+    "systeminformation": "^5.27.7",
     "toastify-js": "^1.12.0",
+    "underdecklib": "^1.0.22",
     "ws": "^8.18.1",
     "xml-js": "^1.6.11"
   }

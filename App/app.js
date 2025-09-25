@@ -2,6 +2,7 @@ const { app, BrowserWindow, session } = require('electron');
 const AutoLaunch = require('auto-launch');
 const Validations = require('../Domain/Communs/Validations.js');
 const Screen_App = require("../Domain/Views/App/app.js");
+const SystemInformation = require("../Domain/Services/SystemInformation.js");
 var autoLaunch = new AutoLaunch({ name: app.getName(), path: app.getPath('exe') });
 autoLaunch.isEnabled().then(isEnabled => {
     if (!isEnabled) {
@@ -63,6 +64,10 @@ function createWindowApp() {
         return true;
       }
       return false;
+    });
+
+    APP_HANDLEMESSAGES('SystemInformation', (event, dt) => {
+      return SystemInformation.GetSystemUsage();
     });
 
     APP_HANDLEMESSAGES('SetStartWithSystem', async (event, data) => {

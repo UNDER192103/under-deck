@@ -19,6 +19,69 @@ ipcRenderer.on('ExecMacro', (events, data) => {
   }
 });
 
+ipcRenderer.on('ExecAppByUuid', async (events, uuid) => {
+  if (uuid) {
+    let list = await DAO.ProgramsExe.get('list_programs');
+    if(!Array.isArray(list)) list = new Array();
+    let app = list.find(f => f.uuid == uuid || f._id == uuid);
+    if(app) exec_program(app);
+  }
+});
+
+ipcRenderer.on('ClientUpdated', async (events, data) => {
+  try {loadUserData();} catch (error) {}
+});
+
+var inGetPermissions = {};
+ipcRenderer.on('UserRequestConnectionPermission', async (events, data) => {
+  if (data.Data && data.Data.name) {
+      let dataUserRQ = {
+        name: data.Data.name,
+        client_id: data.Data && data.Data.client_id ? data.Data.client_id : data.From,
+      };
+      if (!inGetPermissions[dataUserRQ.client_id]) {
+          inGetPermissions[dataUserRQ.client_id] = dataUserRQ;
+          bootbox.confirm({
+              title: `<h3>${getNameTd('.Notice_text')}</h3>`,
+              message: `
+                  ${getNameTd('.confirm_new_acess_remote_1_text').replaceAll('{{user}}', dataUserRQ.name)}
+                  <br><br>
+                  ${getNameTd('.Attention_text')}:<br>
+                  ${getNameTd('.confirm_new_acess_remote_2_text')}
+                  <br><br>
+                  OBS:<br>
+                  ${getNameTd('.confirm_new_acess_remote_3_text')}
+              `,
+              buttons: {
+                  confirm: {
+                      label: getNameTd('.To_accept_text'),
+                      className: 'btn-success To_accept_text'
+                  },
+                  cancel: {
+                      label: getNameTd('.To_deny_text'),
+                      className: 'btn-danger To_deny_text'
+                  }
+              },
+              callback: async (res) => {
+                  if (res) {
+                    await BACKEND.Send('AcceptRequestConnection', data);
+                    toaster.success(getNameTd('.You_successfully_accept_the_request_text'));
+                    delete inGetPermissions[dataUserRQ.client_id];
+                  }
+                  else {
+                      await BACKEND.Send('RejectedRequestConnection', data);
+                      toaster.warning(getNameTd('.You_successfully_declined_the_request_text'));
+                      delete inGetPermissions[dataUserRQ.client_id];
+                  }
+              }
+          });
+      }
+      else {
+          inGetPermissions[dataUserRQ.client_id] = dataUserRQ;
+      }
+  }
+});
+
 ipcRenderer.on('exec-fbt', async (events, data) => {
   if(data){
     switch (data.type) {
@@ -89,7 +152,7 @@ ipcRenderer.on('AutoUpdater', (events, data) => {
   switch (data.code) {
     case -1:
       toaster.danger(data.msg);
-      bootbox.alert(`<h4>${data.msg}</h4>`);
+      //bootbox.alert(`<h4>${data.msg}</h4>`);
       $("#button-search-updates").html(getNameTd('.search_updates_text')).prop('disabled', false);
       break;
 
@@ -101,7 +164,7 @@ ipcRenderer.on('AutoUpdater', (events, data) => {
 
     case 0:
       toaster.success(data.msg);
-      bootbox.alert(`<h4>${data.msg}</h4>`);
+      //bootbox.alert(`<h4>${data.msg}</h4>`);
       $("#button-search-updates").html(getNameTd('.search_updates_text')).prop('disabled', false);
       break;
 
@@ -152,9 +215,7 @@ ipcRenderer.on('AutoUpdater', (events, data) => {
           txt = data.info.percent;
         }
         $(".percent_download_app_update").html(txt + "%");
-
       }
-
       break;
 
     case 3:
@@ -165,7 +226,7 @@ ipcRenderer.on('AutoUpdater', (events, data) => {
 
     case 4:
       toaster.success(data.msg);
-      bootbox.alert(data.msg);
+      //bootbox.alert(data.msg);
       $(".percent_download_update_app").hide('slow');
       $("#button-search-updates").html(getNameTd('.search_updates_text')).prop('disabled', false);
       break;

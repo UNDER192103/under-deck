@@ -10,7 +10,6 @@ $(".key-overlay-r").html(DAO.DB.get('keys-overlay') ? DAO.DB.get('keys-overlay')
 
 $(document).ready(async () => {
     changeInputColor();
-    changeUrlRemoteUnderDeck();
 
     $("#BTN_cloud_stc").attr('disabled', DAO.CLOUD.get('isEnbCloudIntegrations') ? false : true);
     $("#BTN_cloud_sfc").attr('disabled', DAO.CLOUD.get('isEnbCloudIntegrations') ? false : true);
@@ -41,7 +40,8 @@ $(document).ready(async () => {
     //Cloud
 
     $("#BTN_cloud_stc").click(async () => {
-        if (DAO.USER) {
+        var User = await BACKEND.Send('GetAccount');
+        if ( User && User.id ) {
             if (await B_are_you_sure()) {
                 IsFirstPercentSUDP = true;
                 $("body").modalLoading('show', false);
@@ -67,7 +67,8 @@ $(document).ready(async () => {
     });
 
     $("#BTN_cloud_sfc").click(async () => {
-        if (DAO.USER) {
+        var User = await BACKEND.Send('GetAccount');
+        if ( User && User.id ) {
             if (await B_are_you_sure()) {
                 $("#BTN_cloud_sfc").attr('disabled', true);
                 $("body").modalLoading('show', false);
@@ -117,7 +118,8 @@ $(document).ready(async () => {
     });
 
     $("#BTN_cloud_dcs").click(async () => {
-        if (DAO.USER) {
+        var User = await BACKEND.Send('GetAccount');
+        if ( User && User.id ) {
             if (await B_are_you_sure()) {
                 $("body").modalLoading('show', false);
                 BACKEND.Send('clear-synchronized-data').then((response) => {
@@ -367,9 +369,11 @@ async function changeInputColor() {
     $("#webdeck_color_text").val(color_text);
 }
 
-function changeUrlRemoteUnderDeck() {
-    if (DAO.USER && DAO.PC) {
-        let url = `${process.env.API_URL}/client/?ng=webdeck/invite/${DAO.PC.id}/`;
+async function changeUrlRemoteUnderDeck() {
+    var User = await BACKEND.Send('GetAccount');
+    var Pc = await BACKEND.Send('GetPC');
+    if (User && User.id && Pc && Pc.id ) {
+        let url = `${process.env.API_URL}/client/?ng=webdeck/invite/${Pc.id}/`;
         $(".underdeck_url_invite_remote_version").html(url).val(url);
     }
     else

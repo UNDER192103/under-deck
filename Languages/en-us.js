@@ -2673,5 +2673,20 @@ module.exports = {
             type: "html",
             text: "Start with windows",
         },
+        {
+            id: ".plugins_text_icon",
+            type: "html",
+            text: `<i class="bi bi-plugin"></i> Plugins`,
+        },
+        {
+            id: ".actives_plugins_text",
+            type: "html",
+            text: `<i class="bi bi-check-square-fill"></i> Active Plugins`,
+        },
+        {
+            id: ".library_plugins_text",
+            type: "html",
+            text: `<i class="bi bi-collection-fill"></i> Plugin Library`,
+        },
     ]
 };
