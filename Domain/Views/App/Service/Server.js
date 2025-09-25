@@ -35,7 +35,7 @@ async function start_server(type, callback) {
             });
 
             app.post("/get_data_user", async (req, res) => {
-                res.send(await GetDataListProgramsForLocalHost());
+                res.send(await BACKEND.Send('ListWebDeckLocal'));
             });
 
             app.post("/set_volume", async (req, res) => {

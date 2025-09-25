@@ -478,6 +478,10 @@ class MainScreen {
       });
     });
 
+    this.handleMessages('ListWebDeckLocal', async (event, dt) => {
+      return await CommunUnderDeck.ListProgramsForLocal();
+    });
+
     this.handleMessages('GET--UserData', async (event, dt) => {
       return await app.getPath('userData');
     });

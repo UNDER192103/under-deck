@@ -25,6 +25,27 @@ const ListProgramsForRemote = async () => {
     return data;
 }
 
+const ListProgramsForLocal = async () => {
+    await DAO.GetDataNow();
+    let data = {
+        css: `:root {${await DAO.WEBDECK.get('exe-background') ? `\n--backgound-exe-item: ${await DAO.WEBDECK.get('exe-background')};` : ""}${await DAO.WEBDECK.get('exe-color-text') ? `--color-exe-item: ${await DAO.WEBDECK.get('exe-color-text')};\n` : ""}}`,
+        windows: {
+            volume: await loudness.getVolume(),
+            muted: await loudness.getMuted(),
+        },
+        app: {
+            version: app.getVersion(),
+        },
+        web: {
+            formatView: await DAO.WEBDECK.get('format_view'),
+            formatListView: await DAO.WEBDECK.get('format_list_view'),
+            pages: DAO.WEBDECKDATA.pages,
+        },
+        programs: DAO.List_programs ? DAO.List_programs : [],
+    }
+    return data;
+}
+
 const FormatListPagesToRemote = async () => {
     const List = await DAO.WEBDECK.get('pages');
     return List.map(element => {
@@ -123,6 +144,7 @@ async function SetWindowsVolume(volume) {
 }
 
 module.exports = {
+    ListProgramsForLocal,
     GetWindowsVolume,
     SetWindowsVolume,
     GetAppIconByUuid,
