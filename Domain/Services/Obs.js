@@ -56,6 +56,7 @@ const Disconnected = async (callback) => {
 }
 
 module.exports = {
+    IsConnected: false,
     Socket: Socket,
     Connect: SocketConnect,
     ToggleStream: ToggleStream,

@@ -5,7 +5,6 @@ document.getElementById('key-macro').checked = DAO.DB.get('keyEvent');
 document.getElementById('notifications_on_windows').checked = DAO.DB.get('App_notification_windows');
 document.getElementById('isMinimizeToBar').checked = DAO.DB.get('isMinimizeToBar');
 document.getElementById('autoupdateonestart').checked = DAO.DB.get('AutoUpdateApp');
-document.getElementById('isNotValidFirstSearchUpdateApp').checked = DAO.DB.get('isNotValidFirstSearchUpdateApp');
 $(".key-overlay-r").html(DAO.DB.get('keys-overlay') ? DAO.DB.get('keys-overlay').join(' + ') : "N/A");
 
 $(document).ready(async () => {

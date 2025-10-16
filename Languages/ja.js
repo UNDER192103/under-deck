@@ -578,7 +578,7 @@ module.exports = {
         {
           "id": ".settings_text_icon_HVRT",
           "type": "html",
-          "text": "<span class=\"d-block hover_rotation me-1\" href=\"#\"><i class=\"bi bi-gear-wide-connected\"></i></span> 設定"
+          "text": "<span class=\"d-block hover_rotation mt-auto mb-auto me-1\" href=\"#\"><i class=\"bi bi-gear-wide-connected\"></i></span> 設定"
         },
         {
           "id": ".keys_macro_text",
@@ -2721,6 +2721,12 @@ module.exports = {
             id: ".library_plugins_text",
             type: "html",
             text: `<i class="bi bi-collection-fill"></i> プラグインライブラリ`,
+        },
+
+        {
+            id: ".devices_text_icon",
+            type: "html",
+            text: '<i class="bi bi-usb"></i> デバイス',
         },
     ]
 };

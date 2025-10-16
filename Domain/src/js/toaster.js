@@ -1,4 +1,3 @@
-const Toastify = require('toastify-js');
 var is_first_time = true;
 
 const Toastify_exc = (options) => {
@@ -79,7 +78,7 @@ const dialog_confirm = (obj, callback) => {
   }
 }
 
-module.exports = {
+const toaster = {
   Toastify_exc,
   primary,
   warning,
@@ -88,3 +87,5 @@ module.exports = {
   err,
   dialog_confirm
 };
+
+window.toaster = toaster;

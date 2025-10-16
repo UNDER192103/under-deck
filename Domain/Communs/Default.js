@@ -5,7 +5,7 @@ const PathAppData = app.getPath('userData');
 const BasePathAppData = path.join(PathAppData, 'UN-DATA');
 const CheckAppDependencies = require('./AppDependencies.js');
 var LD_appdata = [ BasePathAppData, path.join(BasePathAppData, 'DB'), path.join(BasePathAppData, 'icons-exe'), path.join(BasePathAppData, 'icons-webpages'), path.join(BasePathAppData, 'Themes'), path.join(BasePathAppData, 'Languages'), path.join(BasePathAppData, 'Plugins') ];
-var LD_appdata_db = [ path.join(BasePathAppData, 'DB', 'DB.json'), path.join(BasePathAppData, 'DB', 'DBUSER.json'), path.join(BasePathAppData, 'DB', 'OBS.json'), path.join(BasePathAppData, 'DB', 'CLOUD.json'), path.join(BasePathAppData, 'DB', 'DISCORD.json'), path.join(BasePathAppData, 'DB', 'WEBDECK.json'), path.join(BasePathAppData, 'DB', 'THEMES.json'), path.join(BasePathAppData, 'DB', 'Opens_windows.json'), path.join(BasePathAppData, 'DB', 'Macros.json'), path.join(BasePathAppData, 'DB', 'ProgramsExe.json') ];
+var LD_appdata_db = [ path.join(BasePathAppData, 'DB', 'DB.json'), path.join(BasePathAppData, 'DB', 'DEVICES.json'), path.join(BasePathAppData, 'DB', 'DBUSER.json'), path.join(BasePathAppData, 'DB', 'OBS.json'), path.join(BasePathAppData, 'DB', 'CLOUD.json'), path.join(BasePathAppData, 'DB', 'DISCORD.json'), path.join(BasePathAppData, 'DB', 'WEBDECK.json'), path.join(BasePathAppData, 'DB', 'THEMES.json'), path.join(BasePathAppData, 'DB', 'Opens_windows.json'), path.join(BasePathAppData, 'DB', 'Macros.json'), path.join(BasePathAppData, 'DB', 'ProgramsExe.json') ];
 
 const CheckFoldersUNDB = async () => {
     return new Promise(async (resolve) => {

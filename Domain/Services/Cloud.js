@@ -11,8 +11,26 @@ const GetDataToUpload = async () => {
     return new Promise(async (resolve) => {
         await DAO.GetData();
         var filesToUpload = new Array();
-        filesToUpload.push({ type: 'APPSUD', files: DAO.List_programs.map(e => { return { _id: e._id, positon_l: e.positon_l, url: '', dirFile: e.iconCustom, fileName: e.iconCustom.replaceAll('/', '\\').split('\\')[e.iconCustom.replaceAll('/', '\\').split('\\').length - 1] }} )});
-        filesToUpload.push({ type: 'IWUD', files: DAO.WEBDECKDATA.pages.map(e => { return { id: e.id, url: '', dirFile: e.icon, fileName: e.icon.replaceAll('/', '\\').split('\\')[e.icon.replaceAll('/', '\\').split('\\').length - 1] }} ) });
+        filesToUpload.push({ 
+            type: 'APPSUD',
+            files: DAO.List_programs.filter(e => e.icon && fs.existsSync(e.icon) && !e.icon.includes('underbot_logo.png')).map(e => {
+                return {
+                    ...e,
+                    dirFile: e.icon,
+                    fileName: path.basename(e.icon)
+                }
+            })
+        });
+        filesToUpload.push({
+            type: 'IWUD',
+            files: DAO.WEBDECKDATA.pages.filter(e => e.icon && fs.existsSync(e.icon) && !e.icon.includes('underbot_logo.png')).map(e => {
+                return {
+                    ...e,
+                    dirFile: e.icon,
+                    fileName: path.basename(e.icon)
+                }
+            })
+        });
         Commun.ListAllFilesInFolder(BasePathDataDB).then((listFilesDB) => {
             let Itens = [];
             listFilesDB.forEach(async FilePath => {
@@ -23,15 +41,12 @@ const GetDataToUpload = async () => {
                 try {
                     data = JSON.parse(fs.readFileSync(FilePath, 'utf8'));
                     if(data.list_programs){
-                        data.list_programs = data.list_programs.map(e => {
-                            e.iconCustom = e.iconCustom.replaceAll('/', '\\').split('\\')[e.iconCustom.replaceAll('/', '\\').split('\\').length - 1];
-                            return e;
-                        });
+                        // Não é mais necessário modificar o caminho do ícone aqui.
+                        // O caminho completo será preservado.
                     }
                     else if(data.pages){
                         data.pages = data.pages.map(e => {
-                            if(e.OldIcon) delete e.OldIcon;
-                            e.icon = e.icon.replaceAll('/', '\\').split('\\')[e.icon.replaceAll('/', '\\').split('\\').length - 1];
+                            if(e.OldIcon) delete e.OldIcon; // Mantém a limpeza de dados antigos
                             return e;
                         });
                     }

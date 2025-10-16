@@ -8,8 +8,6 @@ const SetDBDefaultValues = async (callback) => {
         await DAO.DB.set("select_file", null);
         if (await DAO.DB.get('startWithSystem') === null) await DAO.DB.set('startWithSystem', true);
         if (await DAO.DB.get('isFirstStart') === null) await DAO.DB.set('isFirstStart', true);
-        if (await DAO.DB.get('isNotValidFirstSearchUpdateApp') === null) await DAO.DB.set('isNotValidFirstSearchUpdateApp', true);
-        if (await DAO.DB.get('isNotValidFirstSearchUpdateApp') !== false) await DAO.DB.set('first_search_update_app', true);
         if (await DAO.DB.get('server_port') === null) await DAO.DB.set('server_port', 3000);
         if (await DAO.DB.get('isEnableAnimations') === null) await DAO.DB.set('isEnableAnimations', true);
         if (await DAO.DB.get('animation') === null) await DAO.DB.set('animation', 'random');

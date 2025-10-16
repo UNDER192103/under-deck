@@ -398,10 +398,10 @@ hr {
 }
 
 .customImgTemplet {
-  width: 100px;
-  height: 100px;
-  max-width: 100px;
-  max-height: 100px;
+  width: 200px;
+  height: 200px;
+  max-width: 200px;
+  max-height: 200px;
   object-fit: cover;
 }
 
@@ -1188,4 +1188,14 @@ svg.SvgSoundpadColor g path {
   overflow-y: auto;
   min-width: 270px;
   max-height: 85%;
+}
+
+.icone-wrapper {
+  color: white;
+    background-color: rgba(0, 0, 0, 0.4); /* Fundo preto 40% opaco */
+    padding: 2px 5px; /* Ajuste o padding para o tamanho desejado */
+    border-radius: 5px; /* Suavize os cantos */
+    display: inline-flex; /* Para ajustar o tamanho ao conteúdo */
+    align-items: center;
+    justify-content: center;
 }

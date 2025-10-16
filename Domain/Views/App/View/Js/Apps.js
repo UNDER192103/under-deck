@@ -45,11 +45,6 @@ $(document).ready(async () => {
         DAO.DB.set('AutoUpdateApp', isCheck);
     });
 
-    $('#isNotValidFirstSearchUpdateApp').click(function () {
-        let isCheck = document.getElementById('isNotValidFirstSearchUpdateApp').checked;
-        DAO.DB.set('isNotValidFirstSearchUpdateApp', isCheck);
-    });
-
     $('#input-app-exec').change(async () => {
         $('.alert-add-app').text("").addClass('hidden');
         if ($("#name-c-to-app").val().length == 0) {
@@ -167,7 +162,7 @@ function compare__id(a, b) {
 
 function appendHtml(item, count) {
     var name = item.name.replace('.exe', '');
-    var icone = APP_PATH + "/Domain/src/img/underbot_logo-68.png";
+    var icone = APP_PATH + "/Domain/src/img/underbot_logo.png";
     if (item.nameCustom.length > 0)
         name = item.nameCustom;
     if (item.iconCustom != null)

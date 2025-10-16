@@ -573,7 +573,7 @@ module.exports = {
         {
             id: ".settings_text_icon_HVRT",
             type: "html",
-            text: '<span class="d-block hover_rotation me-1" href="#"><i class="bi bi-gear-wide-connected"></i></span> 设置',
+            text: '<span class="d-block hover_rotation mt-auto mb-auto me-1" href="#"><i class="bi bi-gear-wide-connected"></i></span> 设置',
         },
         {
             id: ".keys_macro_text",
@@ -1008,17 +1008,17 @@ module.exports = {
         {
             id: ".apps_name_description",
             type: "html",
-            text: `在 <a class='a-style' onClick='selectMenu("app-main")'><i class="bi bi-google-play"></i> 应用程序</a> 中，可以注册应用程序可执行文件，如 Discord、Steam 和其他应用程序，以及要播放的音频，甚至可以在浏览器新标签页中打开 URL，或使用命令在 Windows CMD（命令提示符）中执行。`,
+            text: `在 <a class='a-style' onClick='GlobalValues.SideBarMenuSelect("app-main")'><i class="bi bi-google-play"></i> 应用程序</a> 中，可以注册应用程序可执行文件，如 Discord、Steam 和其他应用程序，以及要播放的音频，甚至可以在浏览器新标签页中打开 URL，或使用命令在 Windows CMD（命令提示符）中执行。`,
         },
         {
             id: ".keys_macro_text_description",
             type: "html",
-            text: `在 <a class='a-style' onClick='selectMenu("keys-macros")'><i class="bi bi-keyboard-fill"></i> 快捷键</a> 中，您可以为在 <a class='a-style' onClick = 'selectMenu("app-main")'><i class="bi bi-google-play"></i> 应用程序</a> 中注册的每个应用程序注册特定的宏，这样就可以仅使用键盘快捷键执行应用程序，此功能要求您在 <a class='a-style' onClick='selectMenu("config")'><i class="bi bi-gear-wide-connected"></i> 设置</a> 中启用它。`,
+            text: `在 <a class='a-style' onClick='GlobalValues.SideBarMenuSelect("keys-macros")'><i class="bi bi-keyboard-fill"></i> 快捷键</a> 中，您可以为在 <a class='a-style' onClick = 'GlobalValues.SideBarMenuSelect("app-main")'><i class="bi bi-google-play"></i> 应用程序</a> 中注册的每个应用程序注册特定的宏，这样就可以仅使用键盘快捷键执行应用程序，此功能要求您在 <a class='a-style' onClick='GlobalValues.SideBarMenuSelect("settings")'><i class="bi bi-gear-wide-connected"></i> 设置</a> 中启用它。`,
         },
         {
             id: ".settings_text_description",
             type: "html",
-            text: `在 <a class='a-style' onClick='selectMenu("config")'><i class="bi bi-gear-wide-connected"></i></span> 设置</a> 中，您可以启用或禁用快捷键，以及启动 WEB Under Deck，WEB Under Deck 允许您通过访问 URL 来执行在 <a class='a-style' onClick = 'selectMenu("app-main")'><i class="bi bi-google-play"></i> 应用程序</a> 中注册的应用程序，您也可以使用 URL 或扫描二维码从手机访问它，注意：目前此功能仅适用于本地访问，不支持远程访问或与您计算机不同网络的互联网/Wi-Fi 访问。`,
+            text: `在 <a class='a-style' onClick='GlobalValues.SideBarMenuSelect("settings")'><i class="bi bi-gear-wide-connected"></i></span> 设置</a> 中，您可以启用或禁用快捷键，以及启动 WEB Under Deck，WEB Under Deck 允许您通过访问 URL 来执行在 <a class='a-style' onClick = 'GlobalValues.SideBarMenuSelect("app-main")'><i class="bi bi-google-play"></i> 应用程序</a> 中注册的应用程序，您也可以使用 URL 或扫描二维码从手机访问它，注意：目前此功能仅适用于本地访问，不支持远程访问或与您计算机不同网络的互联网/Wi-Fi 访问。`,
         },
         {
             id: ".selec_type_code_edit_or_add",
@@ -2709,6 +2709,12 @@ module.exports = {
             id: ".library_plugins_text",
             type: "html",
             text: `<i class="bi bi-collection-fill"></i> 插件库`,
+        },
+
+        {
+            id: ".devices_text_icon",
+            type: "html",
+            text: '<i class="bi bi-usb"></i> 设备',
         },
     ]
 };

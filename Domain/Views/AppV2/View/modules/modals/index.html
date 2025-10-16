@@ -1,0 +1,981 @@
+
+<div class="modal fade" id="modal-edit-exe" tabindex="-1" aria-labelledby="modal-edit-exeLabel"
+   aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modal-edit-exeLabel edit_text"></h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"
+               aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+            <div class="alert alert-exe-modal hidden" role="alert"></div>
+            <form>
+               <div class="mb-3">
+                  <label for="name-exe-modal" class="col-form-label name_text_expc_1"></label>
+                  <input type="text" class="form-control" id="name-exe-modal">
+               </div>
+               <div class="mb-3 div-edit-url hidden">
+                  <label for="edit-url-add-app" class="col-form-label web_page_text"></label>:
+                  <input type="text" placeholder="Ex.: https://www.youtube.com" class="form-control"
+                     id="edit-url-add-app">
+               </div>
+               <div class="mb-3 div-edit-cmd hidden">
+                  <label for="edit-cmd-add-app" class="col-form-label cmd_page_text"></label>:
+                  <input type="text" placeholder="Ex.: start chrome" class="form-control"
+                     id="edit-cmd-add-app">
+               </div>
+               <div class="mb-3">
+                  <label class="col-md-3 control-label icon_text_expc_1" for="logo"></label>
+                  <div class="col-md-4 m-auto">
+                     <img src="sysfssrc://img/underbot_logo.png" id="previwSeletedIconEditApp"
+                        class="PreviwIconApp">
+                  </div>
+                  <button type="button" class="btn btn-secondary btn-EditAppSelecIcon Select_an_image_text btn-full-w btn-sm mt-4"></button>
+               </div>
+               <div id="DEditAppViewFileAudio" class="mb-3 btn-full-w" style="display: none;">
+                  <label class="col-form-label audio_text"></label>:
+                  <audio controls class="btn-full-w" src=""></audio>
+               </div>
+            </form>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-close-exe-modal close_text"
+               data-bs-dismiss="modal"></button>
+            <button type="button" class="btn btn-primary save_text btn-SaveEditApp"></button>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade" id="modal-add-app" tabindex="-1" aria-labelledby="modal-add-app" aria-hidden="true"
+   data-bs-keyboard="false" data-bs-backdrop="static">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h1 class="modal-title fs-5 add_text" id="modal-add-app"></h1>
+            <button type="button" class="btn-close btn-CloseModalAddApp btn-ClearDataAddApp" data-bs-dismiss="modal"
+               aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+            <div class="alert alert-add-app alert-danger" style="display:none;" role="alert"></div>
+            <form>
+               <label class="form-check-label bnt_select_type_add_text" for="bnt-SelectTypeAddApp"></label>
+               <div class="mb-3">
+                  <div class="btn-group btn-full-w">
+                     <button type="button" class="btn btn-primary dropdown-toggle select_text"
+                        id="bnt-SelectTypeAddApp" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                     <ul class="dropdown-menu btn-full-w">
+                        <li
+                           class="opt-select-add-app" data-id="discord" data-type="type_add_app_0" data-textid=".discord_text" data-mclass="#inputs-add-discord-integration">
+                           <a id="type_add_app_0" class="dropdown-item discord_text" href="#"></a>
+                        </li>
+                        <li
+                           class="opt-select-add-app" data-id="audio" data-type="type_add_app_4" data-textid=".audio_text" data-mclass="#inputs-add-audio-input">
+                           <a id="type_add_app_4" class="dropdown-item audio_text" href="#"></a>
+                        </li>
+                        <li
+                           class="opt-select-add-app" data-id="exe" data-type="type_add_app_1" data-textid=".app_text" data-mclass="#inputs-add-exe">
+                           <a id="type_add_app_1" class="dropdown-item app_text" href="#"></a>
+                        </li>
+                        <li
+                           class="opt-select-add-app" data-id="cmd" data-type="type_add_app_3" data-textid=".cmd_text" data-mclass="#inputs-add-cmd-input">
+                           <a id="type_add_app_3" class="dropdown-item cmd_text" href="#"></a>
+                        </li>
+                        <li
+                           class="opt-select-add-app" data-id="obs_wss" data-type="type_add_app_5" data-textid=".obs_studio_n_text" data-mclass="#obs-add-app-t">
+                           <a id="type_add_app_5" class="dropdown-item obs_studio_n_text" href="#"></a>
+                        </li>
+                        <li
+                           class="opt-select-add-app" data-id="soundpad_audio" data-type="type_add_app_6" data-textid=".soundpad" data-mclass="#soundpad-add-app">
+                           <a id="type_add_app_6" class="dropdown-item soundpad" href="#"></a>
+                        </li>
+                        <li
+                           class="opt-select-add-app" data-id="web_page" data-type="type_add_app_2" data-textid=".web_page_text" data-mclass="#inputs-add-web-page-url">
+                           <a id="type_add_app_2" class="dropdown-item web_page_text" href="#"></a>
+                        </li>
+                        <li
+                           class="opt-select-add-app" data-id="options_os" data-type="type_add_app_7" data-textid=".Options_for_the_Operating_System" data-mclass="#inputs-add-options-os-integration">
+                           <a id="type_add_app_7" class="dropdown-item Options_for_the_Operating_System" href="#"></a>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+               <div id="formselecCustomIcon" class="form-group mb-3 hidden">
+                  <label class="col-md-3 control-label icon_text_expc_1" for="logo"></label>
+                  <div class="col-md-4 m-auto">
+                     <img src="sysfssrc://img/underbot_logo.png" id="previwSeletedIconAddApp"
+                        class="PreviwIconApp">
+                  </div>
+                  <button type="button" class="btn btn-secondary btn-AddAppSelecIcon Select_an_image_text btn-full-w btn-sm mt-4"></button>
+               </div>
+               <div id="formselecCustomName" class="mb-3">
+                     <label for="name-c-to-app" class="col-form-label name_text_expc_1"></label>
+                     <input type="text" class="form-control name_custom_placeholder_text" id="name-c-to-app">
+               </div>
+               <div id="inputs-add-audio-input" class="mb-2 hidden">
+                  <div class="mb-3 btn-full-w">
+                     <label for="input-app-audio" class="col-form-label audio_text"></label>:
+                     <audio id="AddAppAudioPlayer" controls class="btn-full-w" src=""></audio>
+                  </div>
+                  <button type="button" class="btn btn-secondary btn-AddAppSelecAudioFile select_file btn-full-w btn-sm"></button>
+               </div>
+               <div id="inputs-add-discord-integration" class="mb-3 hidden">
+                  <div class="mb-3">
+                     <label for="select-AddAppDiscordTypeIntegration" class="col-form-label discord_text"></label>:
+                     <select id="select-AddAppDiscordTypeIntegration" class="form-select">
+                        <option value="" class="Select_the_type_of_action_text"></option>
+                        <option value="mute-mic"
+                           class="discord_mute_mic_text"></option>
+                        <option value="mute-audio"
+                           class="discord_mute_audio_text"></option>
+                        <option value="unmute-mic"
+                           class="discord_unmute_mic_text"></option>
+                        <option value="unmute-audio"
+                           class="discord_unmute_audio_text"></option>
+                        <option value="toggle-mute-unmute-mic"
+                           class="discord_toggle_mute_unmute_mic_text"></option>
+                        <option value="toggle-mute-unmute-audio"
+                           class="discord_toggle_mute_unmute_audio_text"></option>
+                     </select>
+                  </div>
+               </div>
+               <div id="inputs-add-options-os-integration" class="mb-3 hidden">
+                  <div class="mb-3">
+                     <label for="select-AddAppOptionsOsIntegration" class="col-form-label options_text"></label>:
+                     <select id="select-AddAppOptionsOsIntegration" class="form-select">
+                        <option value="" selected class="Select_the_type_of_action_text"></option>
+                        <option value="audio_play" class="audio_play_text"></option>
+                        <option value="audio_next" class="audio_next_text"></option>
+                        <option value="audio_prev" class="audio_prev_text"></option>
+                        <option value="audio_stop" class="audio_stop_text"></option>
+                        <option value="audio_vol_up" class="audio_vol_up_text"></option>
+                        <option value="audio_vol_down" class="audio_vol_down_text"></option>
+                        <option value="audio_mute" class="audio_mute_text"></option>
+                     </select>
+                  </div>
+               </div>
+               <div id="soundpad-add-app" class="mb-3 hidden">
+                  <div class="mb-3">
+                     <label class="col-form-label soundpad"></label>:
+                     <select class="form-select IRT-SelectSoundpadAudio select-SoundpadAudioAddApp">
+                        <option value="" selected class="select_soundpad_sound"></option>
+                     </select>
+                  </div>
+               </div>
+               <div id="inputs-add-exe" class="mb-3 hidden">
+                  <div class="mb-3">
+                     <label for="input-app-exec" class="col-form-label app_text"></label>:
+                     <input type="text" disabled class="form-control" id="input-path-app-exec">
+                  </div>
+                  <button type="button" class="btn btn-secondary btn-AddAppSelecFileExec select_file btn-full-w btn-sm"></button>
+                  <div class="mb-3">
+                     <label class="col-form-label or_text"></label>:
+                  </div>
+                  <div class="mb-3">
+                     <div id="accordion">
+                        <div class="card theme-card">
+                           <div class="card-header">
+                              <h5 class="mb-0">
+                                 <button type="button" class="btn btn-link btn-link-collapse list_apps_name btn-ListInstalledSoftwares"
+                                    data-toggle="collapse"
+                                    data-target="#list_installed_software" aria-expanded="true"
+                                    aria-controls="list_installed_software">
+                                 </button>
+                              </h5>
+                           </div>
+                           <div id="list_installed_software" class="collapse">
+                              <div class="bg-srt card-body">
+                                 <div id="list_software">
+                                 </div>
+                                 <div class="card-content-spinner">
+                                    <div class="hollow-dots-spinner spinner-center spinnerStyle">
+                                       <div class="dot"></div>
+                                       <div class="dot"></div>
+                                       <div class="dot"></div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div id="inputs-add-web-page-url" class="mb-3 hidden">
+                  <div class="mb-3">
+                     <label for="url-add-app" class="col-form-label web_page_text"></label>:
+                     <input type="text" placeholder="Ex.: https://www.youtube.com" class="form-control"
+                        id="url-add-app">
+                  </div>
+               </div>
+               <div id="obs-add-app-t" class="mb-3 hidden">
+                  <div class="mb-1">
+                     <label for="select-obs-options" class="col-form-label obs_options_text_sl"></label>
+                     <div class="input-group">
+                        <select id="select-obs-options" class="form-select">
+                           <option value="" selected class="select_obs_options_text"></option>
+                           <option class="StartStream_text" id="sl-StartStream" value="StartStream"></option>
+                           <option class="StopStream_text" id="sl-StopStream" value="StopStream"></option>
+                           <option class="StartRecord_text" id="sl-StartRecord" value="StartRecord"></option>
+                           <option class="StopRecord_text" id="sl-StopRecord" value="StopRecord"></option>
+                           <option class="PauseRecord_text" id="sl-PauseRecord" value="PauseRecord"></option>
+                           <option class="ResumeRecord_text" id="sl-ResumeRecord" value="ResumeRecord"></option>
+                        </select>
+                     </div>
+                  </div>
+                  <div class="mb-0">
+                     <label class="col-form-label or_text"></label>:
+                  </div>
+                  <div class="mb-1">
+                     <label for="select-obs-scene" class="col-form-label scenes_text_sl"></label>
+                     <div class="input-group">
+                        <select id="select-obs-scene" class="form-select">
+                           <option value="" selected class="select_obs_scene_text"></option>
+                        </select>
+                        <button class="btn btn-primary update_text btn-UpdateListObs"
+                           type="button"></button>
+                     </div>
+                  </div>
+                  <div class="mb-0">
+                     <label class="col-form-label or_text"></label>:
+                  </div>
+                  <div class="mb-1">
+                     <label for="select-audios-inputs" class="col-form-label obsaudio_input_text_sl"></label>
+                     <div class="input-group">
+                        <select id="select-audios-inputs" class="form-select">
+                           <option value="" selected class="select_obs_audioinput_text"></option>
+                        </select>
+                        <button class="btn btn-primary update_text btn-UpdateListObs"
+                           type="button"></button>
+                     </div>
+                  </div>
+               </div>
+               <div id="inputs-add-cmd-input" class="mb-3 hidden">
+                  <div class="mb-3">
+                     <label for="cmd-add-app" class="col-form-label cmd_page_text"></label>:
+                     <input type="text" placeholder="Ex.: start chrome" class="form-control" id="cmd-add-app">
+                  </div>
+               </div>
+            </form>
+         </div>
+         <div class="modal-footer">
+            <button type="button"
+               class="btn bnt-close-modal-add-app btn-danger btn-close-add-app-modal close_text btn-ClearDataAddApp"
+               data-bs-dismiss="modal"></button>
+            <button type="button" class="btn btn-primary save_text btn-AddNewApp"></button>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade" id="modal-key-macro" tabindex="-1" aria-labelledby="modal-key-macro"
+   aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h1 class="modal-title fs-5 add_text" id="modal-key-macro"></h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"
+               aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+            <div class="alert alert-key-macro-modal alert-danger hidden" role="alert"></div>
+            <form>
+               <div class="mb-3">
+                  <div class="btn-group btn-full-w">
+                     <button type="button"
+                        class="btn btn-primary dropdown-toggle btn-dropdown-key-macro apps_name"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                     </button>
+                     <ul class="dropdown-menu btn-full-w ul-dropdown-ky-macro dynamic-ul">
+                     </ul>
+                  </div>
+               </div>
+               <div class="mb-3">
+                  <div class="input-group mb-3">
+                     <input type="button" value="" id="key-macro-modal"
+                        class="form-control hover-color-primary bg-dark text-white">
+                  </div>
+               </div>
+            </form>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-danger btn-close-key-macro-modal close_text"
+               data-bs-dismiss="modal"></button>
+            <button type="button" class="btn btn-primary save_text btn-addMacroKey"></button>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade" id="modal-select-app-pvw-wbdc" tabindex="-1"
+   aria-labelledby="modal-select-app-pvw-wbdc" data-bs-backdrop="static" data-keyboard="false"
+   data-backdrop="static" aria-modal="true" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h1 class="modal-title fs-5 select_app_text"></h1>
+         </div>
+         <div class="modal-body">
+            <div class="alert alert-pvw-wbdc-modal alert-danger hidden" role="alert"></div>
+            <form>
+               <div class="mb-3">
+                  <div class="btn-group btn-full-w">
+                     <button type="button"
+                        class="btn btn-primary dropdown-toggle btn-dropdown-pvw-wbdc apps_name"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                     </button>
+                     <ul class="dropdown-menu btn-full-w ul-dropdown-pvw-wbdc dynamic-ul">
+                     </ul>
+                  </div>
+               </div>
+            </form>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-danger btn-close-pvw-wbdc-modal close_icon"
+               onclick="clear_modal_pvw_wbdc()" data-bs-dismiss="modal"></button>
+            <button type="button" class="btn btn-danger btn-remove-pvw-wbdc remove_icon" style="display: none;"
+               onclick="clear_modal_pvw_wbdc_and_remove()" data-bs-dismiss="modal"></button>
+            <button type="button" class="btn btn-primary save_icon_text"
+               onclick="confirm_add_pvw_wbdc()"></button>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade" id="modal-webpage" tabindex="-1" aria-labelledby="modal-webpage" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h1 class="modal-title fs-5 add_text" id="modal-webpage"></h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"
+               aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+            <div class="alert alert-webpage-modal alert-danger hidden" role="alert"></div>
+            <form>
+               <div class="mb-3">
+                  <label for="name_webpage" class="col-form-label name_text"></label>
+                  <div class="input-group">
+                     <input type="text" name="name_webpage" id="name_webpage" class="form-control"
+                        placeholder="Name">
+                  </div>
+               </div>
+               <div class="mb-3">
+                  <label for="url_webpage" class="col-form-label">URL</label>
+                  <div class="input-group">
+                     <input type="url" name="url_webpage" id="url_webpage" class="form-control"
+                        value="" placeholder="Url">
+                  </div>
+               </div>
+            </form>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-danger btn-close-webpage-modal close_text" data-bs-dismiss="modal"></button>
+            <button type="button" class="btn btn-primary save_text btn-addWebPage"></button>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade" id="modal-edit-key-macro" tabindex="-1" aria-labelledby="modal-edit-key-macro"
+   aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h1 class="modal-title fs-5 edit_text" id="modal-edit-key-macro-title"></h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"
+               aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+            <div class="alert alert-edit-key-macro-modal alert-danger hidden" role="alert"></div>
+            <form>
+               <div class="mb-3">
+                  <div class="btn-group">
+                     <button type="button" disabled
+                        class="btn btn-primary dropdown-toggle btn-dropdown-edit-key-macro"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                     </button>
+                     <ul class="dropdown-menu ul-dropdown-ky-macro">
+                     </ul>
+                  </div>
+               </div>
+               <div class="mb-3">
+                  <div class="input-group mb-3">
+                     <input type="button" value="" id="key-edit-macro-modal"
+                        class="form-control hover-color-primary bg-dark text-white">
+                  </div>
+               </div>
+            </form>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-danger btn-close-edit-key-macro-modal cancel_text"
+               data-bs-dismiss="modal"></button>
+            <button type="button" class="btn btn-primary btn-saveEditKeyMacro save_text"></button>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade" id="modal-qr-code" tabindex="-1" aria-labelledby="modal-qr-code" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modal-qr-code">QR Code</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+            <img src="" class="m-auto d-flex url-qr-code-modal">
+            <hr>
+            <input type="text" value="N/A"
+               class="form-control input_select_all desable_texting_input url_qr_code_modal_i" placeholder=""
+               aria-label="" aria-describedby="button-addon2">
+         </div>
+         <div class="modal-footer">
+            <button id="close_modal_qr_code" type="button" class="btn btn-danger close_text"
+               data-bs-dismiss="modal"></button>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade" id="modal_discord_integration" data-bs-backdrop='static' data-keyboard="false"
+   data-backdrop="static">
+   <div class="modal-dialog">
+      <form class="rounded modal-content" onSubmit="LoginDiscord(); return false;">
+         <div class="modal-header text-center" style="border-bottom: none !important;">
+            <h4 class="modal-title w-100 discord_integration_ipc_text"></h4>
+         </div>
+         <div class="modal-body pb-0" style="border-top: none !important; border-bottom: none !important;">
+            <div style="display: none;" id="dc-rpc-form-alert" class="alert alert-danger" role="alert"></div>
+            <div class="mb-3">
+               <label for="dc-rpc-clientId" class="form-label">Client ID / Application ID</label>
+               <input required type="text" class="form-control" placeholder="Client ID / Application ID"
+                  id="dc-rpc-clientId">
+            </div>
+            <div class="mb-3">
+               <label for="dc-rpc-clientSecret" class="form-label">Client Secret</label>
+               <div class="input-group">
+                  <a class="btn btn-light border border-secondary view-password d-flex align-items-center" type="button"><i
+                        class="bi bi-eye-fill"></i></a>
+                  <input required type="password" class="form-control" id="dc-rpc-clientSecret"
+                     placeholder="Client Secret">
+               </div>
+            </div>
+            <div class="text-center">
+               <a data-bs-toggle="modal" data-bs-target="#modal_HtgyDCClientIDaClientSecret"
+                  data-bs-dismiss="modal" class="cursor-pointer span font-12 HtgyDCClientIDaClientSecret">
+               </a>
+            </div>
+         </div>
+         <div class="modal-footer" style="border-top: none !important;">
+            <button type="button" id="deny_modal" class="btn btn-danger" data-bs-dismiss="modal">
+               <i class="bi bi-x-lg"></i>
+               <span class="cancel_text"></span>
+            </button>
+            <button type="submit" class="btn btn-primary">
+               <i class="bi bi-send"></i>
+               <span class="UND_userLogin_text"></span>
+            </button>
+         </div>
+      </form>
+   </div>
+</div>
+<div class="modal fade" id="modal_HtgyDCClientIDaClientSecret" data-bs-backdrop='static' data-keyboard="false"
+   data-backdrop="static">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header text-center" style="border-bottom: none !important;">
+            <h5 class="modal-title w-100 HtgyDCClientIDaClientSecret"></h5>
+         </div>
+         <div class="modal-body pb-0" style="border-top: none !important; border-bottom: none !important;">
+            <label class="form-label HtgyDCC_title_text"></label>
+            <ul class="list-group">
+               <li class="list-group-item bg-dark bg-gradient text-light HtgyDCC_1_text"></li>
+               <li class="list-group-item bg-dark bg-gradient text-light HtgyDCC_2_text"></li>
+               <li class="list-group-item bg-dark bg-gradient text-light HtgyDCC_3_text"></li>
+               <li class="list-group-item bg-dark bg-gradient text-light HtgyDCC_4_text"></li>
+               <li class="list-group-item bg-dark bg-gradient text-light HtgyDCC_5_text"></li>
+               <li class="list-group-item bg-dark bg-gradient text-light HtgyDCC_6_text"></li>
+               <li class="list-group-item bg-dark bg-gradient text-light HtgyDCC_7_text"></li>
+            </ul>
+         </div>
+         <div class="modal-footer" style="border-top: none !important;">
+            <a type="button" data-bs-toggle="modal" data-bs-target="#modal_discord_integration"
+               class="btn btn-primary back_icon_text" data-bs-dismiss="modal">
+            </a>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade" id="modal_login" data-bs-backdrop='static' data-keyboard="false"
+   data-backdrop="static">
+   <div class="modal-dialog">
+      <form class="rounded modal-content" id="FormUserLogin">
+         <div class="modal-header text-center" style="border-bottom: none !important;">
+            <h4 class="modal-title w-100 UND_userLogin_text"></h4>
+         </div>
+         <div class="modal-body pb-0" style="border-top: none !important; border-bottom: none !important;">
+            <div style="display: none;" id="u-form-alert" class="alert alert-danger" role="alert"></div>
+            <div class="mb-3">
+               <label for="u-email" class="form-label email_or_username_text"></label>
+               <input required type="text" class="form-control e_or_u_placeholder" id="u-email">
+            </div>
+            <div class="mb-3">
+               <label for="u-password" class="form-label password_text"></label>
+               <div class="input-group">
+                  <input required type="password" class="form-control" id="u-password"
+                     placeholder="************">
+                  <a class="btn btn-light border border-secondary view-password d-flex align-items-center" type="button"><i class="bi bi-eye-fill"></i></a>
+               </div>
+            </div>
+            <div class="text-center">
+               <a data-bs-toggle="modal" data-bs-target="#modal_reset_password" data-bs-dismiss="modal"
+                  type="button" class="cursor-pointer span font-12 Forgot_your_password_text"></a>
+               |
+               <a data-bs-toggle="modal" data-bs-target="#modal_register" data-bs-dismiss="modal" type="button"
+                  class="cursor-pointer span font-12 UND_userRegister_text"></a>
+            </div>
+         </div>
+         <div class="modal-footer" style="border-top: none !important;">
+            <button type="button" id="deny_modal" class="btn btn-danger" data-bs-dismiss="modal">
+               <i class="bi bi-x-lg"></i>
+               <span class="cancel_text"></span>
+            </button>
+            <button type="submit" class="btn btn-primary">
+               <i class="bi bi-send"></i>
+               <span class="UND_userLogin_text"></span>
+            </button>
+         </div>
+      </form>
+   </div>
+</div>
+<div class="modal fade" id="modal_register" data-bs-backdrop='static' data-keyboard="false"
+   data-backdrop="static">
+   <div class="modal-dialog">
+      <form class="rounded modal-content" onSubmit="tryRegisterUser(); return false;">
+         <div class="modal-header text-center" style="border-bottom: none !important;">
+            <h4 class="modal-title w-100 UND_userRegister_text"></h4>
+         </div>
+         <div class="modal-body pb-0" style="border-top: none !important; border-bottom: none !important;">
+            <div style="display: none;" id="u-form-r-alert" class="alert alert-danger" role="alert"></div>
+            <div class="mb-3">
+               <label for="ur-name" class="form-label display_name_text"></label>
+               <input required type="text" class="form-control display_name_placeholder" id="ur-name">
+            </div>
+            <div class="mb-3">
+               <label for="ur-username" class="form-label username_text"></label>
+               <input required type="text" class="form-control username_placeholder" id="ur-username">
+            </div>
+            <div class="mb-3">
+               <label for="ur-email" class="form-label email_text"></label>
+               <input required type="email" class="form-control email_placeholder" id="ur-email">
+            </div>
+            <div class="mb-3">
+               <label for="ur-password" class="form-label password_text"></label>
+               <div class="input-group">
+                  <input required type="password" class="form-control" id="ur-password"
+                     placeholder="************">
+                  <a class="btn btn-light border border-secondary view-password d-flex align-items-center" type="button"><i
+                     class="bi bi-eye-fill"></i></a>
+               </div>
+            </div>
+            <div class="mb-3">
+               <label for="ur-cpassword" class="form-label confirm_password_text"></label>
+               <div class="input-group">
+                  <input required type="password" class="form-control" id="ur-cpassword"
+                     placeholder="************">
+                  <a class="btn btn-light border border-secondary view-password d-flex align-items-center" type="button"><i class="bi bi-eye-fill"></i></a>
+               </div>
+            </div>
+            <div class="text-center">
+               <a data-bs-toggle="modal" data-bs-target="#modal_login" data-bs-dismiss="modal" type="button"
+                  class="cursor-pointer span font-12 UND_userLogin_text"></a>
+            </div>
+         </div>
+         <div class="modal-footer" style="border-top: none !important;">
+            <button type="button" id="deny_modal" class="btn btn-danger" data-bs-dismiss="modal">
+               <i class="bi bi-x-lg"></i>
+               <span class="cancel_text"></span>
+            </button>
+            <button type="submit" class="btn btn-primary">
+               <i class="bi bi-send"></i>
+               <span class="UND_userRegister_text"></span>
+            </button>
+         </div>
+      </form>
+   </div>
+</div>
+<div class="modal fade" id="modal_reset_password" data-bs-backdrop='static' data-keyboard="false"
+   data-backdrop="static">
+   <div class="modal-dialog">
+      <form class="rounded modal-content" onSubmit="tryResetPassword(); return false;">
+         <div class="modal-header text-center" style="border-bottom: none !important;">
+            <h4 class="modal-title w-100 Reset_password_text"></h4>
+         </div>
+         <div class="modal-body pb-0" style="border-top: none !important; border-bottom: none !important;">
+            <div style="display: none;" id="rp-form-alert" class="alert alert-danger" role="alert"></div>
+            <div class="mb-3">
+               <label for="rp-email" class="form-label email_or_username_text"></label>
+               <input required type="text" class="form-control e_or_u_placeholder" id="rp-email">
+            </div>
+            <div class="text-center">
+               <a data-bs-toggle="modal" data-bs-target="#modal_login" data-bs-dismiss="modal" type="button"
+                  class="cursor-pointer span font-12 UND_userLogin_text"></a>
+               |
+               <a data-bs-toggle="modal" data-bs-target="#modal_register" data-bs-dismiss="modal" type="button"
+                  class="cursor-pointer span font-12 UND_userRegister_text"></a>
+            </div>
+         </div>
+         <div class="modal-footer" style="border-top: none !important;">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+               <i class="bi bi-x-lg"></i>
+               <span class="cancel_text"></span>
+            </button>
+            <button type="submit" class="btn btn-primary">
+               <i class="bi bi-send"></i>
+               <span class="submit_text"></span>
+            </button>
+         </div>
+      </form>
+   </div>
+</div>
+<div class="modal fade" id="modal_set_reset_password" data-bs-backdrop='static' data-keyboard="false"
+   data-backdrop="static">
+   <div class="modal-dialog">
+      <form class="rounded modal-content" onSubmit="trySetResetPassword(); return false;">
+         <div class="modal-header text-center" style="border-bottom: none !important;">
+            <h4 class="modal-title w-100 Reset_password_text"></h4>
+         </div>
+         <div class="modal-body pb-0" style="border-top: none !important; border-bottom: none !important;">
+            <div style="display: none;" id="srp-form-alert" class="alert alert-danger" role="alert"></div>
+            <div class="mb-3">
+               <input type="text" class="form-control hidden" id="trpclientid">
+            </div>
+            <div class="mb-3">
+               <label for="rp-token" class="form-label token_reset_password_text"></label>
+               <input required type="number" class="form-control t_r_p_placeholder" id="rp-token">
+            </div>
+            <div class="mb-3">
+               <label for="srp-password" class="form-label password_text"></label>
+               <div class="input-group">
+                  <input required type="password" class="form-control placeholder-password-text"
+                     id="srp-password" placeholder="************">
+                  <a class="btn btn-light border border-secondary view-password d-flex align-items-center" type="button"><i
+                     class="bi bi-eye-fill"></i></a>
+               </div>
+            </div>
+            <div class="mb-3">
+               <label for="srp-cpassword" class="form-label confirm_password_text"></label>
+               <div class="input-group">
+                  <input required type="password" class="form-control placeholder-password-text"
+                     id="srp-cpassword" placeholder="************">
+                  <a class="btn btn-light border border-secondary view-password d-flex align-items-center" type="button"><i
+                     class="bi bi-eye-fill"></i></a>
+               </div>
+            </div>
+            <div class="text-center">
+               <a data-bs-toggle="modal" data-bs-target="#modal_login" data-bs-dismiss="modal" type="button"
+                  class="cursor-pointer span font-12 UND_userLogin_text"></a>
+            </div>
+         </div>
+         <div class="modal-footer" style="border-top: none !important;">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+               <i class="bi bi-x-lg"></i>
+               <span class="cancel_text"></span>
+            </button>
+            <button type="submit" class="btn btn-primary">
+               <i class="bi bi-send"></i>
+               <span class="submit_text"></span>
+            </button>
+         </div>
+      </form>
+   </div>
+</div>
+<div class="modal fade" id="modal_UND_profileView" data-bs-backdrop='static' data-keyboard="false"
+   data-backdrop="static">
+   <div class="modal-dialog modal-lg">
+      <div class="UND_contentUserProfile rounded z-0">
+         <video class="UNDThemeProfileMY rounded rotate-180" style="display: none;" autoplay loop muted
+            plays-inline>
+            <source src="" type="video/mp4">
+         </video>
+         <video class="UNDThemeProfileMY rounded" style="display: none;" autoplay loop muted plays-inline>
+            <source src="" type="video/mp4">
+         </video>
+      </div>
+      <div class="modal-content UNDTPMMSTYL z-1">
+         <div class="modal-header UNDTPMMSTYL" style="border-bottom: none !important;">
+            <h4 class="modal-title userProfile_icon_text"></h4>
+            <button id="btn_close_modal" type="button" class="btn-close" data-bs-dismiss="modal"></button>
+         </div>
+         <div class="modal-body UNDTPMMSTYL"
+            style="border-top: none !important; border-bottom: none !important;">
+            <div class="cards-area aos-init aos-animate" data-aos="fade-down">
+               <div class="row">
+                  <div class="col-md-12 col-xl-12">
+                     <div class="card theme-card UNDTPMMSTYL USRR border-0">
+                        <div class="card-body">
+                           <div id="croppie-demo" style="display: none;">
+                              <h5 class="form-check-label avatar_text"></h5>
+                              <div class="croppie-avatar-wrap">
+                                 <div id="croppie-avatar-export" style="display: none;"></div>
+                                 <div id="croppie-avatar"></div>
+                              </div>
+                              <div class="d-flex justify-content-center">
+                                 <button id="cancelExportAvatar" type="button"
+                                    class="btn btn-danger cancel_icon_text"></button>
+                                 <button
+                                    class="btn btn-primary ms-2 me-2 changeUserAvatar btn-sm changeUserAvatar_text"
+                                    type="button"></button>
+                                 <button id="croppieExportAvatar" type="button"
+                                    class="btn btn-success save_icon_text"></button>
+                              </div>
+                           </div>
+                           <div id="tesss"></div>
+                           <div id="info-profile">
+                              <div class="d-flex">
+                                 <div class="input-group" style="height: 100px;">
+                                    <div class="m-auto ms-0 d-block">
+                                       <div class="ms-2">
+                                          <h5 class="form-check-label avatar_text"></h5>
+                                          <button
+                                             class="btn btn-primary changeUserAvatar btn-sm changeUserAvatar_text"
+                                             type="button"></button>
+                                          <input type="file" class="form-control hidden"
+                                             id="uInput-changeUserAvatar" accept=".jpeg, .gif, .png">
+                                          <button
+                                             class="btn btn-danger ms-3 btn-sm removeUserAvatar_text btn_remove_account_avatar"
+                                             type="button"></button>
+                                       </div>
+                                       <span class="ms-2"><span class="userID_text"></span><span
+                                             class="UND_userClietn_id"></span></span>
+                                    </div>
+                                 </div>
+                                 <div class="input-group">
+                                    <img src="sysfssrc://img/profile-icon.png" alt="" width="100" height="100"
+                                       class="m-auto UND_usericon UND_usericonPrevEdit rounded-circle">
+                                 </div>
+                              </div>
+                              <hr>
+                              <div class="d-flex mt-3">
+                                 <div class="input-group">
+                                    <div class="m-auto ms-0 d-flex">
+                                       <div class="ms-2 d-grid">
+                                          <h5 class="form-check-label display_name_text m-0"></h5>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="input-group">
+                                    <input type="text" id="insertUND_DisplayUsername"
+                                       class="form-control m-auto ValUND_DisplayUsername ValUND_DisplayUsernameEdit">
+                                 </div>
+                              </div>
+                              <div class="d-flex mt-3">
+                                 <div class="input-group">
+                                    <div class="m-auto ms-0 d-flex">
+                                       <div class="ms-2 d-grid">
+                                          <h5 class="form-check-label username_text m-0"></h5>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="input-group">
+                                    <input disabled type="text" class="form-control m-auto ValUND_username">
+                                 </div>
+                              </div>
+                              <div class="d-flex mt-3">
+                                 <div class="input-group">
+                                    <div class="m-auto ms-0 d-flex">
+                                       <div class="ms-2 d-grid">
+                                          <h5 class="form-check-label email_text m-0"></h5>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="input-group">
+                                    <input disabled type="text" class="form-control m-auto ValUND_email">
+                                 </div>
+                              </div>
+                              <div class="mt-1 d-ConfirmEmailAddress" style="display: none;">
+                                 <div class="d-flex">
+                                    <div class="input-group">
+                                       <div class="m-auto ms-0 d-flex">
+                                          <div class="ms-2 d-grid">
+                                             <h5 class="form-check-label m-0"></h5>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="input-group">
+                                       <button type="button"
+                                          class="btn btn-primary confirm_email_text m-auto btn_ConfirmEmail"></button>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="d-flex mt-3 mb-3">
+                                 <div class="input-group">
+                                    <div class="m-auto ms-0 d-flex">
+                                       <div class="ms-2 d-grid">
+                                          <h5 class="form-check-label Is_premium_account m-0"></h5>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="input-group UND_premium_level">
+                                 </div>
+                              </div>
+                              <div class="d-flex mt-3 mb-3">
+                                 <div class="input-group">
+                                    <div class="m-auto ms-0 d-block">
+                                       <div class="ms-2 d-grid">
+                                          <h5 class="form-check-label Name_Plate m-0"></h5>
+                                       </div>
+                                    </div>
+                                    <div class="dropup-center dropup w100 ms-2 me-4 mt-1">
+                                       <div class="UND_contentNamePlate rounded z-0" style="display: none;">
+                                          <video class="PREVUNDNamePlateMY HINRP rounded rotate-180"
+                                             style="display: none;" autoplay loop muted plays-inline>
+                                             <source src="" type="video/mp4">
+                                          </video>
+                                          <video class="PREVUNDNamePlateMY rounded" style="display: none;"
+                                             autoplay loop muted plays-inline>
+                                             <source src="" type="video/mp4">
+                                          </video>
+                                       </div>
+                                       <a
+                                          class="d-flex align-items-center text-decoration-none cursor-pointer position-inherit z-1 p-1 mh-45">
+                                          <img src="sysfssrc://img/profile-icon.png" alt="" width="32"
+                                             height="32" class="UND_usericon p-01 MM rounded-circle me-2">
+                                          <strong class="UND_DisplayUsername u-format-max-text"></strong>
+                                       </a>
+                                    </div>
+                                 </div>
+                                 <div class="input-group">
+                                    <select id="select-user-nameplate" class="form-select mt-auto">
+                                       <option value="" selected="" class="none"></option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="d-flex mt-3 mb-3">
+                                 <div class="input-group">
+                                    <div class="m-auto ms-0 d-block">
+                                       <div class="ms-2 d-grid">
+                                          <h5 class="form-check-label background_color_text m-0"></h5>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="input-group">
+                                    <select id="select-user-profilebackground" class="form-select mt-auto">
+                                       <option value="" selected="" class="none"></option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="d-flex mt-3 mb-3">
+                                 <div class="input-group">
+                                    <div class="m-auto ms-0 d-flex">
+                                       <div class="ms-2 d-grid">
+                                          <h5 class="form-check-label creation_data_text m-0"></h5>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="input-group">
+                                    <h5 class="form-check-label UND_datecreated m-0"></h5>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="modal-footer d-block UNDTPMMSTYL" style="border-top: none !important;">
+            <button type="button" data-bs-dismiss="modal"
+               class="btn btn-primary Friends_icon_text UND_profileViewFriends"></button>
+            <button type="button" class="btn btn-success save_icon_text btn_UpdateUserData float-right"
+               style="display: none;"></button>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade" id="modal_UND_profileViewFriends" data-bs-backdrop='static' data-keyboard="false"
+   data-backdrop="static">
+   <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+         <div class="modal-header" style="border-bottom: none !important;">
+            <h4 class="modal-title Friends_text"></h4>
+            <button id="btn_close_modal" type="button" class="btn-close" data-bs-dismiss="modal"></button>
+         </div>
+         <div class="modal-body" style="border-top: none !important; border-bottom: none !important;">
+            <div class="modal-footer p-0" style="border: none !important;">
+               <button type="button" class="btn btn-primary ILLFRIEND Friends_text"></button>
+               <button type="button" class="btn IACCFRIEND pendings_text"></button>
+               <button type="button" class="btn IREJFRIEND d-flex refused_text"></button>
+               <button type="button" class="btn IBLOCKEDRIEND text-danger d-flex blockeds_text"></button>
+            </div>
+            <div class="cards-area card_L_UND_friends aos-init aos-animate" data-aos="fade-down">
+               <div class="row ROWLUNDFRIENDSFF" style="display: none;">
+               </div>
+               <div class="row ROWLUNDFRIENDSFP" style="display: none;">
+               </div>
+               <div class="row ROWLUNDFRIENDSFRJ" style="display: none;">
+               </div>
+               <div class="row ROWLUNDFRIENDSFBLOCK" style="display: none;">
+               </div>
+            </div>
+         </div>
+         <div class="modal-footer d-block" style="border-top: none !important;">
+            <button type="button" data-bs-dismiss="modal"
+               class="btn btn-primary back_icon_text UND_profileView"></button>
+            <button type="button" data-bs-dismiss="modal"
+               class="btn btn-info IADDFRIEND float-right AddFriend_icon_text"></button>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade" id="modal_UND_searchFriends" data-bs-backdrop='static' data-keyboard="false"
+   data-backdrop="static">
+   <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+         <div class="modal-header" style="border-bottom: none !important;">
+            <h4 class="modal-title search_friends_text"></h4>
+            <button id="btn_close_modal" type="button" class="btn-close" data-bs-dismiss="modal"></button>
+         </div>
+         <div class="modal-body" style="border-top: none !important; border-bottom: none !important;">
+            <div class="mb-3">
+               <label for="NSUAF" class="col-form-label for_username_text"></label>
+               <input type="text" class="form-control" id="NSUAF">
+            </div>
+            <div class="cards-area card_L_UND_friends aos-init aos-animate" data-aos="fade-down">
+               <div class="bodyLoading ROWLUNDFRIENDSFFLOADING" style="display: none !important;">
+                  <div class="loader-4567 m-auto">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66 66" height="100px" width="100px"
+                        class="spinner-4567">
+                        <circle stroke="url(#gradient2)" r="20" cy="33" cx="33" stroke-width="1"
+                           fill="transparent" class="path-4567">
+                        </circle>
+                        <linearGradient id="gradient2">
+                           <stop stop-opacity="1" stop-color="#8f00f4" offset="0%"></stop>
+                           <stop stop-opacity="0" stop-color="#af3dff" offset="100%"></stop>
+                        </linearGradient>
+                     </svg>
+                  </div>
+               </div>
+               <div class="row ROWLISTADDFRIEND">
+               </div>
+            </div>
+         </div>
+         <div class="modal-footer d-block" style="border-top: none !important;">
+            <button type="button" data-bs-dismiss="modal"
+               class="btn btn-primary back_icon_text UND_profileViewFriends"></button>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade" id="modal_dialog">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h4 id="title_modal" class="modal-title"></h4>
+            <button id="btn_close_modal" type="button" class="btn-close" data-bs-dismiss="modal"></button>
+         </div>
+         <div id="body_modal" class="modal-body">
+         </div>
+         <div class="modal-footer">
+            <button type="button" id="confirm_modal" class="btn btn-primary text_yes"
+               data-bs-dismiss="modal"></button>
+            <button type="button" id="deny_modal" class="btn btn-danger text_no"
+               data-bs-dismiss="modal"></button>
+         </div>
+      </div>
+   </div>
+</div>

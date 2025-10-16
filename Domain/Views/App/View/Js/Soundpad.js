@@ -53,7 +53,7 @@ $(document).ready(async () => {
     });
 
     $(document).on('click', '.btn_play-soundpad', async (e) => {
-        exec_soundpad(pathSoundPadExe, e.currentTarget.id);
+        exec_soundpad(pathSoundPadExe, `DoPlaySound(${e.currentTarget.id})`);
     });
 
     $(document).on('click', '.btn_addappplay-soundpad', async (e) => {
@@ -109,5 +109,5 @@ const ChangeListSoundPad = async () => {
 }
 
 const GetSoundPadListAudios = async () => {
-    return BACKEND.Send('get-list-soundpad-audios');
+    return BACKEND.Send('GetListSoundpadAudios');
 }

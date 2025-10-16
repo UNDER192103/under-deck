@@ -1,0 +1,166 @@
+<div class="container container-hide-control container-obs-studio mt-1 mb-1 animate__animated container-animated-style" style="display: none;">
+   <div class="THCG-CT full-h container rounded px-3 py-3" id="featured-3">
+      <div class="auto-scrool">
+         <h2 class="pb-2 border-bottom obs_studio_n_text_icon Svg30px"></h2>
+
+
+         <div class="cards-area aos-init aos-animate mb-3" data-aos="fade-down">
+            <div class="row">
+
+               <div class="col-md-12 col-xl-16 animate__animated">
+                  <div class="card theme-card">
+                     <div class="card-header shadow-text">
+                        <span class="obs-wss-config-t h5"></span>
+                        <button
+                           class="btn btn-success btn-sm float-end hover-pulse-grean btn-success connect-obs button-obs-wss-s-s"
+                           type="button"></button>
+                     </div>
+
+                     <div class="card-body">
+                        <div class="alert apobswbs alert-danger hidden" role="alert"></div>
+
+                        <div class="forms">
+
+                           <div class="checks mb-2">
+                              <div class="">
+                                 <input class="form-check-input" type="checkbox" id="obs-checkbox-start">
+                                 <label class="form-check-label ccOBSWsswhenstarting"
+                                    for="obs-checkbox-start"></label>
+                              </div>
+                              <div class="">
+                                 <input class="form-check-input" type="checkbox" id="obs-is-config-manual">
+                                 <label class="form-check-label ccOBSAutoConfig" for="obs-is-config-manual"></label>
+                              </div>
+                           </div>
+
+                           <div class="input mb-1">
+                              <label for="obs-wss-port" class="col-form-label p-0 port-e-ip-server"></label>
+                              <div class="input-group">
+                                 <input type="text" id="obs-wss-ip"
+                                    class="form-control placeholder-ip-server border border-secondary">
+                                 <input type="number" id="obs-wss-port"
+                                    class="form-control placeholder-port border border-secondary">
+                                 <button class="btn btn-primary save_text" type="button"
+                                    id="btn-save-osb-port"></button>
+                              </div>
+                           </div>
+
+                           <div class="input">
+                              <label for="obs-wss-password" class="col-form-label p-0 password-text"></label>
+                              <div class="input-group">
+                                 <input type="password" id="obs-wss-password"
+                                    class="form-control placeholder-password-text border border-secondary">
+                                 <a class="btn btn-light border border-secondary d-flex align-items-center" type="button"
+                                    id="btn-view-osb-password"><i class="bi bi-eye-fill"></i></a>
+                                 <button class="btn btn-primary save_text" type="button"
+                                    id="btn-save-osb-password"></button>
+                              </div>
+                           </div>
+
+                        </div>
+
+                     </div>
+                  </div>
+               </div>
+
+            </div>
+         </div>
+
+         <div id="accordion">
+
+            <div class="card none-border bg-dark text-light">
+               <div class="card-header" id="headingOne">
+                  <h5 class="mb-0">
+                     <button class="btn btn-dark obsScenes full-w" data-toggle="collapse"
+                        data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                     </button>
+                  </h5>
+               </div>
+
+               <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                  data-parent="#accordion">
+                  <div class="card-body">
+
+                     <div class="input-group mb-2">
+                        <button class="btn btn-secondary" type="button"><span
+                              class="bi bi-search"></span></button>
+                        <input type="text" name="FLSfoo_filter" id="FLSfoo_filter"
+                           class="form-control foo_filter" placeholder="Procurar...">
+                     </div>
+                     <table class="table footable-list-scenes text-light footable border rounded"
+                        data-page-size="15" data-filter="#FLSfoo_filter">
+                        <thead>
+                           <tr>
+                              <th>#</th>
+                              <th class="name_text"></th>
+                              <th class="active_text"></th>
+                              <th class="apply_text"></th>
+                           </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                        <tfoot>
+                           <tr>
+                              <td colspan="6" class="border-0">
+                                 <ul class="pagination">
+                                 </ul>
+                              </td>
+                           </tr>
+                        </tfoot>
+                     </table>
+
+                  </div>
+               </div>
+            </div>
+
+            <hr>
+
+            <div class="card none-border bg-dark text-light">
+               <div class="card-header" id="headingTwo">
+                  <h5 class="mb-0">
+                     <button class="btn btn-dark obsaudioinput full-w" data-toggle="collapse"
+                        data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                     </button>
+                  </h5>
+               </div>
+
+               <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo"
+                  data-parent="#accordion">
+                  <div class="card-body">
+
+                     <div class="input-group mb-2">
+                        <button class="btn btn-secondary" type="button"><span
+                              class="bi bi-search"></span></button>
+                        <input type="text" name="LAIfoo_filter" id="LAIfoo_filter"
+                           class="form-control foo_filter" placeholder="Procurar...">
+                     </div>
+                     <table class="table footable-list-audios-inputs text-light footable border rounded"
+                        data-page-size="15" data-filter="#LAIfoo_filter">
+                        <thead>
+                           <tr>
+                              <th>#</th>
+                              <th class="name_text"></th>
+                              <th class="mute_text"></th>
+                              <th class="unmute_text"></th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                        <tfoot>
+                           <tr>
+                              <td colspan="6" class="border-0">
+                                 <ul class="pagination">
+                                 </ul>
+                              </td>
+                           </tr>
+                        </tfoot>
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+      </div>
+   </div>
+</div>

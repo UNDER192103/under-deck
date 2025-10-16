@@ -573,7 +573,7 @@ module.exports = {
         {
             id: ".settings_text_icon_HVRT",
             type: "html",
-            text: '<span class="d-block hover_rotation me-1" href="#"><i class="bi bi-gear-wide-connected"></i></span> Configurações',
+            text: '<span class="d-block hover_rotation mt-auto mb-auto me-1" href="#"><i class="bi bi-gear-wide-connected"></i></span> Configurações',
         },
         {
             id: ".keys_macro_text",
@@ -1008,17 +1008,17 @@ module.exports = {
         {
             id: ".apps_name_description",
             type: "html",
-            text: `Em <a class='a-style' onClick='selectMenu("app-main")'><i class="bi bi-google-play"></i> Aplicativos</a> é possível cadastrar executáveis ​​de aplicativos como Discord, Steam e outros aplicativos, bem como áudios para serem reproduzidos ou até mesmo abrir uma Url em uma nova aba do seu navegador ou utilizar um comando para ser executado no CMD do Windows ( Prompt de comando).`,
+            text: `Em <a class='a-style' onClick='GlobalValues.SideBarMenuSelect("app-main")'><i class="bi bi-google-play"></i> Aplicativos</a> é possível cadastrar executáveis ​​de aplicativos como Discord, Steam e outros aplicativos, bem como áudios para serem reproduzidos ou até mesmo abrir uma Url em uma nova aba do seu navegador ou utilizar um comando para ser executado no CMD do Windows ( Prompt de comando).`,
         },
         {
             id: ".keys_macro_text_description",
             type: "html",
-            text: `Em <a class='a-style' onClick='selectMenu("keys-macros")'><i class="bi bi-keyboard-fill"></i> Teclas de Atalho</a> você pode cadastrar uma macro específico para cada aplicação que foi cadastrada em <a class='a-style' onClick = 'selectMenu("app-main")'><i class="bi bi-google-play"></i> Aplicativos</a>, isto torna possível executar uma aplicação usando apenas atalhos no teclado, esta função exige que você habilite em: <a class='a-style' onClick='selectMenu("config")'><i class="bi bi-gear-wide-connected"></i> Configurações</a>.`,
+            text: `Em <a class='a-style' onClick='GlobalValues.SideBarMenuSelect("keys-macros")'><i class="bi bi-keyboard-fill"></i> Teclas de Atalho</a> você pode cadastrar uma macro específico para cada aplicação que foi cadastrada em <a class='a-style' onClick = 'GlobalValues.SideBarMenuSelect("app-main")'><i class="bi bi-google-play"></i> Aplicativos</a>, isto torna possível executar uma aplicação usando apenas atalhos no teclado, esta função exige que você habilite em: <a class='a-style' onClick='GlobalValues.SideBarMenuSelect("settings")'><i class="bi bi-gear-wide-connected"></i> Configurações</a>.`,
         },
         {
             id: ".settings_text_description",
             type: "html",
-            text: `Em <a class='a-style' onClick='selectMenu("config")'><i class="bi bi-gear-wide-connected"></i></span> Configurações</a> você pode ativar ou desativar as teclas de atalho, bem como iniciar o WEB Under Deck, o WEB Under Deck permite executar Aplicativos cadastrados em <a class='a-style' onClick = 'selectMenu("app-main")'><i class="bi bi-google-play"></i> Aplicativos</a> apenas acessando a Url, você também pode acessá-lo do seu celular usando a Url ou apenas digitalizando o QR Code, NOTA: No momento esta função só está disponível para acesso local e não suporta acesso remoto ou de outra rede de Internet/Wifi que não seja a mesma utilizada em seu Computador.`,
+            text: `Em <a class='a-style' onClick='GlobalValues.SideBarMenuSelect("settings")'><i class="bi bi-gear-wide-connected"></i></span> Configurações</a> você pode ativar ou desativar as teclas de atalho, bem como iniciar o WEB Under Deck, o WEB Under Deck permite executar Aplicativos cadastrados em <a class='a-style' onClick = 'GlobalValues.SideBarMenuSelect("app-main")'><i class="bi bi-google-play"></i> Aplicativos</a> apenas acessando a Url, você também pode acessá-lo do seu celular usando a Url ou apenas digitalizando o QR Code, NOTA: No momento esta função só está disponível para acesso local e não suporta acesso remoto ou de outra rede de Internet/Wifi que não seja a mesma utilizada em seu Computador.`,
         },
         {
             id: ".selec_type_code_edit_or_add",
@@ -2683,6 +2683,17 @@ module.exports = {
             id: ".library_plugins_text",
             type: "html",
             text: `<i class="bi bi-collection-fill"></i> Biblioteca De Plugins`,
+        },
+
+        {
+            id: ".devices_text_icon",
+            type: "html",
+            text: '<i class="bi bi-usb"></i> Dispositivos',
+        },
+        {
+            id: ".select_file",
+            type: "html",
+            text: 'Selecione um arquivo',
         },
     ]
 };

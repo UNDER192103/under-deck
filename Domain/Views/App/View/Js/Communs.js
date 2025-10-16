@@ -127,10 +127,6 @@ async function processeApressentationApp() {
                     }
                     else {
                         DAO.DB.set('isFirstStart', false);
-                        if (DAO.DB.get('first_search_update_app') == true) {
-                            $("#button-search-updates").click()
-                            DAO.DB.set('first_search_update_app', false);
-                        }
                     }
                 }
             }
@@ -748,7 +744,7 @@ async function ModalGetImagem(permitNull = false, callback, defaultImage = null)
                 <form class="form-horizontal">
                     <div class="form-group">
                         <label class="col-md-3 control-label icon_text_expc_1" for="logo">${getNameTd('.icon_text_expc_1')}</label>
-                        <div class="col-md-4">
+                        <div class="col-md-4 m-auto">
                          <img src="${typeof defaultImage === 'object' && defaultImage.size ? await convertImageToBase64(defaultImage) : defaultImage}" name="customImgTemplet" class="customImgTemplet" />
                         </div>
                         <span class="Select_an_image_text">${getNameTd('.Select_an_image_text')}</span>
@@ -1023,9 +1019,20 @@ const exec_program = async (data, type = null) => {
             }
             else if (type == "soundpad_audio") {
                 if (ListSoundPad.length > 0) {
-                    let soundP = ListSoundPad.filter(f => f.hash == data.hash)[0];
-                    if (soundP) {
-                        exec_soundpad(pathSoundPadExe, soundP.index)
+                     if(data.hash == 'DoPlayCurrentSoundAgain'){
+                        exec_soundpad(pathSoundPadExe, 'DoPlayCurrentSoundAgain()');
+                    }
+                    else if(data.hash == 'DoStopSound'){
+                        exec_soundpad(pathSoundPadExe, 'DoStopSound()');
+                    }
+                    else if(data.hash == 'DoTogglePause'){
+                        exec_soundpad(pathSoundPadExe, 'DoTogglePause()');
+                    }
+                    else{
+                        let soundP = ListSoundPad.filter(f => f.hash == data.hash)[0];
+                        if (soundP) {
+                            exec_soundpad(pathSoundPadExe, `DoPlaySound(${soundP.index})`);
+                        }
                     }
                 }
 
@@ -1051,6 +1058,6 @@ function convertImageToBase64(file) {
   });
 }
 
-const exec_soundpad = async (pathSoundPad, index) => {
-    if (await fs.existsSync(pathSoundPad)) exec(`${pathSoundPad} -rc DoPlaySound(${index})`, (e) => { });
+const exec_soundpad = async (pathSoundPad, command) => {
+    if (await fs.existsSync(pathSoundPad)) exec(`${pathSoundPad} -rc ${command}`, (e) => { });
 }

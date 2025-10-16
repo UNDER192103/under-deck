@@ -130,13 +130,7 @@ $(document).ready(async () => {
     setTimeout(async () => {
         $("#preload-app").fadeOut(250);
         $("#main-app").fadeIn(500);
-        if (await DAO.DB.get('isFirstStart') != true) {
-            if (await DAO.DB.get('first_search_update_app') == true) {
-                $("#button-search-updates").click()
-                await DAO.DB.set('first_search_update_app', false);
-            }
-        }
-        else {
+        if (await DAO.DB.get('isFirstStart') == true) {
             processeApressentationApp();
         }
     }, 100);

@@ -603,7 +603,7 @@ module.exports = {
         {
             id: ".settings_text_icon_HVRT",
             type: "html",
-            text: '<span class="d-block hover_rotation me-1" href="#"><i class="bi bi-gear-wide-connected"></i></span> Settings',
+            text: '<span class="d-block hover_rotation mt-auto mb-auto me-1" href="#"><i class="bi bi-gear-wide-connected"></i></span> Settings',
         },
         {
             id: ".keys_macro_text",
@@ -993,17 +993,17 @@ module.exports = {
         {
             id: ".apps_name_description",
             type: "html",
-            text: `In <a class='a-style' onClick='selectMenu("app-main")'><i class="bi bi-google-play"></i> Apps</a> it is possible to register executables of applications such as Discord, Steam and other applications, as well as audios to be played or even open a Url in a new tab on your browser or use a command to be executed in the Windows CMD (Command Prompt).`,
+            text: `In <a class='a-style' onClick='GlobalValues.SideBarMenuSelect("app-main")'><i class="bi bi-google-play"></i> Apps</a> it is possible to register executables of applications such as Discord, Steam and other applications, as well as audios to be played or even open a Url in a new tab on your browser or use a command to be executed in the Windows CMD (Command Prompt).`,
         },
         {
             id: ".settings_text_description",
             type: "html",
-            text: `In <a class='a-style' onClick='selectMenu("config")'><i class="bi bi-gear-wide-connected"></i></span> Settings</a> you can activate or deactivate shortcut keys, as well as start WEB Under Deck, WEB Under Deck allows you to run registered Applications in <a class='a-style' onClick = 'selectMenu("app-main")'><i class="bi bi-google-play"></i> Apps</a> just by accessing the Url, you can also access it from your mobile phone using the Url or just by scanning the QR Code, NOTE: At the moment this function is only available for local access and does not support remote access or access from another Internet/Wifi network other than the same one used on your Computer.`,
+            text: `In <a class='a-style' onClick='GlobalValues.SideBarMenuSelect("settings")'><i class="bi bi-gear-wide-connected"></i></span> Settings</a> you can activate or deactivate shortcut keys, as well as start WEB Under Deck, WEB Under Deck allows you to run registered Applications in <a class='a-style' onClick = 'GlobalValues.SideBarMenuSelect("app-main")'><i class="bi bi-google-play"></i> Apps</a> just by accessing the Url, you can also access it from your mobile phone using the Url or just by scanning the QR Code, NOTE: At the moment this function is only available for local access and does not support remote access or access from another Internet/Wifi network other than the same one used on your Computer.`,
         },
         {
             id: ".keys_macro_text_description",
             type: "html",
-            text: `In <a class='a-style' onClick='selectMenu("keys-macros")'><i class="bi bi-keyboard-fill"></i> Shortcut Keys</a> you can register a specific macro for each application that has been registered in <a class='a-style' onClick ='selectMenu("app-main")'><i class="bi bi-google-play"></i> Apps</a>, this makes it possible to run an application using only keyboard shortcuts, this function requires you to enable it in: <a class='a-style' onClick='selectMenu("config")'><i class="bi bi-gear-wide-connected"></i></span> Settings</a>.`,
+            text: `In <a class='a-style' onClick='GlobalValues.SideBarMenuSelect("keys-macros")'><i class="bi bi-keyboard-fill"></i> Shortcut Keys</a> you can register a specific macro for each application that has been registered in <a class='a-style' onClick ='GlobalValues.SideBarMenuSelect("app-main")'><i class="bi bi-google-play"></i> Apps</a>, this makes it possible to run an application using only keyboard shortcuts, this function requires you to enable it in: <a class='a-style' onClick='GlobalValues.SideBarMenuSelect("settings")'><i class="bi bi-gear-wide-connected"></i></span> Settings</a>.`,
         },
         {
             id: ".selec_type_code_edit_or_add",
@@ -2687,6 +2687,13 @@ module.exports = {
             id: ".library_plugins_text",
             type: "html",
             text: `<i class="bi bi-collection-fill"></i> Plugin Library`,
+        },
+
+        
+        {
+            id: ".devices_text_icon",
+            type: "html",
+            text: '<i class="bi bi-usb"></i> Devices',
         },
     ]
 };

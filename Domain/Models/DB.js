@@ -2,6 +2,7 @@ module.exports = {
     DB_DIR: null,
     THEME_DIR: null,
     DB: null,
+    DEVICES: null,
     USERDB: null,
     CLOUD: null,
     DISCORD: null,

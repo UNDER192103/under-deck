@@ -117,8 +117,9 @@ $(document).ready(async () => {
     });
 
     $(".wendeckpreview").on("click", ".pvw-edit-item", async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         clear_modal_pvw_wbdc();
-
         let page = DAO.WEBDECKDATA.pages[pageNow];
         pvw_page_item_NOW = page.items.find(f => f.id == $(e.currentTarget).attr('id').replace("pvw-", ""));
         if (pvw_page_item_NOW) {
@@ -150,7 +151,21 @@ $(document).ready(async () => {
         }
     });
 
+    $(".wendeckpreview").on("click", ".pvw-load-page", function (e) {
+        e.preventDefault();
+        pageNow = DAO.WEBDECKDATA.pages.findIndex(x => x.id === $(this).data('id'));
+        loadPreviwWebDeck();
+    });
+
+    $(".wendeckpreview").on("click", ".pvw-exec-app", function (e) {
+        e.preventDefault();
+        let app = DAO.List_programs.find(f => f.uuid == $(this).data('id') || f._id == $(this).data('id'));
+        exec_program(app);
+    });
+
     $(".wendeckpreview").on("click", ".pvw-edit-page-item", async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         let page = DAO.WEBDECKDATA.pages[pageNow];
         pvw_page_item_NOW = page.items.find(f => f.id == $(e.currentTarget).attr('id').replace("pvw-", ""));
         if (pvw_page_item_NOW) {
@@ -206,7 +221,7 @@ $(document).ready(async () => {
                             <div class="col-md-12">
                                 <div class="d-flex justify-content-between">
                                     <div class="d-flex align-items-center">
-                                        <img src="${page.icon}" class="img-thumbnail rounded" style="width: 50px; height: 50px;">
+                                        <img src="${page.icon}" class="img-thumbnail rounded" style="width: 100px; height: 100px;">
                                         <h5 class="m-2">${page.name}</h5>
                                     </div>
                                     <div class="d-flex align-items-center">
@@ -597,7 +612,7 @@ async function EditPageWebDeck(pageId) {
                                 <div class="col-md-12">
                                     <div class="d-flex justify-content-between">
                                         <div class="d-flex align-items-center">
-                                            <img src="${typeof page.icon === 'object' && page.icon.size ? await convertImageToBase64(page.icon) : page.icon}" class="img-thumbnail rounded" style="width: 75px; height: 75px;">
+                                            <img src="${typeof page.icon === 'object' && page.icon.size ? await convertImageToBase64(page.icon) : page.icon}" class="img-thumbnail rounded" style="width: 100px; height: 100px;">
                                             <h5 class="m-2">${page.name}</h5>
                                         </div>
                                     </div>
@@ -879,12 +894,15 @@ const loadPreviwWebDeck = async () => {
             let subPage = DAO.WEBDECKDATA.pages.find(f => f.id == item.app._id);
             if (subPage != null) {
                 $(".wendeckpreview").append(`
-                    <div class="card-oracle-card pvw-edit-page-item" id="pvw-${item.id}">
+                    <div class="card-oracle-card pvw-load-page" data-id="${subPage.id}">
+                        <div class="d-btn-exe-F z-1 d-flex flex-row-reverse">
+                            <a class="nav-link pvw-edit-page-item icone-wrapper" id="pvw-${item.id}" href="#" aria-label="Configurações"><i class="bi bi-pen-fill"></i></a>
+                        </div>
                         <div class="card-oracle-card-body card-oracle-back rounded">
                             <img src="${subPage.icon}" class="card-oracle-card-img rounded" alt="...">
                         </div>
-                        <div class="d-footer-exe card-body text-center">
-                            <h5 class="card-title text-light tooltip-script u-format-max-text exeT m-0 cursor-pointer" title="${subPage.name}" data-toggle="tooltip">${subPage.name}</h5>
+                        <div class="d-footer-exe card-body text-center cursor-pointer">
+                            <h5 class="card-title text-light tooltip-script u-format-max-text exeT m-0 cursor-pointer" title="${subPage.name}" data-toggle="tooltip"><i class="bi bi-folder-symlink-fill"></i> ${subPage.name}</h5>
                         </div>
                     </div>
                 `);
@@ -901,20 +919,23 @@ const loadPreviwWebDeck = async () => {
             }
         }
         else {
-            let app = DAO.List_programs.find(f => f._id == item.app._id);
+            let app = DAO.List_programs.find(f => f.uuid == item.app._id || f._id == item.app._id);
             if (app != null) {
                 var name = app.name.replace('.exe', '');
                 if (app.nameCustom.length > 0)
                     name = app.nameCustom;
                 $(".wendeckpreview").append(`
-                    <div class="card-oracle-card pvw-edit-item" id="pvw-${item.id}">
-                       <div class="card-oracle-card-body card-oracle-back rounded">
-                            <img src="${app.iconCustom}" class="card-oracle-card-img rounded" alt="...">
-                       </div>
-    
-                       <div class="d-footer-exe card-body text-center">
-                            <h5 class="card-title text-light tooltip-script u-format-max-text exeT m-0 cursor-pointer" title="${name}" data-toggle="tooltip">${name}</h5>
+                    <div class="card-oracle-card pvw-exec-app" data-id="${app.uuid ? app.uuid : app._id}">
+                        <div class="d-btn-exe-F z-1 d-flex flex-row-reverse">
+                            <a class="nav-link pvw-edit-item icone-wrapper" id="pvw-${item.id}" href="#" aria-label="Configurações"><i class="bi bi-pen-fill"></i></a>
                         </div>
+                        <div class="card-oracle-card-body card-oracle-back rounded">
+                             <img src="${app.iconCustom}" class="card-oracle-card-img rounded" alt="...">
+                        </div>
+    
+                        <div class="d-footer-exe card-body text-center cursor-pointer">
+                             <h5 class="card-title text-light tooltip-script u-format-max-text exeT m-0 cursor-pointer" title="${name}" data-toggle="tooltip"><i class="bi bi-filetype-exe"></i> ${name}</h5>
+                         </div>
                     </div>
                 `);
             }

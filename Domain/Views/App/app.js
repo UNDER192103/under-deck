@@ -303,6 +303,26 @@ class MainScreen {
       }
     });
 
+    this.ClientUnderDeck.Esp32MultiManager.on('data', (data) => {
+      this.sendFrontData('Esp32Data', data);
+    });
+
+    this.ClientUnderDeck.Esp32MultiManager.on('disconnected', (data) => {
+      this.sendFrontData('Esp32disconnected', data);
+    });
+
+    this.ClientUnderDeck.Esp32MultiManager.on('connected', (data) => {
+      this.sendFrontData('Esp32Connected', data);
+    });
+
+    this.handleMessages('esp32DiscoverDevices', async (event, dt) => {
+      return await this.ClientUnderDeck.Esp32MultiManager.discoverDevices();
+    });
+
+    this.handleMessages('esp32Connect', async (event, data) => {
+      return await this.ClientUnderDeck.Esp32MultiManager.connect(data.path, data.info);
+    });
+
     this.handleMessages('RequestCodeChangePassword', async (event, data) => {
       return await this.ClientUnderDeck.RequestCodeChangePassword(data.username);
     });
@@ -454,7 +474,7 @@ class MainScreen {
       this.sendFrontData('exec-fbt', data);
     });
 
-    this.handleMessages('get-list-soundpad-audios', async () => {
+    this.handleMessages('GetListSoundpadAudios', async () => {
       return Commun.ListAudiosSoundPad();
     });
 

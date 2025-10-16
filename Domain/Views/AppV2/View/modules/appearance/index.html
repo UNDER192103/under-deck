@@ -1,0 +1,164 @@
+<div class="container container-hide-control container-appearance mt-1 mb-1 animate__animated container-animated-style" style="display: none;">
+   <div class="THCG-CT full-h container rounded px-3 py-3" id="featured-3">
+      <div class="auto-scrool">
+         <h2 class="pb-2 border-bottom d-flex appearance_icon"></h2>
+
+         <div class="cards-area aos-init aos-animate" data-aos="fade-down">
+            <div class="row">
+
+               <div class="col-md-12 col-xl-7 animate__animated animate__slideInLeft">
+                  <div class="card theme-card">
+                     <div class="card-header shadow-text text-center">
+                        <h5 class="themes_icon "></h5>
+                     </div>
+
+                     <div class="card-body">
+                        <div class="forms">
+
+                           <div class="select mb-3">
+                              <label class="form-check-label themes_text" for="s-themes"></label>
+                              <select id="s-themes" class="form-select s-themes">
+                                 <option value="light" class="TLight_text"></option>
+                                 <option value="black" class="TOLEDBLACK_text"></option>
+                                 <option value="light-sakura" class="TSakura_text"></option>
+                              </select>
+                           </div>
+                           <hr>
+
+                           <div class="card none-border bg-dark text-light">
+                              <div class="card-header" id="headingOne">
+                                 <h5 class="mb-0">
+                                    <button id="get_list_themes" class="btn btn-dark theme_library_text full-w"
+                                       data-toggle="collapse" data-target="#collapseLThemes"
+                                       aria-expanded="true" aria-controls="collapseLThemes">
+                                    </button>
+                                 </h5>
+                              </div>
+
+                              <div id="collapseLThemes" class="collapse" aria-labelledby="headingOne"
+                                 data-parent="#accordion">
+                                 <div class="card-body">
+
+                                    <div class="input-group mb-2">
+                                       <button class="btn btn-secondary" type="button"><span
+                                             class="bi bi-search"></span></button>
+                                       <input type="text" name="GLTFTfoo_filter" id="GLTFTfoo_filter"
+                                          class="form-control foo_filter" placeholder="">
+                                    </div>
+
+                                    <table class="table footable border text-light rounded" data-page-size="10"
+                                       data-filter="#GLTFTfoo_filter">
+
+                                       <thead>
+                                          <tr>
+                                             <th class="name_text"></th>
+                                             <th class="size_text"></th>
+                                             <th class="Located_in_text"></th>
+                                             <th class="options_text"></th>
+                                          </tr>
+                                       </thead>
+
+                                       <tbody id="list-themes-to-download">
+                                       </tbody>
+
+                                       <tfoot>
+                                          <tr>
+                                             <td colspan="6" class="border-0">
+                                                <ul class="pagination">
+                                                </ul>
+                                             </td>
+                                          </tr>
+                                       </tfoot>
+
+                                    </table>
+
+                                 </div>
+                              </div>
+                           </div>
+
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="col-md-12 col-xl-5 animate__animated animate__slideInRight">
+                  <div class="card theme-card">
+                     <div class="card-header shadow-text text-center">
+                        <h5 class="animations_icon"></h5>
+                     </div>
+
+                     <div class="card-body">
+
+                        <div class="forms">
+
+                           <div class="card none-border bg-secondary text-light">
+                              <div class="card-header" id="headingAP">
+                                 <h5 class="mb-0">
+                                    <button class="btn btn-secondary btn-sm screen_transitions_text full-w"
+                                       data-toggle="collapse" data-target="#collapseAP" aria-expanded="true"
+                                       aria-controls="collapseAP">
+                                    </button>
+                                 </h5>
+                              </div>
+
+                              <div id="collapseAP" class="collapse show" aria-labelledby="headingAP"
+                                 data-parent="#accordion">
+                                 <div class="card-body rounded-bottom">
+
+                                    <div class="select mb-3">
+                                       <label class="form-check-label enable_animations_text"
+                                          for="s-enAnimations"></label>
+                                       <select id="s-enAnimations" class="form-select">
+                                          <option value="true" class="yes"></option>
+                                          <option value="false" class="not"></option>
+                                       </select>
+                                    </div>
+
+                                    <div class="select mb-3">
+                                       <label class="form-check-label animation_models_text"
+                                          for="s-Manimations"></label>
+                                       <select id="s-Manimations" class="form-select">
+                                          <option value="random" class="default_text"></option>
+                                       </select>
+                                    </div>
+
+                                    <div class="select mb-3">
+                                       <label class="form-check-label animation_type_text"
+                                          for="s-animation"></label>
+                                       <select disabled id="s-animation" class="form-select">
+                                          <option value="random" class="default_text"></option>
+                                       </select>
+                                    </div>
+
+                                    <div class="inputs">
+
+                                       <div class="m-0">
+                                          <label for="animation-duration"
+                                             class="form-check-label duration_animation_text"></label>
+                                          <div class="input-group">
+                                             <input type="number" id="animation-duration"
+                                                class="form-control placeholder-duration_animation"
+                                                placeholder="Duration" aria-label="">
+                                             <button class="btn btn-primary save_text" type="button"
+                                                id="btn-animation-duration">Salvar</button>
+                                          </div>
+                                       </div>
+
+                                    </div>
+
+                                 </div>
+                              </div>
+                           </div>
+
+                        </div>
+
+                     </div>
+                  </div>
+               </div>
+
+            </div>
+         </div>
+
+      </div>
+   </div>
+</div>

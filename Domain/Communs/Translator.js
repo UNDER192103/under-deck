@@ -41,6 +41,8 @@ const UpdateListLanguages = () => {
         for (var i in filesLApp) {
             var fileDir = path.join(dirLangs, filesLApp[i]);
             if (!require('fs').statSync(fileDir).isDirectory()) {
+                const modulePath = require.resolve(fileDir);
+                if(require.cache[modulePath]) delete require.cache[modulePath];
                 let _d = require(fileDir);
                 if(_d && _d.id && _d.name && _d.flag != null && _d.data && _d.data.length > 250){
                     langs[_d.id] = _d;
@@ -56,6 +58,8 @@ const UpdateListLanguages = () => {
         for (var i in filesLAppData) {
             var fileDir = path.join(LanguagesPathAppData, filesLAppData[i]);
             if (!require('fs').statSync(fileDir).isDirectory()) {
+                const modulePath = require.resolve(fileDir);
+                if(require.cache[modulePath]) delete require.cache[modulePath];
                 let _d = require(fileDir);
                 if(_d && _d.id && _d.name && _d.flag != null && _d.data && _d.data.length > 250){
                     if(!langs[_d.id]) langs[_d.id] = _d;

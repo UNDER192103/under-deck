@@ -58,6 +58,7 @@ const BasePathAppData = path.join(PathAppData, 'UN-DATA');
 
 Object.defineProperty(global, 'BASE_PATHS', {
   value: {
+    APP_PATH: app.getAppPath(),
     UN_DATA: BasePathAppData,
     DB: path.join(BasePathAppData, 'DB'),
     ICONS_EXE: path.join(BasePathAppData, 'icons-exe'),

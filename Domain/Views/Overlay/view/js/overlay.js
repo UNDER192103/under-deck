@@ -338,7 +338,7 @@ const saveAllPositions = async () => {
 
 const getListSoundPad = async () => {
     if(ListSoundPad.length > 0) return ListSoundPad;
-    ListSoundPad = BACKEND.Send('get-list-soundpad-audios');
+    ListSoundPad = BACKEND.Send('GetListSoundpadAudios');
     return ListSoundPad;
 }
 
@@ -356,7 +356,7 @@ const ChangeListAllApps = async () => {
         $(".list-all-apps").append(`
             <div data-id="${app._id}" class="apps-exc card-all-apps tooltip-script" title="${nameApp}">
                 <div class="card-all-apps-back">
-                    <img src="${app.iconCustom}" alt="${nameApp}" class="card-img-full-size">
+                    <img src="${app.icon}" alt="${nameApp}" class="card-img-full-size">
                     <span class="card-title">${nameApp}</span>
                 </div>
             </div>

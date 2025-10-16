@@ -86,7 +86,7 @@ ipcRenderer.on('exec-fbt', async (events, data) => {
   if(data){
     switch (data.type) {
       case 'soundpad':
-        exec_soundpad(pathSoundPadExe, data.data.id);
+        exec_soundpad(pathSoundPadExe, `DoPlaySound(${data.data.id})`);
       break;
 
       case 'webpage':

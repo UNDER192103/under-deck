@@ -195,9 +195,8 @@ const LoadAppsInScreen = async (type = _all.data_user.web.formatView) => {
                     name = item.nameCustom;
 
                 let contentText = name;
-                /*if (contentText.length >= 14) {
-                    contentText = `<marquee>${name}</marquee>`;
-                }*/
+                //if (contentText.length >= 14) contentText = `<marquee>${name}</marquee>`;
+                if (item.icon) icone = `${location.origin}/icon/exe/${item.icon}`;
                 $('.exe-list').append(`<li id="item-exe-${item._id}" onclick="execut_exe(${item._id})" class="col exe-item xwh-1 set-rotetionS mb-2 ${isRotetionMode}">
                     <div class="card full-w-h rounded-3 border border-2 rounded cc-border">
                         <div class="exe-item-content">
@@ -208,16 +207,6 @@ const LoadAppsInScreen = async (type = _all.data_user.web.formatView) => {
                         </div>
                     </div>
                 </li>`);
-                $.ajax({
-                    url: `${location.origin}/get_base64`,
-                    data: JSON.stringify({ icon: item.iconCustom }),
-                    type: 'POST',
-                    contentType: 'application/json',
-                    success: function (data) {
-                        if (data != "")
-                            $(`#icon-${item._id}`).attr('src', data);
-                    }
-                });
             });
             break;
     }
@@ -336,7 +325,7 @@ const LoaditensGridDFWebDeck = async () => {
         if (item.nameCustom.length > 0)
             name = item.nameCustom;
         let contentText = name;
-
+        if (item.icon) icone = `${location.origin}/icon/exe/${item.icon}`;
         $("#contentGrid .WUD-grid").append(`
             <div class="WUD-grid-item set-rotetionS ${isRotetionMode}" id="item-exe-${item._id}" onclick="execut_exe(${item._id})">
                 <div class="full-w-h rounded-3 border border-2 rounded cc-border">
@@ -349,17 +338,6 @@ const LoaditensGridDFWebDeck = async () => {
                 </div>
             </div>
         `);
-
-        $.ajax({
-            url: `${location.origin}/get_base64`,
-            data: JSON.stringify({ icon: item.iconCustom }),
-            type: 'POST',
-            contentType: 'application/json',
-            success: function (data) {
-                if (data != "")
-                    $(`#icon-${item._id}`).attr('src', data);
-            }
-        });
 
         if (webDeckPage < pages && _all.L_programs.slice(end, _all.L_programs.length).length > 0) {
             if (L_programs[L_programs.length - 1] == item) {
@@ -386,7 +364,6 @@ const LoadGridPagesWebDeck = async () => {
             if (app == null) app = _NW.pages.find(f => f.id == item.app._id);
         }
         let icone = location.origin + "/src/img/underbot_logo.png";
-
         if (app == null) {
             $("#contentGrid .WUD-grid").append(`
                 <div class="WUD-grid-item set-rotetionS ${isRotetionMode}">
@@ -402,6 +379,7 @@ const LoadGridPagesWebDeck = async () => {
         }
         else {
             if (app.type == 'page' || app.type == 'home') {
+                if (app.icon) icone = `${location.origin}/icon/webpages/${app.icon}`;
                 $("#contentGrid .WUD-grid").append(`
                     <div class="WUD-grid-item changePageWebDeck set-rotetionS ${isRotetionMode}" data-id="${app.id}">
                         <div class="full-w-h rounded-3 border border-2 rounded cc-border">
@@ -417,22 +395,11 @@ const LoadGridPagesWebDeck = async () => {
                         </div>
                     </div>
                 `);
-
-                $.ajax({
-                    url: `${location.origin}/get_base64`,
-                    data: JSON.stringify({ icon: app.icon }),
-                    type: 'POST',
-                    contentType: 'application/json',
-                    success: function (data) {
-                        if (data != "")
-                            $(`#icon-page-${app.id}`).attr('src', data);
-                    }
-                });
             }
             else {
+                if (app.icon) icone = `${location.origin}/icon/exe/${app.icon}`;
                 let name = app.name.replace('.exe', '');
-                if (app.nameCustom.length > 0)
-                    name = app.nameCustom;
+                if (app.nameCustom.length > 0) name = app.nameCustom;
                 $("#contentGrid .WUD-grid").append(`
                     <div class="WUD-grid-item set-rotetionS ${isRotetionMode}" id="item-exe-${app._id}" onclick="execut_exe(${app._id})">
                         <div class="full-w-h rounded-3 border border-2 rounded cc-border">
@@ -448,17 +415,6 @@ const LoadGridPagesWebDeck = async () => {
                         </div>
                     </div>
                 `);
-
-                $.ajax({
-                    url: `${location.origin}/get_base64`,
-                    data: JSON.stringify({ icon: app.iconCustom }),
-                    type: 'POST',
-                    contentType: 'application/json',
-                    success: function (data) {
-                        if (data != "")
-                            $(`#icon-${app._id}`).attr('src', data);
-                    }
-                });
             }
         }
     });

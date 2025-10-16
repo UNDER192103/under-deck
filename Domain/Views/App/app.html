@@ -69,20 +69,16 @@
                         <a href="javascript:void(0)"class="nav-link navs-item-sm webdeck_text_icon">
                         </a>
                      </li>
-                     <li data-id="keys-macros" data-did=".container-kys-macros" class="nav-item">
-                        <a href="javascript:void(0)" class="nav-link navs-item-sm keys_macro_text_icon">
-                        </a>
-                     </li>
                      <li data-id="web-pages" data-did=".container-web-pages" class="nav-item">
                         <a href="javascript:void(0)" class="nav-link navs-item-sm web_pages_text_icon">
                         </a>
                      </li>
-                     <li data-id="appearance" data-did=".container-appearance" class="nav-item">
-                        <a href="javascript:void(0)"class="nav-link navs-item-sm appearance_icon">
+                     <li data-id="keys-macros" data-did=".container-kys-macros" class="nav-item">
+                        <a href="javascript:void(0)" class="nav-link navs-item-sm keys_macro_text_icon">
                         </a>
                      </li>
-                     <li data-id="config" data-did=".container-config" class="nav-item">
-                        <a href="javascript:void(0)"class="nav-link navs-item-sm settings_text_icon_HVRT d-flex">
+                     <li data-id="devices" data-did=".container-devices" class="nav-item">
+                        <a href="javascript:void(0)" class="nav-link navs-item-sm devices_text_icon">
                         </a>
                      </li>
                      <!--
@@ -91,16 +87,24 @@
                         </a>
                      </li>
                      -->
-                     <li data-id="discord" data-did=".container-discord" class="nav-item">
-                        <a href="javascript:void(0)"class="nav-link navs-item-sm discord_icon_text d-flex">
-                        </a>
-                     </li>
                      <li data-id="soundpad" data-did=".container-soundpad" class="nav-item">
                         <a href="javascript:void(0)"class="nav-link navs-item-sm soundpad_icon">
                         </a>
                      </li>
                      <li data-id="obs-studio" data-did=".container-obs-studio" class="nav-item">
                         <a href="javascript:void(0)" class="nav-link navs-item-sm obs_studio_n_text_icon">
+                        </a>
+                     </li>
+                     <li data-id="discord" data-did=".container-discord" class="nav-item">
+                        <a href="javascript:void(0)"class="nav-link navs-item-sm discord_icon_text d-flex">
+                        </a>
+                     </li>
+                     <li data-id="config" data-did=".container-config" class="nav-item">
+                        <a href="javascript:void(0)"class="nav-link navs-item-sm settings_text_icon_HVRT d-flex">
+                        </a>
+                     </li>
+                     <li data-id="appearance" data-did=".container-appearance" class="nav-item">
+                        <a href="javascript:void(0)"class="nav-link navs-item-sm appearance_icon">
                         </a>
                      </li>
                      <li data-id="updates" data-did=".container-updates" class="nav-item">
@@ -342,9 +346,7 @@
             </div>
          </div>
 
-         <div
-            class="container container-hide-control container-obs-studio mt-1 mb-1 animate__animated container-animated-style"
-            style="display: none;">
+         <div class="container container-hide-control container-obs-studio mt-1 mb-1 animate__animated container-animated-style" style="display: none;">
             <div class="THCG-CT full-h container rounded px-3 py-3" id="featured-3">
                <div class="auto-scrool">
                   <h2 class="pb-2 border-bottom obs_studio_n_text_icon Svg30px"></h2>
@@ -511,9 +513,7 @@
             </div>
          </div>
 
-         <div
-            class="container container-hide-control container-config mt-1 mb-1 animate__animated container-animated-style"
-            style="display: none;">
+         <div class="container container-hide-control container-config mt-1 mb-1 animate__animated container-animated-style" style="display: none;">
             <div class="THCG-CT full-h container rounded px-3 py-3" id="featured-3">
                <div class="auto-scrool">
                   <h2 class="pb-2 border-bottom d-flex settings_text_icon_HVRT"></h2>
@@ -832,11 +832,6 @@
                            <input class="form-check-input" type="checkbox" id="autoupdateonestart">
                            <label class="form-check-label autoupdate_text" for="autoupdateonestart"></label>
                         </div>
-                        <div class="ml-1">
-                           <input class="form-check-input" type="checkbox" id="isNotValidFirstSearchUpdateApp">
-                           <label class="form-check-label searchUpdateAppOnStart_text"
-                              for="isNotValidFirstSearchUpdateApp"></label>
-                        </div>
                      </div>
 
                      <div class="p-2 m-0 w-50">
@@ -889,9 +884,7 @@
             </div>
          </div>
 
-         <div
-            class="container container-hide-control container-kys-macros mt-1 mb-1 animate__animated container-animated-style"
-            style="display: none;">
+         <div class="container container-hide-control container-kys-macros mt-1 mb-1 animate__animated container-animated-style" style="display: none;">
             <div class="THCG-CT full-h container rounded px-3 py-3" id="featured-3">
                <div class="auto-scrool">
                   <div class="pb-2 d-flex border-bottom">
@@ -948,9 +941,39 @@
             </div>
          </div>
 
-         <div
-            class="container container-hide-control container-web-pages mt-1 mb-1 animate__animated container-animated-style"
-            style="display: none;">
+         <div class="container container-hide-control container-devices mt-1 mb-1 animate__animated container-animated-style" style="display: none;">
+            <div class="THCG-CT full-h container rounded px-3 py-3" id="featured-3">
+               <div class="auto-scrool">
+                  <div class="pb-2 d-flex border-bottom">
+                     <h2 class="btn-full-w devices_text_icon"></h2>
+                     <div class="input-group">
+                        <button type="button"
+                           id="button-list-device"
+                           class="btn btn-primary update_icon bnt-top-title-ma"></button>
+                     </div>
+                  </div>
+
+                  <div class="row g-4 py-2 row-cols-1 row-cols-lg-1">
+                     <div class="feature col">
+                        <div class="card none-border bg-secondary text-light mb-2">
+                           <div class="card-header" id="headingDLP">
+                              <h5 class="mb-0">
+                                 <button class="btn btn-secondary btn-sm full-w" data-toggle="collapse" data-target="#collapseDLP" aria-expanded="true" aria-controls="collapseDLP"><i class="bi bi-r-circle-fill"></i> Logs</button>
+                              </h5>
+                           </div>
+                           <div id="collapseDLP" class="collapse" aria-labelledby="headingDLP" data-parent="#accordion">
+                              <div class="card-body rounded-bottom LOGSDLP">
+                              </div>
+                           </div>
+                        </div>
+                        <div class="row row-cols-1 row-cols-md-5 g-2 CLD_DevicesEsp32 ui-sortable"></div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div class="container container-hide-control container-web-pages mt-1 mb-1 animate__animated container-animated-style" style="display: none;">
             <div class="THCG-CT full-h container rounded px-3 py-3" id="featured-3">
                <div class="auto-scrool">
                   <div class="pb-2 d-flex border-bottom">
@@ -1004,9 +1027,7 @@
             </div>
          </div>
 
-         <div
-            class="container container-hide-control container-helper mt-1 mb-1 animate__animated container-animated-style"
-            style="display: none;">
+         <div class="container container-hide-control container-helper mt-1 mb-1 animate__animated container-animated-style" style="display: none;">
             <div class="THCG-CT full-h container rounded px-3 py-3" id="featured-3">
                <div class="auto-scrool">
                   <div class="pb-2 d-flex border-bottom">
@@ -1060,9 +1081,7 @@
             </div>
          </div>
 
-         <div
-            class="container container-hide-control container-webunderdeck mt-1 mb-1 animate__animated container-animated-style"
-            style="display: none;">
+         <div class="container container-hide-control container-webunderdeck mt-1 mb-1 animate__animated container-animated-style" style="display: none;">
             <div class="THCG-CT full-h container rounded px-3 py-3" id="featured-3">
                <div class="auto-scrool">
                   <h2 class="pb-2 border-bottom d-flex webdeck_text_icon"></h2>
@@ -1268,9 +1287,7 @@
             </div>
          </div>
 
-         <div
-            class="container container-hide-control container-appearance mt-1 mb-1 animate__animated container-animated-style"
-            style="display: none;">
+         <div class="container container-hide-control container-appearance mt-1 mb-1 animate__animated container-animated-style" style="display: none;">
             <div class="THCG-CT full-h container rounded px-3 py-3" id="featured-3">
                <div class="auto-scrool">
                   <h2 class="pb-2 border-bottom d-flex appearance_icon"></h2>
@@ -2597,5 +2614,6 @@
 <script src="./view/js/Soundpad.js"></script>
 <script src="./view/js/webdeck.js"></script>
 <script type="module" src="./view/js/ai.js"></script>
+<script src="./view/js/devices.js"></script>
 <script src="./view/js/Plugins.js"></script>
 </html>

@@ -11,6 +11,7 @@ class DBCLASS {
         });
 
         this.DB = new Jsoning(path.join(DIRAPPDATUNDB, "DB", "DB.json"));
+        this.DEVICES = new Jsoning(path.join(DIRAPPDATUNDB, "DB", "DEVICES.json"));
         this.DBUSER = new Jsoning(path.join(DIRAPPDATUNDB, "DB", "DBUSER.json"));
         this.CLOUD = new Jsoning(path.join(DIRAPPDATUNDB, "DB", "CLOUD.json"));
         this.DISCORD = new Jsoning(path.join(DIRAPPDATUNDB, "DB", "DISCORD.json"));
@@ -27,6 +28,7 @@ class DBCLASS {
 
     async GetDataNow() {
         this.DB = new Jsoning(path.join(DIRAPPDATUNDB, "DB", "DB.json"));
+        this.DEVICES = new Jsoning(path.join(DIRAPPDATUNDB, "DB", "DEVICES.json"));
         this.DBUSER = new Jsoning(path.join(DIRAPPDATUNDB, "DB", "DBUSER.json"));
         this.CLOUD = new Jsoning(path.join(DIRAPPDATUNDB, "DB", "CLOUD.json"));
         this.DISCORD = new Jsoning(path.join(DIRAPPDATUNDB, "DB", "DISCORD.json"));

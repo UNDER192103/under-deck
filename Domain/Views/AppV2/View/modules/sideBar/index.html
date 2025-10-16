@@ -1,0 +1,165 @@
+<nav id="Menu" class="menuSideBar mt-1 mb-1 animate__animated animate__slideInLeft">
+   <div class="THCG-SB h-100 rounded-end d-flex flex-column flex-shrink-0 p-2">
+      <a href="javascript:void(0)" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
+         <img src="sysfssrc://img/UDIx512.png" style="width:40px;border-radius: 5px;">
+         <span class="tTitle p-1 fs-4 menu_text"></span>
+      </a>
+      <hr>
+      <div class="auto-scrool">
+         <ul id="MenuSideMenus" class="nav nav-pills animated flex-column mb-auto">
+            <li data-id="app-main" data-did=".container-home" class="nav-item">
+               <a href="javascript:void(0)" class="nav-link navs-item-sm apps_name_icon">
+               </a>
+            </li>
+            <li data-id="webunderdeck" data-did=".container-webunderdeck" class="nav-item">
+               <a href="javascript:void(0)"class="nav-link navs-item-sm webdeck_text_icon">
+               </a>
+            </li>
+            <li data-id="web-pages" data-did=".container-web-pages" class="nav-item">
+               <a href="javascript:void(0)" class="nav-link navs-item-sm web_pages_text_icon">
+               </a>
+            </li>
+            <li data-id="keys-macros" data-did=".container-kys-macros" class="nav-item">
+               <a href="javascript:void(0)" class="nav-link navs-item-sm keys_macro_text_icon">
+               </a>
+            </li>
+            <li data-id="devices" data-did=".container-devices" class="nav-item">
+               <a href="javascript:void(0)" class="nav-link navs-item-sm devices_text_icon">
+               </a>
+            </li>
+            <li data-id="soundpad" data-did=".container-soundpad" class="nav-item">
+               <a href="javascript:void(0)"class="nav-link navs-item-sm soundpad_icon">
+               </a>
+            </li>
+            <li data-id="obs-studio" data-did=".container-obs-studio" class="nav-item">
+               <a href="javascript:void(0)" class="nav-link navs-item-sm obs_studio_n_text_icon">
+               </a>
+            </li>
+            <li data-id="discord" data-did=".container-discord" class="nav-item">
+               <a href="javascript:void(0)"class="nav-link navs-item-sm discord_icon_text d-flex">
+               </a>
+            </li>
+            <li data-id="settings" data-did=".container-settings" class="nav-item">
+               <a href="javascript:void(0)"class="nav-link navs-item-sm settings_text_icon_HVRT d-flex">
+               </a>
+            </li>
+            <li data-id="appearance" data-did=".container-appearance" class="nav-item">
+               <a href="javascript:void(0)"class="nav-link navs-item-sm appearance_icon">
+               </a>
+            </li>
+            <li data-id="updates" data-did=".container-updates" class="nav-item">
+               <a href="javascript:void(0)"class="nav-link navs-item-sm updates_text_icon">
+               </a>
+            </li>
+            <li data-id="help" data-did=".container-helper" class="nav-item">
+               <a href="javascript:void(0)"class="nav-link navs-item-sm help_text_icon">
+               </a>
+            </li>
+            <li class="nav-item ai_open_modal">
+               <a href="javascript:void(0)"class="nav-link navs-item-sm ai_icon">
+               </a>
+            </li>
+         </ul>
+      </div>
+      <hr>
+      <div class="dropdown UND_usernotloged" style="display: none;">
+         <a class="U-modal-account-l d-flex align-items-center text-decoration-none">
+            <img src="sysfssrc://img/profile-icon.png" alt="" width="32" height="32" class="rounded-circle me-2">
+            <strong class="UND_userLogin_text cursor-pointer tooltip-script" title="Login" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#modal_login" type="button"></strong>/
+            <strong class="u-format-max-text UND_userRegister_text User-register-modal cursor-pointer tooltip-script" title="Register" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#modal_register" type="button"></strong>
+         </a>
+      </div>
+
+      <div class="dropup-center dropup UND_userloged" style="display: none;">
+         <div class="UND_contentNamePlate rounded z-0">
+            <video class="UNDNamePlateMY HINRP rounded rotate-180" style="display: none;" autoplay loop muted plays-inline><source src="" type="video/mp4"></video>
+            <video class="UNDNamePlateMY rounded" style="display: none;" autoplay loop muted plays-inline><source src="" type="video/mp4"></video>
+         </div>
+         <a class="d-flex align-items-center text-decoration-none cursor-pointer position-inherit z-1 p-1 mh-45" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+            <img src="sysfssrc://img/profile-icon.png" alt="" width="32" height="32" class="UND_usericon p-01 MM rounded-circle me-2">
+            <strong class="UND_DisplayUsername u-format-max-text"></strong>
+         </a>
+
+         <div class="dropdown-menu DROPUSERMENU bg-black mb-1">
+            <div class="container p-2">
+               <div class="rounded mb-2 bg-dark">
+                  <a class="d-flex align-items-center text-decoration-none cursor-pointer position-inherit z-1 p-1 mh-45">
+                     <img src="sysfssrc://img/profile-icon.png" alt="" width="72" height="72"
+                        class="UND_usericon p-1 rounded-circle UND_profileView me-2">
+                     <strong class="UND_DisplayUsername UND_profileView u-format-max-text"></strong>
+                  </a>
+               </div>
+
+               <div class="p-0 mb-2">
+                  <ul class="nav nav-pills animated flex-column mb-auto">
+                     <div class="bg-dark p-1 rounded">
+                        <a href="javascript:void(0)" class="bg-dark nav-link mb-0 m-2 ps-2 p-1 navs-item-sm text-white UND_username"></a>
+                        <div class="UND_userTags mt-0 m-2 ps-2 pt-0 p-1 d-flex"></div>
+                     </div>
+                  </ul>
+               </div>
+
+               <div class="p-0 mb-2">
+                  <ul class="nav nav-pills animated flex-column mb-auto">
+                     <div class="bg-dark p-1 rounded">
+                        <a href="javascript:void(0)"
+                           class="CSALLDPM bg-dark nav-link m-2 ps-2 p-1 UND_profileView navs-item-sm text-white edit_profile_icon"></a>
+                        <hr class="text-white me-2 ms-2">
+                        <a href="javascript:void(0)" class="CSALLDPM bg-dark nav-link m-2 ps-2 p-1 navs-item-sm text-white Friends_icon_text UND_profileViewFriends"></a>
+                        <hr class="text-white me-2 ms-2">
+                        <div class="dropup">
+                           <a href="javascript:void(0)" class="bg-dark nav-link m-2 ps-2 p-1 navs-item-sm dropend d-flex text-white d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="bi bi-circle-fill UND_StatusCC me-1"></i>
+                              <span class="UND_Status"></span>
+                              <i class="dropdown-toggle ms-auto"></i>
+                           </a>
+
+                           <ul class="dropdown-menu position-fixed bg-black">
+                              <li>
+                                 <a class="dropdown-item text-white UND_SelectUStatus d-flex align-items-center" data-id="1" href="#">
+                                    <i class="bi bi-circle-fill text-success me-1"></i>
+                                    <span class="online_text"></span>
+                                 </a>
+                              </li>
+                              <li>
+                                 <a class="dropdown-item text-white UND_SelectUStatus d-flex align-items-center" data-id="2" href="#">
+                                    <i class="bi bi-circle-fill text-warning me-1"></i>
+                                    <span class="Absent_text"></span>
+                                 </a>
+                              </li>
+                              <li>
+                                 <a class="dropdown-item text-white UND_SelectUStatus d-flex align-items-center" data-id="4" href="#">
+                                    <i class="bi bi-circle-fill text-danger me-1"></i>
+                                    <span class="Do_not_disturb_text"></span></a>
+                              </li>
+                              <li>
+                                 <a class="dropdown-item text-white UND_SelectUStatus d-flex align-items-center" data-id="3" href="#">
+                                    <i class="bi bi-circle-fill text-secondary me-1"></i>
+                                    <span class="Invisible_text"></span></a>
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                  </ul>
+               </div>
+
+               <div class="p-0">
+                  <ul class="nav nav-pills animated flex-column mb-auto">
+                     <div class="bg-dark p-1 rounded">
+                        <a href="javascript:void(0)" class="CSALLDPM UND_CopyUserId bg-dark nav-link m-1 ps-2 p-1 navs-item-sm text-white">
+                           <svg aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24">
+                              <path fill="currentColor" d="M15.3 14.48c-.46.45-1.08.67-1.86.67h-1.39V9.2h1.39c.78 0 1.4.22 1.86.67.46.45.68 1.22.68 2.31 0 1.1-.22 1.86-.68 2.31Z" class=""></path>
+                              <path fill="currentColor" fill-rule="evenodd" d="M5 2a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V5a3 3 0 0 0-3-3H5Zm1 15h2.04V7.34H6V17Zm4-9.66V17h3.44c1.46 0 2.6-.42 3.38-1.25.8-.83 1.2-2.02 1.2-3.58s-.4-2.75-1.2-3.58c-.79-.83-1.92-1.25-3.38-1.25H10Z" clip-rule="evenodd" class=""></path>
+                           </svg>
+                           <span class="copyUserID_text"></span>
+                        </a>
+                        <hr class="text-white me-2 ms-2">
+                        <a href="javascript:void(0)" class="CSALLDPM text-danger bg-dark nav-link m-1 ps-2 p-1 logout_account navs-item-sm acclogout_icon_text"></a>
+                     </div>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</nav>
